@@ -153,6 +153,60 @@
         "padding_bottom": 36
       }
     },
+    "multicolumn_EXbYme": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_Me7Vei": {
+          "type": "column",
+          "settings": {
+            "title": "Sarah M.",
+            "text": "<p><strong>★★★★★</strong></p><p>\"My kids absolutely love their KIDSMIRE outfits! The quality is amazing and they're so comfortable. We've been customers for over a year now and wouldn't shop anywhere else!\"</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_p3FKUi": {
+          "type": "column",
+          "settings": {
+            "title": "Priya K.",
+            "text": "<p><strong>★★★★★</strong></p><p>\"Best children's clothing brand! The designs are unique, the fabric is soft, and the customer service is exceptional. Highly recommend to all parents!\"</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_AdXdRc": {
+          "type": "column",
+          "settings": {
+            "title": "Aisha P.",
+            "text": "<p><strong>★★★★★</strong></p><p>\"KIDSMIRE has become our go-to for special occasions and everyday wear. The attention to detail is incredible and my daughter feels confident in every piece.\"</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_Me7Vei",
+        "column_p3FKUi",
+        "column_AdXdRc"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "Happy KIDSMIRE Families",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "circle",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "button_label": "Button label",
+        "button_link": "",
+        "color_scheme": "background-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
     "video": {
       "type": "video",
       "settings": {
@@ -173,8 +227,8 @@
         "column1": {
           "type": "column",
           "settings": {
-            "title": "Quality Fabrics",
-            "text": "<p>Soft, breathable materials that are gentle on sensitive skin and built to last through playtime adventures</p>",
+            "title": "Perfect for Party Season!",
+            "text": "<p>The butterfly dress was a hit at my daughter's birthday party. The quality is amazing and she felt like a princess all day. Highly recommend KIDSMIRE! - Priya M., Mumbai</p>",
             "link_label": "",
             "link": ""
           }
@@ -182,8 +236,8 @@
         "column2": {
           "type": "column",
           "settings": {
-            "title": "Affordable Prices",
-            "text": "<p>Beautiful clothing from ₹330 to ₹999 — quality kids' fashion that doesn't break the bank</p>",
+            "title": "Great Quality, Great Price",
+            "text": "<p>I was worried about ordering kids' clothes online, but KIDSMIRE exceeded my expectations. The bomber jacket fits perfectly and looks even better in person! - Rahul S., Delhi</p>",
             "link_label": "",
             "link": ""
           }
@@ -191,8 +245,8 @@
         "column3": {
           "type": "column",
           "settings": {
-            "title": "Easy Shopping",
-            "text": "<p>Clear sizing from 6 months to 6 years, detailed photos, and descriptions to help you find the perfect fit</p>",
+            "title": "My Go-To for Kids' Fashion",
+            "text": "<p>I've ordered three times now and every piece has been adorable and well-made. My son loves his bear hoodie set. Will definitely be back! - Anjali K., Bangalore</p>",
             "link_label": "",
             "link": ""
           }
@@ -204,7 +258,7 @@
         "column3"
       ],
       "settings": {
-        "title": "",
+        "title": "What Parents Are Saying About KIDSMIRE",
         "heading_size": "h1",
         "image_width": "third",
         "image_ratio": "adapt",
@@ -226,6 +280,7 @@
     "rich_text",
     "featured_collection",
     "collage",
+    "multicolumn_EXbYme",
     "video",
     "multicolumn"
   ]
