@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "colors_solid_button_labels": "#ffffff",
@@ -105,15 +114,15 @@
     "sale_badge_color_scheme": "accent-2",
     "sold_out_badge_color_scheme": "inverse",
     "accent_icons": "text",
-    "social_twitter_link": "https:\/\/twitter.com\/ta93abe_",
+    "social_twitter_link": "https://twitter.com/ta93abe_",
     "social_facebook_link": "",
-    "social_pinterest_link": "https:\/\/pinterest.com\/ta93abe",
-    "social_instagram_link": "https:\/\/instagram.com\/ta93abe",
-    "social_tiktok_link": "https:\/\/tiktok.com\/@ta93abe",
-    "social_tumblr_link": "https:\/\/tumblr.com\/ta93abe",
-    "social_snapchat_link": "https:\/\/snapchat.com\/add\/ta93abe",
-    "social_youtube_link": "https:\/\/youtube.com\/@ta93abe",
-    "social_vimeo_link": "https:\/\/vimeo.com\/ta93abe",
+    "social_pinterest_link": "https://pinterest.com/ta93abe",
+    "social_instagram_link": "https://instagram.com/ta93abe",
+    "social_tiktok_link": "https://tiktok.com/@ta93abe",
+    "social_tumblr_link": "https://tumblr.com/ta93abe",
+    "social_snapchat_link": "https://snapchat.com/add/ta93abe",
+    "social_youtube_link": "https://youtube.com/@ta93abe",
+    "social_vimeo_link": "https://vimeo.com/ta93abe",
     "predictive_search_enabled": true,
     "predictive_search_show_vendor": false,
     "predictive_search_show_price": false,
@@ -126,6 +135,7 @@
             "type": "announcement",
             "settings": {
               "text": "Welcome to our store",
+              "text_alignment": "center",
               "color_scheme": "background-1",
               "link": ""
             }
@@ -134,8 +144,7 @@
         "block_order": [
           "announcement-bar-0"
         ],
-        "settings": {
-        }
+        "settings": {}
       },
       "header": {
         "type": "header",
@@ -144,9 +153,13 @@
           "logo_width": 90,
           "logo_position": "middle-left",
           "menu": "main-menu",
+          "menu_type_desktop": "dropdown",
           "show_line_separator": true,
           "enable_sticky_header": true,
-          "margin_bottom": 0
+          "mobile_logo_position": "center",
+          "margin_bottom": 0,
+          "padding_top": 20,
+          "padding_bottom": 20
         }
       },
       "footer": {
@@ -155,22 +168,22 @@
           "footer-0": {
             "type": "link_list",
             "settings": {
-              "heading": "Quick links",
+              "heading": "Quick Links",
               "menu": "footer"
             }
           },
           "footer-1": {
             "type": "link_list",
             "settings": {
-              "heading": "Info",
+              "heading": "Customer Care",
               "menu": "footer"
             }
           },
           "footer-2": {
             "type": "text",
             "settings": {
-              "heading": "Our mission",
-              "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+              "heading": "About KIDSMIRE",
+              "subtext": "<p>Quality kids' clothing from 6 months to 6 years. We believe every child deserves adorable, comfortable outfits for every occasion — from playtime to parties.</p>"
             }
           }
         },
@@ -182,7 +195,7 @@
         "settings": {
           "color_scheme": "background-1",
           "newsletter_enable": true,
-          "newsletter_heading": "Subscribe to our emails",
+          "newsletter_heading": "Join the KIDSMIRE Community",
           "show_social": true,
           "enable_country_selector": true,
           "enable_language_selector": true,
@@ -206,20 +219,7 @@
         }
       }
     },
-    "blocks": {
-      "15683396631634586217": {
-        "type": "shopify:\/\/apps\/inbox\/blocks\/chat\/841fc607-4181-4ad1-842d-e24d7f8bad6b",
-        "disabled": false,
-        "settings": {
-          "button_color": "#6703ff",
-          "button_icon": "chat_bubble",
-          "button_horizontal_position": "bottom_right",
-          "button_vertical_position": "lowest",
-          "button_text": "no_text",
-          "greeting_message": "お話しましょう．"
-        }
-      }
-    }
+    "content_for_index": []
   },
   "presets": {
     "Default": {
@@ -328,15 +328,15 @@
       "sale_badge_color_scheme": "accent-2",
       "sold_out_badge_color_scheme": "inverse",
       "accent_icons": "text",
-      "social_twitter_link": "https:\/\/twitter.com\/ta93abe_",
+      "social_twitter_link": "https://twitter.com/ta93abe_",
       "social_facebook_link": "",
-      "social_pinterest_link": "https:\/\/pinterest.com\/ta93abe",
-      "social_instagram_link": "https:\/\/instagram.com\/ta93abe",
-      "social_tiktok_link": "https:\/\/tiktok.com\/@ta93abe",
-      "social_tumblr_link": "https:\/\/tumblr.com\/ta93abe",
-      "social_snapchat_link": "https:\/\/snapchat.com\/add\/ta93abe",
-      "social_youtube_link": "https:\/\/youtube.com\/@ta93abe",
-      "social_vimeo_link": "https:\/\/vimeo.com\/ta93abe",
+      "social_pinterest_link": "https://pinterest.com/ta93abe",
+      "social_instagram_link": "https://instagram.com/ta93abe",
+      "social_tiktok_link": "https://tiktok.com/@ta93abe",
+      "social_tumblr_link": "https://tumblr.com/ta93abe",
+      "social_snapchat_link": "https://snapchat.com/add/ta93abe",
+      "social_youtube_link": "https://youtube.com/@ta93abe",
+      "social_vimeo_link": "https://vimeo.com/ta93abe",
       "predictive_search_enabled": true,
       "predictive_search_show_vendor": false,
       "predictive_search_show_price": false,
@@ -357,8 +357,7 @@
           "block_order": [
             "announcement-bar-0"
           ],
-          "settings": {
-          }
+          "settings": {}
         },
         "header": {
           "type": "header",
@@ -393,7 +392,7 @@
               "type": "text",
               "settings": {
                 "heading": "Our mission",
-                "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+                "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>"
               }
             }
           },

@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "image_banner": {
@@ -6,14 +15,14 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Image banner",
+            "heading": "Adorable Styles for Little Ones",
             "heading_size": "h0"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text": "From playtime to parties, discover quality clothing that grows with your child. Shop our collection of dresses, outfits, and accessories designed for comfort and style.",
             "text_style": "body"
           }
         },
@@ -35,6 +44,7 @@
         "button"
       ],
       "settings": {
+        "image": "shopify://shop_images/645902502_18031923323610685_1482666318544705477_n.jpg",
         "image_overlay_opacity": 40,
         "image_height": "large",
         "adapt_height_first_image": false,
@@ -53,14 +63,14 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "<p>Talk about your brand</p>",
+            "heading": "<p>Why Parents Choose KIDSMIRE</p>",
             "heading_size": "h1"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
+            "text": "<p>At KIDSMIRE, we believe every child deserves clothing that's as special as they are. Our carefully curated collection features:</p><p>✓ Quality fabrics that are soft, durable, and gentle on sensitive skin<br/>✓ Thoughtful designs from everyday essentials to party-ready outfits<br/>✓ Affordable prices starting from ₹330, because style shouldn't break the bank<br/>✓ Size ranges from 6 months to 6 years to grow with your little one</p><p>Whether you're shopping for a birthday celebration, casual playtime, or building their everyday wardrobe, KIDSMIRE makes it easy to dress your child in comfort and style.</p>"
           }
         }
       },
@@ -69,6 +79,8 @@
         "text"
       ],
       "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
         "color_scheme": "background-1",
         "full_width": true,
         "padding_top": 40,
@@ -80,17 +92,24 @@
       "settings": {
         "title": "Featured products",
         "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
         "collection": "all",
         "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "background-1",
+        "full_width": false,
         "show_view_all": false,
-        "swipe_on_mobile": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "background-1",
         "image_ratio": "adapt",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
+        "enable_quick_add": false,
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 28,
         "padding_bottom": 36
       }
@@ -101,20 +120,20 @@
         "collection-0": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "girls-clothing"
           }
         },
         "product": {
           "type": "product",
           "settings": {
-            "product": "",
+            "product": "cute-cartoon-kitty-smile-clogs-for-kids-pink-lavender-lightweight-eva-sandals",
             "second_image": false
           }
         },
         "collection-1": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "premium-collection"
           }
         }
       },
@@ -128,6 +147,7 @@
         "heading_size": "h2",
         "desktop_layout": "left",
         "mobile_layout": "collage",
+        "card_styles": "product-card-wrapper",
         "color_scheme": "background-1",
         "padding_top": 36,
         "padding_bottom": 36
@@ -137,8 +157,9 @@
       "type": "video",
       "settings": {
         "heading": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "heading_size": "h1",
+        "cover_image": "shopify://shop_images/646081429_18032609840610685_1049087398009866235_n_3d54ed5f-bce2-40ca-94c7-41edcc6dc5a4.jpg",
+        "video_url": "https://vimeo.com/1173553954?share=copy&fl=sv&fe=ci",
         "description": "",
         "full_width": false,
         "color_scheme": "background-1",
@@ -152,8 +173,8 @@
         "column1": {
           "type": "column",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "title": "Quality Fabrics",
+            "text": "<p>Soft, breathable materials that are gentle on sensitive skin and built to last through playtime adventures</p>",
             "link_label": "",
             "link": ""
           }
@@ -161,8 +182,8 @@
         "column2": {
           "type": "column",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "title": "Affordable Prices",
+            "text": "<p>Beautiful clothing from ₹330 to ₹999 — quality kids' fashion that doesn't break the bank</p>",
             "link_label": "",
             "link": ""
           }
@@ -170,8 +191,8 @@
         "column3": {
           "type": "column",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "title": "Easy Shopping",
+            "text": "<p>Clear sizing from 6 months to 6 years, detailed photos, and descriptions to help you find the perfect fit</p>",
             "link_label": "",
             "link": ""
           }
@@ -192,9 +213,9 @@
         "background_style": "none",
         "button_label": "",
         "button_link": "",
-        "swipe_on_mobile": false,
         "color_scheme": "background-1",
         "columns_mobile": "1",
+        "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
       }
