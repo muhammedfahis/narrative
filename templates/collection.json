@@ -1,5 +1,214 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
+    "collapsible_content_cmdMr7": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_p88eCH": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Shipping Information",
+            "icon": "truck",
+            "row_content": "<p>Standard shipping: 5-7 business days. Express shipping available. Free shipping on orders over $50.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_PNdki4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Size Guide",
+            "icon": "ruler",
+            "row_content": "<p>Refer to our size chart for accurate measurements. All sizes are in inches. Please measure your child before ordering.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_PN8iXw": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Care Instructions",
+            "icon": "washing",
+            "row_content": "<p>Machine wash cold with similar colors. Tumble dry low. Do not bleach. Iron on low heat if needed.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_p88eCH",
+        "collapsible_row_PNdki4",
+        "collapsible_row_PN8iXw"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "",
+        "heading": "Product Information",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "section",
+        "color_scheme": "background-1",
+        "container_color_scheme": "background-2",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "collapsible_content_NJNTqa": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_Dd773r": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "⭐⭐⭐⭐⭐ Amazing Quality! - Sarah M.",
+            "icon": "star",
+            "row_content": "<p>My daughter absolutely loves this product! The quality is exceptional and it's so comfortable. Highly recommend to all parents looking for premium kids' clothing.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_9HzAAN": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "⭐⭐⭐⭐⭐ Perfect Fit & Fast Shipping - James T.",
+            "icon": "star",
+            "row_content": "<p>Great product and even better customer service. Arrived in perfect condition and my son wore it immediately. Will definitely order again!</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_VcMdRg": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "⭐⭐⭐⭐ Love the Design - Emma K.",
+            "icon": "star",
+            "row_content": "<p>Beautiful design and excellent craftsmanship. The colors are vibrant and the material is durable. My kids have been wearing it for weeks with no issues.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_76iA99": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "⭐⭐⭐⭐⭐ Best Purchase Ever - Michael R.",
+            "icon": "star",
+            "row_content": "<p>Exceeded my expectations! The product is exactly as described. Great value for money and the customer support team was very helpful.\"</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_Dd773r",
+        "collapsible_row_9HzAAN",
+        "collapsible_row_VcMdRg",
+        "collapsible_row_76iA99"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "",
+        "heading": "Customer Reviews",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "section",
+        "color_scheme": "background-1",
+        "container_color_scheme": "background-2",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_QPfDqU": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Br4Qz7": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>⭐ 4.5 Stars | 328 Customer Reviews</p>",
+            "heading_size": "h2"
+          }
+        },
+        "text_4jyNBg": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Join thousands of satisfied customers. <a href=\"#reviews\">Read customer reviews</a> to see why parents love our products.</p>"
+          }
+        },
+        "button_8fKTJL": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_Br4Qz7",
+        "text_4jyNBg",
+        "button_8fKTJL"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": false,
+        "padding_top": 0,
+        "padding_bottom": 12
+      }
+    },
+    "rich_text_tiF3yc": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_CgH7bb": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>✨ Premium Quality • Limited Edition • Customer Favorite ✨</p>",
+            "heading_size": "h1"
+          }
+        },
+        "text_6YDRNw": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Expertly crafted with meticulous attention to detail. This exclusive product combines superior quality, innovative design, and exceptional value. Join thousands of satisfied customers who trust our brand for excellence.</p>"
+          }
+        },
+        "button_CxhkYb": {
+          "type": "button",
+          "settings": {
+            "button_label": "",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_CgH7bb",
+        "text_6YDRNw",
+        "button_CxhkYb"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": false,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
     "banner": {
       "type": "main-collection-banner",
       "settings": {
@@ -17,16 +226,77 @@
         "show_secondary_image": false,
         "show_vendor": false,
         "show_rating": false,
+        "enable_quick_add": false,
         "enable_filtering": true,
+        "filter_type": "horizontal",
         "enable_sorting": true,
         "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_DancBH": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_PF6pNw": {
+          "type": "column",
+          "settings": {
+            "title": "Premium Quality",
+            "text": "<p>Crafted with high-quality materials and expert craftsmanship to ensure durability and excellence in every detail.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_aAMVFi": {
+          "type": "column",
+          "settings": {
+            "title": "Fast & Free Shipping",
+            "text": "<p>Enjoy complimentary shipping on orders over a minimum amount. Quick delivery to your doorstep.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_8BYCzP": {
+          "type": "column",
+          "settings": {
+            "title": "Satisfaction Guaranteed",
+            "text": "<p>30-day money-back guarantee. We stand behind our products and want you to be completely satisfied.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_PF6pNw",
+        "column_aAMVFi",
+        "column_8BYCzP"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "Key Benefits",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "circle",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "button_label": "Button label",
+        "button_link": "",
+        "color_scheme": "background-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
       }
     }
   },
   "order": [
+    "collapsible_content_NJNTqa",
+    "collapsible_content_cmdMr7",
+    "rich_text_QPfDqU",
+    "rich_text_tiF3yc",
     "banner",
-    "product-grid"
+    "product-grid",
+    "multicolumn_DancBH"
   ]
 }
