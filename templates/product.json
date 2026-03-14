@@ -34,6 +34,13 @@
           "type": "price",
           "settings": {}
         },
+        "text_g7M9rh": {
+          "type": "text",
+          "settings": {
+            "text": "✨ FREE SHIPPING ON ALL ORDERS ✨Price includes all taxes. No hidden charges.",
+            "text_style": "subtitle"
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -66,9 +73,9 @@
         "collapsible-row-1": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Shipping & Returns",
+            "heading": "Shipping & Delivery",
             "icon": "truck",
-            "content": "",
+            "content": "<p><strong>Shipping & Delivery</strong></p><p>📦 <strong>Free Shipping:</strong> All orders across India<br/><br/>🇮🇳 <strong>Ships From:</strong> India<br/><br/>⏱️ <strong>Processing Time:</strong> 1-2 business days<br/><br/>🚚 <strong>Delivery Time:</strong> 5-7 business days after dispatch<br/><br/>📍 <strong>Delivery Locations:</strong> We deliver to all major cities and towns across India<br/><br/>📧 <strong>Tracking:</strong> You'll receive tracking details via email once your order ships<br/><br/>💳 <strong>Cash on Delivery:</strong> Available for select locations</p><p>For urgent orders or questions about delivery to your area, please contact us before placing your order.</p>",
             "page": ""
           }
         },
@@ -90,6 +97,15 @@
             "page": ""
           }
         },
+        "collapsible_tab_nTTjjz": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Returns & Exchanges",
+            "icon": "return",
+            "content": "<p>At KIDSMIRE, we stand behind the quality of our products. While we don't offer standard returns, we're happy to discuss exchange options for premium items (₹500+) on a case-by-case basis within 7 days of delivery. Please contact us with your order details and photos if you have concerns about fit or quality. Our goal is to ensure you and your little one are completely satisfied with your KIDSMIRE purchase.</p>",
+            "page": ""
+          }
+        },
         "share": {
           "type": "share",
           "settings": {
@@ -102,6 +118,7 @@
         "title",
         "caption",
         "price",
+        "text_g7M9rh",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
@@ -110,6 +127,7 @@
         "collapsible-row-1",
         "collapsible-row-2",
         "collapsible-row-3",
+        "collapsible_tab_nTTjjz",
         "share"
       ],
       "settings": {
@@ -222,12 +240,75 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "collapsible_content_rMcmhD": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_4UHmCk": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Product Specifications",
+            "icon": "washing",
+            "row_content": "<ul><li><strong>Material:</strong> Soft, breathable fabric (cotton blend/tulle depending on item)</li><li><strong>Available Sizes:</strong> 6 months to 6 years</li><li><strong>Closure:</strong> Varies by product (buttons/zipper/elastic)</li><li><strong>Occasion:</strong> Casual, party wear, or everyday use</li><li><strong>Care:</strong> Machine washable (see care instructions)</li><li><strong>Country of Origin:</strong> India</li><li><strong>Brand:</strong> KIDSMIRE</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_row_f6hHaG": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Size Guide",
+            "icon": "ruler",
+            "row_content": "<p><strong>KIDSMIRE uses age-based sizing:</strong></p><p>6-9 months | 9-12 months | 12-18 months | 18-24 months | 2-3 years | 3-4 years | 4-5 years | 5-6 years</p><p><strong>Measurements (approximate):</strong></p><ul><li>12-18 months: Chest 18-19\", Length 14-15\"</li><li>2-3 years: Chest 20-21\", Length 16-17\"</li><li>4-5 years: Chest 22-23\", Length 18-19\"</li><li>5-6 years: Chest 23-24\", Length 19-20\"</li></ul><p><strong>How to Measure:</strong> Measure chest around fullest part, length from shoulder to hem. If between sizes, size up for growing room.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_btW4FT": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "check_mark",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_zTbtYq": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "check_mark",
+            "row_content": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_4UHmCk",
+        "collapsible_row_f6hHaG",
+        "collapsible_row_btW4FT",
+        "collapsible_row_zTbtYq"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "",
+        "heading": "Care Instructions",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "layout": "section",
+        "color_scheme": "background-1",
+        "container_color_scheme": "background-2",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "main",
     "image-with-text",
     "multicolumn",
-    "product-recommendations"
+    "product-recommendations",
+    "collapsible_content_rMcmhD"
   ]
 }
