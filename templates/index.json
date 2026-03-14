@@ -44,10 +44,10 @@
         "button"
       ],
       "settings": {
-        "image": "shopify://shop_images/645902502_18031923323610685_1482666318544705477_n.jpg",
+        "image": "shopify://shop_images/Gemini_Generated_Image_n9e6k8n9e6k8n9e6_1.png",
         "image_overlay_opacity": 40,
-        "image_height": "large",
-        "adapt_height_first_image": false,
+        "image_height": "medium",
+        "adapt_height_first_image": true,
         "desktop_content_position": "bottom-center",
         "show_text_box": false,
         "desktop_content_alignment": "center",
