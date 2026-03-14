@@ -9,6 +9,49 @@
  */
 {
   "sections": {
+    "rich_text_r9BXrj": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_TdN9XW": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>🎉 EXCLUSIVE OFFER - LIMITED TIME! 🎉</p>",
+            "heading_size": "h0"
+          }
+        },
+        "text_E9TM4b": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Get 30% OFF on all kids' fashion!</strong> Use code KIDSFUN30 at checkout. Free shipping on orders over ₹999!</p>"
+          }
+        },
+        "button_qAqec7": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/all",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_TdN9XW",
+        "text_E9TM4b",
+        "button_qAqec7"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "accent-2",
+        "full_width": true,
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -311,6 +354,7 @@
     }
   },
   "order": [
+    "rich_text_r9BXrj",
     "image_banner",
     "rich_text",
     "featured_collection",
