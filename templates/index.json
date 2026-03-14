@@ -100,6 +100,54 @@
         "show_text_below": false
       }
     },
+    "image_banner_94mpNe": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_ybUGNe": {
+          "type": "heading",
+          "settings": {
+            "heading": "🎉 Special Offers & Deals",
+            "heading_size": "h0"
+          }
+        },
+        "text_RJYfxW": {
+          "type": "text",
+          "settings": {
+            "text": "Limited time promotions on your favorite products. Don't miss out!",
+            "text_style": "subtitle"
+          }
+        },
+        "buttons_ghtcwF": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop Deals Now",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": false,
+            "button_label_2": "View All Promotions",
+            "button_link_2": "shopify://collections/all",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_ybUGNe",
+        "text_RJYfxW",
+        "buttons_ghtcwF"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image_overlay_opacity": 0,
+        "image_height": "large",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "accent-2",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
     "rich_text": {
       "type": "rich-text",
       "blocks": {
@@ -142,18 +190,126 @@
         "products_to_show": 8,
         "columns_desktop": 3,
         "full_width": false,
-        "show_view_all": false,
+        "show_view_all": true,
         "view_all_style": "solid",
         "enable_desktop_slider": false,
         "color_scheme": "background-1",
         "image_ratio": "adapt",
         "show_secondary_image": true,
         "show_vendor": false,
-        "show_rating": false,
-        "enable_quick_add": false,
+        "show_rating": true,
+        "enable_quick_add": true,
         "columns_mobile": "2",
         "swipe_on_mobile": false,
         "padding_top": 28,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_4d3f7P": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_rMygm8": {
+          "type": "column",
+          "settings": {
+            "title": "Sarah M.",
+            "text": "<p>\"Amazing quality products! My kids absolutely love their toys. The customer service was fantastic and delivery was super fast. Highly recommend KIDSMIRE!\"</p><p>⭐⭐⭐⭐⭐</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_LGbiRa": {
+          "type": "column",
+          "settings": {
+            "title": "Rajesh K.",
+            "text": "<p>\"Best online store for kids' products. Great variety, competitive prices, and excellent packaging. Will definitely order again!\"</p><p>⭐⭐⭐⭐⭐</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_WwhnhR": {
+          "type": "column",
+          "settings": {
+            "title": "Priya S.",
+            "text": "<p>\"Love the selection and quality. My daughter got exactly what she wanted. The whole experience from browsing to delivery was smooth and hassle-free.\"</p><p>⭐⭐⭐⭐⭐</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_rMygm8",
+        "column_LGbiRa",
+        "column_WwhnhR"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "Customer Reviews & Testimonials",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "circle",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "button_label": "Button label",
+        "button_link": "",
+        "color_scheme": "background-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "multicolumn_g3Lq6J": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_pp4tKH": {
+          "type": "column",
+          "settings": {
+            "title": "Media Outlet 1",
+            "text": "<p>Add your media outlet logo here</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_qGYGxb": {
+          "type": "column",
+          "settings": {
+            "title": "Media Outlet 2",
+            "text": "<p>Add your media outlet logo here</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_CW6VXq": {
+          "type": "column",
+          "settings": {
+            "title": "Media Outlet 3",
+            "text": "<p>Add your media outlet logo here</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_pp4tKH",
+        "column_qGYGxb",
+        "column_CW6VXq"
+      ],
+      "name": "t:sections.multicolumn.presets.name",
+      "settings": {
+        "title": "As Featured In",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "background-1",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
         "padding_bottom": 36
       }
     },
@@ -356,8 +512,11 @@
   "order": [
     "rich_text_r9BXrj",
     "image_banner",
+    "image_banner_94mpNe",
     "rich_text",
     "featured_collection",
+    "multicolumn_4d3f7P",
+    "multicolumn_g3Lq6J",
     "collage",
     "multicolumn_EXbYme",
     "video",
