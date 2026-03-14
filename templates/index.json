@@ -100,54 +100,6 @@
         "show_text_below": false
       }
     },
-    "image_banner_94mpNe": {
-      "type": "image-banner",
-      "blocks": {
-        "heading_ybUGNe": {
-          "type": "heading",
-          "settings": {
-            "heading": "🎉 Special Offers & Deals",
-            "heading_size": "h0"
-          }
-        },
-        "text_RJYfxW": {
-          "type": "text",
-          "settings": {
-            "text": "Limited time promotions on your favorite products. Don't miss out!",
-            "text_style": "subtitle"
-          }
-        },
-        "buttons_ghtcwF": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop Deals Now",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": false,
-            "button_label_2": "View All Promotions",
-            "button_link_2": "shopify://collections/all",
-            "button_style_secondary_2": true
-          }
-        }
-      },
-      "block_order": [
-        "heading_ybUGNe",
-        "text_RJYfxW",
-        "buttons_ghtcwF"
-      ],
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image_overlay_opacity": 0,
-        "image_height": "large",
-        "adapt_height_first_image": false,
-        "desktop_content_position": "middle-center",
-        "show_text_box": true,
-        "desktop_content_alignment": "center",
-        "color_scheme": "accent-2",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
-        "show_text_below": true
-      }
-    },
     "rich_text": {
       "type": "rich-text",
       "blocks": {
@@ -512,7 +464,6 @@
   "order": [
     "rich_text_r9BXrj",
     "image_banner",
-    "image_banner_94mpNe",
     "rich_text",
     "featured_collection",
     "multicolumn_4d3f7P",
