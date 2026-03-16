@@ -308,6 +308,21 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "1773646079df475f87": {
+      "type": "apps",
+      "blocks": {
+        "instafeed_app_block_feeds_mLAgpM": {
+          "type": "shopify://apps/instafeed/blocks/app-block-feeds/4169bff3-1d6b-44ad-9377-2ebc3d31f01c",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_feeds_mLAgpM"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
@@ -319,6 +334,7 @@
     "video",
     "multicolumn",
     "177351276986a4ea66",
-    "17735128981acce6d0"
+    "17735128981acce6d0",
+    "1773646079df475f87"
   ]
 }
