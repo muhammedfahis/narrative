@@ -111,6 +111,10 @@
           "settings": {
             "share_label": "Share"
           }
+        },
+        "judge_me_reviews_preview_badge_dPqDcd": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
         }
       },
       "block_order": [
@@ -128,7 +132,8 @@
         "collapsible-row-2",
         "collapsible-row-3",
         "collapsible_tab_nTTjjz",
-        "share"
+        "share",
+        "judge_me_reviews_preview_badge_dPqDcd"
       ],
       "settings": {
         "enable_sticky_info": true,
