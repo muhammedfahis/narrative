@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -5,6 +14,49 @@
       "settings": {
         "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "rich_text_k7aWAW": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_ETNiGP": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Get in Touch with KIDSMIRE</p>",
+            "heading_size": "h1"
+          }
+        },
+        "text_GjY8DL": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We'd love to hear from you! Whether you have questions about sizing, an order, or just want to say hello — we're here to help.</p><p><strong>💬 WhatsApp Support</strong><br/>Chat with us directly: <a href=\"https://wa.me/91XXXXXXXXXX\">Message us on WhatsApp</a><br/><em>(Replace XXXXXXXXXX with your actual WhatsApp number)</em></p><p><strong>📧 Email Us</strong><br/>hello@kidsmire.com<br/><em>(or your actual business email)</em></p><p><strong>📍 Based in Kerala, India</strong></p><p><strong>⏰ Business Hours</strong><br/>Monday – Saturday: 9 AM – 7 PM IST<br/>Replies within 24 hours</p><p><strong>For order-related queries</strong>, please keep your unboxing video ready — it helps us resolve issues faster!</p><p><strong>For size help</strong>, check our Size Guide on the product page or WhatsApp us with your child's age and measurements.</p>"
+          }
+        },
+        "button_7DkJHQ": {
+          "type": "button",
+          "settings": {
+            "button_label": "",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_ETNiGP",
+        "text_GjY8DL",
+        "button_7DkJHQ"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "background-1",
+        "full_width": false,
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "form": {
@@ -20,6 +72,7 @@
   },
   "order": [
     "main",
+    "rich_text_k7aWAW",
     "form"
   ]
 }
