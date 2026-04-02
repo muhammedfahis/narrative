@@ -9,58 +9,6 @@
  */
 {
   "sections": {
-    "collapsible_content_cmdMr7": {
-      "type": "collapsible-content",
-      "blocks": {
-        "collapsible_row_p88eCH": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Shipping Information",
-            "icon": "truck",
-            "row_content": "<p>Standard shipping: 5-7 business days. Express shipping available. Free shipping on orders over $50.</p>",
-            "page": ""
-          }
-        },
-        "collapsible_row_PNdki4": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Size Guide",
-            "icon": "ruler",
-            "row_content": "<p>Refer to our size chart for accurate measurements. All sizes are in inches. Please measure your child before ordering.</p>",
-            "page": ""
-          }
-        },
-        "collapsible_row_PN8iXw": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Care Instructions",
-            "icon": "washing",
-            "row_content": "<p>Machine wash cold with similar colors. Tumble dry low. Do not bleach. Iron on low heat if needed.</p>",
-            "page": ""
-          }
-        }
-      },
-      "block_order": [
-        "collapsible_row_p88eCH",
-        "collapsible_row_PNdki4",
-        "collapsible_row_PN8iXw"
-      ],
-      "name": "t:sections.collapsible_content.presets.name",
-      "settings": {
-        "caption": "",
-        "heading": "Product Information",
-        "heading_size": "h1",
-        "heading_alignment": "center",
-        "layout": "section",
-        "color_scheme": "background-1",
-        "container_color_scheme": "background-2",
-        "open_first_collapsible_row": false,
-        "image_ratio": "adapt",
-        "desktop_layout": "image_second",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "rich_text_tiF3yc": {
       "type": "rich-text",
       "blocks": {
@@ -184,56 +132,46 @@
         "padding_bottom": 36
       }
     },
-    "collapsible_content_NJNTqa": {
+    "collapsible_content_cmdMr7": {
       "type": "collapsible-content",
       "blocks": {
-        "collapsible_row_Dd773r": {
+        "collapsible_row_p88eCH": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "⭐⭐⭐⭐⭐ Amazing Quality! - Sarah M.",
-            "icon": "star",
-            "row_content": "<p>My daughter absolutely loves this product! The quality is exceptional and it's so comfortable. Highly recommend to all parents looking for premium kids' clothing.</p>",
+            "heading": "Shipping Information",
+            "icon": "truck",
+            "row_content": "<p>Standard shipping: 5-7 business days. Express shipping available. Free shipping on orders over $50.</p>",
             "page": ""
           }
         },
-        "collapsible_row_9HzAAN": {
+        "collapsible_row_PNdki4": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "⭐⭐⭐⭐⭐ Perfect Fit & Fast Shipping - James T.",
-            "icon": "star",
-            "row_content": "<p>Great product and even better customer service. Arrived in perfect condition and my son wore it immediately. Will definitely order again!</p>",
+            "heading": "Size Guide",
+            "icon": "ruler",
+            "row_content": "<p>Refer to our size chart for accurate measurements. All sizes are in inches. Please measure your child before ordering.</p>",
             "page": ""
           }
         },
-        "collapsible_row_VcMdRg": {
+        "collapsible_row_PN8iXw": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "⭐⭐⭐⭐ Love the Design - Emma K.",
-            "icon": "star",
-            "row_content": "<p>Beautiful design and excellent craftsmanship. The colors are vibrant and the material is durable. My kids have been wearing it for weeks with no issues.</p>",
-            "page": ""
-          }
-        },
-        "collapsible_row_76iA99": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "⭐⭐⭐⭐⭐ Best Purchase Ever - Michael R.",
-            "icon": "star",
-            "row_content": "<p>Exceeded my expectations! The product is exactly as described. Great value for money and the customer support team was very helpful.\"</p>",
+            "heading": "Care Instructions",
+            "icon": "washing",
+            "row_content": "<p>Machine wash cold with similar colors. Tumble dry low. Do not bleach. Iron on low heat if needed.</p>",
             "page": ""
           }
         }
       },
       "block_order": [
-        "collapsible_row_Dd773r",
-        "collapsible_row_9HzAAN",
-        "collapsible_row_VcMdRg",
-        "collapsible_row_76iA99"
+        "collapsible_row_p88eCH",
+        "collapsible_row_PNdki4",
+        "collapsible_row_PN8iXw"
       ],
       "name": "t:sections.collapsible_content.presets.name",
       "settings": {
         "caption": "",
-        "heading": "Customer Reviews",
+        "heading": "Product Information",
         "heading_size": "h1",
         "heading_alignment": "center",
         "layout": "section",
@@ -252,7 +190,6 @@
     "banner",
     "product-grid",
     "multicolumn_DancBH",
-    "collapsible_content_NJNTqa",
     "collapsible_content_cmdMr7"
   ]
 }
