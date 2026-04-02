@@ -9,92 +9,6 @@
  */
 {
   "sections": {
-    "rich_text_FL9nAW": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_ERFDhN": {
-          "type": "heading",
-          "settings": {
-            "heading": "<p>Talk about your brand</p>",
-            "heading_size": "h1"
-          }
-        },
-        "text_VyinJe": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Made with soft, skin-safe fabric — gentle on your little one's skin.</p>"
-          }
-        },
-        "button_NCnKYF": {
-          "type": "button",
-          "settings": {
-            "button_label": "Button label",
-            "button_link": "",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_ERFDhN",
-        "text_VyinJe",
-        "button_NCnKYF"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "background-1",
-        "full_width": true,
-        "padding_top": 24,
-        "padding_bottom": 24
-      }
-    },
-    "rich_text_7BMUHT": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_YhFkNM": {
-          "type": "heading",
-          "settings": {
-            "heading": "<p>Talk about your brand</p>",
-            "heading_size": "h1"
-          }
-        },
-        "text_qTYC4r": {
-          "type": "text",
-          "settings": {
-            "text": "<p>🔒 Secure Checkout<br/>📦 Free Exchange on Wrong Size<br/>✅ Unboxing Video Required for Claims<br/>💬 WhatsApp Support Available</p>"
-          }
-        },
-        "button_VCU43e": {
-          "type": "button",
-          "settings": {
-            "button_label": "Button label",
-            "button_link": "",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_YhFkNM",
-        "text_qTYC4r",
-        "button_VCU43e"
-      ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "background-1",
-        "full_width": true,
-        "padding_top": 24,
-        "padding_bottom": 24
-      }
-    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -290,7 +204,7 @@
         "column3"
       ],
       "settings": {
-        "title": "What Parents Are Saying About KIDSMIRE",
+        "title": "Why Parents Choose KIDSMIRE",
         "heading_size": "h1",
         "image_width": "third",
         "image_ratio": "adapt",
@@ -358,8 +272,6 @@
     }
   },
   "order": [
-    "rich_text_FL9nAW",
-    "rich_text_7BMUHT",
     "image_banner",
     "rich_text",
     "featured_collection",
