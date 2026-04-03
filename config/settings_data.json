@@ -256,6 +256,11 @@
         "type": "shopify://apps/globo-mega-menu/blocks/app-embed/7a00835e-fe40-45a5-a615-2eb4ab697b58",
         "disabled": false,
         "settings": {}
+      },
+      "8670728856252544919": {
+        "type": "shopify://apps/essential-estimated/blocks/app-embed/02a895dd-b5b5-4103-8966-c6914aa8309e",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
