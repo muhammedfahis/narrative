@@ -1,6 +1,235 @@
+{% doc %}
+  @prompt
+    Create a rotating announcement bar that sits at the very top of the page, above the header and navbar. It should cycle through these two messages with a smooth fade or slide transition every 3-4 seconds:
+    1. "Free Shipping on orders above ₹499"
+    2. "New Arrivals Just Landed 🎉"
+    Style it consistently with the existing theme colors. It should be full-width, compact in height, and always visible on all pages.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-announcement-bar-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    color: {{ block.settings.text_color }};
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    z-index: 1000;
+  }
+
+  .ai-announcement-bar-wrapper-{{ ai_gen_id }} {
+    padding: {{ block.settings.vertical_padding }}px 20px;
+    position: relative;
+    width: 100%;
+  }
+
+  .ai-announcement-bar-content-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: {{ block.settings.font_size | times: 1.5 }}px;
+  }
+
+  .ai-announcement-bar-message-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity {{ block.settings.transition_duration }}s ease-in-out;
+    font-size: {{ block.settings.font_size }}px;
+    font-weight: {{ block.settings.font_weight }};
+    line-height: {{ block.settings.font_size | times: 1.5 }}px;
+  }
+
+  .ai-announcement-bar-message-{{ ai_gen_id }}.active {
+    opacity: 1;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-announcement-bar-message-{{ ai_gen_id }} {
+      font-size: {{ block.settings.font_size | times: 0.9 }}px;
+      line-height: {{ block.settings.font_size | times: 1.35 }}px;
+    }
+
+    .ai-announcement-bar-content-{{ ai_gen_id }} {
+      height: {{ block.settings.font_size | times: 1.35 }}px;
+    }
+  }
+{% endstyle %}
+
+<rotating-announcement-bar-{{ ai_gen_id }}
+  class="ai-announcement-bar-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-announcement-bar-wrapper-{{ ai_gen_id }}">
+    <div class="ai-announcement-bar-content-{{ ai_gen_id }}">
+      {% if block.settings.message_1 != blank %}
+        <div class="ai-announcement-bar-message-{{ ai_gen_id }} active" data-message-index="0">
+          {{ block.settings.message_1 }}
+        </div>
+      {% endif %}
+
+      {% if block.settings.message_2 != blank %}
+        <div class="ai-announcement-bar-message-{{ ai_gen_id }}" data-message-index="1">
+          {{ block.settings.message_2 }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</rotating-announcement-bar-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class RotatingAnnouncementBar{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.messages = [];
+        this.currentIndex = 0;
+        this.intervalId = null;
+      }
+
+      connectedCallback() {
+        this.messages = Array.from(this.querySelectorAll('.ai-announcement-bar-message-{{ ai_gen_id }}'));
+        
+        if (this.messages.length > 1) {
+          this.startRotation();
+        }
+      }
+
+      startRotation() {
+        const rotationInterval = {{ block.settings.rotation_interval | times: 1000 }};
+        
+        this.intervalId = setInterval(() => {
+          this.messages[this.currentIndex].classList.remove('active');
+          
+          this.currentIndex = (this.currentIndex + 1) % this.messages.length;
+          
+          this.messages[this.currentIndex].classList.add('active');
+        }, rotationInterval);
+      }
+
+      disconnectedCallback() {
+        if (this.intervalId) {
+          clearInterval(this.intervalId);
+        }
+      }
+    }
+
+    customElements.define('rotating-announcement-bar-{{ ai_gen_id }}', RotatingAnnouncementBar{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Rotating announcement bar",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Messages"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "message_1",
+      "label": "Message 1",
+      "default": "Free Shipping on orders above ₹499"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "message_2",
+      "label": "Message 2",
+      "default": "New Arrivals Just Landed 🎉"
+    },
+    {
+      "type": "header",
+      "content": "Timing"
+    },
+    {
+      "type": "range",
+      "id": "rotation_interval",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Rotation interval",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "transition_duration",
+      "min": 0.5,
+      "max": 2,
+      "step": 0.5,
+      "unit": "s",
+      "label": "Transition duration",
+      "default": 0.5
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 10
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rotating announcement bar"
+    }
+  ]
+}
 {% endschema %}
