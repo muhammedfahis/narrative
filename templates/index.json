@@ -40,9 +40,9 @@
           "type": "ai_gen_block_934f972",
           "settings": {
             "background_image": "shopify://shop_images/Delicate_baby_girl_outfit_arrangement.png",
-            "overlay_opacity": 40,
+            "overlay_opacity": 80,
             "min_height_desktop": 80,
-            "min_height_mobile": 70,
+            "min_height_mobile": 65,
             "headline": "Curated Essentials for Conscious Parents",
             "subheadline": "Premium Quality Kids' Wear – Loved by Moms Across India",
             "content_max_width": 900,
@@ -357,41 +357,6 @@
     },
     "1775193853430b5e20": {
       "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_6367994_aKGWn7": {
-          "type": "ai_gen_block_6367994",
-          "settings": {
-            "background_image": "shopify://shop_images/Delicate_baby_girl_outfit_arrangement.png",
-            "min_height": 500,
-            "overlay_opacity": 0.5,
-            "content_max_width": 800,
-            "heading": "Premium Kids Fashion",
-            "heading_size": 48,
-            "heading_color": "#ffffff",
-            "subheading": "Discover our collection of everyday wear and party outfits",
-            "subheading_size": 18,
-            "subheading_color": "#ffffff",
-            "button_text": "Shop now",
-            "button_link": "",
-            "button_text_size": 16,
-            "button_bg_color": "#334fb4",
-            "button_hover_bg_color": "#121212",
-            "button_text_color": "#ffffff",
-            "button_border_radius": 8,
-            "usp_1_text": "Free shipping on orders over ₹999",
-            "usp_2_text": "Cash on delivery available",
-            "usp_3_text": "Premium quality guaranteed",
-            "usp_text_size": 14,
-            "usp_text_color": "#ffffff",
-            "usp_icon_size": 20,
-            "usp_icon_color": "#ffffff"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_6367994_aKGWn7"
-      ],
       "settings": {}
     }
   },
