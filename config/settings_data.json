@@ -126,6 +126,7 @@
     "predictive_search_enabled": true,
     "predictive_search_show_vendor": true,
     "predictive_search_show_price": true,
+    "favicon": "shopify://shop_images/Gemini_Generated_Image_5vk8uh5vk8uh5vk8_fb0ccb41-5862-462f-b687-4bf06d4277e1.png",
     "currency_code_enabled": true,
     "sections": {
       "announcement-bar": {
