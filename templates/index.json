@@ -9,6 +9,30 @@
  */
 {
   "sections": {
+    "1775191592d3cd1b61": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_c796622_H6M7zp": {
+          "type": "ai_gen_block_c796622",
+          "settings": {
+            "message_1": "Free Shipping on orders above ₹499",
+            "message_2": "New Arrivals Just Landed 🎉",
+            "rotation_interval": 4,
+            "transition_duration": 0.5,
+            "background_color": "#121212",
+            "text_color": "#ffffff",
+            "font_size": 14,
+            "font_weight": "400",
+            "vertical_padding": 10
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_c796622_H6M7zp"
+      ],
+      "settings": {}
+    },
     "1775192259c9690415": {
       "type": "_blocks",
       "blocks": {
@@ -104,30 +128,6 @@
     },
     "17751918666fdf4b4f": {
       "type": "_blocks",
-      "settings": {}
-    },
-    "1775191592d3cd1b61": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_c796622_H6M7zp": {
-          "type": "ai_gen_block_c796622",
-          "settings": {
-            "message_1": "Free Shipping on orders above ₹499",
-            "message_2": "New Arrivals Just Landed 🎉",
-            "rotation_interval": 4,
-            "transition_duration": 0.5,
-            "background_color": "#121212",
-            "text_color": "#ffffff",
-            "font_size": 14,
-            "font_weight": "400",
-            "vertical_padding": 10
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_c796622_H6M7zp"
-      ],
       "settings": {}
     },
     "1775191175d02d95cb": {
@@ -353,10 +353,10 @@
     }
   },
   "order": [
+    "1775191592d3cd1b61",
     "1775192259c9690415",
     "image_banner",
     "17751918666fdf4b4f",
-    "1775191592d3cd1b61",
     "1775191175d02d95cb",
     "rich_text",
     "featured_collection",
