@@ -124,8 +124,8 @@
     "social_youtube_link": "https://youtube.com/@ta93abe",
     "social_vimeo_link": "https://vimeo.com/ta93abe",
     "predictive_search_enabled": true,
-    "predictive_search_show_vendor": false,
-    "predictive_search_show_price": false,
+    "predictive_search_show_vendor": true,
+    "predictive_search_show_price": true,
     "currency_code_enabled": true,
     "sections": {
       "announcement-bar": {
