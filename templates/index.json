@@ -9,6 +9,50 @@
  */
 {
   "sections": {
+    "1775192259c9690415": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_934f972_AcgwUW": {
+          "type": "ai_gen_block_934f972",
+          "settings": {
+            "background_image": "shopify://shop_images/Delicate_baby_girl_outfit_arrangement.png",
+            "overlay_opacity": 40,
+            "min_height_desktop": 80,
+            "min_height_mobile": 70,
+            "headline": "Curated Essentials for Conscious Parents",
+            "subheadline": "Premium Quality Kids' Wear – Loved by Moms Across India",
+            "content_max_width": 900,
+            "badge_1_text": "Handpicked Styles",
+            "badge_2_text": "Safe & Tested",
+            "badge_3_text": "Fast Delivery",
+            "cta_text": "Shop Best Sellers",
+            "cta_link": "",
+            "text_color": "#ffffff",
+            "button_bg_color": "#334fb4",
+            "button_text_color": "#ffffff",
+            "heading_font": "assistant_n4",
+            "body_font": "assistant_n4",
+            "headline_size_desktop": 56,
+            "headline_size_mobile": 32,
+            "subheadline_size_desktop": 20,
+            "subheadline_size_mobile": 16,
+            "badge_size_desktop": 16,
+            "badge_size_mobile": 14,
+            "button_size_desktop": 16,
+            "button_size_mobile": 15,
+            "button_border_radius": 8,
+            "button_shadow_opacity": 15,
+            "button_shadow_vertical": 4,
+            "button_shadow_blur": 5
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_934f972_AcgwUW"
+      ],
+      "settings": {}
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -43,6 +87,7 @@
         "text",
         "button"
       ],
+      "disabled": true,
       "settings": {
         "image": "shopify://shop_images/Gemini_Generated_Image_n9e6k8n9e6k8n9e6_1.png",
         "image_overlay_opacity": 40,
@@ -56,6 +101,38 @@
         "stack_images_on_mobile": false,
         "show_text_below": false
       }
+    },
+    "17751918666fdf4b4f": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "1775191592d3cd1b61": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_c796622_H6M7zp": {
+          "type": "ai_gen_block_c796622",
+          "settings": {
+            "message_1": "Free Shipping on orders above ₹499",
+            "message_2": "New Arrivals Just Landed 🎉",
+            "rotation_interval": 4,
+            "transition_duration": 0.5,
+            "background_color": "#121212",
+            "text_color": "#ffffff",
+            "font_size": 14,
+            "font_weight": "400",
+            "vertical_padding": 10
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_c796622_H6M7zp"
+      ],
+      "settings": {}
+    },
+    "1775191175d02d95cb": {
+      "type": "_blocks",
+      "settings": {}
     },
     "rich_text": {
       "type": "rich-text",
@@ -276,7 +353,11 @@
     }
   },
   "order": [
+    "1775192259c9690415",
     "image_banner",
+    "17751918666fdf4b4f",
+    "1775191592d3cd1b61",
+    "1775191175d02d95cb",
     "rich_text",
     "featured_collection",
     "collage",
