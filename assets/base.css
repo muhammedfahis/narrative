@@ -2956,4 +2956,13 @@ details-disclosure > details {
   .localization-form__select:focus {
     outline: transparent solid 1px;
   }
+
+  header,
+.header,
+.site-header,
+nav,
+.navigation {
+  z-index: 9999 !important;
+  position: relative;
+}
 }
