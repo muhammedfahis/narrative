@@ -2956,8 +2956,7 @@ details-disclosure > details {
   .localization-form__select:focus {
     outline: transparent solid 1px;
   }
-
- /* Fix Narrative theme mobile menu overlap */
+}
 @media (max-width: 749px) {
   /* Mobile menu drawer - bring to front */
   .header__menu,
@@ -2983,7 +2982,6 @@ details-disclosure > details {
     z-index: 0 !important;
     position: relative;
   }
-}
 }
 
 
