@@ -37,7 +37,7 @@
         "text_g7M9rh": {
           "type": "text",
           "settings": {
-            "text": "✨ FREE SHIPPING ON ALL ORDERS ✨Price includes all taxes. No hidden charges.",
+            "text": "🎉 Extra 10% off your first order! Use code FIRST10 at checkout",
             "text_style": "subtitle"
           }
         },
@@ -55,6 +55,13 @@
           "type": "buy_buttons",
           "settings": {
             "show_dynamic_checkout": true
+          }
+        },
+        "text_eQ6dfX": {
+          "type": "text",
+          "settings": {
+            "text": "Text block",
+            "text_style": "body"
           }
         },
         "icon_with_text_HqVaJj": {
@@ -138,6 +145,7 @@
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "text_eQ6dfX",
         "icon_with_text_HqVaJj",
         "description",
         "collapsible-row-0",
