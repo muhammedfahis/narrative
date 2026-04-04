@@ -2957,5 +2957,37 @@ details-disclosure > details {
     outline: transparent solid 1px;
   }
 
+  /* Fix mobile menu z-index */
+@media (max-width: 768px) {
+  /* Raise the mobile nav drawer above everything */
+  #MobileMenuDrawer,
+  .mobile-menu,
+  .mobile-nav,
+  [id*="mobile-menu"],
+  [class*="mobile-menu"] {
+    z-index: 99999 !important;
+    position: relative;
+  }
+
+  /* Push homepage sections behind the menu */
+  .slideshow,
+  .hero,
+  .banner,
+  main,
+  #MainContent {
+    z-index: 1 !important;
+    position: relative;
+  }
+
+  /* Fix chat widget overlapping menu */
+  [class*="chat"],
+  [id*="chat"],
+  [class*="tidio"],
+  [class*="gorgias"] {
+    z-index: 999 !important; /* Lower than menu */
+  }
+}
+
+
 }
 
