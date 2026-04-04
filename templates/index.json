@@ -126,6 +126,49 @@
         "show_text_below": false
       }
     },
+    "rich_text_zAb4hw": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_KfGVcG": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>🎉 Extra 10% off your first order! Use code FIRST10 at checkout</p>",
+            "heading_size": "h1"
+          }
+        },
+        "text_jYcxgc": {
+          "type": "text",
+          "settings": {
+            "text": ""
+          }
+        },
+        "button_k8jQWV": {
+          "type": "button",
+          "settings": {
+            "button_label": "",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_KfGVcG",
+        "text_jYcxgc",
+        "button_k8jQWV"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "background-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
     "17751918666fdf4b4f": {
       "type": "_blocks",
       "settings": {}
@@ -369,8 +412,9 @@
     }
   },
   "order": [
+    "rich_text_zAb4hw",
     "1775191592d3cd1b61",
-    "1775192259c9690415" ,
+    "1775192259c9690415",
     "image_banner",
     "17751918666fdf4b4f",
     "1775191175d02d95cb",
