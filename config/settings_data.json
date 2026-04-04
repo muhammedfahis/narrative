@@ -149,6 +149,9 @@
       },
       "header": {
         "type": "header",
+        "custom_css": [
+          ".site-header {position: relative !important; z-index: 1000 !important;}"
+        ],
         "settings": {
           "color_scheme": "background-1",
           "logo_width": 90,
