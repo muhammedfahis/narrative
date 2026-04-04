@@ -250,6 +250,11 @@
         "type": "shopify://apps/essential-estimated/blocks/app-embed/02a895dd-b5b5-4103-8966-c6914aa8309e",
         "disabled": false,
         "settings": {}
+      },
+      "11502817661673146621": {
+        "type": "shopify://apps/releasit-cod-fee-partial-pay/blocks/app-embed/019a066b-bc34-792e-8460-8aae1d0bdf53",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
