@@ -131,20 +131,6 @@
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
-        "blocks": {
-          "announcement-bar-0": {
-            "type": "announcement",
-            "settings": {
-              "text": "🎉 Extra 10% off your first order! Use code FIRST10 at checkout",
-              "text_alignment": "center",
-              "color_scheme": "background-1",
-              "link": "shopify://collections/kids-clothing"
-            }
-          }
-        },
-        "block_order": [
-          "announcement-bar-0"
-        ],
         "settings": {}
       },
       "header": {
