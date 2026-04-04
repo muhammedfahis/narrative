@@ -2965,4 +2965,8 @@ nav,
   z-index: 9999 !important;
   position: relative;
 }
+#menu-drawer {
+  z-index: 9999 !important;
+  position: relative;
+}
 }
