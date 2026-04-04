@@ -2957,35 +2957,34 @@ details-disclosure > details {
     outline: transparent solid 1px;
   }
 
-  /* Fix mobile menu z-index */
-@media (max-width: 768px) {
-  /* Raise the mobile nav drawer above everything */
-  #MobileMenuDrawer,
-  .mobile-menu,
+ /* Fix Narrative theme mobile menu overlap */
+@media (max-width: 749px) {
+  /* Mobile menu drawer - bring to front */
+  .header__menu,
   .mobile-nav,
-  [id*="mobile-menu"],
-  [class*="mobile-menu"] {
-    z-index: 99999 !important;
-    position: relative;
+  details[id*="Details-menu"],
+  .menu-drawer,
+  .menu-drawer__navigation {
+    z-index: 100 !important;
+    background-color: #ffffff !important; /* Solid white background */
   }
 
-  /* Push homepage sections behind the menu */
-  .slideshow,
-  .hero,
-  .banner,
-  main,
-  #MainContent {
-    z-index: 1 !important;
-    position: relative;
+  /* Make sure menu has opaque background so content doesn't bleed through */
+  .menu-drawer__inner-container,
+  .menu-drawer__navigation-container {
+    background-color: #ffffff !important;
+    z-index: 100 !important;
   }
 
-  /* Fix chat widget overlapping menu */
-  [class*="chat"],
-  [id*="chat"],
-  [class*="tidio"],
-  [class*="gorgias"] {
-    z-index: 999 !important; /* Lower than menu */
+  /* Push main content behind */
+  #MainContent,
+  .main-content,
+  main[id="MainContent"] {
+    z-index: 0 !important;
+    position: relative;
   }
+}
+
 }
 
 
