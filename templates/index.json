@@ -42,11 +42,27 @@
     "1775191592d3cd1b61": {
       "type": "_blocks",
       "blocks": {
+        "ai_gen_block_c796622_GHgMYD": {
+          "type": "ai_gen_block_c796622",
+          "name": "Rotating announcement bar",
+          "settings": {
+            "message_1": "💵 Cash on Delivery Available across India | Order now, pay at your doorstep",
+            "message_2": "💵 Cash on Delivery Available across India | Order now, pay at your doorstep",
+            "rotation_interval": 4,
+            "transition_duration": 0.5,
+            "background_color": "#121212",
+            "text_color": "#ffffff",
+            "font_size": 14,
+            "font_weight": "400",
+            "vertical_padding": 10
+          },
+          "blocks": {}
+        },
         "ai_gen_block_c796622_H6M7zp": {
           "type": "ai_gen_block_c796622",
           "settings": {
             "message_1": "Free Shipping on orders above ₹499",
-            "message_2": "💵 Cash on Delivery Available across India | Order now, pay at your doorstep",
+            "message_2": "New Arrivals Just Landed 🎉",
             "rotation_interval": 4,
             "transition_duration": 0.5,
             "background_color": "#121212",
@@ -59,6 +75,7 @@
         }
       },
       "block_order": [
+        "ai_gen_block_c796622_GHgMYD",
         "ai_gen_block_c796622_H6M7zp"
       ],
       "settings": {}
