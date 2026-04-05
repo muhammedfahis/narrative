@@ -413,6 +413,31 @@
     "17753250544336e59f": {
       "type": "_blocks",
       "settings": {}
+    },
+    "1775398557991d0497": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_ef304d2_JL9kyi": {
+          "type": "ai_gen_block_ef304d2",
+          "settings": {
+            "phone_number": "918848104626",
+            "button_color": "#25D366",
+            "icon_color": "#FFFFFF",
+            "button_size": 60,
+            "mobile_button_size": 55,
+            "enable_pulse": true,
+            "bottom_position": 20,
+            "right_position": 20,
+            "mobile_bottom_position": 15,
+            "mobile_right_position": 15
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_ef304d2_JL9kyi"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -434,6 +459,7 @@
     "17751932148392d2ee",
     "1775193853430b5e20",
     "17753250311b8322c5",
-    "17753250544336e59f"
+    "17753250544336e59f",
+    "1775398557991d0497"
   ]
 }
