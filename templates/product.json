@@ -15,8 +15,8 @@
         "popup_fX6rwc": {
           "type": "popup",
           "settings": {
-            "text": "Pop-up link text",
-            "page": ""
+            "text": "📏 Size Guide",
+            "page": "size-guide"
           }
         },
         "vendor": {
