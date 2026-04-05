@@ -12,6 +12,13 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "popup_fX6rwc": {
+          "type": "popup",
+          "settings": {
+            "text": "Pop-up link text",
+            "page": ""
+          }
+        },
         "vendor": {
           "type": "text",
           "settings": {
@@ -45,6 +52,20 @@
           "type": "variant_picker",
           "settings": {
             "picker_type": "button"
+          }
+        },
+        "text_qwcFWL": {
+          "type": "text",
+          "settings": {
+            "text": "Text block",
+            "text_style": "body"
+          }
+        },
+        "popup_hDDLmN": {
+          "type": "popup",
+          "settings": {
+            "text": "Pop-up link text",
+            "page": ""
           }
         },
         "quantity_selector": {
@@ -137,12 +158,15 @@
         }
       },
       "block_order": [
+        "popup_fX6rwc",
         "vendor",
         "title",
         "caption",
         "price",
         "text_g7M9rh",
         "variant_picker",
+        "text_qwcFWL",
+        "popup_hDDLmN",
         "quantity_selector",
         "buy_buttons",
         "text_eQ6dfX",
