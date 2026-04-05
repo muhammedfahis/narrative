@@ -92,9 +92,9 @@
         "collapsible-row-0": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Materials",
+            "heading": "Material & Fabric",
             "icon": "leather",
-            "content": "",
+            "content": "<p><strong>Premium Quality Materials</strong></p><p><strong>Fabric Composition:</strong></p><ul><li>Main Fabric: 100% Premium Cotton</li><li>Lining: Soft Cotton Blend</li></ul><p><strong>Why Premium Cotton?</strong></p><p>Our premium cotton is carefully selected for its softness, breathability, and durability—perfect for your child's delicate skin. It's gentle, hypoallergenic, and maintains its quality wash after wash.</p><p><strong>Care Instructions:</strong></p><ul><li>Machine wash cold with similar colors</li><li>Use gentle cycle for longevity</li><li>Do not bleach</li><li>Tumble dry low or hang to dry</li><li>Iron on low heat if needed</li></ul><p><strong>Durability & Comfort:</strong></p><p>Our premium cotton blends are designed to withstand active play while keeping your little one comfortable all day long. The soft lining ensures maximum comfort against sensitive skin.</p>",
             "page": ""
           }
         },
@@ -104,15 +104,6 @@
             "heading": "Shipping & Delivery",
             "icon": "truck",
             "content": "<p><strong>Shipping & Delivery</strong></p><p>📦 <strong>Free Shipping:</strong> All orders across India<br/><br/>🇮🇳 <strong>Ships From:</strong> India<br/><br/>⏱️ <strong>Processing Time:</strong> 1-2 business days<br/><br/>🚚 <strong>Delivery Time:</strong> 5-7 business days after dispatch<br/><br/>📍 <strong>Delivery Locations:</strong> We deliver to all major cities and towns across India<br/><br/>📧 <strong>Tracking:</strong> You'll receive tracking details via email once your order ships<br/><br/>💳 <strong>Cash on Delivery:</strong> Available for select locations</p><p>For urgent orders or questions about delivery to your area, please contact us before placing your order.</p>",
-            "page": ""
-          }
-        },
-        "collapsible-row-2": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Dimensions",
-            "icon": "ruler",
-            "content": "",
             "page": ""
           }
         },
@@ -160,7 +151,6 @@
         "description",
         "collapsible-row-0",
         "collapsible-row-1",
-        "collapsible-row-2",
         "collapsible-row-3",
         "collapsible_tab_nTTjjz",
         "share",

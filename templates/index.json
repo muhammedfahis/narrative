@@ -438,6 +438,55 @@
         "ai_gen_block_ef304d2_JL9kyi"
       ],
       "settings": {}
+    },
+    "17754022644b966329": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "17754024011010f089": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_56e46f6_9dJGHw": {
+          "type": "ai_gen_block_56e46f6",
+          "settings": {
+            "show_heading": true,
+            "heading": "Fabric & Care",
+            "heading_font": "assistant_n4",
+            "heading_size": 18,
+            "heading_color": "#121212",
+            "spacing_below_heading": 16,
+            "show_icon": true,
+            "icon_style": "fabric",
+            "icon_size": 24,
+            "icon_color": "#334fb4",
+            "use_metafield": false,
+            "fabric_composition": "<p>100% Organic Cotton</p>",
+            "text_font": "assistant_n4",
+            "text_size": 14,
+            "text_color": "#121212",
+            "content_spacing": 16,
+            "show_care_instructions": true,
+            "care_instructions": "<p>Machine wash cold. Tumble dry low. Do not bleach.</p>",
+            "care_text_size": 13,
+            "care_text_color": "#666666",
+            "care_padding_top": 12,
+            "care_divider_thickness": 1,
+            "care_divider_color": "#e5e5e5",
+            "desktop_width_percent": 100,
+            "background_color": "#f9f9f9",
+            "padding_vertical": 20,
+            "padding_horizontal": 20,
+            "border_radius": 4,
+            "border_thickness": 1,
+            "border_color": "#e5e5e5"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_56e46f6_9dJGHw"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -460,6 +509,8 @@
     "1775193853430b5e20",
     "17753250311b8322c5",
     "17753250544336e59f",
-    "1775398557991d0497"
+    "1775398557991d0497",
+    "17754022644b966329",
+    "17754024011010f089"
   ]
 }
