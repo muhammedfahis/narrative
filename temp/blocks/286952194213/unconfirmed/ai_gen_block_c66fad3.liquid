@@ -1,6 +1,662 @@
+{% doc %}
+  @prompt
+    Create an exit-intent popup for a premium kids' wear store. The popup should trigger when a user moves their mouse toward the top of the browser (indicating intent to close the tab) on desktop, and on mobile trigger after 30 seconds of inactivity or when the user scrolls back to the top. The popup should display: a soft overlay background, a clean modal with the message "Wait! Don't forget your 10% discount. Use code: FIRST10", a styled discount code box that's easy to copy, a "Shop Now" CTA button, and a close/dismiss button. Design should match a premium boutique kids' brand — soft colors, rounded corners, playful but elegant typography. The popup should only show once per session (use sessionStorage to prevent repeat triggers). It should be fully responsive and work on both mobile and desktop.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-exit-popup-{{ ai_gen_id }} {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .ai-exit-popup-{{ ai_gen_id }}.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .ai-exit-popup-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: {{ block.settings.overlay_color }};
+    opacity: {{ block.settings.overlay_opacity }};
+  }
+
+  .ai-exit-popup-modal-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background-color: {{ block.settings.modal_background }};
+    border-radius: {{ block.settings.modal_border_radius }}px;
+    padding: {{ block.settings.modal_padding }}px;
+    max-width: {{ block.settings.modal_max_width }}px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+    text-align: center;
+  }
+
+  .ai-exit-popup-{{ ai_gen_id }}.active .ai-exit-popup-modal-{{ ai_gen_id }} {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .ai-exit-popup-close-{{ ai_gen_id }} {
+    position: absolute;
+    top: {{ block.settings.close_button_spacing }}px;
+    right: {{ block.settings.close_button_spacing }}px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    line-height: 1;
+  }
+
+  .ai-exit-popup-close-{{ ai_gen_id }}:hover {
+    opacity: 1;
+  }
+
+  .ai-exit-popup-close-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  .ai-exit-popup-content-{{ ai_gen_id }} {
+    padding: 20px 0;
+  }
+
+  .ai-exit-popup-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 {{ block.settings.heading_spacing }}px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .ai-exit-popup-message-{{ ai_gen_id }} {
+    font-size: {{ block.settings.message_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 {{ block.settings.message_spacing }}px;
+    line-height: 1.5;
+  }
+
+  .ai-exit-popup-code-box-{{ ai_gen_id }} {
+    background-color: {{ block.settings.code_box_background }};
+    border: 2px dashed {{ block.settings.code_box_border }};
+    border-radius: {{ block.settings.code_box_border_radius }}px;
+    padding: {{ block.settings.code_box_padding }}px;
+    margin: 0 auto {{ block.settings.code_box_spacing }}px;
+    max-width: 280px;
+    position: relative;
+  }
+
+  .ai-exit-popup-code-{{ ai_gen_id }} {
+    font-size: {{ block.settings.code_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.code_color }};
+    letter-spacing: 2px;
+    margin: 0;
+    font-family: monospace;
+  }
+
+  .ai-exit-popup-copy-hint-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.7;
+    margin-top: 8px;
+  }
+
+  .ai-exit-popup-cta-{{ ai_gen_id }} {
+    display: inline-block;
+    background-color: {{ block.settings.cta_background }};
+    color: {{ block.settings.cta_text_color }};
+    padding: {{ block.settings.cta_padding_vertical }}px {{ block.settings.cta_padding_horizontal }}px;
+    border-radius: {{ block.settings.cta_border_radius }}px;
+    font-size: {{ block.settings.cta_font_size }}px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .ai-exit-popup-cta-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.cta_hover_background }};
+    transform: translateY(-2px);
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-exit-popup-modal-{{ ai_gen_id }} {
+      padding: {{ block.settings.modal_padding | times: 0.7 }}px;
+    }
+
+    .ai-exit-popup-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.85 }}px;
+    }
+
+    .ai-exit-popup-message-{{ ai_gen_id }} {
+      font-size: {{ block.settings.message_size | times: 0.9 }}px;
+    }
+
+    .ai-exit-popup-code-{{ ai_gen_id }} {
+      font-size: {{ block.settings.code_size | times: 0.85 }}px;
+    }
+  }
+{% endstyle %}
+
+<exit-intent-popup-{{ ai_gen_id }}
+  class="ai-exit-popup-{{ ai_gen_id }}"
+  data-desktop-trigger="mouse-exit"
+  data-mobile-trigger="inactivity"
+  data-mobile-timeout="{{ block.settings.mobile_timeout }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-exit-popup-overlay-{{ ai_gen_id }}"></div>
+  <div class="ai-exit-popup-modal-{{ ai_gen_id }}">
+    <button
+      class="ai-exit-popup-close-{{ ai_gen_id }}"
+      aria-label="Close popup"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <div class="ai-exit-popup-content-{{ ai_gen_id }}">
+      {% if block.settings.heading != blank %}
+        <h2 class="ai-exit-popup-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+      {% endif %}
+
+      {% if block.settings.message != blank %}
+        <div class="ai-exit-popup-message-{{ ai_gen_id }}">{{ block.settings.message }}</div>
+      {% endif %}
+
+      {% if block.settings.discount_code != blank %}
+        <div class="ai-exit-popup-code-box-{{ ai_gen_id }}">
+          <p class="ai-exit-popup-code-{{ ai_gen_id }}">{{ block.settings.discount_code }}</p>
+          {% if block.settings.show_copy_hint %}
+            <p class="ai-exit-popup-copy-hint-{{ ai_gen_id }}">Click to copy</p>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.cta_text != blank %}
+        <a
+          href="{{ block.settings.cta_link }}"
+          class="ai-exit-popup-cta-{{ ai_gen_id }}"
+        >
+          {{ block.settings.cta_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</exit-intent-popup-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ExitIntentPopup{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.hasShown = false;
+        this.sessionKey = 'ai-exit-popup-shown-{{ ai_gen_id }}';
+        this.isMobile = window.innerWidth < 750;
+        this.inactivityTimer = null;
+        this.lastScrollY = window.scrollY;
+        this.mobileTimeout = parseInt(this.dataset.mobileTimeout) * 1000;
+      }
+
+      connectedCallback() {
+        if (sessionStorage.getItem(this.sessionKey)) {
+          return;
+        }
+
+        this.closeButton = this.querySelector('.ai-exit-popup-close-{{ ai_gen_id }}');
+        this.overlay = this.querySelector('.ai-exit-popup-overlay-{{ ai_gen_id }}');
+        this.codeBox = this.querySelector('.ai-exit-popup-code-box-{{ ai_gen_id }}');
+
+        this.setupEventListeners();
+        this.initTriggers();
+      }
+
+      setupEventListeners() {
+        this.closeButton.addEventListener('click', () => this.closePopup());
+        this.overlay.addEventListener('click', () => this.closePopup());
+
+        if (this.codeBox) {
+          this.codeBox.addEventListener('click', () => this.copyCode());
+        }
+      }
+
+      initTriggers() {
+        if (this.isMobile) {
+          this.initMobileTriggers();
+        } else {
+          this.initDesktopTriggers();
+        }
+      }
+
+      initDesktopTriggers() {
+        document.addEventListener('mouseleave', (e) => {
+          if (e.clientY <= 0 && !this.hasShown) {
+            this.showPopup();
+          }
+        });
+      }
+
+      initMobileTriggers() {
+        this.resetInactivityTimer();
+
+        document.addEventListener('touchstart', () => this.resetInactivityTimer());
+        document.addEventListener('scroll', () => this.handleMobileScroll());
+      }
+
+      resetInactivityTimer() {
+        clearTimeout(this.inactivityTimer);
+        this.inactivityTimer = setTimeout(() => {
+          if (!this.hasShown) {
+            this.showPopup();
+          }
+        }, this.mobileTimeout);
+      }
+
+      handleMobileScroll() {
+        this.resetInactivityTimer();
+
+        const currentScrollY = window.scrollY;
+        if (currentScrollY < this.lastScrollY && currentScrollY < 100 && !this.hasShown) {
+          this.showPopup();
+        }
+        this.lastScrollY = currentScrollY;
+      }
+
+      showPopup() {
+        if (this.hasShown) return;
+
+        this.classList.add('active');
+        this.hasShown = true;
+        sessionStorage.setItem(this.sessionKey, 'true');
+        document.body.style.overflow = 'hidden';
+      }
+
+      closePopup() {
+        this.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      copyCode() {
+        const codeElement = this.querySelector('.ai-exit-popup-code-{{ ai_gen_id }}');
+        if (!codeElement) return;
+
+        const code = codeElement.textContent;
+        
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(() => {
+            this.showCopyFeedback();
+          });
+        } else {
+          const textArea = document.createElement('textarea');
+          textArea.value = code;
+          textArea.style.position = 'fixed';
+          textArea.style.left = '-999999px';
+          document.body.appendChild(textArea);
+          textArea.select();
+          try {
+            document.execCommand('copy');
+            this.showCopyFeedback();
+          } catch (err) {
+            console.error('Failed to copy code');
+          }
+          document.body.removeChild(textArea);
+        }
+      }
+
+      showCopyFeedback() {
+        const hintElement = this.querySelector('.ai-exit-popup-copy-hint-{{ ai_gen_id }}');
+        if (hintElement) {
+          const originalText = hintElement.textContent;
+          hintElement.textContent = 'Copied!';
+          setTimeout(() => {
+            hintElement.textContent = originalText;
+          }, 2000);
+        }
+      }
+
+      disconnectedCallback() {
+        clearTimeout(this.inactivityTimer);
+      }
+    }
+
+    customElements.define('exit-intent-popup-{{ ai_gen_id }}', ExitIntentPopup{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Exit intent popup",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Wait! Don't miss out"
+    },
+    {
+      "type": "textarea",
+      "id": "message",
+      "label": "Message",
+      "default": "Get 10% off your first order with code below"
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": "Discount code",
+      "default": "FIRST10"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_copy_hint",
+      "label": "Show copy hint",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Trigger settings"
+    },
+    {
+      "type": "range",
+      "id": "mobile_timeout",
+      "label": "Mobile inactivity timeout",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Modal style"
+    },
+    {
+      "type": "color",
+      "id": "modal_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "modal_max_width",
+      "label": "Max width",
+      "min": 300,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "default": 480
+    },
+    {
+      "type": "range",
+      "id": "modal_padding",
+      "label": "Padding",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "modal_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "close_button_spacing",
+      "label": "Close button spacing",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.5
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 18,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Heading spacing",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "message_size",
+      "label": "Message size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "message_spacing",
+      "label": "Message spacing",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Discount code box"
+    },
+    {
+      "type": "color",
+      "id": "code_box_background",
+      "label": "Background",
+      "default": "#fff5f3"
+    },
+    {
+      "type": "color",
+      "id": "code_box_border",
+      "label": "Border color",
+      "default": "#ff6b5b"
+    },
+    {
+      "type": "range",
+      "id": "code_box_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "code_box_padding",
+      "label": "Padding",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "code_box_spacing",
+      "label": "Bottom spacing",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "code_color",
+      "label": "Code color",
+      "default": "#ff6b5b"
+    },
+    {
+      "type": "range",
+      "id": "code_size",
+      "label": "Code size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Call to action button"
+    },
+    {
+      "type": "color",
+      "id": "cta_background",
+      "label": "Background",
+      "default": "#ff6b5b"
+    },
+    {
+      "type": "color",
+      "id": "cta_hover_background",
+      "label": "Hover background",
+      "default": "#e55a4a"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "cta_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "cta_padding_vertical",
+      "label": "Vertical padding",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "cta_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "cta_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Exit intent popup"
+    }
+  ]
+}
 {% endschema %}
