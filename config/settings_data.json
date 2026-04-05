@@ -231,11 +231,6 @@
         "disabled": false,
         "settings": {}
       },
-      "15830000824732515833": {
-        "type": "shopify://apps/sk-whatsapp-chat-button/blocks/app-embed/f26357f3-3b4f-4ccc-8c8a-a4df2fc1dfc5",
-        "disabled": false,
-        "settings": {}
-      },
       "6615124273980966592": {
         "type": "shopify://apps/chatty/blocks/app-embed/1c0e135d-e8e1-4fe2-86be-1c36def46675",
         "disabled": true,
@@ -254,6 +249,11 @@
       "11502817661673146621": {
         "type": "shopify://apps/releasit-cod-fee-partial-pay/blocks/app-embed/019a066b-bc34-792e-8460-8aae1d0bdf53",
         "disabled": false,
+        "settings": {}
+      },
+      "15830000824732515833": {
+        "type": "shopify://apps/sk-whatsapp-chat-button/blocks/app-embed/f26357f3-3b4f-4ccc-8c8a-a4df2fc1dfc5",
+        "disabled": true,
         "settings": {}
       }
     }
