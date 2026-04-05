@@ -491,6 +491,55 @@
     "1775407575578e6274": {
       "type": "_blocks",
       "settings": {}
+    },
+    "1775409054178c3596": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_c66fad3_yLU3Dy": {
+          "type": "ai_gen_block_c66fad3",
+          "settings": {
+            "heading": "Wait! Don't miss out",
+            "message": "Get 10% off your first order with code below",
+            "discount_code": "FIRST10",
+            "show_copy_hint": true,
+            "cta_text": "Shop now",
+            "cta_link": "",
+            "mobile_timeout": 30,
+            "modal_background": "#ffffff",
+            "modal_max_width": 480,
+            "modal_padding": 40,
+            "modal_border_radius": 16,
+            "close_button_spacing": 16,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0.5,
+            "heading_color": "#121212",
+            "heading_size": 28,
+            "heading_spacing": 16,
+            "text_color": "#666666",
+            "message_size": 16,
+            "message_spacing": 20,
+            "code_box_background": "#fff5f3",
+            "code_box_border": "#ff6b5b",
+            "code_box_border_radius": 8,
+            "code_box_padding": 20,
+            "code_box_spacing": 24,
+            "code_color": "#ff6b5b",
+            "code_size": 24,
+            "cta_background": "#ff6b5b",
+            "cta_hover_background": "#e55a4a",
+            "cta_text_color": "#ffffff",
+            "cta_font_size": 16,
+            "cta_padding_vertical": 14,
+            "cta_padding_horizontal": 32,
+            "cta_border_radius": 8
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_c66fad3_yLU3Dy"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -517,6 +566,7 @@
     "1775398557991d0497",
     "17754022644b966329",
     "17754024011010f089",
-    "1775407575578e6274"
+    "1775407575578e6274",
+    "1775409054178c3596"
   ]
 }
