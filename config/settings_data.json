@@ -255,6 +255,11 @@
         "type": "shopify://apps/sk-whatsapp-chat-button/blocks/app-embed/f26357f3-3b4f-4ccc-8c8a-a4df2fc1dfc5",
         "disabled": true,
         "settings": {}
+      },
+      "5332588544499791172": {
+        "type": "shopify://apps/hoppy-free-shipping/blocks/shipping_bar/66159626-1fb8-4d18-901f-af7b6a63adaa",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
