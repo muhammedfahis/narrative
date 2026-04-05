@@ -12,13 +12,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "popup_fX6rwc": {
-          "type": "popup",
-          "settings": {
-            "text": "📏 Size Guide",
-            "page": "size-guide"
-          }
-        },
         "vendor": {
           "type": "text",
           "settings": {
@@ -54,17 +47,12 @@
             "picker_type": "button"
           }
         },
-        "text_qwcFWL": {
-          "type": "text",
+        "collapsible_tab_WKjAMq": {
+          "type": "collapsible_tab",
           "settings": {
-            "text": "Text block",
-            "text_style": "body"
-          }
-        },
-        "popup_hDDLmN": {
-          "type": "popup",
-          "settings": {
-            "text": "Pop-up link text",
+            "heading": "Size Guide",
+            "icon": "check_mark",
+            "content": "",
             "page": ""
           }
         },
@@ -158,15 +146,13 @@
         }
       },
       "block_order": [
-        "popup_fX6rwc",
         "vendor",
         "title",
         "caption",
         "price",
         "text_g7M9rh",
         "variant_picker",
-        "text_qwcFWL",
-        "popup_hDDLmN",
+        "collapsible_tab_WKjAMq",
         "quantity_selector",
         "buy_buttons",
         "text_eQ6dfX",
