@@ -171,42 +171,6 @@
         "padding_bottom": 12
       }
     },
-    "image-with-text": {
-      "type": "image-with-text",
-      "blocks": {
-        "image-with-text-0": {
-          "type": "heading",
-          "settings": {
-            "heading": "Designed for Comfort & Style",
-            "heading_size": "h1"
-          }
-        },
-        "image-with-text-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Every KIDSMIRE piece is carefully selected with your child's comfort in mind. Our clothing features soft, breathable fabrics that move with active kids, durable construction that survives countless washes, and adorable designs that make getting dressed fun. From everyday essentials to special occasion outfits, we make it easy to keep your little one looking and feeling their best.</p>",
-            "text_style": "body"
-          }
-        }
-      },
-      "block_order": [
-        "image-with-text-0",
-        "image-with-text-1"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/642747334_18031090454610685_8983185320241761402_n.jpg",
-        "height": "adapt",
-        "desktop_image_width": "small",
-        "layout": "text_first",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
-        "color_scheme": "background-2",
-        "mobile_content_alignment": "left",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "multicolumn": {
       "type": "multicolumn",
       "blocks": {
@@ -290,7 +254,6 @@
   },
   "order": [
     "main",
-    "image-with-text",
     "multicolumn",
     "product-recommendations",
     "1774359980d7398a3a"
