@@ -1,6 +1,645 @@
+{% doc %}
+  @prompt
+    Create a mobile-first "Category Bubbles" section for a premium kids' wear store. The section should display circular image bubbles in a horizontally scrollable row (on mobile) and a centered grid (on desktop). Each bubble should have a circular cropped image on top and a short category label below (e.g., Boys, Girls, New Arrivals, Sale). The bubbles should link to their respective collections. Style should be clean and boutique — soft shadows, subtle hover effects, and a playful but premium feel. The section should be fully customizable in the theme editor, allowing merchants to add/remove bubbles, change images, labels, and collection links. Aim for 4–6 bubbles by default.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-category-bubbles-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.section_padding_mobile }}px 0;
+  }
+
+  .ai-category-bubbles__container-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .ai-category-bubbles__heading-{{ ai_gen_id }} {
+    text-align: center;
+    margin: 0 0 {{ block.settings.heading_spacing }}px;
+    font-size: {{ block.settings.heading_size_mobile }}px;
+    color: {{ block.settings.heading_color }};
+    font-weight: 600;
+  }
+
+  .ai-category-bubbles__scroll-wrapper-{{ ai_gen_id }} {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .ai-category-bubbles__scroll-wrapper-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-category-bubbles__grid-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.bubble_spacing_mobile }}px;
+    padding: 8px 0;
+  }
+
+  .ai-category-bubbles__item-{{ ai_gen_id }} {
+    flex: 0 0 auto;
+    width: {{ block.settings.bubble_size_mobile }}px;
+    text-align: center;
+  }
+
+  .ai-category-bubbles__link-{{ ai_gen_id }} {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .ai-category-bubbles__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: {{ block.settings.bubble_size_mobile }}px;
+    height: {{ block.settings.bubble_size_mobile }}px;
+    margin: 0 auto {{ block.settings.label_spacing }}px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: {{ block.settings.bubble_background }};
+    box-shadow: 0 {{ block.settings.shadow_vertical }}px {{ block.settings.shadow_blur }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity }});
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ai-category-bubbles__link-{{ ai_gen_id }}:hover .ai-category-bubbles__image-wrapper-{{ ai_gen_id }} {
+    transform: translateY(-4px);
+    box-shadow: 0 {{ block.settings.shadow_vertical | plus: 4 }}px {{ block.settings.shadow_blur | plus: 4 }}px rgba(0, 0, 0, {{ block.settings.shadow_opacity | times: 1.2 | at_most: 0.3 }});
+  }
+
+  .ai-category-bubbles__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-category-bubbles__placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+  }
+
+  .ai-category-bubbles__placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-category-bubbles__label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.label_size_mobile }}px;
+    color: {{ block.settings.label_color }};
+    font-weight: 500;
+    line-height: 1.3;
+    word-wrap: break-word;
+    transition: color 0.3s ease;
+  }
+
+  .ai-category-bubbles__link-{{ ai_gen_id }}:hover .ai-category-bubbles__label-{{ ai_gen_id }} {
+    color: {{ block.settings.label_hover_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-category-bubbles-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_desktop }}px 0;
+    }
+
+    .ai-category-bubbles__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size_desktop }}px;
+    }
+
+    .ai-category-bubbles__scroll-wrapper-{{ ai_gen_id }} {
+      overflow: visible;
+    }
+
+    .ai-category-bubbles__grid-{{ ai_gen_id }} {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax({{ block.settings.bubble_size_desktop }}px, 1fr));
+      justify-items: center;
+      gap: {{ block.settings.bubble_spacing_desktop }}px;
+      max-width: {{ block.settings.max_bubbles_per_row | times: block.settings.bubble_size_desktop | plus: block.settings.bubble_spacing_desktop | times: block.settings.max_bubbles_per_row | minus: block.settings.bubble_spacing_desktop }}px;
+      margin: 0 auto;
+    }
+
+    .ai-category-bubbles__item-{{ ai_gen_id }} {
+      width: {{ block.settings.bubble_size_desktop }}px;
+    }
+
+    .ai-category-bubbles__image-wrapper-{{ ai_gen_id }} {
+      width: {{ block.settings.bubble_size_desktop }}px;
+      height: {{ block.settings.bubble_size_desktop }}px;
+    }
+
+    .ai-category-bubbles__label-{{ ai_gen_id }} {
+      font-size: {{ block.settings.label_size_desktop }}px;
+    }
+  }
+{% endstyle %}
+
+<category-bubbles-{{ ai_gen_id }} class="ai-category-bubbles-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-category-bubbles__container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-category-bubbles__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="ai-category-bubbles__scroll-wrapper-{{ ai_gen_id }}">
+      <div class="ai-category-bubbles__grid-{{ ai_gen_id }}">
+        {% for i in (1..6) %}
+          {% liquid
+            assign collection_key = 'collection_' | append: i
+            assign label_key = 'label_' | append: i
+            assign image_key = 'image_' | append: i
+            assign enabled_key = 'enable_bubble_' | append: i
+
+            assign collection = block.settings[collection_key]
+            assign label = block.settings[label_key]
+            assign image = block.settings[image_key]
+            assign enabled = block.settings[enabled_key]
+          %}
+
+          {% if enabled %}
+            <div class="ai-category-bubbles__item-{{ ai_gen_id }}">
+              {% if collection != blank %}
+                <a href="{{ collection.url }}" class="ai-category-bubbles__link-{{ ai_gen_id }}">
+              {% else %}
+                <div class="ai-category-bubbles__link-{{ ai_gen_id }}">
+              {% endif %}
+                
+                <div class="ai-category-bubbles__image-wrapper-{{ ai_gen_id }}">
+                  {% if image != blank %}
+                    <img
+                      src="{{ image | image_url: width: 400 }}"
+                      alt="{{ label | escape }}"
+                      class="ai-category-bubbles__image-{{ ai_gen_id }}"
+                      loading="lazy"
+                      width="400"
+                      height="400"
+                    >
+                  {% elsif collection != blank and collection.featured_image %}
+                    <img
+                      src="{{ collection.featured_image | image_url: width: 400 }}"
+                      alt="{{ label | default: collection.title | escape }}"
+                      class="ai-category-bubbles__image-{{ ai_gen_id }}"
+                      loading="lazy"
+                      width="400"
+                      height="400"
+                    >
+                  {% else %}
+                    <div class="ai-category-bubbles__placeholder-{{ ai_gen_id }}">
+                      {{ 'collection-apparel-1' | placeholder_svg_tag }}
+                    </div>
+                  {% endif %}
+                </div>
+
+                <div class="ai-category-bubbles__label-{{ ai_gen_id }}">
+                  {% if label != blank %}
+                    {{ label }}
+                  {% elsif collection != blank %}
+                    {{ collection.title }}
+                  {% else %}
+                    Category {{ i }}
+                  {% endif %}
+                </div>
+
+              {% if collection != blank %}
+                </a>
+              {% else %}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</category-bubbles-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class CategoryBubbles{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.setupScrollBehavior();
+      }
+
+      setupScrollBehavior() {
+        const scrollWrapper = this.querySelector('.ai-category-bubbles__scroll-wrapper-{{ ai_gen_id }}');
+        
+        if (!scrollWrapper) return;
+
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        scrollWrapper.addEventListener('mousedown', (e) => {
+          if (window.innerWidth >= 750) return;
+          isDown = true;
+          scrollWrapper.style.cursor = 'grabbing';
+          startX = e.pageX - scrollWrapper.offsetLeft;
+          scrollLeft = scrollWrapper.scrollLeft;
+        });
+
+        scrollWrapper.addEventListener('mouseleave', () => {
+          isDown = false;
+          scrollWrapper.style.cursor = 'grab';
+        });
+
+        scrollWrapper.addEventListener('mouseup', () => {
+          isDown = false;
+          scrollWrapper.style.cursor = 'grab';
+        });
+
+        scrollWrapper.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - scrollWrapper.offsetLeft;
+          const walk = (x - startX) * 2;
+          scrollWrapper.scrollLeft = scrollLeft - walk;
+        });
+      }
+    }
+
+    customElements.define('category-bubbles-{{ ai_gen_id }}', CategoryBubbles{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Category bubbles",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by category"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (mobile)",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size (desktop)",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Heading spacing",
+      "min": 12,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "section_padding_mobile",
+      "label": "Section padding (mobile)",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "section_padding_desktop",
+      "label": "Section padding (desktop)",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Bubble style"
+    },
+    {
+      "type": "range",
+      "id": "bubble_size_mobile",
+      "label": "Bubble size (mobile)",
+      "min": 60,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "bubble_size_desktop",
+      "label": "Bubble size (desktop)",
+      "min": 80,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "bubble_spacing_mobile",
+      "label": "Bubble spacing (mobile)",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "bubble_spacing_desktop",
+      "label": "Bubble spacing (desktop)",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "max_bubbles_per_row",
+      "label": "Max bubbles per row (desktop)",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "color",
+      "id": "bubble_background",
+      "label": "Bubble background",
+      "default": "#f3f3f3"
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical",
+      "label": "Shadow vertical offset",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "label": "Shadow blur",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "label": "Shadow opacity",
+      "min": 0,
+      "max": 0.5,
+      "step": 0.1,
+      "default": 0.1
+    },
+    {
+      "type": "header",
+      "content": "Label style"
+    },
+    {
+      "type": "range",
+      "id": "label_size_mobile",
+      "label": "Label size (mobile)",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "label_size_desktop",
+      "label": "Label size (desktop)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "label_spacing",
+      "label": "Label spacing",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "label_hover_color",
+      "label": "Label hover color",
+      "default": "#334fb4"
+    },
+    {
+      "type": "header",
+      "content": "Bubble 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_bubble_1",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "label_1",
+      "label": "Label",
+      "default": "Boys"
+    },
+    {
+      "type": "header",
+      "content": "Bubble 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_bubble_2",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "label_2",
+      "label": "Label",
+      "default": "Girls"
+    },
+    {
+      "type": "header",
+      "content": "Bubble 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_bubble_3",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "collection_3",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "label_3",
+      "label": "Label",
+      "default": "New arrivals"
+    },
+    {
+      "type": "header",
+      "content": "Bubble 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_bubble_4",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "collection_4",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_4",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "label_4",
+      "label": "Label",
+      "default": "Sale"
+    },
+    {
+      "type": "header",
+      "content": "Bubble 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_bubble_5",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "collection",
+      "id": "collection_5",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_5",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "label_5",
+      "label": "Label",
+      "default": "Accessories"
+    },
+    {
+      "type": "header",
+      "content": "Bubble 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_bubble_6",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "collection",
+      "id": "collection_6",
+      "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_6",
+      "label": "Custom image"
+    },
+    {
+      "type": "text",
+      "id": "label_6",
+      "label": "Label",
+      "default": "Footwear"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category bubbles"
+    }
+  ]
+}
 {% endschema %}
