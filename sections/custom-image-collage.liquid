@@ -223,42 +223,58 @@
       "default": 40
     }
   ],
-  "blocks": [
-    {
-      "type": "image",
-      "name": "Image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "text",
-          "id": "caption",
-          "label": "Caption",
-          "default": "Shop the look"
-        },
-        {
-          "type": "color",
-          "id": "overlay_color",
-          "label": "Overlay color",
-          "default": "rgba(0,0,0,0.4)"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Link URL"
-        },
-        {
-          "type": "text",
-          "id": "link_text",
-          "label": "Link label",
-          "default": "Shop now"
-        }
-      ]
-    }
-  ],
+"blocks": [
+  {
+    "type": "image",
+    "name": "Image",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Select image (from media library)"
+      },
+      {
+        "type": "text",
+        "id": "image_url",
+        "label": "Or paste image URL (from Files)",
+        "placeholder": "https://cdn.shopify.com/s/files/..."
+      },
+      {
+        "type": "text",
+        "id": "caption",
+        "label": "Caption",
+        "default": "Shop the look"
+      },
+      {
+        "type": "color",
+        "id": "overlay_color",
+        "label": "Overlay color",
+        "default": "#000000"
+      },
+      {
+        "type": "range",
+        "id": "overlay_opacity",
+        "label": "Overlay opacity",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "default": 40,
+        "unit": "%"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Link URL"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link label",
+        "default": "Shop now"
+      }
+    ]
+  }
+],
   "max_blocks": 6,
   "presets": [
     {
