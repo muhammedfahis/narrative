@@ -95,17 +95,27 @@
       });
     }
 
+    function lockScroll() {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    }
+
+    function unlockScroll() {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    }
+
     function openLightbox(index) {
       collectImages();
       currentIndex = index;
       showImage(currentIndex);
       lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
+      lockScroll();
     }
 
     function closeLightbox() {
       lightbox.classList.remove('active');
-      document.body.style.overflow = '';
+      unlockScroll();
     }
 
     function showImage(index) {
@@ -145,9 +155,19 @@
       });
     });
 
-    // Controls
+    // Controls — backdrop must receive clicks (see CSS pointer-events on .lightbox-content)
     backdrop && backdrop.addEventListener('click', closeLightbox);
-    closeBtn && closeBtn.addEventListener('click', closeLightbox);
+    closeBtn && closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeLightbox();
+    });
+
+    // Clicks on dimmed area: .lightbox-content often covers the full viewport above the backdrop
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox || e.target === backdrop) {
+        closeLightbox();
+      }
+    });
 
     prevBtn && prevBtn.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -369,6 +389,13 @@
   justify-content: center;
   max-width: 92vw;
   max-height: 92vh;
+  /* Let clicks reach .lightbox-backdrop so overlay tap-to-close works */
+  pointer-events: none;
+}
+
+.lightbox-content button,
+.lightbox-content .lightbox-img {
+  pointer-events: auto;
 }
 
 .lightbox-img {
