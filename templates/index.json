@@ -332,59 +332,6 @@
         "padding_bottom": 36
       }
     },
-    "multicolumn": {
-      "type": "multicolumn",
-      "blocks": {
-        "column1": {
-          "type": "column",
-          "settings": {
-            "title": "Perfect for Party Season!",
-            "text": "<p>The butterfly dress was a hit at my daughter's birthday party. The quality is amazing and she felt like a princess all day. Highly recommend KIDSMIRE! - Adla majeed</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column2": {
-          "type": "column",
-          "settings": {
-            "title": "Great Quality, Great Price",
-            "text": "<p>I was worried about ordering kids' clothes online, but KIDSMIRE exceeded my expectations. The bomber jacket fits perfectly and looks even better in person! - Shahabas Mol</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column3": {
-          "type": "column",
-          "settings": {
-            "title": "My Go-To for Kids' Fashion",
-            "text": "<p>I've ordered three times now and every piece has been adorable and well-made. My son loves his bear hoodie set. Will definitely be back! - Anjali K</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column1",
-        "column2",
-        "column3"
-      ],
-      "settings": {
-        "title": "Why Parents Choose KIDSMIRE",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "background-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "177351276986a4ea66": {
       "type": "apps",
       "settings": {
@@ -540,6 +487,44 @@
         "ai_gen_block_c66fad3_yLU3Dy"
       ],
       "settings": {}
+    },
+    "177565993200a8e6b1": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_reviews_grid_widget_AanjXz": {
+          "type": "shopify://apps/judge-me-reviews/blocks/reviews_grid_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "review_selection": "all",
+            "products": [],
+            "show_media_only": false,
+            "display_order": "media_first",
+            "columns_desktop": 3,
+            "rows_desktop": 3,
+            "columns_mobile": "2",
+            "rows_mobile": 6,
+            "show_stars": true,
+            "show_reviewer_name": true,
+            "show_review_title_on_hover_desktop": true,
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "card_spacing": "medium",
+            "header_text_color": "#000000",
+            "star_and_reviewer_name_color": "#F9F9F9",
+            "drop_shadow_color": "#000000",
+            "overlay_and_background_color": "#000000",
+            "content_color": "#F9F9F9",
+            "header_text": "From our customers",
+            "show_average_rating": true
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_reviews_grid_widget_AanjXz"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
@@ -554,7 +539,6 @@
     "featured_collection",
     "collage",
     "video",
-    "multicolumn",
     "177351276986a4ea66",
     "17735128981acce6d0",
     "1773646079df475f87",
@@ -567,6 +551,7 @@
     "17754022644b966329",
     "17754024011010f089",
     "1775407575578e6274",
-    "1775409054178c3596"
+    "1775409054178c3596",
+    "177565993200a8e6b1"
   ]
 }
