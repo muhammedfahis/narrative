@@ -183,11 +183,25 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "age_filter_bubbles_bjyYbK": {
+      "type": "age-filter-bubbles",
+      "name": "Age Filter Bubbles",
+      "settings": {
+        "background_color": "#ffffff",
+        "bubble_bg": "#f5f0ff",
+        "bubble_text": "#6b4ba1",
+        "bubble_hover": "#ede4ff",
+        "bubble_active_bg": "#6b4ba1",
+        "bubble_active_text": "#ffffff",
+        "bubble_active_border": "#6b4ba1"
+      }
     }
   },
   "order": [
     "rich_text_tiF3yc",
     "banner",
+    "age_filter_bubbles_bjyYbK",
     "product-grid",
     "multicolumn_DancBH",
     "collapsible_content_cmdMr7"
