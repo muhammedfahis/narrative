@@ -118,14 +118,14 @@
     }
 
     // Attach click to every collage item directly
-    section.querySelectorAll('.collage-item').forEach(function(item, idx) {
-      item.style.cursor = 'zoom-in';
-      item.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        openLightbox(idx);
-      });
-    });
+section.querySelectorAll('.collage-link').forEach(function(item, idx) {
+  item.style.cursor = 'zoom-in';
+  item.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    openLightbox(idx);
+  });
+});
 
     backdrop.addEventListener('click', closeLightbox);
     closeBtn.addEventListener('click', closeLightbox);
