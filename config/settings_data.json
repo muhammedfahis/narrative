@@ -260,6 +260,13 @@
         "type": "shopify://apps/hoppy-free-shipping/blocks/shipping_bar/66159626-1fb8-4d18-901f-af7b6a63adaa",
         "disabled": false,
         "settings": {}
+      },
+      "15191099883265461803": {
+        "type": "shopify://apps/reelfy-videos/blocks/app-embed/4022ffb0-05c3-4ef3-a409-6df51f4b1b3f",
+        "disabled": false,
+        "settings": {
+          "exclude_pages": ""
+        }
       }
     }
   },
