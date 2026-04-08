@@ -410,6 +410,7 @@
         "image_phamGd": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/657715437_18036866078610685_3789877822531094146_n.jpg",
             "caption": "Shop the look",
             "overlay_color": "rgba(0,0,0,0.4)",
             "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/657715437_18036866078610685_3789877822531094146_n.jpg?v=1775661055",
@@ -419,6 +420,7 @@
         "image_qTgf9H": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/656889206_18036866060610685_8840199408142873679_n.jpg",
             "caption": "Shop the look",
             "overlay_color": "rgba(0,0,0,0.4)",
             "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/651060874_17999628872911846_6314734712727007834_n.jpg?v=1775661055",
@@ -428,6 +430,7 @@
         "image_QpFMA9": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/651060874_17999628872911846_6314734712727007834_n.jpg",
             "caption": "Shop the look",
             "overlay_color": "rgba(0,0,0,0.4)",
             "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/656294914_18036866087610685_8695682730135637243_n.jpg?v=1775661055",
@@ -437,6 +440,7 @@
         "image_WnfYpV": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/656294914_18036866087610685_8695682730135637243_n.jpg",
             "caption": "Shop the look",
             "overlay_color": "rgba(0,0,0,0.4)",
             "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/657332709_18036866051610685_4910708047875816719_n.jpg?v=1775661055",
