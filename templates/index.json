@@ -279,6 +279,91 @@
         "padding_bottom": 36
       }
     },
+    "custom_image_collage_LRBdGP": {
+      "type": "custom-image-collage",
+      "blocks": {
+        "image_UV47gB": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/IMG_6409.heic",
+            "image_url": "",
+            "caption": "Shop the look",
+            "overlay_color": "#000000",
+            "overlay_opacity": 40,
+            "link": "",
+            "link_text": "Shop now"
+          }
+        },
+        "image_w3FNef": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/IMG_6375.heic",
+            "image_url": "",
+            "caption": "Shop the look",
+            "overlay_color": "#000000",
+            "overlay_opacity": 40,
+            "link": "",
+            "link_text": "Shop now"
+          }
+        },
+        "image_phamGd": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/657715437_18036866078610685_3789877822531094146_n.jpg",
+            "caption": "Shop the look",
+            "overlay_color": "rgba(0,0,0,0.4)",
+            "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/657715437_18036866078610685_3789877822531094146_n.jpg?v=1775661055",
+            "link_text": "Shop now"
+          }
+        },
+        "image_qTgf9H": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/656889206_18036866060610685_8840199408142873679_n.jpg",
+            "caption": "Shop the look",
+            "overlay_color": "rgba(0,0,0,0.4)",
+            "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/651060874_17999628872911846_6314734712727007834_n.jpg?v=1775661055",
+            "link_text": "Shop now"
+          }
+        },
+        "image_QpFMA9": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/651060874_17999628872911846_6314734712727007834_n.jpg",
+            "caption": "Shop the look",
+            "overlay_color": "rgba(0,0,0,0.4)",
+            "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/656294914_18036866087610685_8695682730135637243_n.jpg?v=1775661055",
+            "link_text": "Shop now"
+          }
+        },
+        "image_WnfYpV": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/IMG_6427.heic",
+            "caption": "Shop the look",
+            "overlay_color": "rgba(0,0,0,0.4)",
+            "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/657332709_18036866051610685_4910708047875816719_n.jpg?v=1775661055",
+            "link_text": "Shop now"
+          }
+        }
+      },
+      "block_order": [
+        "image_UV47gB",
+        "image_w3FNef",
+        "image_phamGd",
+        "image_qTgf9H",
+        "image_QpFMA9",
+        "image_WnfYpV"
+      ],
+      "name": "Custom Image Collage",
+      "settings": {
+        "heading": "Our Little Ones",
+        "heading_alignment": "center",
+        "background_color": "#ffffff",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
     "video": {
       "type": "video",
       "settings": {
@@ -403,65 +488,6 @@
       "settings": {
         "include_margins": true
       }
-    },
-    "custom_image_collage_LRBdGP": {
-      "type": "custom-image-collage",
-      "blocks": {
-        "image_phamGd": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/657715437_18036866078610685_3789877822531094146_n.jpg",
-            "caption": "Shop the look",
-            "overlay_color": "rgba(0,0,0,0.4)",
-            "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/657715437_18036866078610685_3789877822531094146_n.jpg?v=1775661055",
-            "link_text": "Shop now"
-          }
-        },
-        "image_qTgf9H": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/656889206_18036866060610685_8840199408142873679_n.jpg",
-            "caption": "Shop the look",
-            "overlay_color": "rgba(0,0,0,0.4)",
-            "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/651060874_17999628872911846_6314734712727007834_n.jpg?v=1775661055",
-            "link_text": "Shop now"
-          }
-        },
-        "image_QpFMA9": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/651060874_17999628872911846_6314734712727007834_n.jpg",
-            "caption": "Shop the look",
-            "overlay_color": "rgba(0,0,0,0.4)",
-            "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/656294914_18036866087610685_8695682730135637243_n.jpg?v=1775661055",
-            "link_text": "Shop now"
-          }
-        },
-        "image_WnfYpV": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/656294914_18036866087610685_8695682730135637243_n.jpg",
-            "caption": "Shop the look",
-            "overlay_color": "rgba(0,0,0,0.4)",
-            "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/657332709_18036866051610685_4910708047875816719_n.jpg?v=1775661055",
-            "link_text": "Shop now"
-          }
-        }
-      },
-      "block_order": [
-        "image_phamGd",
-        "image_qTgf9H",
-        "image_QpFMA9",
-        "image_WnfYpV"
-      ],
-      "name": "Custom Image Collage",
-      "settings": {
-        "heading": "Our Little Ones",
-        "heading_alignment": "center",
-        "background_color": "#ffffff",
-        "padding_top": 40,
-        "padding_bottom": 40
-      }
     }
   },
   "order": [
@@ -474,11 +500,11 @@
     "1775191175d02d95cb",
     "rich_text",
     "featured_collection",
+    "custom_image_collage_LRBdGP",
     "video",
     "17735128981acce6d0",
     "1773646079df475f87",
     "1775398557991d0497",
-    "177565993200a8e6b1",
-    "custom_image_collage_LRBdGP"
+    "177565993200a8e6b1"
   ]
 }
