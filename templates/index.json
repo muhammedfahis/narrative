@@ -86,10 +86,10 @@
         "ai_gen_block_934f972_AcgwUW": {
           "type": "ai_gen_block_934f972",
           "settings": {
-            "background_image": "shopify://shop_images/Pastel_baby_girl_nursery_flat_lay.png",
+            "background_image": "shopify://shop_images/Confident_boy_in_garden_promo_shot.png",
             "overlay_opacity": 80,
-            "min_height_desktop": 80,
-            "min_height_mobile": 65,
+            "min_height_desktop": 100,
+            "min_height_mobile": 50,
             "headline": "Curated Essentials for Conscious Parents",
             "subheadline": "Premium Quality Kids' Wear – Loved by Moms Across India",
             "content_max_width": 900,
@@ -467,7 +467,7 @@
             "corner_styling": "soft",
             "header_text_color": "#000000",
             "text_color": "#000000",
-            "card_color": "#F9F9F9",
+            "card_color": "#f9f9f9",
             "stars_color": "",
             "arrows_color": "#000000",
             "transition_speed": 5,
