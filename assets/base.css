@@ -370,7 +370,7 @@ body,
 }
 
 .skip-to-content-link:focus {
-  z-index: 9999;
+  z-index: 9998;
   position: inherit;
   overflow: auto;
   width: auto;
