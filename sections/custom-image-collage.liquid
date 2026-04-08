@@ -48,34 +48,40 @@
 
   </div>
   <!-- Lightbox Modal -->
-<div class="collage-lightbox" id="collage-lightbox-{{ section.id }}" role="dialog" aria-modal="true">
+<div class="collage-lightbox" data-lightbox="{{ section.id }}" role="dialog" aria-modal="true">
   <div class="lightbox-backdrop"></div>
   <div class="lightbox-content">
     <button class="lightbox-close" aria-label="Close">&times;</button>
     <button class="lightbox-prev" aria-label="Previous">&#8249;</button>
-    <img src="" alt="" class="lightbox-img" id="lightbox-img-{{ section.id }}">
+    <img
+  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+  alt=""
+  class="lightbox-img"
+  width="1"
+  height="1"
+>
+
     <button class="lightbox-next" aria-label="Next">&#8250;</button>
   </div>
-  <script>
+</div>
+
+ <script>
 (function() {
-  const sectionId = '{{ section.id }}';
-  const lightbox = document.getElementById('collage-lightbox-' + sectionId);
-  const lightboxImg = document.getElementById('lightbox-img-' + sectionId);
-  const backdrop = lightbox.querySelector('.lightbox-backdrop');
-  const closeBtn = lightbox.querySelector('.lightbox-close');
-  const prevBtn = lightbox.querySelector('.lightbox-prev');
-  const nextBtn = lightbox.querySelector('.lightbox-next');
+  var section = document.querySelector('#shopify-section-{{ section.id }}');
+  var lightbox = section.querySelector('.collage-lightbox');
+  var lightboxImg = section.querySelector('.lightbox-img');
+  var backdrop = section.querySelector('.lightbox-backdrop');
+  var closeBtn = section.querySelector('.lightbox-close');
+  var prevBtn = section.querySelector('.lightbox-prev');
+  var nextBtn = section.querySelector('.lightbox-next');
 
-  let images = [];
-  let currentIndex = 0;
+  var images = [];
+  var currentIndex = 0;
 
-  // Collect all collage images
   function collectImages() {
     images = [];
-    document.querySelectorAll(
-      '[data-section-id="{{ section.id }}"] .collage-img, #shopify-section-{{ section.id }} .collage-img'
-    ).forEach(function(img) {
-      images.push({ src: img.src, alt: img.alt });
+    section.querySelectorAll('.collage-img').forEach(function(img) {
+      images.push({ src: img.src, alt: img.alt || '' });
     });
   }
 
@@ -108,16 +114,12 @@
     showImage(currentIndex);
   }
 
-  // Attach click to each collage image
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll(
-      '#shopify-section-{{ section.id }} .collage-img'
-    ).forEach(function(img, idx) {
-      img.style.cursor = 'zoom-in';
-      img.parentElement.addEventListener('click', function(e) {
-        e.preventDefault();
-        openLightbox(idx);
-      });
+  // Attach click handlers to images
+  section.querySelectorAll('.collage-img').forEach(function(img, idx) {
+    img.style.cursor = 'zoom-in';
+    img.closest('.collage-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      openLightbox(idx);
     });
   });
 
@@ -126,7 +128,6 @@
   prevBtn.addEventListener('click', function() { navigate(-1); });
   nextBtn.addEventListener('click', function() { navigate(1); });
 
-  // Keyboard support
   document.addEventListener('keydown', function(e) {
     if (!lightbox.classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
@@ -136,7 +137,7 @@
 })();
 </script>
 
-</div>
+
 
 </section>
 
