@@ -65,10 +65,10 @@
   </div>
 </div>
 
- <script>
+<script>
 (function() {
-  function initCollage() {
-    var section = document.querySelector('#shopify-section-{{ section.id }}');
+
+  function initCollage(section) {
     if (!section) return;
 
     var lightbox = section.querySelector('.collage-lightbox');
@@ -78,13 +78,18 @@
     var prevBtn = section.querySelector('.lightbox-prev');
     var nextBtn = section.querySelector('.lightbox-next');
 
+    if (!lightbox || !lightboxImg) return;
+
     var images = [];
     var currentIndex = 0;
 
     function collectImages() {
       images = [];
       section.querySelectorAll('.collage-img').forEach(function(img) {
-        images.push({ src: img.src, alt: img.alt || '' });
+        images.push({
+          src: img.getAttribute('src'),
+          alt: img.getAttribute('alt') || ''
+        });
       });
     }
 
@@ -102,14 +107,15 @@
     }
 
     function showImage(index) {
+      if (!images.length) return;
+
       lightboxImg.style.opacity = '0';
+
       setTimeout(function() {
         lightboxImg.src = images[index].src;
         lightboxImg.alt = images[index].alt;
         lightboxImg.style.opacity = '1';
-      }, 150);
-      prevBtn.style.display = images.length <= 1 ? 'none' : 'block';
-      nextBtn.style.display = images.length <= 1 ? 'none' : 'block';
+      }, 100);
     }
 
     function navigate(dir) {
@@ -117,35 +123,55 @@
       showImage(currentIndex);
     }
 
-    // Attach click to every collage item directly
-section.querySelectorAll('.collage-link').forEach(function(item, idx) {
-  item.style.cursor = 'zoom-in';
-  item.addEventListener('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    openLightbox(idx);
-  });
-});
+    // ✅ CLICK HANDLER (FIXED)
+    section.querySelectorAll('.collage-link').forEach(function(el, index) {
+      el.style.cursor = 'zoom-in';
 
-    backdrop.addEventListener('click', closeLightbox);
-    closeBtn.addEventListener('click', closeLightbox);
-    prevBtn.addEventListener('click', function(e) { e.stopPropagation(); navigate(-1); });
-    nextBtn.addEventListener('click', function(e) { e.stopPropagation(); navigate(1); });
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        openLightbox(index);
+      });
+    });
 
+    // Controls
+    backdrop && backdrop.addEventListener('click', closeLightbox);
+    closeBtn && closeBtn.addEventListener('click', closeLightbox);
+
+    prevBtn && prevBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      navigate(-1);
+    });
+
+    nextBtn && nextBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      navigate(1);
+    });
+
+    // Keyboard
     document.addEventListener('keydown', function(e) {
       if (!lightbox.classList.contains('active')) return;
+
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') navigate(-1);
       if (e.key === 'ArrowRight') navigate(1);
     });
   }
 
-  // Run after DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCollage);
-  } else {
-    initCollage();
-  }
+  // ✅ INITIAL LOAD
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[id^="shopify-section-"]').forEach(function(section) {
+      if (section.querySelector('.custom-collage')) {
+        initCollage(section);
+      }
+    });
+  });
+
+  // ✅ SHOPIFY THEME EDITOR FIX (VERY IMPORTANT)
+  document.addEventListener('shopify:section:load', function(e) {
+    initCollage(e.target);
+  });
+
 })();
 </script>
 
