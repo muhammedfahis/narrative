@@ -37,15 +37,6 @@
               </div>
             {%- endif -%}
 
-            {%- if block.settings.caption != blank -%}
-              <div class="collage-overlay" style="background: {{ block.settings.overlay_color }};">
-                <span class="collage-caption">{{ block.settings.caption }}</span>
-                {%- if block.settings.link_text != blank and block.settings.link != blank -%}
-                  <span class="collage-cta">{{ block.settings.link_text }} →</span>
-                {%- endif -%}
-              </div>
-            {%- endif -%}
-
           {%- if block.settings.link != blank -%}
             </a>
           {%- else -%}
