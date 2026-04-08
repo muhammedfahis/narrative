@@ -2988,7 +2988,7 @@ details-disclosure > details {
 .header__submenu,
 .nav-dropdown,
 .header__menu .dropdown {
-  z-index: 9999 !important;
+  z-index: 1000 !important;
   position: absolute;
 }
 
