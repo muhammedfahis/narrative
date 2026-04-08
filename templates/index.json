@@ -364,20 +364,6 @@
         "padding_bottom": 40
       }
     },
-    "video": {
-      "type": "video",
-      "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "cover_image": "shopify://shop_images/646081429_18032609840610685_1049087398009866235_n_3d54ed5f-bce2-40ca-94c7-41edcc6dc5a4.jpg",
-        "video_url": "https://vimeo.com/1173553954?share=copy&fl=sv&fe=ci",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "background-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "17735128981acce6d0": {
       "type": "apps",
       "blocks": {
@@ -501,7 +487,6 @@
     "rich_text",
     "featured_collection",
     "custom_image_collage_LRBdGP",
-    "video",
     "17735128981acce6d0",
     "1773646079df475f87",
     "1775398557991d0497",
