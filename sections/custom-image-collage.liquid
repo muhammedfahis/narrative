@@ -19,18 +19,20 @@
           {%- endif -%}
 
             {%- if block.settings.image != blank -%}
-  {%- if block.settings.image != blank -%}
-  {{ block.settings.image | image_url: width: 800 | image_tag:
-    loading: 'lazy',
-    class: 'collage-img',
-    alt: block.settings.caption
-  }}
-{%- else -%}
-  <div class="collage-placeholder">
-    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-  </div>
-{%- endif -%}
-
+              {{ block.settings.image | image_url: width: 800 | image_tag:
+                loading: 'lazy',
+                class: 'collage-img',
+                alt: block.settings.caption
+              }}
+            {%- elsif block.settings.image_url != blank -%}
+              <img
+                src="{{ block.settings.image_url | escape }}"
+                class="collage-img"
+                loading="lazy"
+                alt="{{ block.settings.caption | escape }}"
+                width="800"
+                height="800"
+              >
             {%- else -%}
               <div class="collage-placeholder">
                 {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -108,12 +110,15 @@
 
     function showImage(index) {
       if (!images.length) return;
+      if (index < 0 || index >= images.length) return;
 
       lightboxImg.style.opacity = '0';
 
       setTimeout(function() {
-        lightboxImg.src = images[index].src;
-        lightboxImg.alt = images[index].alt;
+        var item = images[index];
+        if (!item) return;
+        lightboxImg.src = item.src;
+        lightboxImg.alt = item.alt;
         lightboxImg.style.opacity = '1';
       }, 100);
     }
@@ -123,14 +128,20 @@
       showImage(currentIndex);
     }
 
-    // ✅ CLICK HANDLER (FIXED)
-    section.querySelectorAll('.collage-link').forEach(function(el, index) {
+    // Click index must match .collage-img order, not .collage-link order (placeholders have no img).
+    section.querySelectorAll('.collage-link').forEach(function(el) {
       el.style.cursor = 'zoom-in';
 
       el.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        openLightbox(index);
+        collectImages();
+        var cellImg = el.querySelector('.collage-img');
+        if (!cellImg || !images.length) return;
+        var galleryImgs = section.querySelectorAll('.collage-grid .collage-img');
+        var idx = Array.prototype.indexOf.call(galleryImgs, cellImg);
+        if (idx < 0) return;
+        openLightbox(idx);
       });
     });
 
