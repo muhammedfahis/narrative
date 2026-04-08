@@ -62,12 +62,13 @@
 .custom-collage { width: 100%; }
 
 .collage-heading {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
   font-weight: 600;
   margin-bottom: 28px;
   letter-spacing: -0.02em;
 }
 
+/* ── Desktop (3-col asymmetric) ── */
 .collage-grid {
   display: grid;
   gap: 12px;
@@ -75,7 +76,6 @@
   grid-auto-rows: 280px;
 }
 
-/* Asymmetric layout rules */
 .collage-item--1 { grid-column: span 2; grid-row: span 2; }
 .collage-item--2 { grid-column: span 1; grid-row: span 1; }
 .collage-item--3 { grid-column: span 1; grid-row: span 1; }
@@ -83,6 +83,7 @@
 .collage-item--5 { grid-column: span 2; grid-row: span 1; }
 .collage-item--6 { grid-column: span 1; grid-row: span 1; }
 
+/* ── Shared item styles ── */
 .collage-link {
   display: block;
   width: 100%;
@@ -140,17 +141,17 @@
 
 .collage-caption {
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.01em;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .collage-cta {
   color: #fff;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 500;
   border-bottom: 1px solid rgba(255,255,255,0.6);
   padding-bottom: 2px;
@@ -158,27 +159,59 @@
   text-transform: uppercase;
 }
 
-/* Tablet */
+/* ── Tablet (2-col) ── */
 @media (max-width: 900px) {
   .collage-grid {
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 220px;
   }
-  .collage-item--1 { grid-column: span 2; grid-row: span 1; }
-  .collage-item--5 { grid-column: span 2; grid-row: span 1; }
+
+  /* Reset all spans first */
+  .collage-item--1,
+  .collage-item--2,
+  .collage-item--3,
+  .collage-item--4,
+  .collage-item--5,
+  .collage-item--6 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  /* First item stays wide */
+  .collage-item--1 { grid-column: span 2; }
 }
 
-/* Mobile */
-@media (max-width: 560px) {
+/* ── Mobile (single column) ── */
+@media (max-width: 480px) {
   .collage-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 160px;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 220px;
+    gap: 10px;
   }
+
+  /* Reset everything to single column */
   .collage-item--1,
-  .collage-item--5 { grid-column: span 2; }
-  .collage-overlay { opacity: 1; }
+  .collage-item--2,
+  .collage-item--3,
+  .collage-item--4,
+  .collage-item--5,
+  .collage-item--6 {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+  }
+
+  /* Always show overlay on mobile (no hover) */
+  .collage-overlay {
+    opacity: 1;
+  }
+
+  .collage-heading {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
 }
 </style>
+
 
 {% schema %}
 {
