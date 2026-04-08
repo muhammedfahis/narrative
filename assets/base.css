@@ -2984,13 +2984,7 @@ details-disclosure > details {
   }
 }
 
-.header__menu-item .mega-menu,
-.header__submenu,
-.nav-dropdown,
-.header__menu .dropdown {
-  z-index: 1000 !important;
-  position: absolute;
-}
+
 
 
 
