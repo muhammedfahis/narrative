@@ -67,77 +67,87 @@
 
  <script>
 (function() {
-  var section = document.querySelector('#shopify-section-{{ section.id }}');
-  var lightbox = section.querySelector('.collage-lightbox');
-  var lightboxImg = section.querySelector('.lightbox-img');
-  var backdrop = section.querySelector('.lightbox-backdrop');
-  var closeBtn = section.querySelector('.lightbox-close');
-  var prevBtn = section.querySelector('.lightbox-prev');
-  var nextBtn = section.querySelector('.lightbox-next');
+  function initCollage() {
+    var section = document.querySelector('#shopify-section-{{ section.id }}');
+    if (!section) return;
 
-  var images = [];
-  var currentIndex = 0;
+    var lightbox = section.querySelector('.collage-lightbox');
+    var lightboxImg = section.querySelector('.lightbox-img');
+    var backdrop = section.querySelector('.lightbox-backdrop');
+    var closeBtn = section.querySelector('.lightbox-close');
+    var prevBtn = section.querySelector('.lightbox-prev');
+    var nextBtn = section.querySelector('.lightbox-next');
 
-  function collectImages() {
-    images = [];
-    section.querySelectorAll('.collage-img').forEach(function(img) {
-      images.push({ src: img.src, alt: img.alt || '' });
+    var images = [];
+    var currentIndex = 0;
+
+    function collectImages() {
+      images = [];
+      section.querySelectorAll('.collage-img').forEach(function(img) {
+        images.push({ src: img.src, alt: img.alt || '' });
+      });
+    }
+
+    function openLightbox(index) {
+      collectImages();
+      currentIndex = index;
+      showImage(currentIndex);
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function showImage(index) {
+      lightboxImg.style.opacity = '0';
+      setTimeout(function() {
+        lightboxImg.src = images[index].src;
+        lightboxImg.alt = images[index].alt;
+        lightboxImg.style.opacity = '1';
+      }, 150);
+      prevBtn.style.display = images.length <= 1 ? 'none' : 'block';
+      nextBtn.style.display = images.length <= 1 ? 'none' : 'block';
+    }
+
+    function navigate(dir) {
+      currentIndex = (currentIndex + dir + images.length) % images.length;
+      showImage(currentIndex);
+    }
+
+    // Attach click to every collage item directly
+    section.querySelectorAll('.collage-item').forEach(function(item, idx) {
+      item.style.cursor = 'zoom-in';
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        openLightbox(idx);
+      });
+    });
+
+    backdrop.addEventListener('click', closeLightbox);
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', function(e) { e.stopPropagation(); navigate(-1); });
+    nextBtn.addEventListener('click', function(e) { e.stopPropagation(); navigate(1); });
+
+    document.addEventListener('keydown', function(e) {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
     });
   }
 
-  function openLightbox(index) {
-    collectImages();
-    currentIndex = index;
-    showImage(currentIndex);
-    lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
+  // Run after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCollage);
+  } else {
+    initCollage();
   }
-
-  function closeLightbox() {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  function showImage(index) {
-    lightboxImg.style.opacity = '0';
-    setTimeout(function() {
-      lightboxImg.src = images[index].src;
-      lightboxImg.alt = images[index].alt;
-      lightboxImg.style.opacity = '1';
-    }, 150);
-    prevBtn.style.display = images.length <= 1 ? 'none' : 'block';
-    nextBtn.style.display = images.length <= 1 ? 'none' : 'block';
-  }
-
-  function navigate(dir) {
-    currentIndex = (currentIndex + dir + images.length) % images.length;
-    showImage(currentIndex);
-  }
-
-  // Attach click handlers to images
-  section.querySelectorAll('.collage-img').forEach(function(img, idx) {
-    img.style.cursor = 'zoom-in';
-    img.closest('.collage-link').addEventListener('click', function(e) {
-      e.preventDefault();
-      openLightbox(idx);
-    });
-  });
-
-  backdrop.addEventListener('click', closeLightbox);
-  closeBtn.addEventListener('click', closeLightbox);
-  prevBtn.addEventListener('click', function() { navigate(-1); });
-  nextBtn.addEventListener('click', function() { navigate(1); });
-
-  document.addEventListener('keydown', function(e) {
-    if (!lightbox.classList.contains('active')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') navigate(-1);
-    if (e.key === 'ArrowRight') navigate(1);
-  });
 })();
 </script>
-
-
 
 </section>
 
