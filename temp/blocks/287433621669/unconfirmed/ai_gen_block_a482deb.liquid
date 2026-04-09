@@ -1,6 +1,853 @@
+{% doc %}
+  @prompt
+    Update the existing AI-generated gender filter banner block (section ID: template--20673556971685__blocks_MM8Chy, block ID: template--20673556971685__blocks_MM8Chy__ai_gen_block_6984537_ixeagT) with these two improvements: 1) "Boys" gender button should be active/selected by default when the page first loads, with the boys banner image and text shown immediately. 2) Add an age filter below the gender toggle that dynamically changes based on the selected gender. When "Boys" is selected, show boys-specific age groups (e.g. 0-2Y, 2-4Y, 4-6Y, 6-8Y, 8-10Y). When "Girls" is selected, show girls-specific age groups (e.g. 0-2Y, 2-4Y, 4-6Y, 6-8Y, 8-10Y) — these should be configurable separately in the theme editor for boys and girls. Clicking an age filter should filter the product grid below to show only products matching that gender and age group using collection URL parameters or tags. The active age filter should be visually highlighted.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-gender-filter-banner-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    position: relative;
+  }
+
+  .ai-gender-filter-container-{{ ai_gen_id }} {
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .ai-gender-toggle-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .ai-gender-button-{{ ai_gen_id }} {
+    padding: 12px 32px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border: 2px solid {{ block.settings.button_border_color }};
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .ai-gender-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+    color: {{ block.settings.button_hover_text_color }};
+    border-color: {{ block.settings.button_hover_border_color }};
+  }
+
+  .ai-gender-button-{{ ai_gen_id }}.active {
+    background-color: {{ block.settings.button_active_bg_color }};
+    color: {{ block.settings.button_active_text_color }};
+    border-color: {{ block.settings.button_active_border_color }};
+  }
+
+  .ai-age-filter-wrapper-{{ ai_gen_id }} {
+    margin-bottom: 24px;
+  }
+
+  .ai-age-filter-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .ai-age-button-{{ ai_gen_id }} {
+    padding: 8px 20px;
+    background-color: {{ block.settings.age_button_bg_color }};
+    color: {{ block.settings.age_button_text_color }};
+    border: 1px solid {{ block.settings.age_button_border_color }};
+    border-radius: {{ block.settings.age_button_border_radius }}px;
+    font-size: {{ block.settings.age_button_font_size }}px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .ai-age-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.age_button_hover_bg_color }};
+    color: {{ block.settings.age_button_hover_text_color }};
+    border-color: {{ block.settings.age_button_hover_border_color }};
+  }
+
+  .ai-age-button-{{ ai_gen_id }}.active {
+    background-color: {{ block.settings.age_button_active_bg_color }};
+    color: {{ block.settings.age_button_active_text_color }};
+    border-color: {{ block.settings.age_button_active_border_color }};
+  }
+
+  .ai-banner-content-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+  }
+
+  .ai-banner-item-{{ ai_gen_id }} {
+    display: none;
+    width: 100%;
+  }
+
+  .ai-banner-item-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-banner-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: {{ block.settings.banner_border_radius }}px;
+  }
+
+  .ai-banner-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .ai-banner-image-placeholder-{{ ai_gen_id }} {
+    background-color: #f4f4f4;
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: {{ block.settings.banner_border_radius }}px;
+  }
+
+  .ai-banner-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+  }
+
+  .ai-banner-text-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: {{ block.settings.overlay_text_color }};
+    width: 90%;
+    max-width: 600px;
+  }
+
+  .ai-banner-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_font_size }}px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .ai-banner-subheading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_font_size }}px;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .ai-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-gender-toggle-{{ ai_gen_id }} {
+      gap: 8px;
+    }
+
+    .ai-gender-button-{{ ai_gen_id }} {
+      padding: 10px 24px;
+      font-size: {{ block.settings.button_font_size | times: 0.9 }}px;
+    }
+
+    .ai-age-button-{{ ai_gen_id }} {
+      padding: 6px 16px;
+      font-size: {{ block.settings.age_button_font_size | times: 0.9 }}px;
+    }
+
+    .ai-banner-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_font_size | times: 0.7 }}px;
+    }
+
+    .ai-banner-subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_font_size | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<gender-filter-banner-{{ ai_gen_id }}
+  class="ai-gender-filter-banner-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-gender-filter-container-{{ ai_gen_id }}">
+    <div class="ai-gender-toggle-{{ ai_gen_id }}">
+      <button
+        class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-boys-{{ ai_gen_id }} active"
+        data-gender="boys"
+        aria-pressed="true"
+      >
+        {{ block.settings.boys_button_text }}
+      </button>
+      <button
+        class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-girls-{{ ai_gen_id }}"
+        data-gender="girls"
+        aria-pressed="false"
+      >
+        {{ block.settings.girls_button_text }}
+      </button>
+    </div>
+
+    <div class="ai-age-filter-wrapper-{{ ai_gen_id }}">
+      <div class="ai-age-filter-{{ ai_gen_id }} ai-age-filter-boys-{{ ai_gen_id }}">
+        {% if block.settings.boys_age_1_label != blank %}
+          <a
+            href="{{ block.settings.boys_age_1_url }}"
+            class="ai-age-button-{{ ai_gen_id }}"
+            data-age-group="boys-1"
+          >
+            {{ block.settings.boys_age_1_label }}
+          </a>
+        {% endif %}
+        {% if block.settings.boys_age_2_label != blank %}
+          <a
+            href="{{ block.settings.boys_age_2_url }}"
+            class="ai-age-button-{{ ai_gen_id }}"
+            data-age-group="boys-2"
+          >
+            {{ block.settings.boys_age_2_label }}
+          </a>
+        {% endif %}
+        {% if block.settings.boys_age_3_label != blank %}
+          <a
+            href="{{ block.settings.boys_age_3_url }}"
+            class="ai-age-button-{{ ai_gen_id }}"
+            data-age-group="boys-3"
+          >
+            {{ block.settings.boys_age_3_label }}
+          </a>
+        {% endif %}
+        {% if block.settings.boys_age_4_label != blank %}
+          <a
+            href="{{ block.settings.boys_age_4_url }}"
+            class="ai-age-button-{{ ai_gen_id }}"
+            data-age-group="boys-4"
+          >
+            {{ block.settings.boys_age_4_label }}
+          </a>
+        {% endif %}
+        {% if block.settings.boys_age_5_label != blank %}
+          <a
+            href="{{ block.settings.boys_age_5_url }}"
+            class="ai-age-button-{{ ai_gen_id }}"
+            data-age-group="boys-5"
+          >
+            {{ block.settings.boys_age_5_label }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="ai-age-filter-{{ ai_gen_id }} ai-age-filter-girls-{{ ai_gen_id }}" style="display: none;">
+        {% if block.settings.girls_age_1_label != blank %}
+          <a
+            href="{{ block.settings.girls_age_1_url }}"
+            class="ai-age-button-{{ ai_gen_id }}"
+            data-age-group="girls-1"
+          >
+            {{ block.settings.girls_age_1_label }}
+          </a>
+        {% endif %}
+        {% if block.settings.girls_age_2_label != blank %}
+          <a
+            href="{{ block.settings.girls_age_2_url }}"
+            class="ai-age-button-{{ ai_gen_id }}"
+            data-age-group="girls-2"
+          >
+            {{ block.settings.girls_age_2_label }}
+          </a>
+        {% endif %}
+        {% if block.settings.girls_age_3_label != blank %}
+          <a
+            href="{{ block.settings.girls_age_3_url }}"
+            class="ai-age-button-{{ ai_gen_id }}"
+            data-age-group="girls-3"
+          >
+            {{ block.settings.girls_age_3_label }}
+          </a>
+        {% endif %}
+        {% if block.settings.girls_age_4_label != blank %}
+          <a
+            href="{{ block.settings.girls_age_4_url }}"
+            class="ai-age-button-{{ ai_gen_id }}"
+            data-age-group="girls-4"
+          >
+            {{ block.settings.girls_age_4_label }}
+          </a>
+        {% endif %}
+        {% if block.settings.girls_age_5_label != blank %}
+          <a
+            href="{{ block.settings.girls_age_5_url }}"
+            class="ai-age-button-{{ ai_gen_id }}"
+            data-age-group="girls-5"
+          >
+            {{ block.settings.girls_age_5_label }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="ai-banner-content-{{ ai_gen_id }}">
+      <div class="ai-banner-item-{{ ai_gen_id }} ai-banner-boys-{{ ai_gen_id }} active" data-banner="boys">
+        <div class="ai-banner-image-wrapper-{{ ai_gen_id }}">
+          {% if block.settings.boys_banner_image %}
+            <img
+              src="{{ block.settings.boys_banner_image | image_url: width: 2000 }}"
+              alt="{{ block.settings.boys_banner_image.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.boys_banner_image.width }}"
+              height="{{ block.settings.boys_banner_image.height }}"
+              class="ai-banner-image-{{ ai_gen_id }}"
+            >
+          {% else %}
+            <div class="ai-banner-image-placeholder-{{ ai_gen_id }}">
+              {{ 'hero-apparel-1' | placeholder_svg_tag }}
+              <div class="ai-empty-state-{{ ai_gen_id }}">
+                Add a boys banner image
+              </div>
+            </div>
+          {% endif %}
+          {% if block.settings.boys_heading != blank or block.settings.boys_subheading != blank %}
+            <div class="ai-banner-text-overlay-{{ ai_gen_id }}">
+              {% if block.settings.boys_heading != blank %}
+                <h2 class="ai-banner-heading-{{ ai_gen_id }}">{{ block.settings.boys_heading }}</h2>
+              {% endif %}
+              {% if block.settings.boys_subheading != blank %}
+                <p class="ai-banner-subheading-{{ ai_gen_id }}">{{ block.settings.boys_subheading }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="ai-banner-item-{{ ai_gen_id }} ai-banner-girls-{{ ai_gen_id }}" data-banner="girls">
+        <div class="ai-banner-image-wrapper-{{ ai_gen_id }}">
+          {% if block.settings.girls_banner_image %}
+            <img
+              src="{{ block.settings.girls_banner_image | image_url: width: 2000 }}"
+              alt="{{ block.settings.girls_banner_image.alt | escape }}"
+              loading="lazy"
+              width="{{ block.settings.girls_banner_image.width }}"
+              height="{{ block.settings.girls_banner_image.height }}"
+              class="ai-banner-image-{{ ai_gen_id }}"
+            >
+          {% else %}
+            <div class="ai-banner-image-placeholder-{{ ai_gen_id }}">
+              {{ 'hero-apparel-1' | placeholder_svg_tag }}
+              <div class="ai-empty-state-{{ ai_gen_id }}">
+                Add a girls banner image
+              </div>
+            </div>
+          {% endif %}
+          {% if block.settings.girls_heading != blank or block.settings.girls_subheading != blank %}
+            <div class="ai-banner-text-overlay-{{ ai_gen_id }}">
+              {% if block.settings.girls_heading != blank %}
+                <h2 class="ai-banner-heading-{{ ai_gen_id }}">{{ block.settings.girls_heading }}</h2>
+              {% endif %}
+              {% if block.settings.girls_subheading != blank %}
+                <p class="ai-banner-subheading-{{ ai_gen_id }}">{{ block.settings.girls_subheading }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</gender-filter-banner-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class GenderFilterBanner{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.genderButtons = this.querySelectorAll('.ai-gender-button-{{ ai_gen_id }}');
+        this.bannerItems = this.querySelectorAll('.ai-banner-item-{{ ai_gen_id }}');
+        this.ageFilterBoys = this.querySelector('.ai-age-filter-boys-{{ ai_gen_id }}');
+        this.ageFilterGirls = this.querySelector('.ai-age-filter-girls-{{ ai_gen_id }}');
+        this.ageButtons = this.querySelectorAll('.ai-age-button-{{ ai_gen_id }}');
+      }
+
+      connectedCallback() {
+        this.setupGenderToggle();
+        this.setupAgeFilters();
+        this.checkUrlForActiveAge();
+      }
+
+      setupGenderToggle() {
+        this.genderButtons.forEach((button) => {
+          button.addEventListener('click', () => {
+            const gender = button.getAttribute('data-gender');
+            this.switchGender(gender);
+          });
+        });
+      }
+
+      switchGender(gender) {
+        this.genderButtons.forEach((btn) => {
+          const isActive = btn.getAttribute('data-gender') === gender;
+          btn.classList.toggle('active', isActive);
+          btn.setAttribute('aria-pressed', isActive);
+        });
+
+        this.bannerItems.forEach((item) => {
+          const isActive = item.getAttribute('data-banner') === gender;
+          item.classList.toggle('active', isActive);
+        });
+
+        if (gender === 'boys') {
+          this.ageFilterBoys.style.display = 'flex';
+          this.ageFilterGirls.style.display = 'none';
+        } else {
+          this.ageFilterBoys.style.display = 'none';
+          this.ageFilterGirls.style.display = 'flex';
+        }
+
+        this.ageButtons.forEach((btn) => {
+          btn.classList.remove('active');
+        });
+      }
+
+      setupAgeFilters() {
+        this.ageButtons.forEach((button) => {
+          button.addEventListener('click', (e) => {
+            this.ageButtons.forEach((btn) => {
+              btn.classList.remove('active');
+            });
+            button.classList.add('active');
+          });
+        });
+      }
+
+      checkUrlForActiveAge() {
+        const currentUrl = window.location.href;
+        this.ageButtons.forEach((button) => {
+          const buttonUrl = button.getAttribute('href');
+          if (buttonUrl && currentUrl.includes(buttonUrl)) {
+            button.classList.add('active');
+          }
+        });
+      }
+    }
+
+    customElements.define('gender-filter-banner-{{ ai_gen_id }}', GenderFilterBanner{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Gender filter banner",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "banner_border_radius",
+      "label": "Banner border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Gender buttons"
+    },
+    {
+      "type": "text",
+      "id": "boys_button_text",
+      "label": "Boys button text",
+      "default": "Boys"
+    },
+    {
+      "type": "text",
+      "id": "girls_button_text",
+      "label": "Girls button text",
+      "default": "Girls"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Border",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Hover background",
+      "default": "#f3f3f3"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Hover border",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_active_bg_color",
+      "label": "Active background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_active_text_color",
+      "label": "Active text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_active_border_color",
+      "label": "Active border",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Age filter buttons"
+    },
+    {
+      "type": "range",
+      "id": "age_button_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "age_button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "age_button_bg_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "age_button_text_color",
+      "label": "Text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "age_button_border_color",
+      "label": "Border",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "age_button_hover_bg_color",
+      "label": "Hover background",
+      "default": "#f3f3f3"
+    },
+    {
+      "type": "color",
+      "id": "age_button_hover_text_color",
+      "label": "Hover text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "age_button_hover_border_color",
+      "label": "Hover border",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "age_button_active_bg_color",
+      "label": "Active background",
+      "default": "#ff6b5b"
+    },
+    {
+      "type": "color",
+      "id": "age_button_active_text_color",
+      "label": "Active text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "age_button_active_border_color",
+      "label": "Active border",
+      "default": "#ff6b5b"
+    },
+    {
+      "type": "header",
+      "content": "Boys age groups"
+    },
+    {
+      "type": "text",
+      "id": "boys_age_1_label",
+      "label": "Age group 1 label",
+      "default": "0-2Y"
+    },
+    {
+      "type": "url",
+      "id": "boys_age_1_url",
+      "label": "Age group 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "boys_age_2_label",
+      "label": "Age group 2 label",
+      "default": "2-4Y"
+    },
+    {
+      "type": "url",
+      "id": "boys_age_2_url",
+      "label": "Age group 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "boys_age_3_label",
+      "label": "Age group 3 label",
+      "default": "4-6Y"
+    },
+    {
+      "type": "url",
+      "id": "boys_age_3_url",
+      "label": "Age group 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "boys_age_4_label",
+      "label": "Age group 4 label",
+      "default": "6-8Y"
+    },
+    {
+      "type": "url",
+      "id": "boys_age_4_url",
+      "label": "Age group 4 URL"
+    },
+    {
+      "type": "text",
+      "id": "boys_age_5_label",
+      "label": "Age group 5 label",
+      "default": "8-10Y"
+    },
+    {
+      "type": "url",
+      "id": "boys_age_5_url",
+      "label": "Age group 5 URL"
+    },
+    {
+      "type": "header",
+      "content": "Girls age groups"
+    },
+    {
+      "type": "text",
+      "id": "girls_age_1_label",
+      "label": "Age group 1 label",
+      "default": "0-2Y"
+    },
+    {
+      "type": "url",
+      "id": "girls_age_1_url",
+      "label": "Age group 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "girls_age_2_label",
+      "label": "Age group 2 label",
+      "default": "2-4Y"
+    },
+    {
+      "type": "url",
+      "id": "girls_age_2_url",
+      "label": "Age group 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "girls_age_3_label",
+      "label": "Age group 3 label",
+      "default": "4-6Y"
+    },
+    {
+      "type": "url",
+      "id": "girls_age_3_url",
+      "label": "Age group 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "girls_age_4_label",
+      "label": "Age group 4 label",
+      "default": "6-8Y"
+    },
+    {
+      "type": "url",
+      "id": "girls_age_4_url",
+      "label": "Age group 4 URL"
+    },
+    {
+      "type": "text",
+      "id": "girls_age_5_label",
+      "label": "Age group 5 label",
+      "default": "8-10Y"
+    },
+    {
+      "type": "url",
+      "id": "girls_age_5_url",
+      "label": "Age group 5 URL"
+    },
+    {
+      "type": "header",
+      "content": "Boys banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "boys_banner_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "boys_heading",
+      "label": "Heading",
+      "default": "Shop Boys Collection"
+    },
+    {
+      "type": "text",
+      "id": "boys_subheading",
+      "label": "Subheading",
+      "default": "Discover our latest styles"
+    },
+    {
+      "type": "header",
+      "content": "Girls banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "girls_banner_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "girls_heading",
+      "label": "Heading",
+      "default": "Shop Girls Collection"
+    },
+    {
+      "type": "text",
+      "id": "girls_subheading",
+      "label": "Subheading",
+      "default": "Discover our latest styles"
+    },
+    {
+      "type": "header",
+      "content": "Banner text overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "label": "Subheading size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gender filter banner"
+    }
+  ]
+}
 {% endschema %}
