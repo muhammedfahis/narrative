@@ -200,29 +200,41 @@
     }
 
     .ai-banner-text-overlay-{{ ai_gen_id }} {
-      left: 16px;
-      right: 16px;
+      left: 18px;
+      right: 18px;
       width: auto;
-      top: auto;
-      bottom: 16px;
+      top: 28px;
+      bottom: auto;
       transform: none;
-      padding: 14px 14px 12px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.62);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      box-shadow: none;
     }
 
     .ai-banner-heading-{{ ai_gen_id }} {
       font-size: 28px;
       color: #111111;
+      display: inline-block;
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.55);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
     }
 
     .ai-banner-subheading-{{ ai_gen_id }} {
       font-size: 15px;
       margin-top: 10px;
       color: rgba(17, 17, 17, 0.88);
+      display: inline-block;
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.50);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
     }
 
     .ai-gender-toggle-{{ ai_gen_id }} {
