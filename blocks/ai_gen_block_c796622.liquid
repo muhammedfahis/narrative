@@ -6,14 +6,23 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% capture marquee_segment_inner %}
+  {% assign marquee_first = true %}
   {% if block.settings.message_1 != blank %}
     <span class="ai-marquee-text-{{ ai_gen_id }}">{{ block.settings.message_1 }}</span>
-  {% endif %}
-  {% if block.settings.message_1 != blank and block.settings.message_2 != blank %}
-    <span class="ai-marquee-sep-{{ ai_gen_id }}" aria-hidden="true"> · </span>
+    {% assign marquee_first = false %}
   {% endif %}
   {% if block.settings.message_2 != blank %}
+    {% unless marquee_first %}
+      <span class="ai-marquee-sep-{{ ai_gen_id }}" aria-hidden="true">·</span>
+    {% endunless %}
     <span class="ai-marquee-text-{{ ai_gen_id }}">{{ block.settings.message_2 }}</span>
+    {% assign marquee_first = false %}
+  {% endif %}
+  {% if block.settings.message_3 != blank %}
+    {% unless marquee_first %}
+      <span class="ai-marquee-sep-{{ ai_gen_id }}" aria-hidden="true">·</span>
+    {% endunless %}
+    <span class="ai-marquee-text-{{ ai_gen_id }}">{{ block.settings.message_3 }}</span>
   {% endif %}
 {% endcapture %}
 
@@ -50,12 +59,20 @@
     will-change: transform;
   }
 
+  .ai-marquee-sep-{{ ai_gen_id }} {
+    display: inline-block;
+    flex-shrink: 0;
+    padding: 0 {{ block.settings.message_spacing | default: 36 }}px;
+    opacity: 0.65;
+    font-weight: 400;
+  }
+
   .ai-marquee-segment-{{ ai_gen_id }} {
     display: inline-flex;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    gap: 0.35em;
+    gap: 0;
     padding-left: {{ block.settings.segment_gap }}px;
     padding-right: {{ block.settings.segment_gap }}px;
     font-size: {{ block.settings.font_size }}px;
@@ -140,13 +157,29 @@
       "type": "inline_richtext",
       "id": "message_1",
       "label": "Message 1",
-      "default": "Free Shipping on orders above ₹499"
+      "default": "Free Shipping on orders above ₹399"
     },
     {
       "type": "inline_richtext",
       "id": "message_2",
       "label": "Message 2",
-      "default": "New Arrivals Just Landed 🎉"
+      "default": "💵 Cash on Delivery Available across India | Order now, pay at your doorstep"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "message_3",
+      "label": "Message 3",
+      "default": "New Arrivals"
+    },
+    {
+      "type": "range",
+      "id": "message_spacing",
+      "min": 12,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Space between messages",
+      "default": 36
     },
     {
       "type": "header",
