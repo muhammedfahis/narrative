@@ -182,6 +182,21 @@
   }
 
   @media screen and (max-width: 749px) {
+    .ai-banner-image-wrapper-{{ ai_gen_id }} {
+      min-height: 72vh;
+    }
+
+    .ai-banner-image-{{ ai_gen_id }} {
+      width: 100%;
+      height: 72vh;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .ai-banner-image-placeholder-{{ ai_gen_id }} {
+      min-height: 72vh;
+    }
+
     .ai-gender-toggle-{{ ai_gen_id }} {
       gap: 8px;
     }
@@ -203,8 +218,8 @@
       left: 18px;
       right: 18px;
       width: auto;
-      top: 28px;
-      bottom: auto;
+      top: auto;
+      bottom: 18px;
       transform: none;
       padding: 0;
       border-radius: 0;
