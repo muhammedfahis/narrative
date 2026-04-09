@@ -20,32 +20,38 @@
   .ai-gender-toggle-{{ ai_gen_id }} {
     display: flex;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
     margin-bottom: 24px;
   }
 
   .ai-gender-button-{{ ai_gen_id }} {
-    padding: 12px 32px;
+    padding: 12px 28px;
     background-color: {{ block.settings.button_bg_color }};
     color: {{ block.settings.button_text_color }};
-    border: 2px solid {{ block.settings.button_border_color }};
+    border: 1px solid {{ block.settings.button_border_color }};
     border-radius: {{ block.settings.button_border_radius }}px;
     font-size: {{ block.settings.button_font_size }}px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    line-height: 1.1;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
   }
 
   .ai-gender-button-{{ ai_gen_id }}:hover {
     background-color: {{ block.settings.button_hover_bg_color }};
     color: {{ block.settings.button_hover_text_color }};
     border-color: {{ block.settings.button_hover_border_color }};
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   }
 
   .ai-gender-button-{{ ai_gen_id }}.active {
     background-color: {{ block.settings.button_active_bg_color }};
     color: {{ block.settings.button_active_text_color }};
     border-color: {{ block.settings.button_active_border_color }};
+    transform: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
   }
 
   .ai-age-filter-wrapper-{{ ai_gen_id }} {
@@ -70,18 +76,40 @@
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
+    line-height: 1.1;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+    user-select: none;
   }
 
   .ai-age-button-{{ ai_gen_id }}:hover {
     background-color: {{ block.settings.age_button_hover_bg_color }};
     color: {{ block.settings.age_button_hover_text_color }};
     border-color: {{ block.settings.age_button_hover_border_color }};
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   }
 
   .ai-age-button-{{ ai_gen_id }}.active {
     background-color: {{ block.settings.age_button_active_bg_color }};
     color: {{ block.settings.age_button_active_text_color }};
     border-color: {{ block.settings.age_button_active_border_color }};
+    transform: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+  }
+
+  .ai-age-button-{{ ai_gen_id }}[aria-disabled='true'] {
+    opacity: 0.55;
+    pointer-events: none;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .ai-filter-hint-{{ ai_gen_id }} {
+    display: none;
+    text-align: center;
+    margin: 0 0 16px;
+    font-size: 14px;
+    color: rgba(18, 18, 18, 0.7);
   }
 
   .ai-banner-content-{{ ai_gen_id }} {
@@ -197,9 +225,9 @@
   <div class="ai-gender-filter-container-{{ ai_gen_id }}">
     <div class="ai-gender-toggle-{{ ai_gen_id }}">
       <button
-        class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-boys-{{ ai_gen_id }} active"
+        class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-boys-{{ ai_gen_id }}"
         data-gender="boys"
-        aria-pressed="true"
+        aria-pressed="false"
       >
         {{ block.settings.boys_button_text }}
       </button>
@@ -213,105 +241,55 @@
     </div>
 
     <div class="ai-age-filter-wrapper-{{ ai_gen_id }}">
-      <div class="ai-age-filter-{{ ai_gen_id }} ai-age-filter-boys-{{ ai_gen_id }}">
-        {% if block.settings.boys_age_1_label != blank %}
-          <a
-            href="{{ block.settings.boys_age_1_url }}"
-            class="ai-age-button-{{ ai_gen_id }}"
-            data-age-group="boys-1"
-          >
-            {{ block.settings.boys_age_1_label }}
-          </a>
-        {% endif %}
-        {% if block.settings.boys_age_2_label != blank %}
-          <a
-            href="{{ block.settings.boys_age_2_url }}"
-            class="ai-age-button-{{ ai_gen_id }}"
-            data-age-group="boys-2"
-          >
-            {{ block.settings.boys_age_2_label }}
-          </a>
-        {% endif %}
-        {% if block.settings.boys_age_3_label != blank %}
-          <a
-            href="{{ block.settings.boys_age_3_url }}"
-            class="ai-age-button-{{ ai_gen_id }}"
-            data-age-group="boys-3"
-          >
-            {{ block.settings.boys_age_3_label }}
-          </a>
-        {% endif %}
-        {% if block.settings.boys_age_4_label != blank %}
-          <a
-            href="{{ block.settings.boys_age_4_url }}"
-            class="ai-age-button-{{ ai_gen_id }}"
-            data-age-group="boys-4"
-          >
-            {{ block.settings.boys_age_4_label }}
-          </a>
-        {% endif %}
-        {% if block.settings.boys_age_5_label != blank %}
-          <a
-            href="{{ block.settings.boys_age_5_url }}"
-            class="ai-age-button-{{ ai_gen_id }}"
-            data-age-group="boys-5"
-          >
-            {{ block.settings.boys_age_5_label }}
-          </a>
-        {% endif %}
-      </div>
-
-      <div class="ai-age-filter-{{ ai_gen_id }} ai-age-filter-girls-{{ ai_gen_id }}" style="display: none;">
-        {% if block.settings.girls_age_1_label != blank %}
-          <a
-            href="{{ block.settings.girls_age_1_url }}"
-            class="ai-age-button-{{ ai_gen_id }}"
-            data-age-group="girls-1"
-          >
-            {{ block.settings.girls_age_1_label }}
-          </a>
-        {% endif %}
-        {% if block.settings.girls_age_2_label != blank %}
-          <a
-            href="{{ block.settings.girls_age_2_url }}"
-            class="ai-age-button-{{ ai_gen_id }}"
-            data-age-group="girls-2"
-          >
-            {{ block.settings.girls_age_2_label }}
-          </a>
-        {% endif %}
-        {% if block.settings.girls_age_3_label != blank %}
-          <a
-            href="{{ block.settings.girls_age_3_url }}"
-            class="ai-age-button-{{ ai_gen_id }}"
-            data-age-group="girls-3"
-          >
-            {{ block.settings.girls_age_3_label }}
-          </a>
-        {% endif %}
-        {% if block.settings.girls_age_4_label != blank %}
-          <a
-            href="{{ block.settings.girls_age_4_url }}"
-            class="ai-age-button-{{ ai_gen_id }}"
-            data-age-group="girls-4"
-          >
-            {{ block.settings.girls_age_4_label }}
-          </a>
-        {% endif %}
-        {% if block.settings.girls_age_5_label != blank %}
-          <a
-            href="{{ block.settings.girls_age_5_url }}"
-            class="ai-age-button-{{ ai_gen_id }}"
-            data-age-group="girls-5"
-          >
-            {{ block.settings.girls_age_5_label }}
-          </a>
-        {% endif %}
+      <p class="ai-filter-hint-{{ ai_gen_id }}" data-filter-hint>
+        Select <strong>{{ block.settings.boys_button_text }}</strong> or <strong>{{ block.settings.girls_button_text }}</strong>, then pick an age group.
+      </p>
+      <div class="ai-age-filter-{{ ai_gen_id }}" data-age-filter>
+        <a
+          href="{{ block.settings.age_0_6_url | default: 'https://kidsmire.co.in/collections/0-6-months' }}"
+          class="ai-age-button-{{ ai_gen_id }}"
+          data-age-tag="0-6-months"
+          aria-disabled="true"
+        >
+          0-6
+        </a>
+        <a
+          href="{{ block.settings.age_6_12_url | default: 'https://kidsmire.co.in/collections/6-12-months' }}"
+          class="ai-age-button-{{ ai_gen_id }}"
+          data-age-tag="6-12-months"
+          aria-disabled="true"
+        >
+          6-12
+        </a>
+        <a
+          href="{{ block.settings.age_1_2_url | default: 'https://kidsmire.co.in/collections/1-2-years' }}"
+          class="ai-age-button-{{ ai_gen_id }}"
+          data-age-tag="1-2-years"
+          aria-disabled="true"
+        >
+          1-2
+        </a>
+        <a
+          href="{{ block.settings.age_2_4_url | default: 'https://kidsmire.co.in/collections/2-4-years' }}"
+          class="ai-age-button-{{ ai_gen_id }}"
+          data-age-tag="2-4-years"
+          aria-disabled="true"
+        >
+          2-4
+        </a>
+        <a
+          href="{{ block.settings.age_4_plus_url | default: 'https://kidsmire.co.in/collections/4-plus-years' }}"
+          class="ai-age-button-{{ ai_gen_id }}"
+          data-age-tag="4-plus-years"
+          aria-disabled="true"
+        >
+          4+
+        </a>
       </div>
     </div>
 
     <div class="ai-banner-content-{{ ai_gen_id }}">
-      <div class="ai-banner-item-{{ ai_gen_id }} ai-banner-boys-{{ ai_gen_id }} active" data-banner="boys">
+      <div class="ai-banner-item-{{ ai_gen_id }} ai-banner-boys-{{ ai_gen_id }}" data-banner="boys">
         <div class="ai-banner-image-wrapper-{{ ai_gen_id }}">
           {% if block.settings.boys_banner_image %}
             <img
@@ -385,15 +363,17 @@
         super();
         this.genderButtons = this.querySelectorAll('.ai-gender-button-{{ ai_gen_id }}');
         this.bannerItems = this.querySelectorAll('.ai-banner-item-{{ ai_gen_id }}');
-        this.ageFilterBoys = this.querySelector('.ai-age-filter-boys-{{ ai_gen_id }}');
-        this.ageFilterGirls = this.querySelector('.ai-age-filter-girls-{{ ai_gen_id }}');
-        this.ageButtons = this.querySelectorAll('.ai-age-button-{{ ai_gen_id }}');
+        this.ageFilter = this.querySelector('[data-age-filter]');
+        this.ageButtons = this.querySelectorAll('[data-age-filter] .ai-age-button-{{ ai_gen_id }}');
+        this.hint = this.querySelector('[data-filter-hint]');
+        this.selectedGender = null;
+        this.selectedAgeTag = null;
       }
 
       connectedCallback() {
         this.setupGenderToggle();
         this.setupAgeFilters();
-        this.checkUrlForActiveAge();
+        this.restoreFromUrl();
       }
 
       setupGenderToggle() {
@@ -406,6 +386,7 @@
       }
 
       switchGender(gender) {
+        this.selectedGender = gender;
         this.genderButtons.forEach((btn) => {
           const isActive = btn.getAttribute('data-gender') === gender;
           btn.classList.toggle('active', isActive);
@@ -417,38 +398,143 @@
           item.classList.toggle('active', isActive);
         });
 
-        if (gender === 'boys') {
-          this.ageFilterBoys.style.display = 'flex';
-          this.ageFilterGirls.style.display = 'none';
-        } else {
-          this.ageFilterBoys.style.display = 'none';
-          this.ageFilterGirls.style.display = 'flex';
-        }
-
-        this.ageButtons.forEach((btn) => {
-          btn.classList.remove('active');
-        });
+        this.enableAgeButtons();
+        this.applyFilters({ replaceState: true });
       }
 
       setupAgeFilters() {
         this.ageButtons.forEach((button) => {
           button.addEventListener('click', (e) => {
-            this.ageButtons.forEach((btn) => {
-              btn.classList.remove('active');
-            });
+            e.preventDefault();
+            if (!this.selectedGender) return;
+            this.selectedAgeTag = button.getAttribute('data-age-tag');
+            this.ageButtons.forEach((btn) => btn.classList.remove('active'));
             button.classList.add('active');
+            this.applyFilters({ replaceState: false });
           });
         });
       }
 
-      checkUrlForActiveAge() {
-        const currentUrl = window.location.href;
-        this.ageButtons.forEach((button) => {
-          const buttonUrl = button.getAttribute('href');
-          if (buttonUrl && currentUrl.includes(buttonUrl)) {
-            button.classList.add('active');
+      restoreFromUrl() {
+        this.hint && (this.hint.style.display = 'block');
+        this.disableAgeButtons();
+
+        const url = new URL(window.location.href);
+        const path = url.pathname || '';
+        if (path.indexOf('/collections/') !== -1) {
+          if (path.indexOf('/collections/{{ block.settings.boys_collection_handle }}') !== -1) {
+            this.switchGender('boys');
+          } else if (path.indexOf('/collections/{{ block.settings.girls_collection_handle }}') !== -1) {
+            this.switchGender('girls');
           }
-        });
+        }
+
+        const tag = url.searchParams.get('filter.p.tag');
+        if (tag) {
+          const match = Array.from(this.ageButtons).find((btn) => btn.getAttribute('data-age-tag') === tag);
+          if (match) {
+            this.selectedAgeTag = tag;
+            this.ageButtons.forEach((btn) => btn.classList.remove('active'));
+            match.classList.add('active');
+          }
+        }
+      }
+
+      disableAgeButtons() {
+        this.ageButtons.forEach((btn) => btn.setAttribute('aria-disabled', 'true'));
+      }
+
+      enableAgeButtons() {
+        this.ageButtons.forEach((btn) => btn.setAttribute('aria-disabled', 'false'));
+        this.hint && (this.hint.style.display = 'none');
+      }
+
+      getProductGridContainer() {
+        return (
+          document.querySelector('#ProductGridContainer') ||
+          document.querySelector('#product-grid') ||
+          document.querySelector('[data-product-grid]') ||
+          document.querySelector('.collection .product-grid') ||
+          null
+        );
+      }
+
+      getFacetContainer() {
+        return (
+          document.querySelector('#FacetFiltersForm') ||
+          document.querySelector('[data-facet-filters]') ||
+          null
+        );
+      }
+
+      buildTargetUrl() {
+        if (!this.selectedGender) return null;
+        const boysUrl = '{{ block.settings.boys_collection_url }}';
+        const girlsUrl = '{{ block.settings.girls_collection_url }}';
+        const boysHandle = '{{ block.settings.boys_collection_handle }}';
+        const girlsHandle = '{{ block.settings.girls_collection_handle }}';
+        const fallbackBoys = 'https://kidsmire.co.in/collections/boys-clothing';
+        const fallbackGirls = 'https://kidsmire.co.in/collections/girls-clothing';
+
+        const base =
+          this.selectedGender === 'boys'
+            ? (boysUrl && boysUrl.length ? boysUrl : (boysHandle && boysHandle.length ? `/collections/${boysHandle}` : fallbackBoys))
+            : (girlsUrl && girlsUrl.length ? girlsUrl : (girlsHandle && girlsHandle.length ? `/collections/${girlsHandle}` : fallbackGirls));
+
+        const url = new URL(base, window.location.origin);
+        if (this.selectedAgeTag) url.searchParams.set('filter.p.tag', this.selectedAgeTag);
+        return url;
+      }
+
+      async applyFilters({ replaceState }) {
+        const targetUrl = this.buildTargetUrl();
+        if (!targetUrl) return;
+
+        const nextUrl = targetUrl.pathname + (targetUrl.search || '');
+        if (replaceState) {
+          window.history.replaceState({}, '', nextUrl);
+        } else {
+          window.history.pushState({}, '', nextUrl);
+        }
+
+        const productGrid = this.getProductGridContainer();
+        if (!productGrid) {
+          window.location.assign(nextUrl);
+          return;
+        }
+
+        productGrid.setAttribute('aria-busy', 'true');
+        try {
+          const res = await fetch(nextUrl, { credentials: 'same-origin' });
+          if (!res.ok) throw new Error('Failed to fetch filtered results');
+
+          const html = await res.text();
+          const doc = new DOMParser().parseFromString(html, 'text/html');
+
+          const newGrid =
+            doc.querySelector('#ProductGridContainer') ||
+            doc.querySelector('#product-grid') ||
+            doc.querySelector('[data-product-grid]') ||
+            doc.querySelector('.collection .product-grid');
+
+          if (newGrid) {
+            productGrid.innerHTML = newGrid.innerHTML;
+          } else {
+            window.location.assign(nextUrl);
+          }
+
+          const facetContainer = this.getFacetContainer();
+          if (facetContainer) {
+            const newFacet =
+              doc.querySelector('#FacetFiltersForm') ||
+              doc.querySelector('[data-facet-filters]');
+            if (newFacet) facetContainer.innerHTML = newFacet.innerHTML;
+          }
+        } catch (err) {
+          window.location.assign(nextUrl);
+        } finally {
+          productGrid.removeAttribute('aria-busy');
+        }
       }
     }
 
@@ -500,6 +586,28 @@
       "id": "girls_button_text",
       "label": "Girls button text",
       "default": "Girls"
+    },
+    {
+      "type": "text",
+      "id": "boys_collection_handle",
+      "label": "Boys collection handle",
+      "default": "boys-clothing"
+    },
+    {
+      "type": "text",
+      "id": "girls_collection_handle",
+      "label": "Girls collection handle",
+      "default": "girls-clothing"
+    },
+    {
+      "type": "url",
+      "id": "boys_collection_url",
+      "label": "Boys collection URL"
+    },
+    {
+      "type": "url",
+      "id": "girls_collection_url",
+      "label": "Girls collection URL"
     },
     {
       "type": "range",
@@ -580,6 +688,35 @@
       "content": "Age filter buttons"
     },
     {
+      "type": "header",
+      "content": "Age group URLs (used for fallbacks / sharing)"
+    },
+    {
+      "type": "url",
+      "id": "age_0_6_url",
+      "label": "0-6 URL"
+    },
+    {
+      "type": "url",
+      "id": "age_6_12_url",
+      "label": "6-12 URL"
+    },
+    {
+      "type": "url",
+      "id": "age_1_2_url",
+      "label": "1-2 URL"
+    },
+    {
+      "type": "url",
+      "id": "age_2_4_url",
+      "label": "2-4 URL"
+    },
+    {
+      "type": "url",
+      "id": "age_4_plus_url",
+      "label": "4+ URL"
+    },
+    {
       "type": "range",
       "id": "age_button_font_size",
       "label": "Font size",
@@ -652,124 +789,6 @@
       "id": "age_button_active_border_color",
       "label": "Active border",
       "default": "#ff6b5b"
-    },
-    {
-      "type": "header",
-      "content": "Boys age groups"
-    },
-    {
-      "type": "text",
-      "id": "boys_age_1_label",
-      "label": "Age group 1 label",
-      "default": "0-2Y"
-    },
-    {
-      "type": "url",
-      "id": "boys_age_1_url",
-      "label": "Age group 1 URL"
-    },
-    {
-      "type": "text",
-      "id": "boys_age_2_label",
-      "label": "Age group 2 label",
-      "default": "2-4Y"
-    },
-    {
-      "type": "url",
-      "id": "boys_age_2_url",
-      "label": "Age group 2 URL"
-    },
-    {
-      "type": "text",
-      "id": "boys_age_3_label",
-      "label": "Age group 3 label",
-      "default": "4-6Y"
-    },
-    {
-      "type": "url",
-      "id": "boys_age_3_url",
-      "label": "Age group 3 URL"
-    },
-    {
-      "type": "text",
-      "id": "boys_age_4_label",
-      "label": "Age group 4 label",
-      "default": "6-8Y"
-    },
-    {
-      "type": "url",
-      "id": "boys_age_4_url",
-      "label": "Age group 4 URL"
-    },
-    {
-      "type": "text",
-      "id": "boys_age_5_label",
-      "label": "Age group 5 label",
-      "default": "8-10Y"
-    },
-    {
-      "type": "url",
-      "id": "boys_age_5_url",
-      "label": "Age group 5 URL"
-    },
-    {
-      "type": "header",
-      "content": "Girls age groups"
-    },
-    {
-      "type": "text",
-      "id": "girls_age_1_label",
-      "label": "Age group 1 label",
-      "default": "0-2Y"
-    },
-    {
-      "type": "url",
-      "id": "girls_age_1_url",
-      "label": "Age group 1 URL"
-    },
-    {
-      "type": "text",
-      "id": "girls_age_2_label",
-      "label": "Age group 2 label",
-      "default": "2-4Y"
-    },
-    {
-      "type": "url",
-      "id": "girls_age_2_url",
-      "label": "Age group 2 URL"
-    },
-    {
-      "type": "text",
-      "id": "girls_age_3_label",
-      "label": "Age group 3 label",
-      "default": "4-6Y"
-    },
-    {
-      "type": "url",
-      "id": "girls_age_3_url",
-      "label": "Age group 3 URL"
-    },
-    {
-      "type": "text",
-      "id": "girls_age_4_label",
-      "label": "Age group 4 label",
-      "default": "6-8Y"
-    },
-    {
-      "type": "url",
-      "id": "girls_age_4_url",
-      "label": "Age group 4 URL"
-    },
-    {
-      "type": "text",
-      "id": "girls_age_5_label",
-      "label": "Age group 5 label",
-      "default": "8-10Y"
-    },
-    {
-      "type": "url",
-      "id": "girls_age_5_url",
-      "label": "Age group 5 URL"
     },
     {
       "type": "header",
