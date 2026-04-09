@@ -27,9 +27,9 @@
 
   .ai-gender-button-{{ ai_gen_id }} {
     padding: 10px 18px;
-    background-color: #2b2b2b;
-    color: #ffffff;
-    border: 0;
+    background-color: #ffffff;
+    color: #111111;
+    border: 2px solid #111111;
     border-radius: 999px;
     font-size: 13px;
     font-weight: 600;
@@ -42,7 +42,7 @@
   }
 
   .ai-gender-button-{{ ai_gen_id }}:hover {
-    background-color: #1f1f1f;
+    background-color: #f5f5f5;
     transform: translateY(-1px);
     box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
   }
@@ -50,6 +50,31 @@
   .ai-gender-button-{{ ai_gen_id }}.active {
     background-color: #111111;
     color: #ffffff;
+    border-color: #111111;
+  }
+
+  gender-filter-banner-{{ ai_gen_id }}[data-selected-gender='boys'] .ai-gender-button-boys-{{ ai_gen_id }} {
+    background-color: #111111;
+    color: #ffffff;
+    border-color: #111111;
+  }
+
+  gender-filter-banner-{{ ai_gen_id }}[data-selected-gender='boys'] .ai-gender-button-girls-{{ ai_gen_id }} {
+    background-color: #ffffff;
+    color: #111111;
+    border-color: #111111;
+  }
+
+  gender-filter-banner-{{ ai_gen_id }}[data-selected-gender='girls'] .ai-gender-button-girls-{{ ai_gen_id }} {
+    background-color: #111111;
+    color: #ffffff;
+    border-color: #111111;
+  }
+
+  gender-filter-banner-{{ ai_gen_id }}[data-selected-gender='girls'] .ai-gender-button-boys-{{ ai_gen_id }} {
+    background-color: #ffffff;
+    color: #111111;
+    border-color: #111111;
   }
 
   .ai-banner-content-{{ ai_gen_id }} {
@@ -167,25 +192,55 @@
     }
 
     .ai-banner-heading-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_font_size | times: 0.7 }}px;
+      font-size: 30px;
     }
 
     .ai-banner-subheading-{{ ai_gen_id }} {
-      font-size: {{ block.settings.subheading_font_size | times: 0.8 }}px;
+      font-size: 16px;
     }
 
     .ai-banner-text-overlay-{{ ai_gen_id }} {
-      left: 18px;
-      width: calc(100% - 36px);
+      left: 16px;
+      right: 16px;
+      width: auto;
+      top: auto;
+      bottom: 16px;
+      transform: none;
+      padding: 14px 14px 12px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.86);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
     }
-    .ai-banner-heading-{{ ai_gen_id }} { font-size: 30px; }
-    .ai-banner-subheading-{{ ai_gen_id }} { font-size: 16px; margin-top: 10px; }
-    .ai-gender-toggle-{{ ai_gen_id }} { gap: 10px; margin-top: 16px; }
+
+    .ai-banner-heading-{{ ai_gen_id }} {
+      font-size: 28px;
+      color: #111111;
+    }
+
+    .ai-banner-subheading-{{ ai_gen_id }} {
+      font-size: 15px;
+      margin-top: 10px;
+      color: rgba(17, 17, 17, 0.88);
+    }
+
+    .ai-gender-toggle-{{ ai_gen_id }} {
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .ai-gender-button-{{ ai_gen_id }} {
+      flex: 1 1 calc(50% - 10px);
+      text-align: center;
+      box-shadow: none;
+    }
   }
 {% endstyle %}
 
 <gender-filter-banner-{{ ai_gen_id }}
   class="ai-gender-filter-banner-{{ ai_gen_id }}"
+  data-selected-gender="boys"
   {{ block.shopify_attributes }}
 >
   <div class="ai-gender-filter-container-{{ ai_gen_id }}">
@@ -316,6 +371,7 @@
       switchGender(gender, options = {}) {
         const { suppressApply = false } = options;
         this.selectedGender = gender;
+        this.setAttribute('data-selected-gender', gender);
         this.genderButtons.forEach((btn) => {
           const isActive = btn.getAttribute('data-gender') === gender;
           btn.classList.toggle('active', isActive);
