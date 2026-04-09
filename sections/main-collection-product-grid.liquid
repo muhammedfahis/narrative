@@ -24,6 +24,60 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Product grid polish (scoped to this section) */
+  .section-{{ section.id }}-padding #product-grid {
+    gap: 1.25rem;
+  }
+
+  .section-{{ section.id }}-padding #product-grid .card-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 180ms ease, transform 180ms ease;
+  }
+
+  .section-{{ section.id }}-padding #product-grid .card-wrapper:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+
+  /* Remove "Choose option(s)" quick-add button (keeps primary add-to-cart) */
+  .section-{{ section.id }}-padding #product-grid .quick-add__submit.button--secondary {
+    display: none !important;
+  }
+
+  /* Cart icon badge on each product card (bottom-right) */
+  .section-{{ section.id }}-padding #product-grid .card-wrapper::after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px 20px;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2720%27%20height%3D%2720%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23111111%27%20stroke-width%3D%272%27%3E%3Ccircle%20cx%3D%279%27%20cy%3D%2721%27%20r%3D%271%27/%3E%3Ccircle%20cx%3D%2720%27%20cy%3D%2721%27%20r%3D%271%27/%3E%3Cpath%20d%3D%27M1%201h4l2.68%2013.39a2%202%200%200%200%202%201.61h9.72a2%202%200%200%200%202-1.61L23%206H6%27/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .section-{{ section.id }}-padding #product-grid {
+      gap: 0.9rem;
+    }
+    .section-{{ section.id }}-padding #product-grid .card-wrapper::after {
+      width: 36px;
+      height: 36px;
+      right: 10px;
+      bottom: 10px;
+      background-size: 18px 18px;
+    }
+  }
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding">
