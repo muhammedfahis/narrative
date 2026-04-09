@@ -24,6 +24,41 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Replace "Choose option(s)" with a bottom-right cart icon */
+  #product-grid .card-wrapper {
+    position: relative;
+  }
+
+  #product-grid .choose-options-icon {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: #ffffff;
+    color: currentColor;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #product-grid .choose-options-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  #product-grid .choose-options-icon[disabled] {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding">
@@ -137,6 +172,73 @@
     </div>
   </div>
 </div>
+
+<script>
+  (function () {
+    function findChooseOptionsEl(card) {
+      // Dawn-style quick add often uses these selectors/classes.
+      // We purposely keep this flexible since the snippet isn't in this repo.
+      const candidates = card.querySelectorAll(
+        'button.quick-add__submit, a.quick-add__submit, button.button--secondary, a.button--secondary'
+      );
+
+      for (const el of candidates) {
+        const text = (el.textContent || '').trim().toLowerCase();
+        if (text === 'choose option' || text === 'choose options') return el;
+      }
+
+      return null;
+    }
+
+    function injectIconForCard(card) {
+      if (!card || card.querySelector('.choose-options-icon')) return;
+
+      const chooseOptionsEl = findChooseOptionsEl(card);
+      if (!chooseOptionsEl) return;
+
+      // Hide the original control (but keep it in DOM for behavior).
+      chooseOptionsEl.style.display = 'none';
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'choose-options-icon';
+      btn.setAttribute('aria-label', 'Choose options');
+      btn.innerHTML =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+        '<circle cx="9" cy="21" r="1"></circle>' +
+        '<circle cx="20" cy="21" r="1"></circle>' +
+        '<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>' +
+        '</svg>';
+
+      btn.addEventListener('click', function () {
+        // Trigger the exact same behavior as the original "Choose options" control
+        chooseOptionsEl.click();
+      });
+
+      card.appendChild(btn);
+    }
+
+    function init() {
+      const grid = document.getElementById('product-grid');
+      if (!grid) return;
+
+      // Initial render
+      grid.querySelectorAll('.card-wrapper').forEach(injectIconForCard);
+
+      // Handle re-renders from filtering/sorting (facets) and pagination updates
+      const mo = new MutationObserver(() => {
+        grid.querySelectorAll('.card-wrapper').forEach(injectIconForCard);
+      });
+      mo.observe(grid, { childList: true, subtree: true });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
 
 
 {% schema %}
