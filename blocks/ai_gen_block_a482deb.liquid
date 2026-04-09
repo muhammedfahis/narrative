@@ -466,7 +466,6 @@
             this.selectedAgeTag = tag;
             this.ageButtons.forEach((btn) => btn.classList.remove('active'));
             match.classList.add('active');
-            this.applyFilters({ replaceState: true });
           }
         }
       }
@@ -522,6 +521,9 @@
         if (!targetUrl) return;
 
         const nextUrl = targetUrl.pathname + (targetUrl.search || '');
+        const currentUrl = window.location.pathname + window.location.search;
+        if (replaceState && nextUrl === currentUrl) return;
+
         if (replaceState) {
           window.history.replaceState({}, '', nextUrl);
         } else {
