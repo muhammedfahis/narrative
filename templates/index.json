@@ -46,7 +46,7 @@
           "type": "ai_gen_block_c796622",
           "name": "Rotating announcement bar",
           "settings": {
-            "message_1": "💵 Cash on Delivery Available across India | Order now, pay at your doorstep",
+            "message_1": "New Arrivals Just Landed 🎉",
             "message_2": "💵 Cash on Delivery Available across India | Order now, pay at your doorstep",
             "rotation_interval": 4,
             "transition_duration": 0.5,
