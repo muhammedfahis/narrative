@@ -22,7 +22,25 @@
     {% unless marquee_first %}
       <span class="ai-marquee-sep-{{ ai_gen_id }}" aria-hidden="true">·</span>
     {% endunless %}
-    <span class="ai-marquee-text-{{ ai_gen_id }}">{{ block.settings.message_3 }}</span>
+    <span class="ai-marquee-msg3-{{ ai_gen_id }}">
+      {% unless block.settings.message_3_show_icon == false %}
+        <svg
+          class="ai-marquee-icon-{{ ai_gen_id }}"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813a3.75 3.75 0 002.576-2.576l.813-2.846A.75.75 0 019 4.5zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 012.455 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 011.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 011.423 1.423l1.183.394-1.183.394a2.25 2.25 0 01-1.423 1.423z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      {% endunless %}
+      <span class="ai-marquee-text-{{ ai_gen_id }}">{{ block.settings.message_3 }}</span>
+    </span>
   {% endif %}
 {% endcapture %}
 
@@ -84,6 +102,21 @@
   .ai-marquee-text-{{ ai_gen_id }} a {
     color: inherit;
     text-decoration: underline;
+  }
+
+  .ai-marquee-msg3-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+
+  .ai-marquee-icon-{{ ai_gen_id }} {
+    width: 1.1em;
+    height: 1.1em;
+    flex-shrink: 0;
+    opacity: 0.92;
+    position: relative;
+    top: 0.03em;
   }
 
   @keyframes ai-marquee-scroll-{{ ai_gen_id }} {
@@ -170,6 +203,12 @@
       "id": "message_3",
       "label": "Message 3",
       "default": "New Arrivals"
+    },
+    {
+      "type": "checkbox",
+      "id": "message_3_show_icon",
+      "label": "Sparkle icon on message 3",
+      "default": true
     },
     {
       "type": "range",
