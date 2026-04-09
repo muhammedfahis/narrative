@@ -56,65 +56,6 @@
     box-shadow: none;
   }
 
-  .ai-age-filter-wrapper-{{ ai_gen_id }} {
-    margin-bottom: 0;
-  }
-
-  .ai-age-filter-{{ ai_gen_id }} {
-    display: flex;
-    justify-content: flex-start;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .ai-age-button-{{ ai_gen_id }} {
-    padding: 8px 12px;
-    background-color: rgba(255, 255, 255, 0.10);
-    color: rgba(255, 255, 255, 0.96);
-    border: 1px solid rgba(255, 255, 255, 0.26);
-    border-radius: {{ block.settings.age_button_border_radius }}px;
-    font-size: {{ block.settings.age_button_font_size }}px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    line-height: 1.1;
-    box-shadow: none;
-    user-select: none;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-  }
-
-  .ai-age-button-{{ ai_gen_id }}:hover {
-    background-color: rgba(255, 255, 255, 0.18);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.40);
-    transform: none;
-    box-shadow: none;
-  }
-
-  .ai-age-button-{{ ai_gen_id }}.active {
-    background-color: rgba(255, 255, 255, 0.92);
-    color: #121212;
-    border-color: rgba(255, 255, 255, 0.92);
-    box-shadow: none;
-  }
-
-  .ai-age-button-{{ ai_gen_id }}[aria-disabled='true'] {
-    opacity: 0.55;
-    pointer-events: none;
-    transform: none;
-    box-shadow: none;
-  }
-
-  .ai-filter-hint-{{ ai_gen_id }} {
-    display: none;
-    text-align: center;
-    margin: 0 0 16px;
-    font-size: 14px;
-    color: rgba(18, 18, 18, 0.7);
-  }
-
   .ai-banner-content-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
@@ -166,7 +107,7 @@
       rgba(0, 0, 0, 0.10) 28%,
       rgba(0, 0, 0, 0.00) 56%,
       rgba(0, 0, 0, 0.34) 78%,
-      rgba(0, 0, 0, 0.62) 100%
+      rgba(0, 0, 0, 0.72) 100%
     );
     pointer-events: none;
     z-index: 1;
@@ -215,6 +156,19 @@
     pointer-events: none;
   }
 
+  .ai-banner-text-overlay-{{ ai_gen_id }} > * {
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.42);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .ai-banner-text-overlay-{{ ai_gen_id }} > * + * {
+    margin-top: 10px;
+  }
+
   .ai-banner-heading-{{ ai_gen_id }} {
     font-size: {{ block.settings.heading_font_size }}px;
     font-weight: 700;
@@ -252,11 +206,6 @@
       font-size: {{ block.settings.button_font_size | times: 0.9 }}px;
     }
 
-    .ai-age-button-{{ ai_gen_id }} {
-      padding: 7px 10px;
-      font-size: {{ block.settings.age_button_font_size | times: 0.9 }}px;
-    }
-
     .ai-banner-heading-{{ ai_gen_id }} {
       font-size: {{ block.settings.heading_font_size | times: 0.7 }}px;
     }
@@ -276,6 +225,11 @@
       bottom: 14px;
       width: calc(100% - 28px);
       padding: 0 0 96px;
+    }
+
+    .ai-banner-text-overlay-{{ ai_gen_id }} > * {
+      padding: 9px 10px;
+      border-radius: 10px;
     }
   }
 {% endstyle %}
@@ -302,51 +256,6 @@
           >
             {{ block.settings.girls_button_text }}
           </button>
-        </div>
-
-        <div class="ai-age-filter-wrapper-{{ ai_gen_id }}">
-          <div class="ai-age-filter-{{ ai_gen_id }}" data-age-filter>
-            <a
-              href="{{ block.settings.age_0_6_url | default: 'https://kidsmire.co.in/collections/0-6-months' }}"
-              class="ai-age-button-{{ ai_gen_id }}"
-              data-age-tag="0-6-months"
-              aria-disabled="false"
-            >
-              0-6
-            </a>
-            <a
-              href="{{ block.settings.age_6_12_url | default: 'https://kidsmire.co.in/collections/6-12-months' }}"
-              class="ai-age-button-{{ ai_gen_id }}"
-              data-age-tag="6-12-months"
-              aria-disabled="false"
-            >
-              6-12
-            </a>
-            <a
-              href="{{ block.settings.age_1_2_url | default: 'https://kidsmire.co.in/collections/1-2-years' }}"
-              class="ai-age-button-{{ ai_gen_id }}"
-              data-age-tag="1-2-years"
-              aria-disabled="false"
-            >
-              1-2
-            </a>
-            <a
-              href="{{ block.settings.age_2_4_url | default: 'https://kidsmire.co.in/collections/2-4-years' }}"
-              class="ai-age-button-{{ ai_gen_id }}"
-              data-age-tag="2-4-years"
-              aria-disabled="false"
-            >
-              2-4
-            </a>
-            <a
-              href="{{ block.settings.age_4_plus_url | default: 'https://kidsmire.co.in/collections/4-plus-years' }}"
-              class="ai-age-button-{{ ai_gen_id }}"
-              data-age-tag="4-plus-years"
-              aria-disabled="false"
-            >
-              4+
-            </a>
-          </div>
         </div>
       </div>
 
@@ -424,16 +333,11 @@
         super();
         this.genderButtons = this.querySelectorAll('.ai-gender-button-{{ ai_gen_id }}');
         this.bannerItems = this.querySelectorAll('.ai-banner-item-{{ ai_gen_id }}');
-        this.ageFilter = this.querySelector('[data-age-filter]');
-        this.ageButtons = this.querySelectorAll('[data-age-filter] .ai-age-button-{{ ai_gen_id }}');
-        this.hint = this.querySelector('[data-filter-hint]');
         this.selectedGender = null;
-        this.selectedAgeTag = null;
       }
 
       connectedCallback() {
         this.setupGenderToggle();
-        this.setupAgeFilters();
         this.restoreFromUrl();
       }
 
@@ -460,21 +364,7 @@
           item.classList.toggle('active', isActive);
         });
 
-        this.enableAgeButtons();
         if (!suppressApply) this.applyFilters({ replaceState: true });
-      }
-
-      setupAgeFilters() {
-        this.ageButtons.forEach((button) => {
-          button.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (!this.selectedGender) return;
-            this.selectedAgeTag = button.getAttribute('data-age-tag');
-            this.ageButtons.forEach((btn) => btn.classList.remove('active'));
-            button.classList.add('active');
-            this.applyFilters({ replaceState: false });
-          });
-        });
       }
 
       restoreFromUrl() {
@@ -492,25 +382,6 @@
           // Default visual state
           this.switchGender('boys', { suppressApply: true });
         }
-
-        const tag = url.searchParams.get('filter.p.tag');
-        if (tag) {
-          const match = Array.from(this.ageButtons).find((btn) => btn.getAttribute('data-age-tag') === tag);
-          if (match) {
-            this.selectedAgeTag = tag;
-            this.ageButtons.forEach((btn) => btn.classList.remove('active'));
-            match.classList.add('active');
-          }
-        }
-      }
-
-      disableAgeButtons() {
-        this.ageButtons.forEach((btn) => btn.setAttribute('aria-disabled', 'true'));
-      }
-
-      enableAgeButtons() {
-        this.ageButtons.forEach((btn) => btn.setAttribute('aria-disabled', 'false'));
-        this.hint && (this.hint.style.display = 'none');
       }
 
       getProductGridContainer() {
@@ -546,7 +417,6 @@
             : (girlsUrl && girlsUrl.length ? girlsUrl : (girlsHandle && girlsHandle.length ? `/collections/${girlsHandle}` : fallbackGirls));
 
         const url = new URL(base, window.location.origin);
-        if (this.selectedAgeTag) url.searchParams.set('filter.p.tag', this.selectedAgeTag);
         return url;
       }
 
@@ -752,110 +622,7 @@
     },
     {
       "type": "header",
-      "content": "Age filter buttons"
-    },
-    {
-      "type": "header",
-      "content": "Age group URLs (used for fallbacks / sharing)"
-    },
-    {
-      "type": "url",
-      "id": "age_0_6_url",
-      "label": "0-6 URL"
-    },
-    {
-      "type": "url",
-      "id": "age_6_12_url",
-      "label": "6-12 URL"
-    },
-    {
-      "type": "url",
-      "id": "age_1_2_url",
-      "label": "1-2 URL"
-    },
-    {
-      "type": "url",
-      "id": "age_2_4_url",
-      "label": "2-4 URL"
-    },
-    {
-      "type": "url",
-      "id": "age_4_plus_url",
-      "label": "4+ URL"
-    },
-    {
-      "type": "range",
-      "id": "age_button_font_size",
-      "label": "Font size",
-      "min": 10,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "age_button_border_radius",
-      "label": "Border radius",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 20
-    },
-    {
-      "type": "color",
-      "id": "age_button_bg_color",
-      "label": "Background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "age_button_text_color",
-      "label": "Text",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "id": "age_button_border_color",
-      "label": "Border",
-      "default": "#cccccc"
-    },
-    {
-      "type": "color",
-      "id": "age_button_hover_bg_color",
-      "label": "Hover background",
-      "default": "#f3f3f3"
-    },
-    {
-      "type": "color",
-      "id": "age_button_hover_text_color",
-      "label": "Hover text",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "id": "age_button_hover_border_color",
-      "label": "Hover border",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "id": "age_button_active_bg_color",
-      "label": "Active background",
-      "default": "#ff6b5b"
-    },
-    {
-      "type": "color",
-      "id": "age_button_active_text_color",
-      "label": "Active text",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "age_button_active_border_color",
-      "label": "Active border",
-      "default": "#ff6b5b"
+      "content": "Banners"
     },
     {
       "type": "header",
