@@ -42,40 +42,68 @@
     transform: translateY(-2px);
   }
 
-  /* Remove "Choose option(s)" quick-add button (keeps primary add-to-cart) */
-  .section-{{ section.id }}-padding #product-grid .quick-add__submit.button--secondary {
-    display: none !important;
-  }
-
-  /* Cart icon badge on each product card (bottom-right) */
-  .section-{{ section.id }}-padding #product-grid .card-wrapper::after {
-    content: '';
+  /*
+    Turn the existing "Choose option(s)" quick-add trigger into a cart icon.
+    This preserves the same popup behavior (quick-add) while matching the new design.
+  */
+  .section-{{ section.id }}-padding #product-grid .card-wrapper .quick-add__submit.button--secondary {
     position: absolute;
     right: 12px;
     bottom: 12px;
+    z-index: 2;
     width: 40px;
     height: 40px;
+    min-height: 40px;
+    padding: 0;
     border-radius: 999px;
     background-color: rgba(255, 255, 255, 0.92);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
     border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0; /* hide any button text visually */
+    line-height: 0;
+    color: transparent;
+  }
+
+  .section-{{ section.id }}-padding #product-grid .card-wrapper .quick-add__submit.button--secondary::before {
+    content: '';
+    width: 24px;
+    height: 24px;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 20px 20px;
-    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2720%27%20height%3D%2720%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23111111%27%20stroke-width%3D%272%27%3E%3Ccircle%20cx%3D%279%27%20cy%3D%2721%27%20r%3D%271%27/%3E%3Ccircle%20cx%3D%2720%27%20cy%3D%2721%27%20r%3D%271%27/%3E%3Cpath%20d%3D%27M1%201h4l2.68%2013.39a2%202%200%200%200%202%201.61h9.72a2%202%200%200%200%202-1.61L23%206H6%27/%3E%3C/svg%3E");
-    pointer-events: none;
+    background-size: 24px 24px;
+    background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2724%27%20height%3D%2724%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cpath%20d%3D%27M21.5177%2023.1094H2.47656L4.27215%206.01022H19.7221L21.5177%2023.1094Z%27%20stroke%3D%27%23101010%27%20stroke-width%3D%271.41176%27%20stroke-miterlimit%3D%2710%27%20stroke-linejoin%3D%27round%27/%3E%3Cpath%20d%3D%27M10%2014.4001H14.8%27%20stroke%3D%27%23101010%27%20stroke-width%3D%271.41176%27%20stroke-miterlimit%3D%2710%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27/%3E%3Cpath%20d%3D%27M12.3984%2012V16.8%27%20stroke%3D%27%23101010%27%20stroke-width%3D%271.41176%27%20stroke-miterlimit%3D%2710%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27/%3E%3Cpath%20d%3D%27M8.35156%208.26279V4.53764C8.35156%202.52348%209.98435%200.890684%2011.9985%200.890684C14.0127%200.890684%2015.6455%202.52348%2015.6455%204.53764V8.26279%27%20stroke%3D%27%23101010%27%20stroke-width%3D%271.41176%27%20stroke-miterlimit%3D%2710%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27/%3E%3C/svg%3E");
+  }
+
+  .section-{{ section.id }}-padding #product-grid .card-wrapper .quick-add__submit.button--secondary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+  }
+
+  .section-{{ section.id }}-padding #product-grid .card-wrapper .quick-add__submit.button--secondary:focus-visible {
+    outline: 2px solid rgba(16, 16, 16, 0.6);
+    outline-offset: 2px;
   }
 
   @media screen and (max-width: 749px) {
     .section-{{ section.id }}-padding #product-grid {
       gap: 0.9rem;
     }
-    .section-{{ section.id }}-padding #product-grid .card-wrapper::after {
+
+    .section-{{ section.id }}-padding #product-grid .card-wrapper .quick-add__submit.button--secondary {
       width: 36px;
       height: 36px;
+      min-height: 36px;
       right: 10px;
       bottom: 10px;
-      background-size: 18px 18px;
+    }
+
+    .section-{{ section.id }}-padding #product-grid .card-wrapper .quick-add__submit.button--secondary::before {
+      width: 22px;
+      height: 22px;
+      background-size: 22px 22px;
     }
   }
 {%- endstyle -%}
