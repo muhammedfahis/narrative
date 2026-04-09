@@ -15,7 +15,7 @@
     - Main headline (large, bold, Assistant font): "Curated Essentials for Conscious Parents"
     - Subheadline (lighter weight, Assistant font): "Premium Quality Kids' Wear – Loved by Moms Across India"
     - Trust badges row: "✓ Handpicked Styles   ✓ Safe & Tested   ✓ Fast Delivery"
-    - CTA button: "Shop Best Sellers" in #334fb4 blue with white text, border-radius 8px, linking to /collections/all
+    - Two CTA buttons: "Shop Boys" and "Shop Girls" in #334fb4 blue with white text, border-radius 8px, each with its own link
     - Text centered, vertically centered on the banner
     - Banner height: large (at least 80vh on desktop)
     - Fully responsive on mobile
@@ -156,6 +156,14 @@
     box-shadow: 0 {{ block.settings.button_shadow_vertical | plus: 2 }}px {{ block.settings.button_shadow_blur | plus: 2 }}px rgba(0, 0, 0, {{ block.settings.button_shadow_opacity | divided_by: 100.0 | plus: 0.05 }});
   }
 
+  .ai-hero-usp-cta-row-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+  }
+
   @media screen and (max-width: 749px) {
     .ai-hero-usp-{{ ai_gen_id }} {
       min-height: {{ block.settings.min_height_mobile }}vh;
@@ -254,10 +262,19 @@
       {% endif %}
     </div>
 
-    {% if block.settings.cta_text != blank %}
-      <a href="{{ block.settings.cta_link }}" class="ai-hero-usp-cta-{{ ai_gen_id }}">
-        {{ block.settings.cta_text }}
-      </a>
+    {% if block.settings.cta_boys_text != blank or block.settings.cta_girls_text != blank %}
+      <div class="ai-hero-usp-cta-row-{{ ai_gen_id }}">
+        {% if block.settings.cta_boys_text != blank %}
+          <a href="{{ block.settings.cta_boys_link }}" class="ai-hero-usp-cta-{{ ai_gen_id }}">
+            {{ block.settings.cta_boys_text }}
+          </a>
+        {% endif %}
+        {% if block.settings.cta_girls_text != blank %}
+          <a href="{{ block.settings.cta_girls_link }}" class="ai-hero-usp-cta-{{ ai_gen_id }}">
+            {{ block.settings.cta_girls_text }}
+          </a>
+        {% endif %}
+      </div>
     {% endif %}
   </div>
 </hero-usp-{{ ai_gen_id }}>
@@ -274,10 +291,9 @@
       }
 
       setupAccessibility() {
-        const ctaButton = this.querySelector('.ai-hero-usp-cta-{{ ai_gen_id }}');
-        if (ctaButton) {
+        this.querySelectorAll('.ai-hero-usp-cta-{{ ai_gen_id }}').forEach((ctaButton) => {
           ctaButton.setAttribute('role', 'button');
-        }
+        });
       }
     }
 
@@ -382,14 +398,25 @@
     },
     {
       "type": "text",
-      "id": "cta_text",
-      "label": "Button text",
-      "default": "Shop Best Sellers"
+      "id": "cta_boys_text",
+      "label": "Shop Boys — button text",
+      "default": "Shop Boys"
     },
     {
       "type": "url",
-      "id": "cta_link",
-      "label": "Button link"
+      "id": "cta_boys_link",
+      "label": "Shop Boys — link"
+    },
+    {
+      "type": "text",
+      "id": "cta_girls_text",
+      "label": "Shop Girls — button text",
+      "default": "Shop Girls"
+    },
+    {
+      "type": "url",
+      "id": "cta_girls_link",
+      "label": "Shop Girls — link"
     },
     {
       "type": "header",
