@@ -414,7 +414,6 @@
       connectedCallback() {
         this.setupGenderToggle();
         this.setupAgeFilters();
-        this.switchGender('boys');
         this.restoreFromUrl();
       }
 
@@ -427,7 +426,8 @@
         });
       }
 
-      switchGender(gender) {
+      switchGender(gender, options = {}) {
+        const { suppressApply = false } = options;
         this.selectedGender = gender;
         this.genderButtons.forEach((btn) => {
           const isActive = btn.getAttribute('data-gender') === gender;
@@ -441,7 +441,7 @@
         });
 
         this.enableAgeButtons();
-        this.applyFilters({ replaceState: true });
+        if (!suppressApply) this.applyFilters({ replaceState: true });
       }
 
       setupAgeFilters() {
@@ -459,6 +459,20 @@
 
       restoreFromUrl() {
         const url = new URL(window.location.href);
+        const path = url.pathname || '';
+
+        const boysHandle = '{{ block.settings.boys_collection_handle }}';
+        const girlsHandle = '{{ block.settings.girls_collection_handle }}';
+        const isOnBoys = boysHandle && path.indexOf(`/collections/${boysHandle}`) !== -1;
+        const isOnGirls = girlsHandle && path.indexOf(`/collections/${girlsHandle}`) !== -1;
+
+        if (isOnGirls) {
+          this.switchGender('girls', { suppressApply: true });
+        } else {
+          // Default visual state
+          this.switchGender('boys', { suppressApply: true });
+        }
+
         const tag = url.searchParams.get('filter.p.tag');
         if (tag) {
           const match = Array.from(this.ageButtons).find((btn) => btn.getAttribute('data-age-tag') === tag);
