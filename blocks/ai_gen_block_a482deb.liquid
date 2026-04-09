@@ -20,65 +20,41 @@
   .ai-gender-toggle-{{ ai_gen_id }} {
     display: flex;
     justify-content: flex-start;
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 12px;
+    margin-top: 18px;
     flex-wrap: wrap;
   }
 
   .ai-gender-button-{{ ai_gen_id }} {
-    padding: 9px 14px;
-    background-color: rgba(255, 255, 255, 0.10);
+    padding: 10px 18px;
+    background-color: #2b2b2b;
     color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.30);
-    border-radius: {{ block.settings.button_border_radius }}px;
-    font-size: {{ block.settings.button_font_size }}px;
+    border: 0;
+    border-radius: 999px;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     line-height: 1.1;
-    box-shadow: none;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.20);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .ai-gender-button-{{ ai_gen_id }}:hover {
-    background-color: rgba(255, 255, 255, 0.18);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.42);
-    transform: none;
-    box-shadow: none;
+    background-color: #1f1f1f;
+    transform: translateY(-1px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
   }
 
   .ai-gender-button-{{ ai_gen_id }}.active {
-    background-color: rgba(255, 255, 255, 0.92);
-    color: #121212;
-    border-color: rgba(255, 255, 255, 0.92);
-    box-shadow: none;
+    background-color: #111111;
+    color: #ffffff;
   }
 
   .ai-banner-content-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
-  }
-
-  .ai-banner-controls-{{ ai_gen_id }} {
-    position: absolute;
-    left: 22px;
-    bottom: 22px;
-    transform: none;
-    z-index: 6;
-    width: min(560px, calc(100% - 44px));
-    padding: 0;
-    border-radius: 0;
-    background: transparent;
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    border: 0;
-    box-shadow: none;
-  }
-
-  .ai-banner-controls-{{ ai_gen_id }} .ai-age-filter-wrapper-{{ ai_gen_id }} {
-    margin-top: 8px;
   }
 
   .ai-banner-item-{{ ai_gen_id }} {
@@ -103,11 +79,9 @@
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.22) 0%,
-      rgba(0, 0, 0, 0.10) 28%,
-      rgba(0, 0, 0, 0.00) 56%,
-      rgba(0, 0, 0, 0.34) 78%,
-      rgba(0, 0, 0, 0.72) 100%
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.00) 55%,
+      rgba(0, 0, 0, 0.10) 100%
     );
     pointer-events: none;
     z-index: 1;
@@ -139,49 +113,35 @@
 
   .ai-banner-text-overlay-{{ ai_gen_id }} {
     position: absolute;
-    bottom: 22px;
-    left: 22px;
-    top: auto;
-    transform: none;
+    left: 38px;
+    top: 50%;
+    transform: translateY(-50%);
     text-align: left;
-    color: #ffffff;
-    width: min(560px, calc(100% - 44px));
+    color: #111111;
+    width: min(520px, calc(100% - 76px));
     max-width: none;
-    z-index: 5;
-    padding: 0 0 88px;
+    z-index: 3;
+    padding: 0;
     border-radius: 0;
     background: transparent;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
-    pointer-events: none;
-  }
-
-  .ai-banner-text-overlay-{{ ai_gen_id }} > * {
-    display: inline-block;
-    padding: 10px 12px;
-    border-radius: 12px;
-    background: rgba(0, 0, 0, 0.42);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-  }
-
-  .ai-banner-text-overlay-{{ ai_gen_id }} > * + * {
-    margin-top: 10px;
+    pointer-events: auto;
   }
 
   .ai-banner-heading-{{ ai_gen_id }} {
-    font-size: {{ block.settings.heading_font_size }}px;
-    font-weight: 700;
+    font-size: 40px;
+    font-weight: 800;
     margin: 0;
     letter-spacing: -0.02em;
-    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
+    line-height: 1.05;
   }
 
   .ai-banner-subheading-{{ ai_gen_id }} {
-    font-size: {{ block.settings.subheading_font_size }}px;
-    margin: 4px 0 0;
-    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
-    opacity: 0.92;
+    font-size: 18px;
+    margin: 12px 0 0;
+    line-height: 1.35;
+    opacity: 0.9;
   }
 
   .ai-empty-state-{{ ai_gen_id }} {
@@ -202,8 +162,8 @@
     }
 
     .ai-gender-button-{{ ai_gen_id }} {
-      padding: 9px 12px;
-      font-size: {{ block.settings.button_font_size | times: 0.9 }}px;
+      padding: 10px 16px;
+      font-size: 12px;
     }
 
     .ai-banner-heading-{{ ai_gen_id }} {
@@ -214,23 +174,13 @@
       font-size: {{ block.settings.subheading_font_size | times: 0.8 }}px;
     }
 
-    .ai-banner-controls-{{ ai_gen_id }} {
-      left: 14px;
-      bottom: 14px;
-      width: calc(100% - 28px);
-    }
-
     .ai-banner-text-overlay-{{ ai_gen_id }} {
-      left: 14px;
-      bottom: 14px;
-      width: calc(100% - 28px);
-      padding: 0 0 96px;
+      left: 18px;
+      width: calc(100% - 36px);
     }
-
-    .ai-banner-text-overlay-{{ ai_gen_id }} > * {
-      padding: 9px 10px;
-      border-radius: 10px;
-    }
+    .ai-banner-heading-{{ ai_gen_id }} { font-size: 30px; }
+    .ai-banner-subheading-{{ ai_gen_id }} { font-size: 16px; margin-top: 10px; }
+    .ai-gender-toggle-{{ ai_gen_id }} { gap: 10px; margin-top: 16px; }
   }
 {% endstyle %}
 
@@ -240,25 +190,6 @@
 >
   <div class="ai-gender-filter-container-{{ ai_gen_id }}">
     <div class="ai-banner-content-{{ ai_gen_id }}">
-      <div class="ai-banner-controls-{{ ai_gen_id }}">
-        <div class="ai-gender-toggle-{{ ai_gen_id }}">
-          <button
-            class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-boys-{{ ai_gen_id }} active"
-            data-gender="boys"
-            aria-pressed="true"
-          >
-            {{ block.settings.boys_button_text }}
-          </button>
-          <button
-            class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-girls-{{ ai_gen_id }}"
-            data-gender="girls"
-            aria-pressed="false"
-          >
-            {{ block.settings.girls_button_text }}
-          </button>
-        </div>
-      </div>
-
       <div class="ai-banner-item-{{ ai_gen_id }} ai-banner-boys-{{ ai_gen_id }} active" data-banner="boys">
         <div class="ai-banner-image-wrapper-{{ ai_gen_id }}">
           {% if block.settings.boys_banner_image %}
@@ -286,6 +217,22 @@
               {% if block.settings.boys_subheading != blank %}
                 <p class="ai-banner-subheading-{{ ai_gen_id }}">{{ block.settings.boys_subheading }}</p>
               {% endif %}
+              <div class="ai-gender-toggle-{{ ai_gen_id }}">
+                <button
+                  class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-boys-{{ ai_gen_id }} active"
+                  data-gender="boys"
+                  aria-pressed="true"
+                >
+                  Shop Boys
+                </button>
+                <button
+                  class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-girls-{{ ai_gen_id }}"
+                  data-gender="girls"
+                  aria-pressed="false"
+                >
+                  Shop Girls
+                </button>
+              </div>
             </div>
           {% endif %}
         </div>
@@ -318,6 +265,22 @@
               {% if block.settings.girls_subheading != blank %}
                 <p class="ai-banner-subheading-{{ ai_gen_id }}">{{ block.settings.girls_subheading }}</p>
               {% endif %}
+              <div class="ai-gender-toggle-{{ ai_gen_id }}">
+                <button
+                  class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-boys-{{ ai_gen_id }}"
+                  data-gender="boys"
+                  aria-pressed="false"
+                >
+                  Shop Boys
+                </button>
+                <button
+                  class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-girls-{{ ai_gen_id }} active"
+                  data-gender="girls"
+                  aria-pressed="true"
+                >
+                  Shop Girls
+                </button>
+              </div>
             </div>
           {% endif %}
         </div>
