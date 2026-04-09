@@ -21,7 +21,7 @@
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
   }
 
   .ai-gender-button-{{ ai_gen_id }} {
@@ -55,7 +55,7 @@
   }
 
   .ai-age-filter-wrapper-{{ ai_gen_id }} {
-    margin-bottom: 24px;
+    margin-bottom: 0;
   }
 
   .ai-age-filter-{{ ai_gen_id }} {
@@ -117,6 +117,26 @@
     width: 100%;
   }
 
+  .ai-banner-controls-{{ ai_gen_id }} {
+    position: absolute;
+    left: 50%;
+    top: 18px;
+    transform: translateX(-50%);
+    z-index: 3;
+    width: min(920px, 92%);
+    padding: 14px 14px 12px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.88);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.14);
+  }
+
+  .ai-banner-controls-{{ ai_gen_id }} .ai-age-filter-wrapper-{{ ai_gen_id }} {
+    margin-top: 10px;
+  }
+
   .ai-banner-item-{{ ai_gen_id }} {
     display: none;
     width: 100%;
@@ -131,6 +151,20 @@
     width: 100%;
     overflow: hidden;
     border-radius: {{ block.settings.banner_border_radius }}px;
+  }
+
+  .ai-banner-image-wrapper-{{ ai_gen_id }}:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0.12) 28%,
+      rgba(0, 0, 0, 0.00) 55%
+    );
+    pointer-events: none;
+    z-index: 1;
   }
 
   .ai-banner-image-{{ ai_gen_id }} {
@@ -166,6 +200,7 @@
     color: {{ block.settings.overlay_text_color }};
     width: 90%;
     max-width: 600px;
+    z-index: 2;
   }
 
   .ai-banner-heading-{{ ai_gen_id }} {
@@ -215,6 +250,13 @@
     .ai-banner-subheading-{{ ai_gen_id }} {
       font-size: {{ block.settings.subheading_font_size | times: 0.8 }}px;
     }
+
+    .ai-banner-controls-{{ ai_gen_id }} {
+      top: 12px;
+      padding: 12px 12px 10px;
+      border-radius: 14px;
+      width: min(920px, 94%);
+    }
   }
 {% endstyle %}
 
@@ -223,73 +265,72 @@
   {{ block.shopify_attributes }}
 >
   <div class="ai-gender-filter-container-{{ ai_gen_id }}">
-    <div class="ai-gender-toggle-{{ ai_gen_id }}">
-      <button
-        class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-boys-{{ ai_gen_id }}"
-        data-gender="boys"
-        aria-pressed="false"
-      >
-        {{ block.settings.boys_button_text }}
-      </button>
-      <button
-        class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-girls-{{ ai_gen_id }}"
-        data-gender="girls"
-        aria-pressed="false"
-      >
-        {{ block.settings.girls_button_text }}
-      </button>
-    </div>
-
-    <div class="ai-age-filter-wrapper-{{ ai_gen_id }}">
-      <p class="ai-filter-hint-{{ ai_gen_id }}" data-filter-hint>
-        Select <strong>{{ block.settings.boys_button_text }}</strong> or <strong>{{ block.settings.girls_button_text }}</strong>, then pick an age group.
-      </p>
-      <div class="ai-age-filter-{{ ai_gen_id }}" data-age-filter>
-        <a
-          href="{{ block.settings.age_0_6_url | default: 'https://kidsmire.co.in/collections/0-6-months' }}"
-          class="ai-age-button-{{ ai_gen_id }}"
-          data-age-tag="0-6-months"
-          aria-disabled="true"
-        >
-          0-6
-        </a>
-        <a
-          href="{{ block.settings.age_6_12_url | default: 'https://kidsmire.co.in/collections/6-12-months' }}"
-          class="ai-age-button-{{ ai_gen_id }}"
-          data-age-tag="6-12-months"
-          aria-disabled="true"
-        >
-          6-12
-        </a>
-        <a
-          href="{{ block.settings.age_1_2_url | default: 'https://kidsmire.co.in/collections/1-2-years' }}"
-          class="ai-age-button-{{ ai_gen_id }}"
-          data-age-tag="1-2-years"
-          aria-disabled="true"
-        >
-          1-2
-        </a>
-        <a
-          href="{{ block.settings.age_2_4_url | default: 'https://kidsmire.co.in/collections/2-4-years' }}"
-          class="ai-age-button-{{ ai_gen_id }}"
-          data-age-tag="2-4-years"
-          aria-disabled="true"
-        >
-          2-4
-        </a>
-        <a
-          href="{{ block.settings.age_4_plus_url | default: 'https://kidsmire.co.in/collections/4-plus-years' }}"
-          class="ai-age-button-{{ ai_gen_id }}"
-          data-age-tag="4-plus-years"
-          aria-disabled="true"
-        >
-          4+
-        </a>
-      </div>
-    </div>
-
     <div class="ai-banner-content-{{ ai_gen_id }}">
-      <div class="ai-banner-item-{{ ai_gen_id }} ai-banner-boys-{{ ai_gen_id }}" data-banner="boys">
+      <div class="ai-banner-controls-{{ ai_gen_id }}">
+        <div class="ai-gender-toggle-{{ ai_gen_id }}">
+          <button
+            class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-boys-{{ ai_gen_id }} active"
+            data-gender="boys"
+            aria-pressed="true"
+          >
+            {{ block.settings.boys_button_text }}
+          </button>
+          <button
+            class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-girls-{{ ai_gen_id }}"
+            data-gender="girls"
+            aria-pressed="false"
+          >
+            {{ block.settings.girls_button_text }}
+          </button>
+        </div>
+
+        <div class="ai-age-filter-wrapper-{{ ai_gen_id }}">
+          <div class="ai-age-filter-{{ ai_gen_id }}" data-age-filter>
+            <a
+              href="{{ block.settings.age_0_6_url | default: 'https://kidsmire.co.in/collections/0-6-months' }}"
+              class="ai-age-button-{{ ai_gen_id }}"
+              data-age-tag="0-6-months"
+              aria-disabled="false"
+            >
+              0-6
+            </a>
+            <a
+              href="{{ block.settings.age_6_12_url | default: 'https://kidsmire.co.in/collections/6-12-months' }}"
+              class="ai-age-button-{{ ai_gen_id }}"
+              data-age-tag="6-12-months"
+              aria-disabled="false"
+            >
+              6-12
+            </a>
+            <a
+              href="{{ block.settings.age_1_2_url | default: 'https://kidsmire.co.in/collections/1-2-years' }}"
+              class="ai-age-button-{{ ai_gen_id }}"
+              data-age-tag="1-2-years"
+              aria-disabled="false"
+            >
+              1-2
+            </a>
+            <a
+              href="{{ block.settings.age_2_4_url | default: 'https://kidsmire.co.in/collections/2-4-years' }}"
+              class="ai-age-button-{{ ai_gen_id }}"
+              data-age-tag="2-4-years"
+              aria-disabled="false"
+            >
+              2-4
+            </a>
+            <a
+              href="{{ block.settings.age_4_plus_url | default: 'https://kidsmire.co.in/collections/4-plus-years' }}"
+              class="ai-age-button-{{ ai_gen_id }}"
+              data-age-tag="4-plus-years"
+              aria-disabled="false"
+            >
+              4+
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-banner-item-{{ ai_gen_id }} ai-banner-boys-{{ ai_gen_id }} active" data-banner="boys">
         <div class="ai-banner-image-wrapper-{{ ai_gen_id }}">
           {% if block.settings.boys_banner_image %}
             <img
@@ -373,6 +414,7 @@
       connectedCallback() {
         this.setupGenderToggle();
         this.setupAgeFilters();
+        this.switchGender('boys');
         this.restoreFromUrl();
       }
 
@@ -416,19 +458,7 @@
       }
 
       restoreFromUrl() {
-        this.hint && (this.hint.style.display = 'block');
-        this.disableAgeButtons();
-
         const url = new URL(window.location.href);
-        const path = url.pathname || '';
-        if (path.indexOf('/collections/') !== -1) {
-          if (path.indexOf('/collections/{{ block.settings.boys_collection_handle }}') !== -1) {
-            this.switchGender('boys');
-          } else if (path.indexOf('/collections/{{ block.settings.girls_collection_handle }}') !== -1) {
-            this.switchGender('girls');
-          }
-        }
-
         const tag = url.searchParams.get('filter.p.tag');
         if (tag) {
           const match = Array.from(this.ageButtons).find((btn) => btn.getAttribute('data-age-tag') === tag);
@@ -436,6 +466,7 @@
             this.selectedAgeTag = tag;
             this.ageButtons.forEach((btn) => btn.classList.remove('active'));
             match.classList.add('active');
+            this.applyFilters({ replaceState: true });
           }
         }
       }
