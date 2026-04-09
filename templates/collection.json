@@ -9,51 +9,49 @@
  */
 {
   "sections": {
-    "rich_text_tiF3yc": {
-      "type": "rich-text",
+    "blocks_MM8Chy": {
+      "type": "_blocks",
       "blocks": {
-        "heading_CgH7bb": {
-          "type": "heading",
+        "ai_gen_block_6984537_ixeagT": {
+          "type": "ai_gen_block_6984537",
           "settings": {
-            "heading": "<p>✨ Premium Quality • Limited Edition • Customer Favorite ✨</p>",
-            "heading_size": "h1"
-          }
-        },
-        "text_6YDRNw": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Expertly crafted with meticulous attention to detail. This exclusive product combines superior quality, innovative design, and exceptional value. Join thousands of satisfied customers who trust our brand for excellence.</p>"
-          }
-        },
-        "button_CxhkYb": {
-          "type": "button",
-          "settings": {
-            "button_label": "",
-            "button_link": "",
-            "button_style_secondary": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
+            "boys_image": "shopify://shop_images/ChatGPT_Image_Apr_9_2026_02_27_34_PM.png",
+            "boys_heading": "Shop Boys Collection",
+            "boys_subheading": "Discover premium styles for young gentlemen",
+            "boys_collection_url": "",
+            "girls_image": "shopify://shop_images/ChatGPT_Image_Apr_9_2026_02_18_19_PM.png",
+            "girls_heading": "Shop Girls Collection",
+            "girls_subheading": "Explore elegant designs for young ladies",
+            "girls_collection_url": "",
+            "banner_height_desktop": 600,
+            "banner_height_mobile": 400,
+            "filter_position_vertical": 85,
+            "heading_size": 56,
+            "subheading_size": 18,
+            "text_color": "#ffffff",
+            "overlay_color": "rgba(0, 0, 0, 0.4)",
+            "overlay_padding": 32,
+            "overlay_border_radius": 8,
+            "filter_background": "#ffffff",
+            "button_active_background": "#121212",
+            "button_active_color": "#ffffff",
+            "button_inactive_color": "#121212",
+            "button_hover_background": "#f3f3f3",
+            "filter_border_radius": 8,
+            "button_border_radius": 4
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "heading_CgH7bb",
-        "text_6YDRNw",
-        "button_CxhkYb"
+        "ai_gen_block_6984537_ixeagT"
       ],
-      "name": "t:sections.rich-text.presets.name",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "background-1",
-        "full_width": false,
-        "padding_top": 20,
-        "padding_bottom": 20
-      }
+      "name": "Gender filter banner",
+      "settings": {}
     },
     "banner": {
       "type": "main-collection-banner",
+      "disabled": true,
       "settings": {
         "show_collection_description": true,
         "show_collection_image": false,
@@ -147,7 +145,7 @@
     }
   },
   "order": [
-    "rich_text_tiF3yc",
+    "blocks_MM8Chy",
     "banner",
     "age_filter_bubbles_bjyYbK",
     "product-grid",
