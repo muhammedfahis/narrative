@@ -15,7 +15,7 @@
     - Main headline (large, bold, Assistant font): "Curated Essentials for Conscious Parents"
     - Subheadline (lighter weight, Assistant font): "Premium Quality Kids' Wear – Loved by Moms Across India"
     - Trust badges row: "✓ Handpicked Styles   ✓ Safe & Tested   ✓ Fast Delivery"
-    - Two CTA buttons: "Shop Boys" and "Shop Girls" in #334fb4 blue with white text, border-radius 8px, each with its own link
+    - Two CTA buttons: "Shop Boys" and "Shop Girls" with separate default and hover colors, border-radius 8px, each with its own link
     - Text centered, vertically centered on the banner
     - Banner height: large (at least 80vh on desktop)
     - Fully responsive on mobile
@@ -138,20 +138,37 @@
   .ai-hero-usp-cta-{{ ai_gen_id }} {
     display: inline-block;
     padding: 16px 40px;
-    background-color: {{ block.settings.button_bg_color }};
-    color: {{ block.settings.button_text_color }};
     font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
     font-weight: 600;
     font-size: {{ block.settings.button_size_desktop }}px;
     text-decoration: none;
     border-radius: {{ block.settings.button_border_radius }}px;
     box-shadow: 0 {{ block.settings.button_shadow_vertical }}px {{ block.settings.button_shadow_blur }}px rgba(0, 0, 0, {{ block.settings.button_shadow_opacity | divided_by: 100.0 }});
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
     border: none;
     cursor: pointer;
   }
 
-  .ai-hero-usp-cta-{{ ai_gen_id }}:hover {
+  .ai-hero-usp-cta-boys-{{ ai_gen_id }} {
+    background-color: {{ block.settings.boys_button_bg }};
+    color: {{ block.settings.boys_button_text }};
+  }
+
+  .ai-hero-usp-cta-boys-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.boys_button_bg_hover }};
+    color: {{ block.settings.boys_button_text_hover }};
+    transform: translateY(-2px);
+    box-shadow: 0 {{ block.settings.button_shadow_vertical | plus: 2 }}px {{ block.settings.button_shadow_blur | plus: 2 }}px rgba(0, 0, 0, {{ block.settings.button_shadow_opacity | divided_by: 100.0 | plus: 0.05 }});
+  }
+
+  .ai-hero-usp-cta-girls-{{ ai_gen_id }} {
+    background-color: {{ block.settings.girls_button_bg }};
+    color: {{ block.settings.girls_button_text }};
+  }
+
+  .ai-hero-usp-cta-girls-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.girls_button_bg_hover }};
+    color: {{ block.settings.girls_button_text_hover }};
     transform: translateY(-2px);
     box-shadow: 0 {{ block.settings.button_shadow_vertical | plus: 2 }}px {{ block.settings.button_shadow_blur | plus: 2 }}px rgba(0, 0, 0, {{ block.settings.button_shadow_opacity | divided_by: 100.0 | plus: 0.05 }});
   }
@@ -265,12 +282,12 @@
     {% if block.settings.cta_boys_text != blank or block.settings.cta_girls_text != blank %}
       <div class="ai-hero-usp-cta-row-{{ ai_gen_id }}">
         {% if block.settings.cta_boys_text != blank %}
-          <a href="{{ block.settings.cta_boys_link }}" class="ai-hero-usp-cta-{{ ai_gen_id }}">
+          <a href="{{ block.settings.cta_boys_link }}" class="ai-hero-usp-cta-{{ ai_gen_id }} ai-hero-usp-cta-boys-{{ ai_gen_id }}">
             {{ block.settings.cta_boys_text }}
           </a>
         {% endif %}
         {% if block.settings.cta_girls_text != blank %}
-          <a href="{{ block.settings.cta_girls_link }}" class="ai-hero-usp-cta-{{ ai_gen_id }}">
+          <a href="{{ block.settings.cta_girls_link }}" class="ai-hero-usp-cta-{{ ai_gen_id }} ai-hero-usp-cta-girls-{{ ai_gen_id }}">
             {{ block.settings.cta_girls_text }}
           </a>
         {% endif %}
@@ -429,15 +446,59 @@
       "default": "#ffffff"
     },
     {
+      "type": "header",
+      "content": "Shop Boys button"
+    },
+    {
       "type": "color",
-      "id": "button_bg_color",
-      "label": "Button background",
+      "id": "boys_button_bg",
+      "label": "Background",
       "default": "#334fb4"
     },
     {
       "type": "color",
-      "id": "button_text_color",
-      "label": "Button text",
+      "id": "boys_button_text",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "boys_button_bg_hover",
+      "label": "Hover — background",
+      "default": "#283d8f"
+    },
+    {
+      "type": "color",
+      "id": "boys_button_text_hover",
+      "label": "Hover — text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Shop Girls button"
+    },
+    {
+      "type": "color",
+      "id": "girls_button_bg",
+      "label": "Background",
+      "default": "#c2185b"
+    },
+    {
+      "type": "color",
+      "id": "girls_button_text",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "girls_button_bg_hover",
+      "label": "Hover — background",
+      "default": "#9d1450"
+    },
+    {
+      "type": "color",
+      "id": "girls_button_text_hover",
+      "label": "Hover — text",
       "default": "#ffffff"
     },
     {
