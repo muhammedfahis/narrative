@@ -461,29 +461,6 @@
     },
     "17758382771cf65052": {
       "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_5347ed9_mmN8JX": {
-          "type": "ai_gen_block_5347ed9",
-          "settings": {
-            "trigger_text": "Find My Size",
-            "link_color": "#121212",
-            "modal_title": "Find the Perfect Fit",
-            "heading_size": 24,
-            "modal_bg_color": "#ffffff",
-            "text_color": "#121212",
-            "modal_border_radius": 12,
-            "table_header_bg": "#f3f3f3",
-            "table_header_text": "#121212",
-            "table_row_alt_bg": "#fafafa",
-            "tip_text": "Tip: If your child is between sizes, we recommend sizing up for a comfortable, room-to-grow fit.",
-            "tip_bg_color": "#fff9e6"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_5347ed9_mmN8JX"
-      ],
       "settings": {}
     }
   },
