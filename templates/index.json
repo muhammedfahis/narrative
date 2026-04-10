@@ -284,35 +284,58 @@
       ],
       "settings": {}
     },
-    "rich_text": {
-      "type": "rich-text",
+    "1775837563e7d2b710": {
+      "type": "_blocks",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "ai_gen_block_ddfe6c4_RmjN7k": {
+          "type": "ai_gen_block_ddfe6c4",
           "settings": {
-            "heading": "<p>Why Parents Choose KIDSMIRE</p>",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>At KIDSMIRE, we believe every child deserves clothing that's as special as they are. Our carefully curated collection features:</p><p>✓ Quality fabrics that are soft, durable, and gentle on sensitive skin<br/>✓ Thoughtful designs from everyday essentials to party-ready outfits<br/>✓ Affordable prices starting from ₹330, because style shouldn't break the bank<br/>✓ Size ranges from 6 months to 6 years to grow with your little one</p><p>Whether you're shopping for a birthday celebration, casual playtime, or building their everyday wardrobe, KIDSMIRE makes it easy to dress your child in comfort and style.</p>"
-          }
+            "heading": "Why Parents Love KIDSMIRE 💛",
+            "heading_color": "#121212",
+            "heading_size": 36,
+            "heading_spacing": 40,
+            "card_1_icon": "🧸",
+            "card_1_title": "Super Soft Fabrics",
+            "card_1_description": "Gentle on sensitive skin, tough enough for playtime.",
+            "card_2_icon": "👗",
+            "card_2_title": "Styles for Every Moment",
+            "card_2_description": "From birthday parties to lazy Sundays.",
+            "card_3_icon": "💰",
+            "card_3_title": "Starting at just ₹330",
+            "card_3_description": "Because great style shouldn't cost a fortune.",
+            "card_4_icon": "📏",
+            "card_4_title": "6 Months to 6 Years",
+            "card_4_description": "Growing with your little one, every step of the way.",
+            "closing_text": "Whether it's playtime, parties, or everyday adventures — KIDSMIRE makes dressing up the fun part. 🎉",
+            "closing_color": "#555555",
+            "closing_size": 16,
+            "closing_spacing": 36,
+            "icon_size": 48,
+            "icon_spacing": 16,
+            "card_background": "#FFFFFF",
+            "card_border_color": "#E5E5E5",
+            "card_border_hover_color": "#CCCCCC",
+            "card_title_color": "#121212",
+            "card_title_size": 18,
+            "card_title_spacing": 8,
+            "card_description_color": "#666666",
+            "card_description_size": 14,
+            "card_padding": 32,
+            "card_border_radius": 12,
+            "card_gap": 20,
+            "card_shadow_opacity": 5,
+            "background_color": "#F9F9F9",
+            "max_width": 1200,
+            "section_padding_top": 64,
+            "section_padding_bottom": 64
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "heading",
-        "text"
+        "ai_gen_block_ddfe6c4_RmjN7k"
       ],
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "background-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
-      }
+      "settings": {}
     },
     "17735128981acce6d0": {
       "type": "apps",
@@ -442,7 +465,7 @@
     "17751918666fdf4b4f",
     "1775191175d02d95cb",
     "1775834680150f3a04",
-    "rich_text",
+    "1775837563e7d2b710",
     "17735128981acce6d0",
     "1773646079df475f87",
     "1775398557991d0497",
