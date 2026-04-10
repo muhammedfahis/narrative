@@ -217,6 +217,73 @@
       "type": "_blocks",
       "settings": {}
     },
+    "1775834680150f3a04": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_b74099b_aGjifW": {
+          "type": "ai_gen_block_b74099b",
+          "settings": {
+            "max_width": 1200,
+            "background_color": "#ffffff",
+            "section_padding_top": 60,
+            "section_padding_bottom": 60,
+            "heading": "Explore more real-life styles & customer moments",
+            "heading_size": 28,
+            "heading_color": "#121212",
+            "heading_spacing": 30,
+            "profile_image": "shopify://shop_images/640930606_18030736952610685_5613102237704181806_n.jpg",
+            "profile_pic_size": 56,
+            "show_story_ring": true,
+            "story_ring_width": 3,
+            "story_gradient_color_1": "#f09433",
+            "story_gradient_color_2": "#dc2743",
+            "story_gradient_color_3": "#bc1888",
+            "instagram_handle": "@kidsmire.official",
+            "handle_size": 16,
+            "handle_color": "#121212",
+            "profile_subtitle": "Discover real community stories and detailed fabric reviews.",
+            "subtitle_size": 13,
+            "subtitle_color": "#666666",
+            "profile_spacing": 30,
+            "columns_desktop": 5,
+            "columns_mobile": "2",
+            "grid_gap": 8,
+            "grid_spacing": 30,
+            "photo_1": "shopify://shop_images/645902488_18032453582610685_833225720255526247_n.jpg",
+            "username_1": "",
+            "photo_2": "shopify://shop_images/IMG_6422.heic",
+            "username_2": "",
+            "photo_3": "shopify://shop_images/IMG_6405.heic",
+            "username_3": "",
+            "photo_4": "shopify://shop_images/IMG_6426.heic",
+            "username_4": "",
+            "photo_5": "shopify://shop_images/IMG_6430.heic",
+            "username_5": "",
+            "photo_6": "shopify://shop_images/IMG_6375_c37335cc-9356-487c-892e-c329af7c91c4.heic",
+            "username_6": "",
+            "photo_7": "shopify://shop_images/652143891_17999628863911846_4037362447208143612_n.jpg",
+            "username_7": "",
+            "photo_8": "shopify://shop_images/657715437_18036866078610685_3789877822531094146_n.jpg",
+            "username_8": "",
+            "photo_9": "shopify://shop_images/651060874_17999628872911846_6314734712727007834_n.jpg",
+            "username_9": "",
+            "photo_10": "shopify://shop_images/656294914_18036866087610685_8695682730135637243_n.jpg",
+            "username_10": "",
+            "footer_text": "explore more detailed looks and community content at",
+            "footer_link": "",
+            "footer_link_text": "instagram.com/kidsmire.official",
+            "footer_size": 13,
+            "footer_color": "#666666",
+            "footer_link_color": "#121212"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_b74099b_aGjifW"
+      ],
+      "settings": {}
+    },
     "rich_text": {
       "type": "rich-text",
       "blocks": {
@@ -245,99 +312,6 @@
         "full_width": true,
         "padding_top": 40,
         "padding_bottom": 0
-      }
-    },
-    "custom_image_collage_LRBdGP": {
-      "type": "custom-image-collage",
-      "blocks": {
-        "image_UV47gB": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/IMG_6409.heic",
-            "image_url": "",
-            "caption": "Shop the look",
-            "overlay_color": "#000000",
-            "overlay_opacity": 40,
-            "link": "",
-            "link_text": "Shop now"
-          }
-        },
-        "image_w3FNef": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/IMG_6375.heic",
-            "image_url": "",
-            "caption": "Shop the look",
-            "overlay_color": "#000000",
-            "overlay_opacity": 40,
-            "link": "",
-            "link_text": "Shop now"
-          }
-        },
-        "image_phamGd": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/657715437_18036866078610685_3789877822531094146_n.jpg",
-            "image_url": "",
-            "caption": "Shop the look",
-            "overlay_color": "#00000066",
-            "overlay_opacity": 40,
-            "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/657715437_18036866078610685_3789877822531094146_n.jpg?v=1775661055",
-            "link_text": "Shop now"
-          }
-        },
-        "image_qTgf9H": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/656889206_18036866060610685_8840199408142873679_n.jpg",
-            "image_url": "",
-            "caption": "Shop the look",
-            "overlay_color": "#00000066",
-            "overlay_opacity": 40,
-            "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/651060874_17999628872911846_6314734712727007834_n.jpg?v=1775661055",
-            "link_text": "Shop now"
-          }
-        },
-        "image_QpFMA9": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/651060874_17999628872911846_6314734712727007834_n.jpg",
-            "image_url": "",
-            "caption": "Shop the look",
-            "overlay_color": "#00000066",
-            "overlay_opacity": 40,
-            "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/656294914_18036866087610685_8695682730135637243_n.jpg?v=1775661055",
-            "link_text": "Shop now"
-          }
-        },
-        "image_WnfYpV": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/IMG_6427.heic",
-            "image_url": "",
-            "caption": "Shop the look",
-            "overlay_color": "#00000066",
-            "overlay_opacity": 40,
-            "link": "https://cdn.shopify.com/s/files/1/0757/6528/5029/files/657332709_18036866051610685_4910708047875816719_n.jpg?v=1775661055",
-            "link_text": "Shop now"
-          }
-        }
-      },
-      "block_order": [
-        "image_UV47gB",
-        "image_w3FNef",
-        "image_phamGd",
-        "image_qTgf9H",
-        "image_QpFMA9",
-        "image_WnfYpV"
-      ],
-      "name": "Custom Image Collage",
-      "settings": {
-        "heading": "Our Little Ones",
-        "heading_alignment": "center",
-        "background_color": "#ffffff",
-        "padding_top": 40,
-        "padding_bottom": 40
       }
     },
     "17735128981acce6d0": {
@@ -467,8 +441,8 @@
     "collection_list_zdxykJ",
     "17751918666fdf4b4f",
     "1775191175d02d95cb",
+    "1775834680150f3a04",
     "rich_text",
-    "custom_image_collage_LRBdGP",
     "17735128981acce6d0",
     "1773646079df475f87",
     "1775398557991d0497",
