@@ -4,6 +4,10 @@
 <noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'section-rich-text.css' | asset_url | stylesheet_tag }}</noscript>
 
+{%- liquid
+  assign bw_variant = section.settings.bw_variant | default: 'light'
+-%}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -16,37 +20,207 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Black & white banner — scoped to this section */
+  .banner-bw-{{ section.id }} {
+    --banner-bw-bg: #ffffff;
+    --banner-bw-surface: #fafafa;
+    --banner-bw-text: #0a0a0a;
+    --banner-bw-muted: #5c5c5c;
+    --banner-bw-border: #0a0a0a;
+    --banner-bw-border-subtle: rgba(10, 10, 10, 0.12);
+    --banner-bw-btn-primary-bg: #0a0a0a;
+    --banner-bw-btn-primary-fg: #ffffff;
+    --banner-bw-btn-secondary-bg: transparent;
+    --banner-bw-btn-secondary-fg: #0a0a0a;
+    --banner-bw-accent: #0a0a0a;
+  }
+
+  .banner-bw-{{ section.id }}.banner-bw--dark {
+    --banner-bw-bg: #0a0a0a;
+    --banner-bw-surface: #141414;
+    --banner-bw-text: #f5f5f5;
+    --banner-bw-muted: #a3a3a3;
+    --banner-bw-border: #f5f5f5;
+    --banner-bw-border-subtle: rgba(255, 255, 255, 0.14);
+    --banner-bw-btn-primary-bg: #f5f5f5;
+    --banner-bw-btn-primary-fg: #0a0a0a;
+    --banner-bw-btn-secondary-bg: transparent;
+    --banner-bw-btn-secondary-fg: #f5f5f5;
+    --banner-bw-accent: #f5f5f5;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text.content-container {
+    background: var(--banner-bw-bg) !important;
+    color: var(--banner-bw-text);
+    border: 1px solid var(--banner-bw-border-subtle);
+    box-shadow: 0 1px 0 var(--banner-bw-border-subtle);
+  }
+
+  .banner-bw-{{ section.id }} .banner-bw__frame {
+    position: relative;
+    max-width: 68rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  .banner-bw-{{ section.id }} .banner-bw__frame::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--banner-bw-accent);
+    opacity: 0.9;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__blocks {
+    padding-inline-start: clamp(1rem, 3vw, 1.75rem);
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__heading,
+  .banner-bw-{{ section.id }} .rich-text__heading * {
+    color: var(--banner-bw-text) !important;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    margin-top: 0;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__heading.h0,
+  .banner-bw-{{ section.id }} .rich-text__heading.hxl {
+    letter-spacing: -0.03em;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__caption {
+    color: var(--banner-bw-muted) !important;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__text,
+  .banner-bw-{{ section.id }} .rich-text__text.rte,
+  .banner-bw-{{ section.id }} .rich-text__text p {
+    color: var(--banner-bw-muted);
+    line-height: 1.7;
+    font-size: 1rem;
+    max-width: 42rem;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__text.left,
+  .banner-bw-{{ section.id }} .rich-text__blocks.left .rich-text__text {
+    margin-inline: 0;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__text.center,
+  .banner-bw-{{ section.id }} .rich-text__blocks.center .rich-text__text {
+    margin-inline: auto;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__text.right,
+  .banner-bw-{{ section.id }} .rich-text__blocks.right .rich-text__text {
+    margin-inline: 0 0 0 auto;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__buttons {
+    gap: 0.75rem 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__buttons .button.button--primary {
+    background: var(--banner-bw-btn-primary-bg) !important;
+    color: var(--banner-bw-btn-primary-fg) !important;
+    border: 2px solid var(--banner-bw-border) !important;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.8125rem;
+    padding: 0.85em 1.6em;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__buttons .button.button--secondary {
+    background: var(--banner-bw-btn-secondary-bg) !important;
+    color: var(--banner-bw-btn-secondary-fg) !important;
+    border: 2px solid var(--banner-bw-border) !important;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.8125rem;
+    padding: 0.85em 1.6em;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__buttons .button:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__buttons .button[aria-disabled='true'] {
+    opacity: 0.45;
+    transform: none;
+    cursor: not-allowed;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__divider {
+    width: 3rem;
+    height: 1px;
+    background: var(--banner-bw-accent);
+    margin: 1.25rem auto;
+    opacity: 0.35;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__blocks.left .banner-bw__divider-spacer .rich-text__divider {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .banner-bw-{{ section.id }} .rich-text__blocks.right .banner-bw__divider-spacer .rich-text__divider {
+    margin-right: 0;
+    margin-left: auto;
+  }
 {%- endstyle -%}
 
-<div class="isolate{% unless section.settings.full_width %} page-width{% endunless %}">
+<div class="isolate banner-bw-{{ section.id }} banner-bw--{{ bw_variant }}{% unless section.settings.full_width %} page-width{% endunless %}">
   <div class="rich-text content-container color-{{ section.settings.color_scheme }} gradient{% if section.settings.full_width %} rich-text--full-width content-container--full-width{% endif %} section-{{ section.id }}-padding">
     <div class="rich-text__wrapper rich-text__wrapper--{{ section.settings.desktop_content_position }}{% if section.settings.full_width %} page-width{% endif %}">
-      <div class="rich-text__blocks {{ section.settings.content_alignment }}">
-        {%- for block in section.blocks -%}
-          {%- case block.type -%}
-            {%- when 'heading' -%}
-              <h2 class="rich-text__heading rte {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
-                {{ block.settings.heading | replace: 'p>', 'span>' }}
-              </h2>
-            {%- when 'caption' -%}
-              <p class="rich-text__caption {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }}" {{ block.shopify_attributes }}>
-                {{ block.settings.caption | escape }}
-              </p>
-            {%- when 'text' -%}
-              <div class="rich-text__text rte" {{ block.shopify_attributes }}>
-                {{ block.settings.text }}
-              </div>
-            {%- when 'button' -%}
-              <div class="rich-text__buttons{% if block.settings.button_label != blank and block.settings.button_label_2 != blank %} rich-text__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
-                {%- if block.settings.button_label != blank -%}
-                  <a{% if block.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link }}"{% endif %} class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}">{{ block.settings.button_label | escape }}</a>
+      <div class="banner-bw__frame">
+        <div class="rich-text__blocks {{ section.settings.content_alignment }}">
+          {%- assign heading_seen = false -%}
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'heading' -%}
+                {%- if heading_seen -%}
+                  <div class="banner-bw__divider-spacer" aria-hidden="true"><div class="rich-text__divider"></div></div>
                 {%- endif -%}
-                {%- if block.settings.button_label_2 != blank -%}
-                  <a{% if block.settings.button_link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link_2 }}"{% endif %} class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}">{{ block.settings.button_label_2 | escape }}</a>
-                {%- endif -%}
-              </div>
-          {%- endcase -%}
-        {%- endfor -%}
+                {%- assign heading_seen = true -%}
+                <h2 class="rich-text__heading rte {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                  {{ block.settings.heading | replace: 'p>', 'span>' }}
+                </h2>
+              {%- when 'caption' -%}
+                <p class="rich-text__caption {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }}" {{ block.shopify_attributes }}>
+                  {{ block.settings.caption | escape }}
+                </p>
+              {%- when 'text' -%}
+                <div class="rich-text__text rte" {{ block.shopify_attributes }}>
+                  {{ block.settings.text }}
+                </div>
+              {%- when 'button' -%}
+                <div class="rich-text__buttons{% if block.settings.button_label != blank and block.settings.button_label_2 != blank %} rich-text__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
+                  {%- if block.settings.button_label != blank -%}
+                    <a{% if block.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link }}"{% endif %} class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}">{{ block.settings.button_label | escape }}</a>
+                  {%- endif -%}
+                  {%- if block.settings.button_label_2 != blank -%}
+                    <a{% if block.settings.button_link_2 == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link_2 }}"{% endif %} class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}">{{ block.settings.button_label_2 | escape }}</a>
+                  {%- endif -%}
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
       </div>
     </div>
   </div>
@@ -58,6 +232,22 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "select",
+      "id": "bw_variant",
+      "label": "Black & white contrast",
+      "options": [
+        {
+          "value": "light",
+          "label": "Light (white background)"
+        },
+        {
+          "value": "dark",
+          "label": "Dark (black background)"
+        }
+      ],
+      "default": "light"
+    },
     {
       "type": "select",
       "id": "desktop_content_position",
@@ -125,7 +315,8 @@
         }
       ],
       "default": "background-1",
-      "label": "t:sections.all.colors.label"
+      "label": "t:sections.all.colors.label",
+      "info": "Theme color scheme (overridden by black & white styling for this banner)"
     },
     {
       "type": "checkbox",
