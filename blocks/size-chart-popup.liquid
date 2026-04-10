@@ -1,0 +1,581 @@
+{% comment %}
+  Full copy of blocks/size-chart-popup.liquid — same block; keep in sync or edit one file only.
+  In Shopify: save as theme blocks/size-chart-popup.liquid (filename must match block type).
+{% endcomment %}
+{% assign sc_uid = block.id | replace: '-', '' | replace: '_', '' | replace: '.', '' | downcase %}
+
+{%- style -%}
+  .ai-size-chart-trigger-{{ sc_uid }} {
+    display: inline-block;
+    width: 100%;
+  }
+
+  .ai-size-chart-link-{{ sc_uid }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: {{ block.settings.link_color }};
+    text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    transition: opacity 0.2s ease;
+  }
+
+  .ai-size-chart-link-{{ sc_uid }}:hover {
+    opacity: 0.7;
+  }
+
+  .ai-size-chart-overlay-{{ sc_uid }} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .ai-size-chart-overlay-{{ sc_uid }}.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .ai-size-chart-modal-{{ sc_uid }} {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background-color: {{ block.settings.modal_bg_color }};
+    border-radius: {{ block.settings.modal_border_radius }}px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  }
+
+  .ai-size-chart-modal-{{ sc_uid }}.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .ai-size-chart-header-{{ sc_uid }} {
+    position: sticky;
+    top: 0;
+    background-color: {{ block.settings.modal_bg_color }};
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .ai-size-chart-title-{{ sc_uid }} {
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+  }
+
+  .ai-size-chart-close-{{ sc_uid }} {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: {{ block.settings.text_color }};
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+
+  .ai-size-chart-close-{{ sc_uid }}:hover {
+    opacity: 1;
+  }
+
+  .ai-size-chart-content-{{ sc_uid }} {
+    padding: 24px;
+  }
+
+  .ai-size-chart-table-wrapper-{{ sc_uid }} {
+    overflow-x: auto;
+    margin-bottom: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-size-chart-table-{{ sc_uid }} {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 600px;
+  }
+
+  .ai-size-chart-table-{{ sc_uid }} th {
+    background-color: {{ block.settings.table_header_bg }};
+    color: {{ block.settings.table_header_text }};
+    padding: 12px 8px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+  }
+
+  .ai-size-chart-table-{{ sc_uid }} td {
+    padding: 12px 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-size-chart-table-{{ sc_uid }} tr:nth-child(even) {
+    background-color: {{ block.settings.table_row_alt_bg }};
+  }
+
+  .ai-size-chart-table-{{ sc_uid }} tr:last-child td {
+    border-bottom: none;
+  }
+
+  .ai-size-chart-how-to-{{ sc_uid }} {
+    margin-bottom: 24px;
+  }
+
+  .ai-size-chart-how-to-title-{{ sc_uid }} {
+    font-size: 18px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 16px;
+  }
+
+  .ai-size-chart-diagram-{{ sc_uid }} {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .ai-size-chart-svg-{{ sc_uid }} {
+    flex-shrink: 0;
+  }
+
+  .ai-size-chart-svg-{{ sc_uid }} svg {
+    width: 200px;
+    height: auto;
+  }
+
+  .ai-size-chart-instructions-{{ sc_uid }} {
+    flex: 1;
+    min-width: 250px;
+  }
+
+  .ai-size-chart-instruction-{{ sc_uid }} {
+    margin-bottom: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .ai-size-chart-instruction-number-{{ sc_uid }} {
+    background-color: {{ block.settings.link_color }};
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .ai-size-chart-instruction-text-{{ sc_uid }} {
+    color: {{ block.settings.text_color }};
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .ai-size-chart-tip-{{ sc_uid }} {
+    background-color: {{ block.settings.tip_bg_color }};
+    border-left: 4px solid {{ block.settings.link_color }};
+    padding: 16px;
+    border-radius: 4px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .ai-size-chart-tip-icon-{{ sc_uid }} {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .ai-size-chart-tip-text-{{ sc_uid }} {
+    color: {{ block.settings.text_color }};
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-size-chart-modal-{{ sc_uid }} {
+      width: 100%;
+      height: 100%;
+      max-height: 100vh;
+      border-radius: 0;
+      top: 0;
+      left: 0;
+      transform: translateY(100%);
+    }
+
+    .ai-size-chart-modal-{{ sc_uid }}.active {
+      transform: translateY(0);
+    }
+
+    .ai-size-chart-header-{{ sc_uid }} {
+      padding: 16px;
+    }
+
+    .ai-size-chart-content-{{ sc_uid }} {
+      padding: 16px;
+    }
+
+    .ai-size-chart-title-{{ sc_uid }} {
+      font-size: 20px;
+    }
+
+    .ai-size-chart-diagram-{{ sc_uid }} {
+      flex-direction: column;
+    }
+
+    .ai-size-chart-svg-{{ sc_uid }} svg {
+      width: 150px;
+    }
+  }
+{%- endstyle -%}
+
+<size-chart-{{ sc_uid }} class="ai-size-chart-trigger-{{ sc_uid }}" {{ block.shopify_attributes }}>
+  <button type="button" class="ai-size-chart-link-{{ sc_uid }}" aria-label="Open size chart">
+    <span aria-hidden="true">&#128207;</span>
+    <span>{{ block.settings.trigger_text }}</span>
+  </button>
+
+  <div class="ai-size-chart-overlay-{{ sc_uid }}"></div>
+
+  <div class="ai-size-chart-modal-{{ sc_uid }}" role="dialog" aria-modal="true" aria-labelledby="size-chart-title-{{ sc_uid }}">
+    <div class="ai-size-chart-header-{{ sc_uid }}">
+      <h2 class="ai-size-chart-title-{{ sc_uid }}" id="size-chart-title-{{ sc_uid }}">{{ block.settings.modal_title }}</h2>
+      <button type="button" class="ai-size-chart-close-{{ sc_uid }}" aria-label="Close size chart">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="ai-size-chart-content-{{ sc_uid }}">
+      <div class="ai-size-chart-table-wrapper-{{ sc_uid }}">
+        <table class="ai-size-chart-table-{{ sc_uid }}">
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Age</th>
+              <th>Height (in)</th>
+              <th>Height (cm)</th>
+              <th>Chest (in)</th>
+              <th>Chest (cm)</th>
+              <th>Garment Length (in)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>6-12M</td>
+              <td>6-12 months</td>
+              <td>26-29&quot;</td>
+              <td>66-74cm</td>
+              <td>17-18&quot;</td>
+              <td>43-46cm</td>
+              <td>11&quot;</td>
+            </tr>
+            <tr>
+              <td>12-18M</td>
+              <td>12-18 months</td>
+              <td>29-31&quot;</td>
+              <td>74-79cm</td>
+              <td>18-19&quot;</td>
+              <td>46-48cm</td>
+              <td>12&quot;</td>
+            </tr>
+            <tr>
+              <td>18-24M</td>
+              <td>18-24 months</td>
+              <td>31-33&quot;</td>
+              <td>79-84cm</td>
+              <td>19-20&quot;</td>
+              <td>48-51cm</td>
+              <td>13&quot;</td>
+            </tr>
+            <tr>
+              <td>2-3Y</td>
+              <td>2-3 years</td>
+              <td>33-37&quot;</td>
+              <td>84-94cm</td>
+              <td>20-21&quot;</td>
+              <td>51-53cm</td>
+              <td>14&quot;</td>
+            </tr>
+            <tr>
+              <td>3-4Y</td>
+              <td>3-4 years</td>
+              <td>37-40&quot;</td>
+              <td>94-102cm</td>
+              <td>21-22&quot;</td>
+              <td>53-56cm</td>
+              <td>15&quot;</td>
+            </tr>
+            <tr>
+              <td>4-5Y</td>
+              <td>4-5 years</td>
+              <td>40-43&quot;</td>
+              <td>102-109cm</td>
+              <td>22-23&quot;</td>
+              <td>56-58cm</td>
+              <td>16&quot;</td>
+            </tr>
+            <tr>
+              <td>5-6Y</td>
+              <td>5-6 years</td>
+              <td>43-47&quot;</td>
+              <td>109-119cm</td>
+              <td>23-24&quot;</td>
+              <td>58-61cm</td>
+              <td>17&quot;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ai-size-chart-how-to-{{ sc_uid }}">
+        <h3 class="ai-size-chart-how-to-title-{{ sc_uid }}">How to Measure</h3>
+        <div class="ai-size-chart-diagram-{{ sc_uid }}">
+          <div class="ai-size-chart-svg-{{ sc_uid }}">
+            <svg viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="40" r="20" fill="#FFE5E5" stroke="#FF6B5B" stroke-width="2"/>
+              <line x1="100" y1="60" x2="100" y2="120" stroke="#FF6B5B" stroke-width="3"/>
+              <line x1="100" y1="80" x2="70" y2="110" stroke="#FF6B5B" stroke-width="3"/>
+              <line x1="100" y1="80" x2="130" y2="110" stroke="#FF6B5B" stroke-width="3"/>
+              <line x1="100" y1="120" x2="75" y2="180" stroke="#FF6B5B" stroke-width="3"/>
+              <line x1="100" y1="120" x2="125" y2="180" stroke="#FF6B5B" stroke-width="3"/>
+              <line x1="20" y1="20" x2="20" y2="180" stroke="#121212" stroke-width="2" stroke-dasharray="4 4"/>
+              <line x1="15" y1="20" x2="25" y2="20" stroke="#121212" stroke-width="2"/>
+              <line x1="15" y1="180" x2="25" y2="180" stroke="#121212" stroke-width="2"/>
+              <text x="10" y="105" font-size="12" fill="#121212" font-weight="600">①</text>
+              <line x1="60" y1="75" x2="140" y2="75" stroke="#334FB4" stroke-width="2" stroke-dasharray="4 4"/>
+              <line x1="60" y1="70" x2="60" y2="80" stroke="#334FB4" stroke-width="2"/>
+              <line x1="140" y1="70" x2="140" y2="80" stroke="#334FB4" stroke-width="2"/>
+              <text x="95" y="70" font-size="12" fill="#334FB4" font-weight="600">②</text>
+              <line x1="180" y1="60" x2="180" y2="120" stroke="#FF9500" stroke-width="2" stroke-dasharray="4 4"/>
+              <line x1="175" y1="60" x2="185" y2="60" stroke="#FF9500" stroke-width="2"/>
+              <line x1="175" y1="120" x2="185" y2="120" stroke="#FF9500" stroke-width="2"/>
+              <text x="175" y="95" font-size="12" fill="#FF9500" font-weight="600">③</text>
+            </svg>
+          </div>
+          <div class="ai-size-chart-instructions-{{ sc_uid }}">
+            <div class="ai-size-chart-instruction-{{ sc_uid }}">
+              <div class="ai-size-chart-instruction-number-{{ sc_uid }}">1</div>
+              <div class="ai-size-chart-instruction-text-{{ sc_uid }}">
+                <strong>Height:</strong> Measure from the top of the head to the floor with your child standing straight.
+              </div>
+            </div>
+            <div class="ai-size-chart-instruction-{{ sc_uid }}">
+              <div class="ai-size-chart-instruction-number-{{ sc_uid }}">2</div>
+              <div class="ai-size-chart-instruction-text-{{ sc_uid }}">
+                <strong>Chest:</strong> Measure around the fullest part of the chest, keeping the tape measure horizontal.
+              </div>
+            </div>
+            <div class="ai-size-chart-instruction-{{ sc_uid }}">
+              <div class="ai-size-chart-instruction-number-{{ sc_uid }}">3</div>
+              <div class="ai-size-chart-instruction-text-{{ sc_uid }}">
+                <strong>Garment Length:</strong> Measure from the shoulder seam straight down to the desired hem length.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-size-chart-tip-{{ sc_uid }}">
+        <div class="ai-size-chart-tip-icon-{{ sc_uid }}" aria-hidden="true">&#128161;</div>
+        <p class="ai-size-chart-tip-text-{{ sc_uid }}">{{ block.settings.tip_text }}</p>
+      </div>
+    </div>
+  </div>
+</size-chart-{{ sc_uid }}>
+
+<script>
+  (function () {
+    var tagName = 'size-chart-{{ sc_uid }}';
+    if (typeof customElements === 'undefined' || customElements.get(tagName)) return;
+
+    class SizeChart{{ sc_uid }} extends HTMLElement {
+      constructor() {
+        super();
+        this._onKeydown = this._onKeydown.bind(this);
+      }
+
+      connectedCallback() {
+        this.triggerButton = this.querySelector('.ai-size-chart-link-{{ sc_uid }}');
+        this.overlay = this.querySelector('.ai-size-chart-overlay-{{ sc_uid }}');
+        this.modal = this.querySelector('.ai-size-chart-modal-{{ sc_uid }}');
+        this.closeButton = this.querySelector('.ai-size-chart-close-{{ sc_uid }}');
+        if (!this.triggerButton || !this.overlay || !this.modal || !this.closeButton) return;
+        this.triggerButton.addEventListener('click', () => this.openModal());
+        this.closeButton.addEventListener('click', () => this.closeModal());
+        this.overlay.addEventListener('click', () => this.closeModal());
+        document.addEventListener('keydown', this._onKeydown);
+      }
+
+      disconnectedCallback() {
+        document.removeEventListener('keydown', this._onKeydown);
+      }
+
+      _onKeydown(e) {
+        if (e.key === 'Escape' && this.modal && this.modal.classList.contains('active')) {
+          this.closeModal();
+        }
+      }
+
+      openModal() {
+        this.overlay.classList.add('active');
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        this.closeButton.focus();
+      }
+
+      closeModal() {
+        this.overlay.classList.remove('active');
+        this.modal.classList.remove('active');
+        document.body.style.overflow = '';
+        if (this.triggerButton) this.triggerButton.focus();
+      }
+    }
+
+    customElements.define(tagName, SizeChart{{ sc_uid }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Size chart popup",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Trigger button"
+    },
+    {
+      "type": "text",
+      "id": "trigger_text",
+      "label": "Button text",
+      "default": "Find My Size"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Button color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Modal"
+    },
+    {
+      "type": "text",
+      "id": "modal_title",
+      "label": "Modal title",
+      "default": "Find the Perfect Fit"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 18,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "modal_bg_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "modal_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 24,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Table"
+    },
+    {
+      "type": "color",
+      "id": "table_header_bg",
+      "label": "Header background",
+      "default": "#F3F3F3"
+    },
+    {
+      "type": "color",
+      "id": "table_header_text",
+      "label": "Header text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "table_row_alt_bg",
+      "label": "Alternate row background",
+      "default": "#FAFAFA"
+    },
+    {
+      "type": "header",
+      "content": "Tip section"
+    },
+    {
+      "type": "textarea",
+      "id": "tip_text",
+      "label": "Tip text",
+      "default": "Tip: If your child is between sizes, we recommend sizing up for a comfortable, room-to-grow fit."
+    },
+    {
+      "type": "color",
+      "id": "tip_bg_color",
+      "label": "Tip background color",
+      "default": "#FFF9E6"
+    }
+  ]
+}
+{% endschema %}
