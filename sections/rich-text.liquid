@@ -5,7 +5,7 @@
 <noscript>{{ 'section-rich-text.css' | asset_url | stylesheet_tag }}</noscript>
 
 {%- liquid
-  assign bw_variant = section.settings.bw_variant | default: 'light'
+  assign playful_style = section.settings.playful_style | default: 'sunshine'
 -%}
 
 {%- style -%}
@@ -21,181 +21,278 @@
     }
   }
 
-  /* Black & white banner — scoped to this section */
-  .banner-bw-{{ section.id }} {
-    --banner-bw-bg: #ffffff;
-    --banner-bw-surface: #fafafa;
-    --banner-bw-text: #0a0a0a;
-    --banner-bw-muted: #5c5c5c;
-    --banner-bw-border: #0a0a0a;
-    --banner-bw-border-subtle: rgba(10, 10, 10, 0.12);
-    --banner-bw-btn-primary-bg: #0a0a0a;
-    --banner-bw-btn-primary-fg: #ffffff;
-    --banner-bw-btn-secondary-bg: transparent;
-    --banner-bw-btn-secondary-fg: #0a0a0a;
-    --banner-bw-accent: #0a0a0a;
+  /* Cheerful kids banner — scoped, no harsh “editorial” bar */
+  .kids-banner-{{ section.id }} {
+    --k-text: #2d2a26;
+    --k-muted: #5e5a52;
+    --k-bg: #fffbf5;
+    --k-bg-2: #fff5eb;
+    --k-border: rgba(255, 138, 107, 0.22);
+    --k-shadow: 0 12px 40px rgba(45, 42, 38, 0.07);
+    --k-accent: #ff8a6b;
+    --k-accent-2: #ffd93d;
+    --k-dot: rgba(255, 138, 107, 0.12);
+    --k-btn-primary-bg: #ff8a6b;
+    --k-btn-primary-fg: #ffffff;
+    --k-btn-secondary-bg: #ffffff;
+    --k-btn-secondary-fg: #2d2a26;
+    --k-btn-secondary-border: rgba(45, 42, 38, 0.2);
   }
 
-  .banner-bw-{{ section.id }}.banner-bw--dark {
-    --banner-bw-bg: #0a0a0a;
-    --banner-bw-surface: #141414;
-    --banner-bw-text: #f5f5f5;
-    --banner-bw-muted: #a3a3a3;
-    --banner-bw-border: #f5f5f5;
-    --banner-bw-border-subtle: rgba(255, 255, 255, 0.14);
-    --banner-bw-btn-primary-bg: #f5f5f5;
-    --banner-bw-btn-primary-fg: #0a0a0a;
-    --banner-bw-btn-secondary-bg: transparent;
-    --banner-bw-btn-secondary-fg: #f5f5f5;
-    --banner-bw-accent: #f5f5f5;
+  .kids-banner-{{ section.id }}.kids-banner--bubblegum {
+    --k-text: #3d2f3a;
+    --k-muted: #6b5a63;
+    --k-bg: #fff5fb;
+    --k-bg-2: #fce8f4;
+    --k-border: rgba(232, 121, 169, 0.28);
+    --k-shadow: 0 12px 40px rgba(120, 60, 100, 0.08);
+    --k-accent: #e879a9;
+    --k-accent-2: #c4a5ff;
+    --k-dot: rgba(232, 121, 169, 0.12);
+    --k-btn-primary-bg: #e879a9;
+    --k-btn-primary-fg: #ffffff;
+    --k-btn-secondary-bg: #ffffff;
+    --k-btn-secondary-fg: #3d2f3a;
+    --k-btn-secondary-border: rgba(61, 47, 58, 0.2);
   }
 
-  .banner-bw-{{ section.id }} .rich-text.content-container {
-    background: var(--banner-bw-bg) !important;
-    color: var(--banner-bw-text);
-    border: 1px solid var(--banner-bw-border-subtle);
-    box-shadow: 0 1px 0 var(--banner-bw-border-subtle);
+  .kids-banner-{{ section.id }}.kids-banner--mint {
+    --k-text: #1e3d38;
+    --k-muted: #4a6560;
+    --k-bg: #f4fffc;
+    --k-bg-2: #e6faf5;
+    --k-border: rgba(62, 203, 182, 0.28);
+    --k-shadow: 0 12px 40px rgba(30, 90, 80, 0.07);
+    --k-accent: #3ecbb6;
+    --k-accent-2: #7dd3fc;
+    --k-dot: rgba(62, 203, 182, 0.12);
+    --k-btn-primary-bg: #2eb8a3;
+    --k-btn-primary-fg: #ffffff;
+    --k-btn-secondary-bg: #ffffff;
+    --k-btn-secondary-fg: #1e3d38;
+    --k-btn-secondary-border: rgba(30, 61, 56, 0.2);
   }
 
-  .banner-bw-{{ section.id }} .banner-bw__frame {
+  .kids-banner-{{ section.id }}.kids-banner--soft_mono {
+    --k-text: #252525;
+    --k-muted: #5a5a5a;
+    --k-bg: #fafafa;
+    --k-bg-2: #f0f0f0;
+    --k-border: rgba(0, 0, 0, 0.08);
+    --k-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+    --k-accent: #404040;
+    --k-accent-2: #9ca3af;
+    --k-dot: rgba(0, 0, 0, 0.05);
+    --k-btn-primary-bg: #252525;
+    --k-btn-primary-fg: #ffffff;
+    --k-btn-secondary-bg: #ffffff;
+    --k-btn-secondary-fg: #252525;
+    --k-btn-secondary-border: rgba(0, 0, 0, 0.15);
+  }
+
+  .kids-banner-{{ section.id }} .rich-text.content-container {
     position: relative;
-    max-width: 68rem;
-    margin-inline: auto;
-    padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+    overflow: hidden;
+    border-radius: clamp(1.25rem, 4vw, 2rem) !important;
+    border: 1px solid var(--k-border) !important;
+    box-shadow: var(--k-shadow) !important;
+    background: linear-gradient(155deg, var(--k-bg) 0%, var(--k-bg-2) 55%, var(--k-bg) 100%) !important;
+    color: var(--k-text);
   }
 
-  .banner-bw-{{ section.id }} .banner-bw__frame::before {
+  .kids-banner-{{ section.id }} .rich-text.content-container::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0;
+    inset: 0;
+    border-radius: inherit;
+    background-image: radial-gradient(var(--k-dot) 1.2px, transparent 1.2px);
+    background-size: 20px 20px;
+    pointer-events: none;
+    opacity: 0.85;
+  }
+
+  .kids-banner-{{ section.id }} .kids-banner__frame {
+    position: relative;
+    z-index: 1;
+    max-width: 70rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 2.75rem);
+  }
+
+  .kids-banner-{{ section.id }} .kids-banner__frame::before,
+  .kids-banner-{{ section.id }} .kids-banner__frame::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .kids-banner-{{ section.id }} .kids-banner__frame::before {
+    width: min(140px, 28vw);
+    height: min(140px, 28vw);
+    background: var(--k-accent-2);
+    opacity: 0.18;
+    top: -2rem;
+    right: -1.5rem;
+  }
+
+  .kids-banner-{{ section.id }} .kids-banner__frame::after {
+    width: min(100px, 22vw);
+    height: min(100px, 22vw);
+    background: var(--k-accent);
+    opacity: 0.14;
     bottom: 0;
-    width: 3px;
-    background: var(--banner-bw-accent);
-    opacity: 0.9;
+    left: -1rem;
   }
 
-  .banner-bw-{{ section.id }} .rich-text__blocks {
-    padding-inline-start: clamp(1rem, 3vw, 1.75rem);
+  .kids-banner-{{ section.id }} .rich-text__blocks {
+    position: relative;
+    z-index: 1;
+    padding-inline: 0;
   }
 
-  .banner-bw-{{ section.id }} .rich-text__heading,
-  .banner-bw-{{ section.id }} .rich-text__heading * {
-    color: var(--banner-bw-text) !important;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.12;
+  .kids-banner-{{ section.id }} .rich-text__heading,
+  .kids-banner-{{ section.id }} .rich-text__heading * {
+    color: var(--k-text) !important;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.18;
     margin-top: 0;
   }
 
-  .banner-bw-{{ section.id }} .rich-text__heading.h0,
-  .banner-bw-{{ section.id }} .rich-text__heading.hxl {
-    letter-spacing: -0.03em;
+  .kids-banner-{{ section.id }} .rich-text__caption {
+    color: var(--k-accent) !important;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    margin-bottom: 0.35rem;
   }
 
-  .banner-bw-{{ section.id }} .rich-text__caption {
-    color: var(--banner-bw-muted) !important;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    margin-bottom: 0.75rem;
+  .kids-banner-{{ section.id }} .rich-text__text,
+  .kids-banner-{{ section.id }} .rich-text__text.rte,
+  .kids-banner-{{ section.id }} .rich-text__text p {
+    color: var(--k-muted);
+    line-height: 1.75;
+    font-size: 1.05rem;
+    max-width: 44rem;
   }
 
-  .banner-bw-{{ section.id }} .rich-text__text,
-  .banner-bw-{{ section.id }} .rich-text__text.rte,
-  .banner-bw-{{ section.id }} .rich-text__text p {
-    color: var(--banner-bw-muted);
-    line-height: 1.7;
-    font-size: 1rem;
-    max-width: 42rem;
-  }
-
-  .banner-bw-{{ section.id }} .rich-text__text.left,
-  .banner-bw-{{ section.id }} .rich-text__blocks.left .rich-text__text {
+  .kids-banner-{{ section.id }} .rich-text__text.left,
+  .kids-banner-{{ section.id }} .rich-text__blocks.left .rich-text__text {
     margin-inline: 0;
   }
 
-  .banner-bw-{{ section.id }} .rich-text__text.center,
-  .banner-bw-{{ section.id }} .rich-text__blocks.center .rich-text__text {
+  .kids-banner-{{ section.id }} .rich-text__text.center,
+  .kids-banner-{{ section.id }} .rich-text__blocks.center .rich-text__text {
     margin-inline: auto;
   }
 
-  .banner-bw-{{ section.id }} .rich-text__text.right,
-  .banner-bw-{{ section.id }} .rich-text__blocks.right .rich-text__text {
+  .kids-banner-{{ section.id }} .rich-text__text.right,
+  .kids-banner-{{ section.id }} .rich-text__blocks.right .rich-text__text {
     margin-inline: 0 0 0 auto;
   }
 
-  .banner-bw-{{ section.id }} .rich-text__buttons {
-    gap: 0.75rem 1rem;
-    margin-top: 0.5rem;
+  .kids-banner-{{ section.id }} .rich-text__buttons {
+    gap: 0.85rem 1rem;
+    margin-top: 0.65rem;
+    flex-wrap: wrap;
   }
 
-  .banner-bw-{{ section.id }} .rich-text__buttons .button.button--primary {
-    background: var(--banner-bw-btn-primary-bg) !important;
-    color: var(--banner-bw-btn-primary-fg) !important;
-    border: 2px solid var(--banner-bw-border) !important;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    font-size: 0.8125rem;
-    padding: 0.85em 1.6em;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+  .kids-banner-{{ section.id }} .rich-text__buttons .button.button--primary {
+    background: var(--k-btn-primary-bg) !important;
+    color: var(--k-btn-primary-fg) !important;
+    border: 2px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 9999px !important;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    font-size: 1rem;
+    padding: 0.9em 1.75em;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .banner-bw-{{ section.id }} .rich-text__buttons .button.button--secondary {
-    background: var(--banner-bw-btn-secondary-bg) !important;
-    color: var(--banner-bw-btn-secondary-fg) !important;
-    border: 2px solid var(--banner-bw-border) !important;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    font-size: 0.8125rem;
-    padding: 0.85em 1.6em;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+  .kids-banner-{{ section.id }} .rich-text__buttons .button.button--secondary {
+    background: var(--k-btn-secondary-bg) !important;
+    color: var(--k-btn-secondary-fg) !important;
+    border: 2px solid var(--k-btn-secondary-border) !important;
+    border-radius: 9999px !important;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    font-size: 1rem;
+    padding: 0.9em 1.75em;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
   }
 
-  .banner-bw-{{ section.id }} .rich-text__buttons .button:hover {
-    opacity: 0.88;
-    transform: translateY(-1px);
+  .kids-banner-{{ section.id }} .rich-text__buttons .button.button--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.14);
   }
 
-  .banner-bw-{{ section.id }} .rich-text__buttons .button[aria-disabled='true'] {
-    opacity: 0.45;
+  .kids-banner-{{ section.id }} .rich-text__buttons .button.button--secondary:hover {
+    transform: translateY(-2px);
+    background: #fffef8 !important;
+    border-color: var(--k-accent) !important;
+  }
+
+  .kids-banner-{{ section.id }} .rich-text__buttons .button[aria-disabled='true'] {
+    opacity: 0.5;
     transform: none;
+    box-shadow: none;
     cursor: not-allowed;
   }
 
-  .banner-bw-{{ section.id }} .rich-text__divider {
-    width: 3rem;
-    height: 1px;
-    background: var(--banner-bw-accent);
-    margin: 1.25rem auto;
-    opacity: 0.35;
+  .kids-banner-{{ section.id }} .kids-banner__divider-dots {
+    display: flex;
+    gap: 0.45rem;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 0.25rem;
   }
 
-  .banner-bw-{{ section.id }} .rich-text__blocks.left .banner-bw__divider-spacer .rich-text__divider {
-    margin-left: 0;
-    margin-right: auto;
+  .kids-banner-{{ section.id }} .kids-banner__divider-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--k-accent);
+    opacity: 0.75;
   }
 
-  .banner-bw-{{ section.id }} .rich-text__blocks.right .banner-bw__divider-spacer .rich-text__divider {
-    margin-right: 0;
-    margin-left: auto;
+  .kids-banner-{{ section.id }} .kids-banner__divider-dots span:nth-child(2) {
+    background: var(--k-accent-2);
+    transform: scale(1.15);
+  }
+
+  .kids-banner-{{ section.id }} .kids-banner__divider-dots span:nth-child(3) {
+    background: var(--k-accent);
+    opacity: 0.55;
+  }
+
+  .kids-banner-{{ section.id }} .rich-text__blocks.left .kids-banner__divider-dots {
+    justify-content: flex-start;
+  }
+
+  .kids-banner-{{ section.id }} .rich-text__blocks.right .kids-banner__divider-dots {
+    justify-content: flex-end;
   }
 {%- endstyle -%}
 
-<div class="isolate banner-bw-{{ section.id }} banner-bw--{{ bw_variant }}{% unless section.settings.full_width %} page-width{% endunless %}">
+<div class="isolate kids-banner-{{ section.id }} kids-banner--{{ playful_style }}{% unless section.settings.full_width %} page-width{% endunless %}">
   <div class="rich-text content-container color-{{ section.settings.color_scheme }} gradient{% if section.settings.full_width %} rich-text--full-width content-container--full-width{% endif %} section-{{ section.id }}-padding">
     <div class="rich-text__wrapper rich-text__wrapper--{{ section.settings.desktop_content_position }}{% if section.settings.full_width %} page-width{% endif %}">
-      <div class="banner-bw__frame">
+      <div class="kids-banner__frame">
         <div class="rich-text__blocks {{ section.settings.content_alignment }}">
           {%- assign heading_seen = false -%}
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when 'heading' -%}
                 {%- if heading_seen -%}
-                  <div class="banner-bw__divider-spacer" aria-hidden="true"><div class="rich-text__divider"></div></div>
+                  <div class="kids-banner__divider-spacer" aria-hidden="true">
+                    <div class="kids-banner__divider-dots"><span></span><span></span><span></span></div>
+                  </div>
                 {%- endif -%}
                 {%- assign heading_seen = true -%}
                 <h2 class="rich-text__heading rte {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
@@ -234,19 +331,28 @@
   "settings": [
     {
       "type": "select",
-      "id": "bw_variant",
-      "label": "Black & white contrast",
+      "id": "playful_style",
+      "label": "Mood & colors",
       "options": [
         {
-          "value": "light",
-          "label": "Light (white background)"
+          "value": "sunshine",
+          "label": "Sunshine (warm peach & yellow)"
         },
         {
-          "value": "dark",
-          "label": "Dark (black background)"
+          "value": "bubblegum",
+          "label": "Bubblegum (pink & lavender)"
+        },
+        {
+          "value": "mint",
+          "label": "Mint & sky (fresh)"
+        },
+        {
+          "value": "soft_mono",
+          "label": "Soft monochrome (minimal)"
         }
       ],
-      "default": "light"
+      "default": "sunshine",
+      "info": "Cheerful palettes for kids — headings and buttons pick up accent colors automatically."
     },
     {
       "type": "select",
@@ -316,7 +422,7 @@
       ],
       "default": "background-1",
       "label": "t:sections.all.colors.label",
-      "info": "Theme color scheme (overridden by black & white styling for this banner)"
+      "info": "Fallback theme colors; this section uses the Mood & colors palette above for the card look."
     },
     {
       "type": "checkbox",
