@@ -66,13 +66,6 @@
             "show_dynamic_checkout": true
           }
         },
-        "text_eQ6dfX": {
-          "type": "text",
-          "settings": {
-            "text": "Text block",
-            "text_style": "body"
-          }
-        },
         "icon_with_text_HqVaJj": {
           "type": "icon-with-text",
           "settings": {
@@ -147,7 +140,6 @@
         "collapsible_tab_WKjAMq",
         "quantity_selector",
         "buy_buttons",
-        "text_eQ6dfX",
         "icon_with_text_HqVaJj",
         "description",
         "collapsible-row-0",

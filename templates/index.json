@@ -48,8 +48,11 @@
           "settings": {
             "message_1": "Free Shipping on orders above ₹399",
             "message_2": "💵 Cash on Delivery Available across India | Order now, pay at your doorstep",
-            "rotation_interval": 4,
-            "transition_duration": 0.5,
+            "message_3": "New Arrivals",
+            "message_3_show_icon": true,
+            "message_spacing": 36,
+            "marquee_duration": 30,
+            "segment_gap": 48,
             "background_color": "#121212",
             "text_color": "#ffffff",
             "font_size": 14,
@@ -85,8 +88,14 @@
             "cta_girls_text": "Shop Girls",
             "cta_girls_link": "shopify://collections/girls-clothing",
             "text_color": "#ffffff",
-            "button_bg_color": "#334fb4",
-            "button_text_color": "#ffffff",
+            "boys_button_bg": "#334fb4",
+            "boys_button_text": "#ffffff",
+            "boys_button_bg_hover": "#283d8f",
+            "boys_button_text_hover": "#ffffff",
+            "girls_button_bg": "#c2185b",
+            "girls_button_text": "#ffffff",
+            "girls_button_bg_hover": "#9d1450",
+            "girls_button_text_hover": "#ffffff",
             "heading_font": "assistant_n4",
             "body_font": "assistant_n4",
             "headline_size_desktop": 56,
@@ -362,15 +371,6 @@
     },
     "1773646079df475f87": {
       "type": "apps",
-      "blocks": {
-        "instafeed_app_block_feeds_mLAgpM": {
-          "type": "shopify://apps/instafeed/blocks/app-block-feeds/4169bff3-1d6b-44ad-9377-2ebc3d31f01c",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "instafeed_app_block_feeds_mLAgpM"
-      ],
       "settings": {
         "include_margins": true
       }
