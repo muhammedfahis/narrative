@@ -35,22 +35,6 @@
             "button_active_bg_color": "#121212",
             "button_active_text_color": "#ffffff",
             "button_active_border_color": "#121212",
-            "age_0_6_url": "",
-            "age_6_12_url": "",
-            "age_1_2_url": "",
-            "age_2_4_url": "",
-            "age_4_plus_url": "",
-            "age_button_font_size": 14,
-            "age_button_border_radius": 20,
-            "age_button_bg_color": "#ffffff",
-            "age_button_text_color": "#121212",
-            "age_button_border_color": "#cccccc",
-            "age_button_hover_bg_color": "#f3f3f3",
-            "age_button_hover_text_color": "#121212",
-            "age_button_hover_border_color": "#121212",
-            "age_button_active_bg_color": "#ff6b5b",
-            "age_button_active_text_color": "#ffffff",
-            "age_button_active_border_color": "#ff6b5b",
             "boys_banner_image": "shopify://shop_images/ChatGPT_Image_Apr_9_2026_02_27_34_PM.png",
             "boys_heading": "Shop Boys Collection",
             "boys_subheading": "Discover our latest styles",
@@ -100,20 +84,20 @@
     "multicolumn_DancBH": {
       "type": "multicolumn",
       "blocks": {
-        "column_PF6pNw": {
-          "type": "column",
-          "settings": {
-            "title": "Premium Quality",
-            "text": "<p>Crafted with high-quality materials and expert craftsmanship to ensure durability and excellence in every detail.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
         "column_aAMVFi": {
           "type": "column",
           "settings": {
             "title": "Fast & Free Shipping",
             "text": "<p>Enjoy complimentary shipping on orders over a minimum amount. Quick delivery to your doorstep.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_dCpdTe": {
+          "type": "column",
+          "settings": {
+            "title": "Easy 7-Day Returns",
+            "text": "<p>Hassle-free returns, no questions asked</p>",
             "link_label": "",
             "link": ""
           }
@@ -126,12 +110,22 @@
             "link_label": "",
             "link": ""
           }
+        },
+        "column_KNxQde": {
+          "type": "column",
+          "settings": {
+            "title": "Delivers in 3-5 Days",
+            "text": "<p>Fast, reliable delivery across India</p>",
+            "link_label": "",
+            "link": ""
+          }
         }
       },
       "block_order": [
-        "column_PF6pNw",
         "column_aAMVFi",
-        "column_8BYCzP"
+        "column_dCpdTe",
+        "column_8BYCzP",
+        "column_KNxQde"
       ],
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
@@ -139,7 +133,7 @@
         "heading_size": "h1",
         "image_width": "full",
         "image_ratio": "circle",
-        "columns_desktop": 3,
+        "columns_desktop": 4,
         "column_alignment": "center",
         "background_style": "primary",
         "button_label": "",

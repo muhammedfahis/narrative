@@ -9,6 +9,34 @@
  */
 {
   "sections": {
+    "blocks_Rahckw": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_c796622_jBM7HA": {
+          "type": "ai_gen_block_c796622",
+          "settings": {
+            "message_1": "COD Available · ₹30 handling fee applies — shown at checkout",
+            "message_2": "Free Shipping on orders above ₹399",
+            "message_3": "New Arrivals",
+            "message_3_show_icon": true,
+            "message_spacing": 36,
+            "marquee_duration": 30,
+            "segment_gap": 48,
+            "background_color": "#121212",
+            "text_color": "#ffffff",
+            "font_size": 14,
+            "font_weight": "400",
+            "vertical_padding": 10
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_c796622_jBM7HA"
+      ],
+      "name": "Scrolling announcement",
+      "settings": {}
+    },
     "1775326328e5c8d96e": {
       "type": "_blocks",
       "blocks": {
@@ -41,30 +69,6 @@
     },
     "1775191592d3cd1b61": {
       "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_c796622_GHgMYD": {
-          "type": "ai_gen_block_c796622",
-          "name": "Rotating announcement bar",
-          "settings": {
-            "message_1": "Free Shipping on orders above ₹399",
-            "message_2": "💵 Cash on Delivery Available across India | Order now, pay at your doorstep",
-            "message_3": "New Arrivals",
-            "message_3_show_icon": true,
-            "message_spacing": 36,
-            "marquee_duration": 30,
-            "segment_gap": 48,
-            "background_color": "#121212",
-            "text_color": "#ffffff",
-            "font_size": 14,
-            "font_weight": "400",
-            "vertical_padding": 10
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_c796622_GHgMYD"
-      ],
       "settings": {}
     },
     "1775192259c9690415": {
@@ -312,9 +316,9 @@
             "closing_spacing": 36,
             "icon_size": 48,
             "icon_spacing": 16,
-            "card_background": "#FFFFFF",
-            "card_border_color": "#E5E5E5",
-            "card_border_hover_color": "#CCCCCC",
+            "card_background": "#ffffff",
+            "card_border_color": "#e5e5e5",
+            "card_border_hover_color": "#cccccc",
             "card_title_color": "#121212",
             "card_title_size": 18,
             "card_title_spacing": 8,
@@ -324,7 +328,7 @@
             "card_border_radius": 12,
             "card_gap": 20,
             "card_shadow_opacity": 5,
-            "background_color": "#F9F9F9",
+            "background_color": "#f9f9f9",
             "max_width": 1200,
             "section_padding_top": 64,
             "section_padding_bottom": 64
@@ -465,14 +469,14 @@
             "link_color": "#121212",
             "modal_title": "Find the Perfect Fit",
             "heading_size": 24,
-            "modal_bg_color": "#FFFFFF",
+            "modal_bg_color": "#ffffff",
             "text_color": "#121212",
             "modal_border_radius": 12,
-            "table_header_bg": "#F3F3F3",
+            "table_header_bg": "#f3f3f3",
             "table_header_text": "#121212",
-            "table_row_alt_bg": "#FAFAFA",
+            "table_row_alt_bg": "#fafafa",
             "tip_text": "Tip: If your child is between sizes, we recommend sizing up for a comfortable, room-to-grow fit.",
-            "tip_bg_color": "#FFF9E6"
+            "tip_bg_color": "#fff9e6"
           },
           "blocks": {}
         }
@@ -484,6 +488,7 @@
     }
   },
   "order": [
+    "blocks_Rahckw",
     "1775326328e5c8d96e",
     "1775191592d3cd1b61",
     "1775192259c9690415",
