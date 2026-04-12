@@ -47,15 +47,6 @@
             "picker_type": "button"
           }
         },
-        "collapsible_tab_WKjAMq": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Size Guide",
-            "icon": "ruler",
-            "content": "<p><strong>Size Guide:</strong></p><ul><li>0–3 Months: Height 50–60cm, Chest 40–42cm, Weight 3–6kg</li></ul><ul><li>3–6 Months: Height 60–67cm, Chest 42–44cm, Weight 6–8kg</li></ul><ul><li>6–12 Months: Height 67–74cm, Chest 44–46cm, Weight 8–10kg</li></ul><ul><li>12–18 Months: Height 74–80cm, Chest 46–48cm, Weight 10–12kg</li></ul><ul><li>18–24 Months: Height 80–86cm, Chest 48–50cm, Weight 12–14kg</li></ul><ul><li>2–3 Years: Height 86–98cm, Chest 50–52cm, Weight 14–16kg</li></ul><ul><li>3–4 Years: Height 98–104cm, Chest 52–54cm, Weight 16–18kg</li></ul><ul><li>4–5 Years: Height 104–110cm, Chest 54–56cm, Weight 18–20kg</li></ul><ul><li>5–6 Years: Height 110–116cm, Chest 56–58cm, Weight 20–22kg</li></ul><ul><li>6–7 Years: Height 116–122cm, Chest 58–60cm, Weight 22–25kg</li></ul><ul><li><strong>Tip:</strong> When between sizes, size up for room to grow.</li></ul>",
-            "page": ""
-          }
-        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -137,7 +128,6 @@
         "price",
         "text_g7M9rh",
         "variant_picker",
-        "collapsible_tab_WKjAMq",
         "quantity_selector",
         "buy_buttons",
         "icon_with_text_HqVaJj",
