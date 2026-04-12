@@ -1,8 +1,8 @@
 {% doc %}
   @prompt
-    Dynamic size chart block: tag `imported` shows international chart; otherwise Indian/KIDSMIRE chart.
-    Columns: Age, size label/CN, Height, Chest, Garment length (shoulder to hem). Inches default with CM toggle.
-    Includes a small line-art “how to measure” diagram. Accordion with Size Chart heading.
+    `imported` tag: age bands (0-6 mo … 11-12 yr) + CN size; height-led measurements.
+    No `imported`: letter sizes S, M, L, XL, 2XL, 3XL with age column (S = 6 months, etc.).
+    Columns include Height, Chest, Garment length; Inches default + CM toggle; optional how-to diagram.
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
@@ -294,7 +294,7 @@
           <thead>
             <tr>
               <th>Age</th>
-              <th>CN Size</th>
+              <th>CN</th>
               <th>Height</th>
               <th>Chest</th>
               <th>Garment length</th>
@@ -302,51 +302,72 @@
           </thead>
           <tbody>
             <tr>
-              <td>2-3 Years</td>
+              <td>0-6 mo</td>
+              <td>66</td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">23-27</span><span class="ai-sc-cm-{{ ai_gen_id }}">59-68</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">16-17</span><span class="ai-sc-cm-{{ ai_gen_id }}">40-44</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">11-13</span><span class="ai-sc-cm-{{ ai_gen_id }}">28-32</span></td>
+            </tr>
+            <tr>
+              <td>6-12 mo</td>
+              <td>73</td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">27-30</span><span class="ai-sc-cm-{{ ai_gen_id }}">68-76</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">17-19</span><span class="ai-sc-cm-{{ ai_gen_id }}">44-47</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">13-14</span><span class="ai-sc-cm-{{ ai_gen_id }}">32-36</span></td>
+            </tr>
+            <tr>
+              <td>1-2 yr</td>
+              <td>90</td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">31-35</span><span class="ai-sc-cm-{{ ai_gen_id }}">80-90</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">19-21</span><span class="ai-sc-cm-{{ ai_gen_id }}">48-52</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">14-17</span><span class="ai-sc-cm-{{ ai_gen_id }}">36-42</span></td>
+            </tr>
+            <tr>
+              <td>2-3 yr</td>
               <td>100</td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">37-39</span><span class="ai-sc-cm-{{ ai_gen_id }}">95-100</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">36-39</span><span class="ai-sc-cm-{{ ai_gen_id }}">92-98</span></td>
               <td><span class="ai-sc-in-{{ ai_gen_id }}">20-21</span><span class="ai-sc-cm-{{ ai_gen_id }}">52-54</span></td>
               <td><span class="ai-sc-in-{{ ai_gen_id }}">17-18</span><span class="ai-sc-cm-{{ ai_gen_id }}">42-46</span></td>
             </tr>
             <tr>
-              <td>3-4 Years</td>
+              <td>3-4 yr</td>
               <td>110</td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">39-43</span><span class="ai-sc-cm-{{ ai_gen_id }}">100-110</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">39-41</span><span class="ai-sc-cm-{{ ai_gen_id }}">98-104</span></td>
               <td><span class="ai-sc-in-{{ ai_gen_id }}">21-22</span><span class="ai-sc-cm-{{ ai_gen_id }}">54-56</span></td>
               <td><span class="ai-sc-in-{{ ai_gen_id }}">18-20</span><span class="ai-sc-cm-{{ ai_gen_id }}">46-50</span></td>
             </tr>
             <tr>
-              <td>4-5 Years</td>
+              <td>4-5 yr</td>
               <td>120</td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">43-47</span><span class="ai-sc-cm-{{ ai_gen_id }}">110-120</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">41-43</span><span class="ai-sc-cm-{{ ai_gen_id }}">104-110</span></td>
               <td><span class="ai-sc-in-{{ ai_gen_id }}">22-23</span><span class="ai-sc-cm-{{ ai_gen_id }}">56-58</span></td>
               <td><span class="ai-sc-in-{{ ai_gen_id }}">20-21</span><span class="ai-sc-cm-{{ ai_gen_id }}">50-54</span></td>
             </tr>
             <tr>
-              <td>5-6 Years</td>
+              <td>5-6 yr</td>
               <td>130</td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">47-51</span><span class="ai-sc-cm-{{ ai_gen_id }}">120-130</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">23-24</span><span class="ai-sc-cm-{{ ai_gen_id }}">58-62</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">43-46</span><span class="ai-sc-cm-{{ ai_gen_id }}">110-116</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">23-24</span><span class="ai-sc-cm-{{ ai_gen_id }}">58-60</span></td>
               <td><span class="ai-sc-in-{{ ai_gen_id }}">21-23</span><span class="ai-sc-cm-{{ ai_gen_id }}">54-58</span></td>
             </tr>
             <tr>
-              <td>7-8 Years</td>
+              <td>7-8 yr</td>
               <td>140</td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">51-55</span><span class="ai-sc-cm-{{ ai_gen_id }}">130-140</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">24-26</span><span class="ai-sc-cm-{{ ai_gen_id }}">62-66</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">48-50</span><span class="ai-sc-cm-{{ ai_gen_id }}">122-128</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">24-25</span><span class="ai-sc-cm-{{ ai_gen_id }}">62-64</span></td>
               <td><span class="ai-sc-in-{{ ai_gen_id }}">23-24</span><span class="ai-sc-cm-{{ ai_gen_id }}">58-62</span></td>
             </tr>
             <tr>
-              <td>9-10 Years</td>
+              <td>9-10 yr</td>
               <td>150</td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">55-59</span><span class="ai-sc-cm-{{ ai_gen_id }}">140-150</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">26-28</span><span class="ai-sc-cm-{{ ai_gen_id }}">66-70</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">53-55</span><span class="ai-sc-cm-{{ ai_gen_id }}">134-140</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">26-27</span><span class="ai-sc-cm-{{ ai_gen_id }}">66-68</span></td>
               <td><span class="ai-sc-in-{{ ai_gen_id }}">24-26</span><span class="ai-sc-cm-{{ ai_gen_id }}">62-66</span></td>
             </tr>
             <tr>
-              <td>11-12 Years</td>
+              <td>11-12 yr</td>
               <td>160</td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">59-63</span><span class="ai-sc-cm-{{ ai_gen_id }}">150-160</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">57-60</span><span class="ai-sc-cm-{{ ai_gen_id }}">146-152</span></td>
               <td><span class="ai-sc-in-{{ ai_gen_id }}">28-29</span><span class="ai-sc-cm-{{ ai_gen_id }}">70-74</span></td>
               <td><span class="ai-sc-in-{{ ai_gen_id }}">26-28</span><span class="ai-sc-cm-{{ ai_gen_id }}">66-70</span></td>
             </tr>
@@ -361,8 +382,8 @@
         <table class="ai-size-chart-table-{{ ai_gen_id }}">
           <thead>
             <tr>
+              <th>Size</th>
               <th>Age</th>
-              <th>Size Label</th>
               <th>Height</th>
               <th>Chest</th>
               <th>Garment length</th>
@@ -370,53 +391,46 @@
           </thead>
           <tbody>
             <tr>
-              <td>2-3 Years</td>
-              <td>2-3Y</td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">36-39</span><span class="ai-sc-cm-{{ ai_gen_id }}">92-98</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">20-21</span><span class="ai-sc-cm-{{ ai_gen_id }}">52-54</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">17-18</span><span class="ai-sc-cm-{{ ai_gen_id }}">42-46</span></td>
+              <td>S</td>
+              <td>6 months</td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">25-28</span><span class="ai-sc-cm-{{ ai_gen_id }}">64-71</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">17-18</span><span class="ai-sc-cm-{{ ai_gen_id }}">43-45</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">12-13</span><span class="ai-sc-cm-{{ ai_gen_id }}">30-34</span></td>
             </tr>
             <tr>
-              <td>3-4 Years</td>
-              <td>3-4Y</td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">39-41</span><span class="ai-sc-cm-{{ ai_gen_id }}">98-104</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">21-22</span><span class="ai-sc-cm-{{ ai_gen_id }}">54-56</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">18-20</span><span class="ai-sc-cm-{{ ai_gen_id }}">46-50</span></td>
+              <td>M</td>
+              <td>12 months</td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">28-30</span><span class="ai-sc-cm-{{ ai_gen_id }}">71-77</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">18-19</span><span class="ai-sc-cm-{{ ai_gen_id }}">46-48</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">13-15</span><span class="ai-sc-cm-{{ ai_gen_id }}">34-38</span></td>
             </tr>
             <tr>
-              <td>4-5 Years</td>
-              <td>4-5Y</td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">41-43</span><span class="ai-sc-cm-{{ ai_gen_id }}">104-110</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">22-23</span><span class="ai-sc-cm-{{ ai_gen_id }}">56-58</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">20-21</span><span class="ai-sc-cm-{{ ai_gen_id }}">50-54</span></td>
+              <td>L</td>
+              <td>18 months</td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">31-33</span><span class="ai-sc-cm-{{ ai_gen_id }}">78-83</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">19-20</span><span class="ai-sc-cm-{{ ai_gen_id }}">49-51</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">15-16</span><span class="ai-sc-cm-{{ ai_gen_id }}">38-40</span></td>
             </tr>
             <tr>
-              <td>5-6 Years</td>
-              <td>5-6Y</td>
+              <td>XL</td>
+              <td>2 years</td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">34-36</span><span class="ai-sc-cm-{{ ai_gen_id }}">86-92</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">20-21</span><span class="ai-sc-cm-{{ ai_gen_id }}">51-53</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">16-17</span><span class="ai-sc-cm-{{ ai_gen_id }}">40-44</span></td>
+            </tr>
+            <tr>
+              <td>2XL</td>
+              <td>3-4 years</td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">39-43</span><span class="ai-sc-cm-{{ ai_gen_id }}">98-110</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">21-23</span><span class="ai-sc-cm-{{ ai_gen_id }}">54-58</span></td>
+              <td><span class="ai-sc-in-{{ ai_gen_id }}">18-20</span><span class="ai-sc-cm-{{ ai_gen_id }}">46-52</span></td>
+            </tr>
+            <tr>
+              <td>3XL</td>
+              <td>5-6 years</td>
               <td><span class="ai-sc-in-{{ ai_gen_id }}">43-46</span><span class="ai-sc-cm-{{ ai_gen_id }}">110-116</span></td>
               <td><span class="ai-sc-in-{{ ai_gen_id }}">23-24</span><span class="ai-sc-cm-{{ ai_gen_id }}">58-60</span></td>
               <td><span class="ai-sc-in-{{ ai_gen_id }}">21-23</span><span class="ai-sc-cm-{{ ai_gen_id }}">54-58</span></td>
-            </tr>
-            <tr>
-              <td>7-8 Years</td>
-              <td>7-8Y</td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">48-50</span><span class="ai-sc-cm-{{ ai_gen_id }}">122-128</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">24-25</span><span class="ai-sc-cm-{{ ai_gen_id }}">62-64</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">23-24</span><span class="ai-sc-cm-{{ ai_gen_id }}">58-62</span></td>
-            </tr>
-            <tr>
-              <td>9-10 Years</td>
-              <td>9-10Y</td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">53-55</span><span class="ai-sc-cm-{{ ai_gen_id }}">134-140</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">26-27</span><span class="ai-sc-cm-{{ ai_gen_id }}">66-68</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">24-26</span><span class="ai-sc-cm-{{ ai_gen_id }}">62-66</span></td>
-            </tr>
-            <tr>
-              <td>11-12 Years</td>
-              <td>11-12Y</td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">57-60</span><span class="ai-sc-cm-{{ ai_gen_id }}">146-152</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">28-29</span><span class="ai-sc-cm-{{ ai_gen_id }}">70-74</span></td>
-              <td><span class="ai-sc-in-{{ ai_gen_id }}">26-28</span><span class="ai-sc-cm-{{ ai_gen_id }}">66-70</span></td>
             </tr>
           </tbody>
         </table>
@@ -663,13 +677,13 @@
       "type": "richtext",
       "id": "standard_note",
       "label": "Standard chart note",
-      "default": "<p>Measurements are shown in inches by default (common for tailoring in India); switch to CM for precision. Garment length is typical for tops/dresses and may vary by style. Height is the most reliable guide for kids.</p>"
+      "default": "<p>Domestic chart uses letter sizes (S through 3XL). S is typically 6 months; match mainly by child height, then chest. Inches default; switch to CM for precision. Garment length varies by style.</p>"
     },
     {
       "type": "richtext",
       "id": "international_note",
-      "label": "International chart note",
-      "default": "<p>International sizing (CN). Inches are shown by default; use CM if you prefer. Garment length is indicative (shoulder to hem). Always compare your child’s measurements to the chart.</p>"
+      "label": "International (imported) chart note",
+      "default": "<p>Imported chart: age bands and CN reference sizing. Choose primarily by measured height, then chest. Inches default; CM optional. Garment length is indicative (shoulder to hem).</p>"
     },
     {
       "type": "color",
