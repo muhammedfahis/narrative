@@ -462,6 +462,45 @@
     "17758382771cf65052": {
       "type": "_blocks",
       "settings": {}
+    },
+    "1775996377b821d5a8": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_9b9630e_4xTtjy": {
+          "type": "ai_gen_block_9b9630e",
+          "settings": {
+            "title": "Size Chart",
+            "default_open": false,
+            "desktop_width_percent": 100,
+            "background_color": "#ffffff",
+            "header_background_color": "#f3f3f3",
+            "header_hover_color": "#e8e8e8",
+            "title_color": "#121212",
+            "text_color": "#121212",
+            "border_color": "#e0e0e0",
+            "border_thickness": 1,
+            "border_radius": 4,
+            "padding": 16,
+            "title_font_size": 18,
+            "table_header_bg": "#f8f8f8",
+            "table_header_text": "#121212",
+            "table_border_color": "#e8e8e8",
+            "table_row_hover": "#f9f9f9",
+            "table_font_size": 14,
+            "show_note": true,
+            "standard_note": "<p>All measurements are approximate. For best fit, measure your child and compare with the chart.</p>",
+            "international_note": "<p>International sizing (CN). Measurements may vary slightly. Please check product details for specific fit information.</p>",
+            "note_background": "#fff8e1",
+            "note_border": "#ff6b5b",
+            "note_font_size": 13
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_9b9630e_4xTtjy"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -483,6 +522,7 @@
     "17757259630b79b784",
     "1775726021356bb2df",
     "1775726649ce29ab81",
-    "17758382771cf65052"
+    "17758382771cf65052",
+    "1775996377b821d5a8"
   ]
 }
