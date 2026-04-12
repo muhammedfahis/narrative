@@ -1,6 +1,507 @@
+{% doc %}
+  @prompt
+    Create a dynamic size chart section/block for the default product page template that conditionally displays different size charts based on a product tag. If the product has the tag 'imported', show an international size chart (with columns for Age, CN Size, Height cm, Chest cm, Waist cm). If the product does NOT have the 'imported' tag, show a standard Indian/KIDSMIRE size chart (with columns for Age, Size Label, Height cm, Chest cm, Waist cm). The block should be collapsible/accordion style with a "Size Chart" heading that expands on click. Both charts should be displayed as clean HTML tables. The block should be insertable into the product page and work with the existing theme.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-size-chart-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: {{ block.settings.background_color }};
+    border: {{ block.settings.border_thickness }}px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+  }
+
+  .ai-size-chart-header-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: {{ block.settings.padding }}px;
+    cursor: pointer;
+    background-color: {{ block.settings.header_background_color }};
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-size-chart-header-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.header_hover_color }};
+  }
+
+  .ai-size-chart-title-{{ ai_gen_id }} {
+    margin: 0;
+    font-size: {{ block.settings.title_font_size }}px;
+    color: {{ block.settings.title_color }};
+    font-weight: 600;
+  }
+
+  .ai-size-chart-icon-{{ ai_gen_id }} {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+    color: {{ block.settings.title_color }};
+  }
+
+  .ai-size-chart-{{ ai_gen_id }}.active .ai-size-chart-icon-{{ ai_gen_id }} {
+    transform: rotate(180deg);
+  }
+
+  .ai-size-chart-content-{{ ai_gen_id }} {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .ai-size-chart-{{ ai_gen_id }}.active .ai-size-chart-content-{{ ai_gen_id }} {
+    max-height: 1000px;
+  }
+
+  .ai-size-chart-inner-{{ ai_gen_id }} {
+    padding: {{ block.settings.padding }}px;
+  }
+
+  .ai-size-chart-table-{{ ai_gen_id }} {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: {{ block.settings.table_font_size }}px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-size-chart-table-{{ ai_gen_id }} th {
+    background-color: {{ block.settings.table_header_bg }};
+    color: {{ block.settings.table_header_text }};
+    padding: 12px 8px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid {{ block.settings.border_color }};
+  }
+
+  .ai-size-chart-table-{{ ai_gen_id }} td {
+    padding: 10px 8px;
+    border-bottom: 1px solid {{ block.settings.table_border_color }};
+  }
+
+  .ai-size-chart-table-{{ ai_gen_id }} tr:last-child td {
+    border-bottom: none;
+  }
+
+  .ai-size-chart-table-{{ ai_gen_id }} tbody tr:hover {
+    background-color: {{ block.settings.table_row_hover }};
+  }
+
+  .ai-size-chart-note-{{ ai_gen_id }} {
+    margin-top: 16px;
+    padding: 12px;
+    background-color: {{ block.settings.note_background }};
+    border-left: 3px solid {{ block.settings.note_border }};
+    font-size: {{ block.settings.note_font_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-size-chart-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-size-chart-table-{{ ai_gen_id }} {
+      font-size: {{ block.settings.table_font_size | times: 0.9 }}px;
+    }
+
+    .ai-size-chart-table-{{ ai_gen_id }} th,
+    .ai-size-chart-table-{{ ai_gen_id }} td {
+      padding: 8px 6px;
+    }
+  }
+{% endstyle %}
+
+<size-chart-{{ ai_gen_id }}
+  class="ai-size-chart-{{ ai_gen_id }} {% if block.settings.default_open %}active{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-size-chart-header-{{ ai_gen_id }}" role="button" aria-expanded="{% if block.settings.default_open %}true{% else %}false{% endif %}" tabindex="0">
+    <h3 class="ai-size-chart-title-{{ ai_gen_id }}">{{ block.settings.title }}</h3>
+    <svg class="ai-size-chart-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </div>
+
+  <div class="ai-size-chart-content-{{ ai_gen_id }}">
+    <div class="ai-size-chart-inner-{{ ai_gen_id }}">
+      {% if product.tags contains 'imported' %}
+        <table class="ai-size-chart-table-{{ ai_gen_id }}">
+          <thead>
+            <tr>
+              <th>Age</th>
+              <th>CN Size</th>
+              <th>Height (cm)</th>
+              <th>Chest (cm)</th>
+              <th>Waist (cm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2-3 Years</td>
+              <td>100</td>
+              <td>95-100</td>
+              <td>52-54</td>
+              <td>48-50</td>
+            </tr>
+            <tr>
+              <td>3-4 Years</td>
+              <td>110</td>
+              <td>100-110</td>
+              <td>54-56</td>
+              <td>50-52</td>
+            </tr>
+            <tr>
+              <td>4-5 Years</td>
+              <td>120</td>
+              <td>110-120</td>
+              <td>56-58</td>
+              <td>52-54</td>
+            </tr>
+            <tr>
+              <td>5-6 Years</td>
+              <td>130</td>
+              <td>120-130</td>
+              <td>58-62</td>
+              <td>54-56</td>
+            </tr>
+            <tr>
+              <td>7-8 Years</td>
+              <td>140</td>
+              <td>130-140</td>
+              <td>62-66</td>
+              <td>56-58</td>
+            </tr>
+            <tr>
+              <td>9-10 Years</td>
+              <td>150</td>
+              <td>140-150</td>
+              <td>66-70</td>
+              <td>58-62</td>
+            </tr>
+            <tr>
+              <td>11-12 Years</td>
+              <td>160</td>
+              <td>150-160</td>
+              <td>70-74</td>
+              <td>62-66</td>
+            </tr>
+          </tbody>
+        </table>
+        {% if block.settings.show_note and block.settings.international_note != blank %}
+          <div class="ai-size-chart-note-{{ ai_gen_id }}">
+            {{ block.settings.international_note }}
+          </div>
+        {% endif %}
+      {% else %}
+        <table class="ai-size-chart-table-{{ ai_gen_id }}">
+          <thead>
+            <tr>
+              <th>Age</th>
+              <th>Size Label</th>
+              <th>Height (cm)</th>
+              <th>Chest (cm)</th>
+              <th>Waist (cm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2-3 Years</td>
+              <td>2-3Y</td>
+              <td>92-98</td>
+              <td>52-54</td>
+              <td>50-52</td>
+            </tr>
+            <tr>
+              <td>3-4 Years</td>
+              <td>3-4Y</td>
+              <td>98-104</td>
+              <td>54-56</td>
+              <td>52-54</td>
+            </tr>
+            <tr>
+              <td>4-5 Years</td>
+              <td>4-5Y</td>
+              <td>104-110</td>
+              <td>56-58</td>
+              <td>54-56</td>
+            </tr>
+            <tr>
+              <td>5-6 Years</td>
+              <td>5-6Y</td>
+              <td>110-116</td>
+              <td>58-60</td>
+              <td>56-58</td>
+            </tr>
+            <tr>
+              <td>7-8 Years</td>
+              <td>7-8Y</td>
+              <td>122-128</td>
+              <td>62-64</td>
+              <td>58-60</td>
+            </tr>
+            <tr>
+              <td>9-10 Years</td>
+              <td>9-10Y</td>
+              <td>134-140</td>
+              <td>66-68</td>
+              <td>60-62</td>
+            </tr>
+            <tr>
+              <td>11-12 Years</td>
+              <td>11-12Y</td>
+              <td>146-152</td>
+              <td>70-74</td>
+              <td>62-66</td>
+            </tr>
+          </tbody>
+        </table>
+        {% if block.settings.show_note and block.settings.standard_note != blank %}
+          <div class="ai-size-chart-note-{{ ai_gen_id }}">
+            {{ block.settings.standard_note }}
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</size-chart-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class SizeChart{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.header = this.querySelector('.ai-size-chart-header-{{ ai_gen_id }}');
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.header.addEventListener('click', () => this.toggle());
+        this.header.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.toggle();
+          }
+        });
+      }
+
+      toggle() {
+        const isActive = this.classList.contains('active');
+        this.classList.toggle('active');
+        this.header.setAttribute('aria-expanded', !isActive);
+      }
+    }
+
+    customElements.define('size-chart-{{ ai_gen_id }}', SizeChart{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Size chart",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Size Chart"
+    },
+    {
+      "type": "checkbox",
+      "id": "default_open",
+      "label": "Open by default",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "header_background_color",
+      "label": "Header background",
+      "default": "#f3f3f3"
+    },
+    {
+      "type": "color",
+      "id": "header_hover_color",
+      "label": "Header hover",
+      "default": "#e8e8e8"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Padding",
+      "min": 8,
+      "max": 32,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title font size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Table style"
+    },
+    {
+      "type": "color",
+      "id": "table_header_bg",
+      "label": "Header background",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "table_header_text",
+      "label": "Header text",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "table_border_color",
+      "label": "Row border",
+      "default": "#e8e8e8"
+    },
+    {
+      "type": "color",
+      "id": "table_row_hover",
+      "label": "Row hover",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "range",
+      "id": "table_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Notes"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_note",
+      "label": "Show notes",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "standard_note",
+      "label": "Standard chart note",
+      "default": "<p>All measurements are approximate. For best fit, measure your child and compare with the chart.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "international_note",
+      "label": "International chart note",
+      "default": "<p>International sizing (CN). Measurements may vary slightly. Please check product details for specific fit information.</p>"
+    },
+    {
+      "type": "color",
+      "id": "note_background",
+      "label": "Note background",
+      "default": "#fff8e1"
+    },
+    {
+      "type": "color",
+      "id": "note_border",
+      "label": "Note border",
+      "default": "#ff6b5b"
+    },
+    {
+      "type": "range",
+      "id": "note_font_size",
+      "label": "Note font size",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    }
+  ],
+  "presets": [
+    {
+      "name": "Size chart"
+    }
+  ]
+}
 {% endschema %}
