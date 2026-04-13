@@ -26,7 +26,8 @@
   }
 
   /* Replace "Choose option(s)" with a bottom-right cart icon */
-  #product-grid .card-wrapper {
+  #product-grid .card-wrapper,
+  #product-grid li.grid__item {
     position: relative;
   }
 
@@ -184,7 +185,7 @@
 
     /**
      * Text fallback when theme markup differs. Covers EN variants, option(s), and common alt copy.
-     * Structural match (modal-opener.quick-add) handles all locales for standard Dawn/HORIZON.
+     * Primary detection uses .quick-add (Dawn main) so any locale works without matching label text.
      */
     function isChooseOptionsLabel(text) {
       if (!text) return false;
@@ -196,19 +197,25 @@
     }
 
     function findChooseOptionsEl(card) {
-      // Dawn / Horizon: multi-variant "picker" is always modal-opener.quick-add, not product-form add-to-cart.
-      // This stays correct for any translation of products.product.choose_options.
-      const structural = card.querySelector(
+      // Current Dawn (main): <div class="quick-add"> → <modal-opener> → button.quick-add__submit
+      // (modal-opener does NOT have class "quick-add"; older snippets used modal-opener.quick-add.)
+      // Single-variant add-to-cart uses the same class inside <product-form> — skip those.
+      const quickAddRoots = card.querySelectorAll('.quick-add');
+      for (const root of quickAddRoots) {
+        for (const el of root.querySelectorAll('button.quick-add__submit, a.quick-add__submit')) {
+          if (!el.closest('product-form')) return el;
+        }
+      }
+
+      const legacy = card.querySelector(
         'modal-opener.quick-add .quick-add__submit, modal-opener[class*="quick-add"] .quick-add__submit'
       );
-      if (structural) return structural;
+      if (legacy) return legacy;
 
       const candidates = card.querySelectorAll(
         'button.quick-add__submit, a.quick-add__submit, button.button--secondary, a.button--secondary'
       );
-
       for (const el of candidates) {
-        // Skip single-variant add-to-cart inside product-form (also uses quick-add__submit in Dawn).
         if (el.closest('product-form')) continue;
         if (isChooseOptionsLabel(normalizeBtnText(el))) return el;
       }
@@ -222,8 +229,8 @@
       const chooseOptionsEl = findChooseOptionsEl(card);
       if (!chooseOptionsEl) return;
 
-      // Hide the original control (but keep it in DOM for behavior).
-      chooseOptionsEl.style.display = 'none';
+      // Hide the original control (theme CSS can override plain display:none).
+      chooseOptionsEl.style.setProperty('display', 'none', 'important');
 
       const btn = document.createElement('button');
       btn.type = 'button';
@@ -244,25 +251,54 @@
       card.appendChild(btn);
     }
 
-    function init() {
-      const grid = document.getElementById('product-grid');
+    function forEachProductCard(grid, fn) {
+      const wrappers = grid.querySelectorAll('.card-wrapper');
+      if (wrappers.length > 0) {
+        wrappers.forEach(fn);
+      } else {
+        grid.querySelectorAll('li.grid__item').forEach(fn);
+      }
+    }
+
+    function runInject(grid) {
       if (!grid) return;
+      forEachProductCard(grid, injectIconForCard);
+    }
 
-      // Initial render
-      grid.querySelectorAll('.card-wrapper').forEach(injectIconForCard);
+    let moContainer = null;
+    function init() {
+      runInject(document.getElementById('product-grid'));
 
-      // Handle re-renders from filtering/sorting (facets) and pagination updates
-      const mo = new MutationObserver(() => {
-        grid.querySelectorAll('.card-wrapper').forEach(injectIconForCard);
+      const container = document.getElementById('ProductGridContainer');
+      if (container && !moContainer) {
+        moContainer = new MutationObserver(function () {
+          runInject(document.getElementById('product-grid'));
+        });
+        moContainer.observe(container, { childList: true, subtree: true });
+      }
+    }
+
+    function scheduleInit() {
+      init();
+      requestAnimationFrame(function () {
+        requestAnimationFrame(init);
       });
-      mo.observe(grid, { childList: true, subtree: true });
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
+      document.addEventListener('DOMContentLoaded', scheduleInit);
     } else {
-      init();
+      scheduleInit();
     }
+
+    window.addEventListener('load', scheduleInit);
+
+    document.addEventListener('shopify:section:load', function (ev) {
+      const g =
+        (ev.target && ev.target.querySelector && ev.target.querySelector('#product-grid')) ||
+        document.getElementById('product-grid');
+      runInject(g);
+    });
   })();
 </script>
 
