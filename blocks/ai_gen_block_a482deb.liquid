@@ -5,8 +5,6 @@
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
-
   .ai-gender-filter-banner-{{ ai_gen_id }} {
     display: block;
     width: 100%;
@@ -114,6 +112,32 @@
     z-index: 1;
   }
 
+  /* Girls banner only: soft white wash from the left (reference: readable black copy on busy photo) */
+  .ai-banner-girls-{{ ai_gen_id }} .ai-banner-image-wrapper-{{ ai_gen_id }}:before {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.94) 0%,
+      rgba(255, 255, 255, 0.78) 18%,
+      rgba(255, 255, 255, 0.48) 38%,
+      rgba(255, 255, 255, 0.18) 56%,
+      rgba(255, 255, 255, 0.05) 68%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  .ai-banner-girls-{{ ai_gen_id }} .ai-banner-heading-{{ ai_gen_id }} {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 700;
+    color: #000000;
+    letter-spacing: -0.01em;
+  }
+
+  .ai-banner-girls-{{ ai_gen_id }} .ai-banner-subheading-{{ ai_gen_id }} {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #000000;
+    opacity: 1;
+  }
+
   .ai-banner-image-{{ ai_gen_id }} {
     width: 100%;
     height: auto;
@@ -181,57 +205,6 @@
     color: #666;
     text-align: center;
     pointer-events: none;
-  }
-
-  /* Girls banner only: cream panel + black type (reference layout); boys unchanged */
-  .ai-banner-girls-{{ ai_gen_id }} .ai-banner-image-wrapper-{{ ai_gen_id }}:before {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .ai-banner-girls-{{ ai_gen_id }} .ai-banner-text-overlay-{{ ai_gen_id }} {
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: min(520px, 46%);
-    max-width: none;
-    padding: 56px 48px 56px 56px;
-    background-color: #f9f7f2;
-    background-image: repeating-linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.012) 0px,
-      rgba(0, 0, 0, 0.012) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-    color: #000000;
-    box-sizing: border-box;
-    z-index: 4;
-  }
-
-  .ai-banner-girls-{{ ai_gen_id }} .ai-banner-heading-{{ ai_gen_id }} {
-    font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
-    font-size: clamp(32px, 3.6vw, 48px);
-    font-weight: 600;
-    font-style: normal;
-    letter-spacing: 0;
-    line-height: 1.12;
-    color: #000000;
-    white-space: pre-line;
-  }
-
-  .ai-banner-girls-{{ ai_gen_id }} .ai-banner-subheading-{{ ai_gen_id }} {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    font-size: 17px;
-    font-weight: 400;
-    line-height: 1.4;
-    margin-top: 16px;
-    color: #000000;
-    opacity: 1;
-  }
-
-  .ai-banner-girls-{{ ai_gen_id }} .ai-gender-toggle-{{ ai_gen_id }} {
-    margin-top: 28px;
   }
 
   @media screen and (max-width: 749px) {
@@ -325,31 +298,30 @@
       letter-spacing: 0.03em;
     }
 
-    /* Girls only: keep dark text on cream panel (do not apply boys mobile overlay treatment) */
-    .ai-banner-girls-{{ ai_gen_id }} .ai-banner-text-overlay-{{ ai_gen_id }} {
-      left: 16px;
-      right: 16px;
-      width: auto;
-      top: auto;
-      bottom: 20px;
-      transform: none;
-      padding: 20px 18px 18px;
-      border-radius: 0;
-      background-color: #f9f7f2;
-      background-image: repeating-linear-gradient(
+    /* Girls banner mobile: light legibility zone + black type (boys overlay unchanged) */
+    .ai-banner-girls-{{ ai_gen_id }} .ai-banner-image-wrapper-{{ ai_gen_id }}:before {
+      background: linear-gradient(
         90deg,
-        rgba(0, 0, 0, 0.012) 0px,
-        rgba(0, 0, 0, 0.012) 1px,
-        transparent 1px,
-        transparent 3px
+        rgba(255, 255, 255, 0.96) 0%,
+        rgba(255, 255, 255, 0.72) 45%,
+        rgba(255, 255, 255, 0.28) 72%,
+        rgba(255, 255, 255, 0) 100%
       );
-      -webkit-backdrop-filter: none;
-      backdrop-filter: none;
-      color: #000000;
+    }
+
+    .ai-banner-girls-{{ ai_gen_id }} .ai-banner-text-overlay-{{ ai_gen_id }} {
+      background: linear-gradient(
+        to top,
+        rgba(255, 255, 255, 0.97) 0%,
+        rgba(255, 255, 255, 0.88) 35%,
+        rgba(255, 255, 255, 0.55) 65%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
     }
 
     .ai-banner-girls-{{ ai_gen_id }} .ai-banner-heading-{{ ai_gen_id }} {
-      font-size: clamp(26px, 7vw, 34px);
       color: #000000;
       text-shadow: none;
     }
@@ -438,7 +410,7 @@
           {% if block.settings.girls_heading != blank or block.settings.girls_subheading != blank %}
             <div class="ai-banner-text-overlay-{{ ai_gen_id }}">
               {% if block.settings.girls_heading != blank %}
-                <h2 class="ai-banner-heading-{{ ai_gen_id }}">{{ block.settings.girls_heading | newline_to_br }}</h2>
+                <h2 class="ai-banner-heading-{{ ai_gen_id }}">{{ block.settings.girls_heading }}</h2>
               {% endif %}
               {% if block.settings.girls_subheading != blank %}
                 <p class="ai-banner-subheading-{{ ai_gen_id }}">{{ block.settings.girls_subheading }}</p>
