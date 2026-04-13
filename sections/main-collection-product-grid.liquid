@@ -175,16 +175,42 @@
 
 <script>
   (function () {
+    function normalizeBtnText(el) {
+      return (el.textContent || '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toLowerCase();
+    }
+
+    /**
+     * Text fallback when theme markup differs. Covers EN variants, option(s), and common alt copy.
+     * Structural match (modal-opener.quick-add) handles all locales for standard Dawn/HORIZON.
+     */
+    function isChooseOptionsLabel(text) {
+      if (!text) return false;
+      if (/^choose\s+options?$/.test(text)) return true;
+      if (/^choose\s+option\(s\)\s*$/.test(text)) return true;
+      if (/^select\s+options?$/.test(text)) return true;
+      if (/^choose\b/.test(text) && /\boptions?\b/.test(text)) return true;
+      return false;
+    }
+
     function findChooseOptionsEl(card) {
-      // Dawn-style quick add often uses these selectors/classes.
-      // We purposely keep this flexible since the snippet isn't in this repo.
+      // Dawn / Horizon: multi-variant "picker" is always modal-opener.quick-add, not product-form add-to-cart.
+      // This stays correct for any translation of products.product.choose_options.
+      const structural = card.querySelector(
+        'modal-opener.quick-add .quick-add__submit, modal-opener[class*="quick-add"] .quick-add__submit'
+      );
+      if (structural) return structural;
+
       const candidates = card.querySelectorAll(
         'button.quick-add__submit, a.quick-add__submit, button.button--secondary, a.button--secondary'
       );
 
       for (const el of candidates) {
-        const text = (el.textContent || '').trim().toLowerCase();
-        if (text === 'choose option' || text === 'choose options') return el;
+        // Skip single-variant add-to-cart inside product-form (also uses quick-add__submit in Dawn).
+        if (el.closest('product-form')) continue;
+        if (isChooseOptionsLabel(normalizeBtnText(el))) return el;
       }
 
       return null;
