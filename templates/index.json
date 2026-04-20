@@ -481,7 +481,7 @@
             "subheading": "Valid on selected styles only",
             "show_cta": true,
             "cta_text": "Explore Collection",
-            "cta_link": "",
+            "cta_link": "shopify://collections/all",
             "popup_width": 550,
             "padding": 60,
             "border_radius": 4,
