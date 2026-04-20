@@ -270,6 +270,11 @@
         "type": "shopify://apps/kwikpass/blocks/kp_login/603e209b-d585-47ff-8592-837a4faa325b",
         "disabled": false,
         "settings": {}
+      },
+      "9388344762370057067": {
+        "type": "shopify://apps/essential-slide-cart-drawer/blocks/app-embed/824bb1f9-5f36-4608-a60c-1f2b6a6f8834",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
