@@ -275,6 +275,11 @@
         "type": "shopify://apps/essential-slide-cart-drawer/blocks/app-embed/824bb1f9-5f36-4608-a60c-1f2b6a6f8834",
         "disabled": false,
         "settings": {}
+      },
+      "13669795325273674392": {
+        "type": "shopify://apps/releasit-cod-form/blocks/app-embed/72faf214-4174-4fec-886b-0d0e8d3af9a2",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
