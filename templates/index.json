@@ -466,6 +466,69 @@
     "1775996377b821d5a8": {
       "type": "_blocks",
       "settings": {}
+    },
+    "1776678561b81228a1": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_dc68bcf_GYKF6m": {
+          "type": "ai_gen_block_dc68bcf",
+          "settings": {
+            "popup_delay": 1500,
+            "show_badge": true,
+            "badge_text": "Exclusive Offer",
+            "heading": "Mix & Match Any 2 from Our Premium Picks",
+            "price_text": "@ ₹799",
+            "subheading": "Valid on selected styles only",
+            "show_cta": true,
+            "cta_text": "Explore Collection",
+            "cta_link": "",
+            "popup_width": 550,
+            "padding": 60,
+            "border_radius": 4,
+            "border_width": 1,
+            "border_color": "#E0E0E0",
+            "popup_bg_color": "#FFFFFF",
+            "show_decorative_corners": true,
+            "show_accent_line": true,
+            "accent_line_height": 4,
+            "show_divider": true,
+            "divider_color": "#D0D0D0",
+            "overlay_opacity": 0.7,
+            "overlay_blur": 4,
+            "badge_font_size": 10,
+            "badge_bg_color": "#000000",
+            "badge_text_color": "#FFFFFF",
+            "badge_border_color": "#000000",
+            "heading_font_size": 32,
+            "heading_color": "#1A1A1A",
+            "price_font_size": 48,
+            "price_color": "#000000",
+            "subheading_font_size": 14,
+            "subheading_color": "#666666",
+            "cta_font_size": 13,
+            "cta_border_radius": 2,
+            "cta_bg_color": "#FFFFFF",
+            "cta_text_color": "#000000",
+            "cta_border_color": "#000000",
+            "cta_hover_bg_color": "#000000",
+            "cta_hover_text_color": "#FFFFFF",
+            "cta_hover_border_color": "#000000",
+            "accent_color_1": "#000000",
+            "accent_color_2": "#4A4A4A",
+            "corner_accent_color": "#CCCCCC",
+            "close_button_position": 20,
+            "close_button_color": "#666666",
+            "close_button_border": "#CCCCCC",
+            "close_button_hover_bg": "#F5F5F5",
+            "close_button_hover_border": "#000000"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_dc68bcf_GYKF6m"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -488,6 +551,7 @@
     "1775726021356bb2df",
     "1775726649ce29ab81",
     "17758382771cf65052",
-    "1775996377b821d5a8"
+    "1775996377b821d5a8",
+    "1776678561b81228a1"
   ]
 }
