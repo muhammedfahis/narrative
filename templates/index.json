@@ -15,8 +15,8 @@
         "ai_gen_block_c796622_jBM7HA": {
           "type": "ai_gen_block_c796622",
           "settings": {
-            "message_1": "COD Available · ₹30 handling fee applies — shown at checkout",
-            "message_2": "Free Shipping on orders above ₹500",
+            "message_1": "COD Available ·",
+            "message_2": "Free Shipping on orders above ₹999",
             "message_3": "Buy 2 @799",
             "message_3_show_icon": true,
             "message_spacing": 36,
