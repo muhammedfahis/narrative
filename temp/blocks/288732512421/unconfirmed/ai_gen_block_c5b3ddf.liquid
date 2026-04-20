@@ -1,6 +1,470 @@
+{% doc %}
+  @prompt
+    Create a popup banner that appears automatically when a visitor lands on the page. The popup should promote a "Buy 2 @ ₹799" offer. It should appear after a short delay (1-2 seconds), have a visually appealing design matching a premium kids' clothing brand with pastel colors, include a close button, and optionally a CTA button. The popup should only show once per session using sessionStorage so it doesn't appear on every page load.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-promo-popup-{{ ai_gen_id }} {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .ai-promo-popup-{{ ai_gen_id }}.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .ai-promo-popup-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, {{ block.settings.overlay_opacity }});
+  }
+
+  .ai-promo-popup-content-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background-color: {{ block.settings.popup_background }};
+    border-radius: {{ block.settings.border_radius }}px;
+    padding: {{ block.settings.padding }}px;
+    max-width: {{ block.settings.popup_width }}px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    text-align: center;
+  }
+
+  .ai-promo-popup-{{ ai_gen_id }}.active .ai-promo-popup-content-{{ ai_gen_id }} {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .ai-promo-popup-close-{{ ai_gen_id }} {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    z-index: 1;
+  }
+
+  .ai-promo-popup-close-{{ ai_gen_id }}:hover {
+    opacity: 1;
+  }
+
+  .ai-promo-popup-close-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ai-promo-popup-image-{{ ai_gen_id }} {
+    margin-bottom: 20px;
+  }
+
+  .ai-promo-popup-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: auto;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-promo-popup-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 15px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .ai-promo-popup-subheading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 20px;
+    line-height: 1.5;
+  }
+
+  .ai-promo-popup-cta-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 14px 32px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .ai-promo-popup-cta-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    transform: translateY(-2px);
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-promo-popup-content-{{ ai_gen_id }} {
+      padding: {{ block.settings.padding | times: 0.7 }}px;
+    }
+
+    .ai-promo-popup-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+    }
+
+    .ai-promo-popup-subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<promo-popup-{{ ai_gen_id }}
+  class="ai-promo-popup-{{ ai_gen_id }}"
+  data-delay="{{ block.settings.delay }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-promo-popup-overlay-{{ ai_gen_id }}"></div>
+  <div class="ai-promo-popup-content-{{ ai_gen_id }}">
+    <button
+      class="ai-promo-popup-close-{{ ai_gen_id }}"
+      aria-label="Close popup"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    {% if block.settings.popup_image %}
+      <div class="ai-promo-popup-image-{{ ai_gen_id }}">
+        <img
+          src="{{ block.settings.popup_image | image_url: width: 800 }}"
+          alt="{{ block.settings.popup_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.popup_image.width }}"
+          height="{{ block.settings.popup_image.height }}"
+        >
+      </div>
+    {% endif %}
+
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-promo-popup-heading-{{ ai_gen_id }}">
+        {{ block.settings.heading }}
+      </h2>
+    {% endif %}
+
+    {% if block.settings.subheading != blank %}
+      <div class="ai-promo-popup-subheading-{{ ai_gen_id }}">
+        {{ block.settings.subheading }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_cta and block.settings.cta_text != blank %}
+      <a
+        href="{{ block.settings.cta_link }}"
+        class="ai-promo-popup-cta-{{ ai_gen_id }}"
+      >
+        {{ block.settings.cta_text }}
+      </a>
+    {% endif %}
+  </div>
+</promo-popup-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class PromoPopup{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.sessionKey = 'ai_promo_popup_{{ ai_gen_id }}_shown';
+      }
+
+      connectedCallback() {
+        if (this.hasBeenShown()) {
+          return;
+        }
+
+        const delay = parseInt(this.dataset.delay) || 1500;
+        
+        setTimeout(() => {
+          this.showPopup();
+        }, delay);
+
+        this.setupEventListeners();
+      }
+
+      hasBeenShown() {
+        return sessionStorage.getItem(this.sessionKey) === 'true';
+      }
+
+      markAsShown() {
+        sessionStorage.setItem(this.sessionKey, 'true');
+      }
+
+      showPopup() {
+        this.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      hidePopup() {
+        this.classList.remove('active');
+        document.body.style.overflow = '';
+        this.markAsShown();
+      }
+
+      setupEventListeners() {
+        const closeButton = this.querySelector('.ai-promo-popup-close-{{ ai_gen_id }}');
+        const overlay = this.querySelector('.ai-promo-popup-overlay-{{ ai_gen_id }}');
+
+        if (closeButton) {
+          closeButton.addEventListener('click', () => {
+            this.hidePopup();
+          });
+        }
+
+        if (overlay) {
+          overlay.addEventListener('click', () => {
+            this.hidePopup();
+          });
+        }
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && this.classList.contains('active')) {
+            this.hidePopup();
+          }
+        });
+      }
+    }
+
+    customElements.define('promo-popup-{{ ai_gen_id }}', PromoPopup{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Promo popup",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "popup_image",
+      "label": "Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Buy 2 @ ₹799"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Limited time offer on premium kids' clothing!</p>"
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Timing"
+    },
+    {
+      "type": "range",
+      "id": "delay",
+      "min": 500,
+      "max": 5000,
+      "step": 500,
+      "unit": "ms",
+      "label": "Delay before showing",
+      "default": 1500
+    },
+    {
+      "type": "header",
+      "content": "Popup style"
+    },
+    {
+      "type": "range",
+      "id": "popup_width",
+      "min": 300,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 500
+    },
+    {
+      "type": "color",
+      "id": "popup_background",
+      "label": "Background color",
+      "default": "#FFF5F5"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Overlay opacity",
+      "default": 0.5
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Text style"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#FF6B5B"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background color",
+      "default": "#FF6B5B"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background color",
+      "default": "#E55A4A"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo popup"
+    }
+  ]
+}
 {% endschema %}
