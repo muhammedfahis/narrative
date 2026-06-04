@@ -1,314 +1,450 @@
 {% doc %}
-  @prompt
-    Create an Instagram showcase section that is pixel-identical to this design: A section with a heading "Explore more real-life styles & customer moments" centered at the top. Below the heading, show an Instagram profile row with a circular profile picture (using the store logo), the handle "@kidsmire.official" in bold next to it, and a subtitle "Discover real community stories and detailed fabric reviews." in smaller gray text. Below that, display a 5-column grid of Instagram-style photos (2 rows = 10 photos total) with small Instagram username tags (like "@sneha.k.123", "@kaxya.mom") overlaid in the bottom-left corner of select images, styled like Instagram photo tags with a semi-transparent dark background and white text. At the bottom, centered text that reads "explore more detailed looks and community content at instagram.com/kidsmire.official" where "instagram.com/kidsmire.official" is a clickable link. The section should have a white background and clean, minimal styling. The photo grid should accept images via merchant-replaceable image picker blocks with an optional Instagram username field per image. Make it fully responsive for mobile., add a round highlighted like instagram when we add a story around profile pic, can't see the story ring
+  KIDSMIRE Instagram Showcase — Redesigned
+  Dark minimal aesthetic matching the hero section.
+  Editorial layout: large feature photo left + grid right.
+  Consistent with #0e0e0e / #ffffff / #c2a96e brand palette.
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
-  .ai-instagram-showcase-{{ ai_gen_id }} {
-    display: block;
-    width: 100%;
-    background-color: {{ block.settings.background_color }};
+
+  .km-ig-{{ ai_gen_id }} {
+    background: #0e0e0e;
     padding: {{ block.settings.section_padding_top }}px 20px {{ block.settings.section_padding_bottom }}px;
+    font-family: 'Assistant', sans-serif;
   }
 
-  .ai-instagram-showcase__container-{{ ai_gen_id }} {
+  .km-ig-inner-{{ ai_gen_id }} {
     max-width: {{ block.settings.max_width }}px;
     margin: 0 auto;
   }
 
-  .ai-instagram-showcase__heading-{{ ai_gen_id }} {
-    text-align: center;
-    font-size: {{ block.settings.heading_size }}px;
-    font-weight: 600;
-    color: {{ block.settings.heading_color }};
-    margin: 0 0 {{ block.settings.heading_spacing }}px;
-    line-height: 1.3;
-  }
-
-  .ai-instagram-showcase__profile-{{ ai_gen_id }} {
+  /* ── HEADER ROW ─────────────────────────────── */
+  .km-ig-header-{{ ai_gen_id }} {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: {{ block.settings.profile_spacing }}px;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    gap: 20px;
+    flex-wrap: wrap;
   }
 
-  .ai-instagram-showcase__profile-pic-wrapper-{{ ai_gen_id }} {
-    position: relative;
-    flex-shrink: 0;
-    padding: {{ block.settings.story_ring_width }}px;
-    background: linear-gradient(45deg, 
-      {{ block.settings.story_gradient_color_1 }} 0%, 
-      {{ block.settings.story_gradient_color_2 }} 50%, 
-      {{ block.settings.story_gradient_color_3 }} 100%
-    );
-    border-radius: 50%;
-  }
-
-  .ai-instagram-showcase__profile-pic-{{ ai_gen_id }} {
-    width: {{ block.settings.profile_pic_size }}px;
-    height: {{ block.settings.profile_pic_size }}px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: #f4f4f4;
-    border: 3px solid {{ block.settings.background_color }};
-    position: relative;
-  }
-
-  .ai-instagram-showcase__profile-pic-{{ ai_gen_id }} img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .ai-instagram-showcase__profile-info-{{ ai_gen_id }} {
+  .km-ig-header-left-{{ ai_gen_id }} {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 6px;
   }
 
-  .ai-instagram-showcase__handle-{{ ai_gen_id }} {
-    font-size: {{ block.settings.handle_size }}px;
+  .km-ig-eyebrow-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
     font-weight: 700;
-    color: {{ block.settings.handle_color }};
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c2a96e;
+  }
+
+  .km-ig-eyebrow-{{ ai_gen_id }}::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: #c2a96e;
+    flex-shrink: 0;
+  }
+
+  .km-ig-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    font-weight: 800;
+    color: #ffffff;
     margin: 0;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
   }
 
-  .ai-instagram-showcase__subtitle-{{ ai_gen_id }} {
-    font-size: {{ block.settings.subtitle_size }}px;
-    color: {{ block.settings.subtitle_color }};
-    margin: 0;
+  /* profile pill */
+  .km-ig-profile-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 0.5px solid rgba(255,255,255,0.1);
+    border-radius: 99px;
+    padding: 6px 16px 6px 6px;
+    flex-shrink: 0;
   }
 
-  .ai-instagram-showcase__grid-{{ ai_gen_id }} {
-    display: grid;
-    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
-    gap: {{ block.settings.grid_gap }}px;
-    margin-bottom: {{ block.settings.grid_spacing }}px;
-  }
-
-  .ai-instagram-showcase__photo-{{ ai_gen_id }} {
+  .km-ig-avatar-wrap-{{ ai_gen_id }} {
     position: relative;
-    aspect-ratio: 1;
-    overflow: hidden;
-    background-color: #f4f4f4;
+    width: {{ block.settings.profile_pic_size }}px;
+    height: {{ block.settings.profile_pic_size }}px;
+    flex-shrink: 0;
   }
 
-  .ai-instagram-showcase__photo-{{ ai_gen_id }} img {
+  .km-ig-avatar-ring-{{ ai_gen_id }} {
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, {{ block.settings.story_gradient_color_1 }}, {{ block.settings.story_gradient_color_2 }}, {{ block.settings.story_gradient_color_3 }});
+    z-index: 0;
+  }
+
+  .km-ig-avatar-bg-{{ ai_gen_id }} {
+    position: absolute;
+    inset: -1px;
+    border-radius: 50%;
+    background: #0e0e0e;
+    z-index: 1;
+  }
+
+  .km-ig-avatar-img-{{ ai_gen_id }} {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+
+  .km-ig-avatar-img-{{ ai_gen_id }} img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
 
-  .ai-instagram-showcase__photo-placeholder-{{ ai_gen_id }} {
+  .km-ig-profile-info-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .km-ig-handle-{{ ai_gen_id }} {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .km-ig-sub-{{ ai_gen_id }} {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* ── EDITORIAL GRID ─────────────────────────── */
+  .km-ig-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  /* large feature photo — spans 2 rows on left */
+  .km-ig-feature-{{ ai_gen_id }} {
+    grid-row: span 2;
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+
+  /* small grid on right — 2x2 */
+  .km-ig-small-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  .km-ig-cell-{{ ai_gen_id }} {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+
+  .km-ig-cell-{{ ai_gen_id }} img,
+  .km-ig-feature-{{ ai_gen_id }} img {
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f4f4f4;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
   }
 
-  .ai-instagram-showcase__photo-placeholder-{{ ai_gen_id }} svg {
-    width: 50%;
-    height: 50%;
-    opacity: 0.3;
+  .km-ig-cell-{{ ai_gen_id }}:hover img,
+  .km-ig-feature-{{ ai_gen_id }}:hover img {
+    transform: scale(1.04);
   }
 
-  .ai-instagram-showcase__username-tag-{{ ai_gen_id }} {
+  /* hover overlay */
+  .km-ig-cell-{{ ai_gen_id }}::after,
+  .km-ig-feature-{{ ai_gen_id }}::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0);
+    transition: background 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .km-ig-cell-{{ ai_gen_id }}:hover::after,
+  .km-ig-feature-{{ ai_gen_id }}:hover::after {
+    background: rgba(0,0,0,0.2);
+  }
+
+  /* username tag */
+  .km-ig-tag-{{ ai_gen_id }} {
     position: absolute;
     bottom: 8px;
     left: 8px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #ffffff;
-    padding: 4px 8px;
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 7px;
     border-radius: 3px;
-    font-size: 11px;
-    font-weight: 500;
+    z-index: 2;
+    pointer-events: none;
+    letter-spacing: 0.02em;
+  }
+
+  /* bottom 5 photos — full width strip */
+  .km-ig-strip-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+    margin-top: {{ block.settings.grid_gap }}px;
+  }
+
+  .km-ig-strip-cell-{{ ai_gen_id }} {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+
+  .km-ig-strip-cell-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .km-ig-strip-cell-{{ ai_gen_id }}:hover img {
+    transform: scale(1.04);
+  }
+
+  .km-ig-strip-cell-{{ ai_gen_id }}::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0);
+    transition: background 0.3s ease;
     pointer-events: none;
   }
 
-  .ai-instagram-showcase__footer-{{ ai_gen_id }} {
-    text-align: center;
-    font-size: {{ block.settings.footer_size }}px;
-    color: {{ block.settings.footer_color }};
+  .km-ig-strip-cell-{{ ai_gen_id }}:hover::after {
+    background: rgba(0,0,0,0.2);
   }
 
-  .ai-instagram-showcase__footer-link-{{ ai_gen_id }} {
-    color: {{ block.settings.footer_link_color }};
+  /* ── FOOTER ─────────────────────────────────── */
+  .km-ig-footer-{{ ai_gen_id }} {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .km-ig-footer-text-{{ ai_gen_id }} {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .km-ig-footer-link-{{ ai_gen_id }} {
+    font-size: 13px;
+    font-weight: 600;
+    color: #c2a96e;
     text-decoration: none;
-    font-weight: 500;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 
-  .ai-instagram-showcase__footer-link-{{ ai_gen_id }}:hover {
+  .km-ig-footer-link-{{ ai_gen_id }}:hover {
     text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
+  /* ── MOBILE ─────────────────────────────────── */
   @media screen and (max-width: 749px) {
-    .ai-instagram-showcase__grid-{{ ai_gen_id }} {
-      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+
+    .km-ig-header-{{ ai_gen_id }} {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 20px;
     }
 
-    .ai-instagram-showcase__heading-{{ ai_gen_id }} {
-      font-size: calc({{ block.settings.heading_size }}px * 0.8);
+    .km-ig-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.72 | round }}px;
     }
 
-    .ai-instagram-showcase__profile-pic-{{ ai_gen_id }} {
-      width: calc({{ block.settings.profile_pic_size }}px * 0.85);
-      height: calc({{ block.settings.profile_pic_size }}px * 0.85);
+    .km-ig-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr 1fr;
     }
 
-    .ai-instagram-showcase__handle-{{ ai_gen_id }} {
-      font-size: calc({{ block.settings.handle_size }}px * 0.9);
+    .km-ig-feature-{{ ai_gen_id }} {
+      grid-row: span 1;
+      aspect-ratio: 1;
     }
 
-    .ai-instagram-showcase__subtitle-{{ ai_gen_id }} {
-      font-size: calc({{ block.settings.subtitle_size }}px * 0.9);
+    .km-ig-small-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr 1fr;
     }
 
-    .ai-instagram-showcase__footer-{{ ai_gen_id }} {
-      font-size: calc({{ block.settings.footer_size }}px * 0.9);
+    .km-ig-strip-{{ ai_gen_id }} {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .km-ig-strip-cell-{{ ai_gen_id }}:nth-child(n+4) {
+      display: none;
     }
   }
+
 {% endstyle %}
 
-<instagram-showcase-{{ ai_gen_id }} class="ai-instagram-showcase-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
-  <div class="ai-instagram-showcase__container-{{ ai_gen_id }}">
-    {% if block.settings.heading != blank %}
-      <h2 class="ai-instagram-showcase__heading-{{ ai_gen_id }}">
-        {{ block.settings.heading }}
-      </h2>
-    {% endif %}
+<div class="km-ig-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="km-ig-inner-{{ ai_gen_id }}">
 
-    <div class="ai-instagram-showcase__profile-{{ ai_gen_id }}">
-      {% if block.settings.show_story_ring %}
-        <div class="ai-instagram-showcase__profile-pic-wrapper-{{ ai_gen_id }}">
-          <div class="ai-instagram-showcase__profile-pic-{{ ai_gen_id }}">
+    <!-- HEADER -->
+    <div class="km-ig-header-{{ ai_gen_id }}">
+      <div class="km-ig-header-left-{{ ai_gen_id }}">
+        <span class="km-ig-eyebrow-{{ ai_gen_id }}">Community</span>
+        {% if block.settings.heading != blank %}
+          <h2 class="km-ig-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+      </div>
+
+      <!-- Profile pill -->
+      <div class="km-ig-profile-{{ ai_gen_id }}">
+        <div class="km-ig-avatar-wrap-{{ ai_gen_id }}">
+          <div class="km-ig-avatar-ring-{{ ai_gen_id }}"></div>
+          <div class="km-ig-avatar-bg-{{ ai_gen_id }}"></div>
+          <div class="km-ig-avatar-img-{{ ai_gen_id }}">
             {% if block.settings.profile_image %}
               <img
-                src="{{ block.settings.profile_image | image_url: width: 200 }}"
+                src="{{ block.settings.profile_image | image_url: width: 120 }}"
                 alt="{{ block.settings.instagram_handle }}"
                 loading="lazy"
-                width="200"
-                height="200"
+                width="120"
+                height="120"
               >
             {% else %}
-              <div class="ai-instagram-showcase__photo-placeholder-{{ ai_gen_id }}">
-                {{ 'image' | placeholder_svg_tag }}
-              </div>
+              {{ 'image' | placeholder_svg_tag }}
             {% endif %}
           </div>
         </div>
-      {% else %}
-        <div class="ai-instagram-showcase__profile-pic-{{ ai_gen_id }}" style="border: none;">
-          {% if block.settings.profile_image %}
-            <img
-              src="{{ block.settings.profile_image | image_url: width: 200 }}"
-              alt="{{ block.settings.instagram_handle }}"
-              loading="lazy"
-              width="200"
-              height="200"
-            >
-          {% else %}
-            <div class="ai-instagram-showcase__photo-placeholder-{{ ai_gen_id }}">
-              {{ 'image' | placeholder_svg_tag }}
-            </div>
-          {% endif %}
+        <div class="km-ig-profile-info-{{ ai_gen_id }}">
+          <div class="km-ig-handle-{{ ai_gen_id }}">{{ block.settings.instagram_handle }}</div>
+          <div class="km-ig-sub-{{ ai_gen_id }}">{{ block.settings.profile_subtitle }}</div>
         </div>
-      {% endif %}
-      <div class="ai-instagram-showcase__profile-info-{{ ai_gen_id }}">
-        {% if block.settings.instagram_handle != blank %}
-          <div class="ai-instagram-showcase__handle-{{ ai_gen_id }}">
-            {{ block.settings.instagram_handle }}
-          </div>
-        {% endif %}
-        {% if block.settings.profile_subtitle != blank %}
-          <div class="ai-instagram-showcase__subtitle-{{ ai_gen_id }}">
-            {{ block.settings.profile_subtitle }}
-          </div>
-        {% endif %}
       </div>
     </div>
 
-    <div class="ai-instagram-showcase__grid-{{ ai_gen_id }}">
-      {% for i in (1..10) %}
+    <!-- EDITORIAL GRID: feature + 4 small -->
+    <div class="km-ig-grid-{{ ai_gen_id }}">
+
+      <!-- Feature photo (left, tall) -->
+      <div class="km-ig-feature-{{ ai_gen_id }}">
+        {% if block.settings.photo_1 %}
+          <img
+            src="{{ block.settings.photo_1 | image_url: width: 800 }}"
+            alt="{{ block.settings.username_1 | default: 'KIDSMIRE style' }}"
+            loading="lazy" width="800" height="1000"
+          >
+        {% else %}
+          {{ 'image' | placeholder_svg_tag }}
+        {% endif %}
+        {% if block.settings.username_1 != blank %}
+          <div class="km-ig-tag-{{ ai_gen_id }}">{{ block.settings.username_1 }}</div>
+        {% endif %}
+      </div>
+
+      <!-- 4 small photos (right, 2x2) -->
+      <div class="km-ig-small-grid-{{ ai_gen_id }}">
+        {% for i in (2..5) %}
+          {% liquid
+            assign photo_key = 'photo_' | append: i
+            assign user_key = 'username_' | append: i
+          %}
+          <div class="km-ig-cell-{{ ai_gen_id }}">
+            {% if block.settings[photo_key] %}
+              <img
+                src="{{ block.settings[photo_key] | image_url: width: 500 }}"
+                alt="{{ block.settings[user_key] | default: 'KIDSMIRE style' }}"
+                loading="lazy" width="500" height="500"
+              >
+            {% else %}
+              {{ 'image' | placeholder_svg_tag }}
+            {% endif %}
+            {% if block.settings[user_key] != blank %}
+              <div class="km-ig-tag-{{ ai_gen_id }}">{{ block.settings[user_key] }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+
+    <!-- BOTTOM STRIP: photos 6–10 -->
+    <div class="km-ig-strip-{{ ai_gen_id }}">
+      {% for i in (6..10) %}
         {% liquid
-          assign image_key = 'photo_' | append: i
-          assign username_key = 'username_' | append: i
-          assign photo = block.settings[image_key]
-          assign username = block.settings[username_key]
+          assign photo_key = 'photo_' | append: i
+          assign user_key = 'username_' | append: i
         %}
-        <div class="ai-instagram-showcase__photo-{{ ai_gen_id }}">
-          {% if photo %}
+        <div class="km-ig-strip-cell-{{ ai_gen_id }}">
+          {% if block.settings[photo_key] %}
             <img
-              src="{{ photo | image_url: width: 600 }}"
-              alt="{{ username | default: 'Instagram photo' }}"
-              loading="lazy"
-              width="600"
-              height="600"
+              src="{{ block.settings[photo_key] | image_url: width: 400 }}"
+              alt="{{ block.settings[user_key] | default: 'KIDSMIRE style' }}"
+              loading="lazy" width="400" height="400"
             >
           {% else %}
-            <div class="ai-instagram-showcase__photo-placeholder-{{ ai_gen_id }}">
-              {{ 'image' | placeholder_svg_tag }}
-            </div>
+            {{ 'image' | placeholder_svg_tag }}
           {% endif %}
-          {% if username != blank %}
-            <div class="ai-instagram-showcase__username-tag-{{ ai_gen_id }}">
-              {{ username }}
-            </div>
+          {% if block.settings[user_key] != blank %}
+            <div class="km-ig-tag-{{ ai_gen_id }}">{{ block.settings[user_key] }}</div>
           {% endif %}
         </div>
       {% endfor %}
     </div>
 
-    {% if block.settings.footer_text != blank %}
-      <div class="ai-instagram-showcase__footer-{{ ai_gen_id }}">
-        {{ block.settings.footer_text }}
-        {% if block.settings.footer_link != blank %}
-          <a
-            href="{{ block.settings.footer_link }}"
-            class="ai-instagram-showcase__footer-link-{{ ai_gen_id }}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {{ block.settings.footer_link_text }}
-          </a>
-        {% endif %}
-      </div>
-    {% endif %}
+    <!-- FOOTER -->
+    <div class="km-ig-footer-{{ ai_gen_id }}">
+      <span class="km-ig-footer-text-{{ ai_gen_id }}">{{ block.settings.footer_text }}</span>
+      {% if block.settings.footer_link != blank %}
+        <a href="{{ block.settings.footer_link }}" class="km-ig-footer-link-{{ ai_gen_id }}" target="_blank" rel="noopener noreferrer">
+          {{ block.settings.footer_link_text }}
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+
   </div>
-</instagram-showcase-{{ ai_gen_id }}>
-
-<script>
-  (function() {
-    class InstagramShowcase{{ ai_gen_id }} extends HTMLElement {
-      constructor() {
-        super();
-      }
-
-      connectedCallback() {
-        this.setupAccessibility();
-      }
-
-      setupAccessibility() {
-        const photos = this.querySelectorAll('.ai-instagram-showcase__photo-{{ ai_gen_id }}');
-        photos.forEach((photo) => {
-          photo.setAttribute('role', 'img');
-        });
-      }
-    }
-
-    customElements.define('instagram-showcase-{{ ai_gen_id }}', InstagramShowcase{{ ai_gen_id }});
-  })();
-</script>
+</div>
 
 {% schema %}
 {
-  "name": "Instagram showcase",
-  "tag": null,
-  "class": "instagram-showcase-section",
+  "name": "KIDSMIRE Instagram",
   "settings": [
     {
       "type": "header",
@@ -321,14 +457,8 @@
       "max": 1600,
       "step": 100,
       "unit": "px",
-      "label": "Maximum width",
+      "label": "Max width",
       "default": 1200
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background color",
-      "default": "#ffffff"
     },
     {
       "type": "range",
@@ -338,7 +468,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding top",
-      "default": 60
+      "default": 64
     },
     {
       "type": "range",
@@ -348,7 +478,7 @@
       "step": 4,
       "unit": "px",
       "label": "Padding bottom",
-      "default": 60
+      "default": 64
     },
     {
       "type": "header",
@@ -358,33 +488,17 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Explore more real-life styles & customer moments"
+      "default": "Real Kids. Real Style."
     },
     {
       "type": "range",
       "id": "heading_size",
-      "min": 16,
-      "max": 48,
+      "min": 24,
+      "max": 60,
       "step": 2,
       "unit": "px",
-      "label": "Size",
-      "default": 28
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Color",
-      "default": "#121212"
-    },
-    {
-      "type": "range",
-      "id": "heading_spacing",
-      "min": 10,
-      "max": 60,
-      "step": 5,
-      "unit": "px",
-      "label": "Bottom spacing",
-      "default": 30
+      "label": "Heading size",
+      "default": 40
     },
     {
       "type": "header",
@@ -398,28 +512,12 @@
     {
       "type": "range",
       "id": "profile_pic_size",
-      "min": 40,
-      "max": 80,
+      "min": 32,
+      "max": 60,
       "step": 4,
       "unit": "px",
       "label": "Picture size",
-      "default": 56
-    },
-    {
-      "type": "checkbox",
-      "id": "show_story_ring",
-      "label": "Show story ring",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "story_ring_width",
-      "min": 2,
-      "max": 6,
-      "step": 1,
-      "unit": "px",
-      "label": "Story ring width",
-      "default": 3
+      "default": 40
     },
     {
       "type": "color",
@@ -442,56 +540,14 @@
     {
       "type": "text",
       "id": "instagram_handle",
-      "label": "Instagram handle",
+      "label": "Handle",
       "default": "@kidsmire.official"
-    },
-    {
-      "type": "range",
-      "id": "handle_size",
-      "min": 12,
-      "max": 24,
-      "step": 1,
-      "unit": "px",
-      "label": "Handle size",
-      "default": 16
-    },
-    {
-      "type": "color",
-      "id": "handle_color",
-      "label": "Handle color",
-      "default": "#121212"
     },
     {
       "type": "text",
       "id": "profile_subtitle",
       "label": "Subtitle",
-      "default": "Discover real community stories and detailed fabric reviews."
-    },
-    {
-      "type": "range",
-      "id": "subtitle_size",
-      "min": 10,
-      "max": 18,
-      "step": 1,
-      "unit": "px",
-      "label": "Subtitle size",
-      "default": 13
-    },
-    {
-      "type": "color",
-      "id": "subtitle_color",
-      "label": "Subtitle color",
-      "default": "#666666"
-    },
-    {
-      "type": "range",
-      "id": "profile_spacing",
-      "min": 10,
-      "max": 60,
-      "step": 5,
-      "unit": "px",
-      "label": "Bottom spacing",
-      "default": 30
+      "default": "Real kids, real moments"
     },
     {
       "type": "header",
@@ -499,189 +555,74 @@
     },
     {
       "type": "range",
-      "id": "columns_desktop",
-      "min": 3,
-      "max": 6,
-      "step": 1,
-      "label": "Columns on desktop",
-      "default": 5
-    },
-    {
-      "type": "select",
-      "id": "columns_mobile",
-      "label": "Columns on mobile",
-      "options": [
-        {
-          "value": "2",
-          "label": "2"
-        },
-        {
-          "value": "3",
-          "label": "3"
-        }
-      ],
-      "default": "2"
-    },
-    {
-      "type": "range",
       "id": "grid_gap",
-      "min": 4,
-      "max": 24,
+      "min": 2,
+      "max": 16,
       "step": 2,
       "unit": "px",
       "label": "Gap between photos",
-      "default": 8
-    },
-    {
-      "type": "range",
-      "id": "grid_spacing",
-      "min": 10,
-      "max": 60,
-      "step": 5,
-      "unit": "px",
-      "label": "Bottom spacing",
-      "default": 30
+      "default": 4
     },
     {
       "type": "header",
-      "content": "Photo 1"
+      "content": "Photo 1 — Feature (large left)"
     },
-    {
-      "type": "image_picker",
-      "id": "photo_1",
-      "label": "Image"
-    },
-    {
-      "type": "text",
-      "id": "username_1",
-      "label": "Username tag"
-    },
+    { "type": "image_picker", "id": "photo_1", "label": "Image" },
+    { "type": "text", "id": "username_1", "label": "Username tag" },
     {
       "type": "header",
       "content": "Photo 2"
     },
-    {
-      "type": "image_picker",
-      "id": "photo_2",
-      "label": "Image"
-    },
-    {
-      "type": "text",
-      "id": "username_2",
-      "label": "Username tag"
-    },
+    { "type": "image_picker", "id": "photo_2", "label": "Image" },
+    { "type": "text", "id": "username_2", "label": "Username tag" },
     {
       "type": "header",
       "content": "Photo 3"
     },
-    {
-      "type": "image_picker",
-      "id": "photo_3",
-      "label": "Image"
-    },
-    {
-      "type": "text",
-      "id": "username_3",
-      "label": "Username tag"
-    },
+    { "type": "image_picker", "id": "photo_3", "label": "Image" },
+    { "type": "text", "id": "username_3", "label": "Username tag" },
     {
       "type": "header",
       "content": "Photo 4"
     },
-    {
-      "type": "image_picker",
-      "id": "photo_4",
-      "label": "Image"
-    },
-    {
-      "type": "text",
-      "id": "username_4",
-      "label": "Username tag"
-    },
+    { "type": "image_picker", "id": "photo_4", "label": "Image" },
+    { "type": "text", "id": "username_4", "label": "Username tag" },
     {
       "type": "header",
       "content": "Photo 5"
     },
-    {
-      "type": "image_picker",
-      "id": "photo_5",
-      "label": "Image"
-    },
-    {
-      "type": "text",
-      "id": "username_5",
-      "label": "Username tag"
-    },
+    { "type": "image_picker", "id": "photo_5", "label": "Image" },
+    { "type": "text", "id": "username_5", "label": "Username tag" },
     {
       "type": "header",
       "content": "Photo 6"
     },
-    {
-      "type": "image_picker",
-      "id": "photo_6",
-      "label": "Image"
-    },
-    {
-      "type": "text",
-      "id": "username_6",
-      "label": "Username tag"
-    },
+    { "type": "image_picker", "id": "photo_6", "label": "Image" },
+    { "type": "text", "id": "username_6", "label": "Username tag" },
     {
       "type": "header",
       "content": "Photo 7"
     },
-    {
-      "type": "image_picker",
-      "id": "photo_7",
-      "label": "Image"
-    },
-    {
-      "type": "text",
-      "id": "username_7",
-      "label": "Username tag"
-    },
+    { "type": "image_picker", "id": "photo_7", "label": "Image" },
+    { "type": "text", "id": "username_7", "label": "Username tag" },
     {
       "type": "header",
       "content": "Photo 8"
     },
-    {
-      "type": "image_picker",
-      "id": "photo_8",
-      "label": "Image"
-    },
-    {
-      "type": "text",
-      "id": "username_8",
-      "label": "Username tag"
-    },
+    { "type": "image_picker", "id": "photo_8", "label": "Image" },
+    { "type": "text", "id": "username_8", "label": "Username tag" },
     {
       "type": "header",
       "content": "Photo 9"
     },
-    {
-      "type": "image_picker",
-      "id": "photo_9",
-      "label": "Image"
-    },
-    {
-      "type": "text",
-      "id": "username_9",
-      "label": "Username tag"
-    },
+    { "type": "image_picker", "id": "photo_9", "label": "Image" },
+    { "type": "text", "id": "username_9", "label": "Username tag" },
     {
       "type": "header",
       "content": "Photo 10"
     },
-    {
-      "type": "image_picker",
-      "id": "photo_10",
-      "label": "Image"
-    },
-    {
-      "type": "text",
-      "id": "username_10",
-      "label": "Username tag"
-    },
+    { "type": "image_picker", "id": "photo_10", "label": "Image" },
+    { "type": "text", "id": "username_10", "label": "Username tag" },
     {
       "type": "header",
       "content": "Footer"
@@ -690,7 +631,7 @@
       "type": "text",
       "id": "footer_text",
       "label": "Footer text",
-      "default": "explore more detailed looks and community content at"
+      "default": "See more at"
     },
     {
       "type": "url",
@@ -701,34 +642,12 @@
       "type": "text",
       "id": "footer_link_text",
       "label": "Link text",
-      "default": "instagram.com/kidsmire.official"
-    },
-    {
-      "type": "range",
-      "id": "footer_size",
-      "min": 10,
-      "max": 18,
-      "step": 1,
-      "unit": "px",
-      "label": "Size",
-      "default": 13
-    },
-    {
-      "type": "color",
-      "id": "footer_color",
-      "label": "Text color",
-      "default": "#666666"
-    },
-    {
-      "type": "color",
-      "id": "footer_link_color",
-      "label": "Link color",
-      "default": "#121212"
+      "default": "@kidsmire.official"
     }
   ],
   "presets": [
     {
-      "name": "Instagram showcase"
+      "name": "KIDSMIRE Instagram"
     }
   ]
 }
