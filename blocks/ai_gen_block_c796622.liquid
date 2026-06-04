@@ -130,7 +130,7 @@
 
   @media screen and (max-width: 749px) {
     .ai-marquee-segment-{{ ai_gen_id }} {
-      font-size: {{ s.settings.font_size | times: 0.9 }}px;
+      font-size: {{ block.settings.font_size | times: 0.9 }}px;
       line-height: {{ block.settings.font_size | times: 1.35 }}px;
     }
 
@@ -214,7 +214,7 @@
       "type": "range",
       "id": "message_spacing",
       "min": 12,
-      "max": 12,
+      "max": 80,
       "step": 4,
       "unit": "px",
       "label": "Space between messages",
@@ -239,11 +239,11 @@
       "type": "range",
       "id": "segment_gap",
       "min": 12,
-      "max": 12,
+      "max": 108,
       "step": 8,
       "unit": "px",
       "label": "Space between message repeats",
-      "default": 48
+      "default": 44
     },
     {
       "type": "header",
