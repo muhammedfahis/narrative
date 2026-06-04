@@ -3106,7 +3106,171 @@ details-disclosure > details {
 .jdgm-paginate__load-more-btn:hover {
   background: #F1EFE8;
 }
+/* ── KIDSMIRE footer redesign ── */
 
+/* Trust banner */
+.footer-trust-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  background: #EAF3DE;
+  border-bottom: 0.5px solid #C0DD97;
+  font-size: 12px;
+  color: #27500A;
+  text-align: center;
+}
+
+/* Main footer layout */
+.footer__content-top {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2rem !important;
+}
+
+.footer__blocks-wrapper {
+  gap: 2rem !important;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 0.5px solid var(--color-border-tertiary);
+}
+
+/* Column headings */
+.footer-block__heading {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.07em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 14px !important;
+  opacity: 0.9;
+}
+
+/* Footer links */
+.footer-block__details-content .list-menu__item {
+  font-size: 13px !important;
+  line-height: 1;
+  padding: 5px 0 !important;
+  opacity: 0.75;
+  transition: opacity 0.15s;
+}
+
+.footer-block__details-content .list-menu__item:hover {
+  opacity: 1;
+}
+
+/* About KIDSMIRE text block */
+.footer-block__details-content.rte p {
+  font-size: 12px !important;
+  line-height: 1.7 !important;
+  opacity: 0.75;
+  margin-bottom: 4px;
+}
+
+/* Trust pill lines in about block */
+.footer-block__details-content.rte p:not(:first-child) {
+  font-size: 12px !important;
+  opacity: 0.85;
+}
+
+/* Newsletter section */
+.footer-block--newsletter {
+  padding-top: 1.5rem;
+  border-top: 0.5px solid var(--color-border-tertiary);
+  margin-top: 0.5rem;
+}
+
+.footer-block__newsletter .footer-block__heading {
+  font-size: 14px !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  margin-bottom: 4px !important;
+}
+
+.footer__newsletter .field__input {
+  font-size: 13px !important;
+  border-radius: 6px !important;
+}
+
+/* Bottom bar */
+.footer__content-bottom {
+  padding-top: 1.25rem;
+  border-top: 0.5px solid var(--color-border-tertiary);
+  margin-top: 0;
+}
+
+.footer__content-bottom-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer__copyright {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.copyright__content {
+  font-size: 11px !important;
+  opacity: 0.55;
+}
+
+/* Payment icons */
+.list-payment {
+  gap: 6px !important;
+}
+
+.list-payment__item svg,
+.list-payment__item img {
+  height: 22px !important;
+  width: auto !important;
+  border-radius: 3px;
+  border: 0.5px solid var(--color-border-tertiary);
+}
+
+/* Social icons */
+.list-social {
+  gap: 10px !important;
+}
+
+.list-social__link {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  border: 0.5px solid var(--color-border-tertiary) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: border-color 0.15s, opacity 0.15s !important;
+  opacity: 0.7;
+}
+
+.list-social__link:hover {
+  opacity: 1;
+  border-color: var(--color-border-primary) !important;
+}
+
+.list-social__link svg {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Mobile */
+@media screen and (max-width: 749px) {
+  .footer__blocks-wrapper {
+    gap: 1.5rem !important;
+  }
+  .footer-block__heading {
+    font-size: 11px !important;
+  }
+  .footer-block__details-content .list-menu__item {
+    font-size: 13px !important;
+  }
+}
 
 
 
