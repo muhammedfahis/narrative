@@ -8,203 +8,210 @@
 
 {% style %}
   .ai-size-chart-{{ ai_gen_id }} {
-    display: block;
-    width: {{ block.settings.desktop_width_percent }}%;
-    max-width: 100%;
-    margin: 0 auto;
-    background-color: {{ block.settings.background_color }};
-    border: {{ block.settings.border_thickness }}px solid {{ block.settings.border_color }};
-    border-radius: {{ block.settings.border_radius }}px;
-    overflow: hidden;
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,0.45);
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .ai-size-chart-{{ ai_gen_id }}.active {
+    display: flex;
+  }
+
+  .ai-size-chart-modal-{{ ai_gen_id }} {
+    background: #ffffff;
+    border-radius: 14px;
+    border: 0.5px solid #D3D1C7;
+    width: 100%;
+    max-width: 560px;
+    max-height: 85vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .ai-size-chart-header-{{ ai_gen_id }} {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: {{ block.settings.padding }}px;
-    cursor: pointer;
-    background-color: {{ block.settings.header_background_color }};
-    transition: background-color 0.3s ease;
-  }
-
-  .ai-size-chart-header-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.header_hover_color }};
+    padding: 1rem 1.25rem;
+    background: #2C2C2A;
+    border-radius: 14px 14px 0 0;
+    cursor: default;
+    position: sticky;
+    top: 0;
+    z-index: 2;
   }
 
   .ai-size-chart-title-{{ ai_gen_id }} {
     margin: 0;
-    font-size: {{ block.settings.title_font_size }}px;
-    color: {{ block.settings.title_color }};
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
+    color: #F1EFE8;
   }
 
   .ai-size-chart-icon-{{ ai_gen_id }} {
     width: 20px;
     height: 20px;
-    transition: transform 0.3s ease;
-    color: {{ block.settings.title_color }};
+    color: #B4B2A9;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color 0.2s;
   }
 
-  .ai-size-chart-{{ ai_gen_id }}.active .ai-size-chart-icon-{{ ai_gen_id }} {
-    transform: rotate(180deg);
+  .ai-size-chart-icon-{{ ai_gen_id }}:hover {
+    color: #F1EFE8;
   }
 
   .ai-size-chart-content-{{ ai_gen_id }} {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-
-  .ai-size-chart-{{ ai_gen_id }}.active .ai-size-chart-content-{{ ai_gen_id }} {
-    max-height: 3200px;
+    max-height: none;
+    overflow: visible;
   }
 
   .ai-size-chart-inner-{{ ai_gen_id }} {
-    padding: {{ block.settings.padding }}px;
+    padding: 1.25rem;
+  }
+
+  .ai-size-chart-guide-{{ ai_gen_id }} {
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.5px solid #D3D1C7;
+  }
+
+  .ai-size-chart-guide-title-{{ ai_gen_id }} {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #2C2C2A;
+  }
+
+  .ai-size-chart-guide-list-{{ ai_gen_id }} {
+    margin: 0 0 12px;
+    padding-left: 1.1em;
+    font-size: 12px;
+    color: #5F5E5A;
+    line-height: 1.6;
+  }
+
+  .ai-size-chart-guide-list-{{ ai_gen_id }} li {
+    margin-bottom: 4px;
+  }
+
+  .ai-size-chart-diagram-{{ ai_gen_id }} {
+    max-width: 180px;
+    margin: 0 auto;
+    color: #5F5E5A;
+  }
+
+  .ai-size-chart-diagram-caption-{{ ai_gen_id }} {
+    margin-top: 6px;
+    font-size: 11px;
+    color: #888780;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .ai-size-chart-toolbar-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .ai-size-chart-toolbar-label-{{ ai_gen_id }} {
+    font-size: 12px;
+    font-weight: 500;
+    color: #2C2C2A;
+  }
+
+  .ai-size-chart-unit-toggle-{{ ai_gen_id }} {
+    display: inline-flex;
+    border: 0.5px solid #D3D1C7;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #F1EFE8;
+  }
+
+  .ai-size-chart-unit-btn-{{ ai_gen_id }} {
+    margin: 0;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: #5F5E5A;
+    line-height: 1.2;
+    transition: background 0.15s;
+  }
+
+  .ai-size-chart-unit-btn-{{ ai_gen_id }} + .ai-size-chart-unit-btn-{{ ai_gen_id }} {
+    border-left: 0.5px solid #D3D1C7;
+  }
+
+  .ai-size-chart-unit-btn-{{ ai_gen_id }}[aria-pressed="true"] {
+    background: #2C2C2A;
+    color: #F1EFE8;
+    font-weight: 500;
+  }
+
+  .ai-size-chart-table-wrap-{{ ai_gen_id }} {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+    border: 0.5px solid #D3D1C7;
+  }
+
+  .ai-size-chart-table-wrap-{{ ai_gen_id }} .ai-size-chart-table-{{ ai_gen_id }} {
+    min-width: 420px;
   }
 
   .ai-size-chart-table-{{ ai_gen_id }} {
     width: 100%;
     border-collapse: collapse;
-    font-size: {{ block.settings.table_font_size }}px;
-    color: {{ block.settings.text_color }};
+    font-size: 12px;
+    color: #2C2C2A;
   }
 
   .ai-size-chart-table-{{ ai_gen_id }} th {
-    background-color: {{ block.settings.table_header_bg }};
-    color: {{ block.settings.table_header_text }};
-    padding: 12px 8px;
+    background: #F1EFE8;
+    color: #444441;
+    padding: 8px 10px;
     text-align: left;
-    font-weight: 600;
-    border-bottom: 2px solid {{ block.settings.border_color }};
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 0.5px solid #D3D1C7;
   }
 
   .ai-size-chart-table-{{ ai_gen_id }} td {
-    padding: 10px 8px;
-    border-bottom: 1px solid {{ block.settings.table_border_color }};
+    padding: 9px 10px;
+    border-bottom: 0.5px solid #F1EFE8;
+    color: #2C2C2A;
   }
 
   .ai-size-chart-table-{{ ai_gen_id }} tr:last-child td {
     border-bottom: none;
   }
 
-  .ai-size-chart-table-{{ ai_gen_id }} tbody tr:hover {
-    background-color: {{ block.settings.table_row_hover }};
+  .ai-size-chart-table-{{ ai_gen_id }} tbody tr:hover td {
+    background: #F9F7F4;
   }
 
   .ai-size-chart-note-{{ ai_gen_id }} {
-    margin-top: 16px;
-    padding: 12px;
-    background-color: {{ block.settings.note_background }};
-    border-left: 3px solid {{ block.settings.note_border }};
-    font-size: {{ block.settings.note_font_size }}px;
-    color: {{ block.settings.text_color }};
-    line-height: 1.5;
-  }
-
-  .ai-size-chart-guide-{{ ai_gen_id }} {
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid {{ block.settings.border_color }};
-  }
-
-  .ai-size-chart-guide-title-{{ ai_gen_id }} {
-    margin: 0 0 10px;
-    font-size: {{ block.settings.table_font_size | plus: 1 }}px;
-    font-weight: 600;
-    color: {{ block.settings.text_color }};
-  }
-
-  .ai-size-chart-guide-list-{{ ai_gen_id }} {
-    margin: 0 0 14px;
-    padding-left: 1.15em;
-    font-size: {{ block.settings.table_font_size }}px;
-    color: {{ block.settings.text_color }};
+    margin-top: 1rem;
+    padding: 10px 12px;
+    background: #FAEEDA;
+    border-left: 3px solid #EF9F27;
+    border-radius: 0 6px 6px 0;
+    font-size: 12px;
+    color: #633806;
     line-height: 1.55;
-  }
-
-  .ai-size-chart-guide-list-{{ ai_gen_id }} li {
-    margin-bottom: 6px;
-  }
-
-  .ai-size-chart-diagram-{{ ai_gen_id }} {
-    max-width: 220px;
-    margin: 0 auto;
-    color: {{ block.settings.text_color }};
-  }
-
-  .ai-size-chart-diagram-{{ ai_gen_id }} svg {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .ai-size-chart-diagram-caption-{{ ai_gen_id }} {
-    margin-top: 8px;
-    font-size: {{ block.settings.table_font_size | times: 0.92 }}px;
-    color: {{ block.settings.text_color }};
-    opacity: 0.9;
-    line-height: 1.45;
-    text-align: center;
-  }
-
-  .ai-size-chart-toolbar-{{ ai_gen_id }} {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px 12px;
-    margin-bottom: 12px;
-  }
-
-  .ai-size-chart-toolbar-label-{{ ai_gen_id }} {
-    font-size: {{ block.settings.table_font_size }}px;
-    font-weight: 600;
-    color: {{ block.settings.text_color }};
-    margin-right: 4px;
-  }
-
-  .ai-size-chart-unit-toggle-{{ ai_gen_id }} {
-    display: inline-flex;
-    border: 1px solid {{ block.settings.border_color }};
-    border-radius: 6px;
-    overflow: hidden;
-    background: {{ block.settings.background_color }};
-  }
-
-  .ai-size-chart-unit-btn-{{ ai_gen_id }} {
-    margin: 0;
-    padding: 8px 14px;
-    font-size: {{ block.settings.table_font_size }}px;
-    font-family: inherit;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    color: {{ block.settings.text_color }};
-    line-height: 1.2;
-  }
-
-  .ai-size-chart-unit-btn-{{ ai_gen_id }} + .ai-size-chart-unit-btn-{{ ai_gen_id }} {
-    border-left: 1px solid {{ block.settings.border_color }};
-  }
-
-  .ai-size-chart-unit-btn-{{ ai_gen_id }}[aria-pressed="true"] {
-    background-color: {{ block.settings.table_header_bg }};
-    font-weight: 600;
-  }
-
-  .ai-size-chart-unit-btn-{{ ai_gen_id }}:focus-visible {
-    outline: 2px solid {{ block.settings.note_border }};
-    outline-offset: 2px;
-  }
-
-  .ai-size-chart-table-wrap-{{ ai_gen_id }} {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .ai-size-chart-table-wrap-{{ ai_gen_id }} .ai-size-chart-table-{{ ai_gen_id }} {
-    min-width: 480px;
   }
 
   .ai-size-chart-table-wrap-{{ ai_gen_id }}[data-unit="in"] .ai-sc-cm-{{ ai_gen_id }},
@@ -212,18 +219,35 @@
     display: none;
   }
 
-  @media screen and (max-width: 749px) {
-    .ai-size-chart-{{ ai_gen_id }} {
-      width: 100%;
-    }
+  .kidsmire-size-trigger-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #1D9E75;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    margin-left: 8px;
+  }
 
-    .ai-size-chart-table-{{ ai_gen_id }} {
-      font-size: {{ block.settings.table_font_size | times: 0.9 }}px;
+  .kidsmire-size-trigger-{{ ai_gen_id }}:hover {
+    color: #0F6E56;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-size-chart-modal-{{ ai_gen_id }} {
+      max-height: 90vh;
     }
 
     .ai-size-chart-table-{{ ai_gen_id }} th,
     .ai-size-chart-table-{{ ai_gen_id }} td {
-      padding: 8px 6px;
+      padding: 7px 8px;
+      font-size: 11px;
     }
   }
 {% endstyle %}
