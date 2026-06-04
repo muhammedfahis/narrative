@@ -2984,7 +2984,128 @@ details-disclosure > details {
   }
 }
 
+/* ── KIDSMIRE — Judge.me reviews override ── */
 
+/* Section heading */
+.jdgm-widget .jdgm-histogram__heading,
+.jdgm-all-reviews-header h2 {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* Rating summary bar */
+.jdgm-histogram {
+  max-width: 260px;
+}
+.jdgm-histogram__bar-container {
+  height: 5px;
+  border-radius: 3px;
+  background: #D3D1C7;
+}
+.jdgm-histogram__bar {
+  background: #EF9F27;
+  border-radius: 3px;
+}
+
+/* Review cards grid */
+.jdgm-rev-widg__reviews,
+.jdgm-all-reviews-collection {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+/* Individual review card */
+.jdgm-rev {
+  background: #ffffff;
+  border: 0.5px solid #D3D1C7 !important;
+  border-radius: 12px !important;
+  padding: 1rem 1.1rem !important;
+  box-shadow: none !important;
+}
+
+/* Reviewer name */
+.jdgm-rev__author {
+  font-size: 13px;
+  font-weight: 500;
+  color: #2C2C2A;
+}
+
+/* Reviewer location */
+.jdgm-rev__location {
+  font-size: 11px;
+  color: #888780;
+}
+
+/* Avatar initials circle */
+.jdgm-rev__pic {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  background: #CECBF6 !important;
+  color: #3C3489 !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  border: none !important;
+}
+
+/* Star color */
+.jdgm-star.jdgm--on {
+  color: #EF9F27 !important;
+}
+.jdgm-star.jdgm--off {
+  color: #D3D1C7 !important;
+}
+
+/* Review body text */
+.jdgm-rev__body {
+  font-size: 12px;
+  color: #5F5E5A;
+  line-height: 1.65;
+}
+
+/* Product name pill */
+.jdgm-rev__prod-link {
+  display: inline-block;
+  background: #F1EFE8;
+  color: #444441;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-decoration: none;
+  margin-bottom: 6px;
+}
+
+/* Verified badge */
+.jdgm-rev__verification-badge {
+  font-size: 11px;
+  color: #3B6D11;
+  background: #EAF3DE;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: none !important;
+}
+
+/* Photo thumbnails */
+.jdgm-rev__pics img {
+  border-radius: 6px;
+  border: 0.5px solid #D3D1C7;
+}
+
+/* "Load more" button */
+.jdgm-paginate__load-more-btn,
+.jdgm-all-reviews-link {
+  background: transparent;
+  border: 0.5px solid #888780;
+  border-radius: 8px;
+  color: #2C2C2A;
+  font-size: 13px;
+  padding: 8px 20px;
+}
+.jdgm-paginate__load-more-btn:hover {
+  background: #F1EFE8;
+}
 
 
 
