@@ -252,18 +252,26 @@
   }
 {% endstyle %}
 
-<size-chart-{{ ai_gen_id }}
-  class="ai-size-chart-{{ ai_gen_id }} {% if block.settings.default_open %}active{% endif %}"
-  {{ block.shopify_attributes }}
->
-  <div class="ai-size-chart-header-{{ ai_gen_id }}" role="button" aria-expanded="{% if block.settings.default_open %}true{% else %}false{% endif %}" tabindex="0">
-    <h3 class="ai-size-chart-title-{{ ai_gen_id }}">{{ block.settings.title }}</h3>
-    <svg class="ai-size-chart-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="6 9 12 15 18 9"></polyline>
-    </svg>
-  </div>
+<button class="kidsmire-size-trigger-{{ ai_gen_id }}" id="size-trigger-{{ ai_gen_id }}" type="button" aria-haspopup="dialog">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M12 2v20M7 7l10 10M17 7L7 17"/></svg>
+  What size is my child?
+</button>
 
-  <div class="ai-size-chart-content-{{ ai_gen_id }}">
+<size-chart-{{ ai_gen_id }}
+  class="ai-size-chart-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+  role="dialog"
+  aria-modal="true"
+  aria-label="Size guide"
+>
+  <div class="ai-size-chart-modal-{{ ai_gen_id }}">
+    <div class="ai-size-chart-header-{{ ai_gen_id }}">
+      <h3 class="ai-size-chart-title-{{ ai_gen_id }}">{{ block.settings.title }}</h3>
+      <svg class="ai-size-chart-icon-{{ ai_gen_id }}" id="size-close-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="button" tabindex="0" aria-label="Close size guide">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </div>
     <div class="ai-size-chart-inner-{{ ai_gen_id }}">
       {% if block.settings.show_measurement_guide %}
         <div class="ai-size-chart-guide-{{ ai_gen_id }}">
@@ -472,44 +480,51 @@
 <script>
   (function() {
     class SizeChart{{ ai_gen_id }} extends HTMLElement {
-      constructor() {
-        super();
-      }
-
       connectedCallback() {
-        this.header = this.querySelector('.ai-size-chart-header-{{ ai_gen_id }}');
         this.tableWrap = this.querySelector('.ai-size-chart-table-wrap-{{ ai_gen_id }}');
         this.unitBtns = this.querySelectorAll('.ai-size-chart-unit-btn-{{ ai_gen_id }}');
-        this.setupEventListeners();
-      }
+        this.closeBtn = this.querySelector('#size-close-{{ ai_gen_id }}');
+        this.trigger = document.querySelector('#size-trigger-{{ ai_gen_id }}');
 
-      setupEventListeners() {
-        this.header.addEventListener('click', () => this.toggle());
-        this.header.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.toggle();
-          }
+        if (this.trigger) {
+          this.trigger.addEventListener('click', () => this.open());
+        }
+        if (this.closeBtn) {
+          this.closeBtn.addEventListener('click', () => this.close());
+          this.closeBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.close(); }
+          });
+        }
+        this.addEventListener('click', (e) => {
+          if (e.target === this) this.close();
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.classList.contains('active')) this.close();
         });
         this.unitBtns.forEach((btn) => {
           btn.addEventListener('click', () => this.setUnit(btn.dataset.unit));
         });
       }
 
+      open() {
+        this.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      close() {
+        this.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
       setUnit(unit) {
         if (!this.tableWrap || (unit !== 'in' && unit !== 'cm')) return;
         this.tableWrap.setAttribute('data-unit', unit);
         this.unitBtns.forEach((b) => {
-          const on = b.dataset.unit === unit;
-          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+          b.setAttribute('aria-pressed', b.dataset.unit === unit ? 'true' : 'false');
         });
       }
 
-      toggle() {
-        const isActive = this.classList.contains('active');
-        this.classList.toggle('active');
-        this.header.setAttribute('aria-expanded', !isActive);
-      }
+      toggle() {}
     }
 
     customElements.define('size-chart-{{ ai_gen_id }}', SizeChart{{ ai_gen_id }});
