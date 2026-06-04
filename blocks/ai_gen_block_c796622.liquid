@@ -130,7 +130,7 @@
 
   @media screen and (max-width: 749px) {
     .ai-marquee-segment-{{ ai_gen_id }} {
-      font-size: {{ block.settings.font_size | times: 0.9 }}px;
+      font-size: {{ s.settings.font_size | times: 0.9 }}px;
       line-height: {{ block.settings.font_size | times: 1.35 }}px;
     }
 
@@ -238,8 +238,8 @@
     {
       "type": "range",
       "id": "segment_gap",
-      "min": 24,
-      "max": 120,
+      "min": 12,
+      "max": 12,
       "step": 8,
       "unit": "px",
       "label": "Space between message repeats",
