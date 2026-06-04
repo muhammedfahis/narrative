@@ -34,28 +34,49 @@
     margin-bottom: {{ block.settings.closing_spacing }}px;
   }
 
-  .ai-kidsmire-features__card-{{ ai_gen_id }} {
+.ai-kidsmire-features__card-{{ ai_gen_id }} {
     background-color: {{ block.settings.card_background }};
-    border: 1px solid {{ block.settings.card_border_color }};
+    border: 0.5px solid #D3D1C7;
     border-radius: {{ block.settings.card_border_radius }}px;
     padding: {{ block.settings.card_padding }}px;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, {{ block.settings.card_shadow_opacity | divided_by: 100.0 }});
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    text-align: left;
+    box-shadow: none;
+    transition: border-color 0.2s ease;
   }
 
   .ai-kidsmire-features__card-{{ ai_gen_id }}:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, {{ block.settings.card_shadow_opacity | divided_by: 100.0 | times: 1.5 }});
-    border-color: {{ block.settings.card_border_hover_color }};
+    border-color: #888780;
+  }
+
+  .ai-kidsmire-features__card-{{ ai_gen_id }}:nth-child(1) .ai-kidsmire-features__icon-wrap-{{ ai_gen_id }} { background: #EAF3DE; color: #3B6D11; }
+  .ai-kidsmire-features__card-{{ ai_gen_id }}:nth-child(2) .ai-kidsmire-features__icon-wrap-{{ ai_gen_id }} { background: #FAEEDA; color: #633806; }
+  .ai-kidsmire-features__card-{{ ai_gen_id }}:nth-child(3) .ai-kidsmire-features__icon-wrap-{{ ai_gen_id }} { background: #E6F1FB; color: #0C447C; }
+  .ai-kidsmire-features__card-{{ ai_gen_id }}:nth-child(4) .ai-kidsmire-features__icon-wrap-{{ ai_gen_id }} { background: #FAECE7; color: #712B13; }
+
+  .ai-kidsmire-features__icon-wrap-{{ ai_gen_id }} {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: {{ block.settings.icon_spacing }}px;
+    font-size: {{ block.settings.icon_size }}px;
+    line-height: 1;
   }
 
   .ai-kidsmire-features__icon-{{ ai_gen_id }} {
     font-size: {{ block.settings.icon_size }}px;
     line-height: 1;
-    margin-bottom: {{ block.settings.icon_spacing }}px;
     display: block;
-    opacity: 0.9;
+  }
+
+  .ai-kidsmire-features__card-claim-{{ ai_gen_id }} {
+    font-size: 12px;
+    font-weight: 500;
+    color: #1D9E75;
+    margin: 0 0 4px;
+    display: block;
   }
 
   .ai-kidsmire-features__card-title-{{ ai_gen_id }} {
@@ -119,6 +140,35 @@
       font-size: calc({{ block.settings.closing_size }}px * 0.95);
     }
   }
+  .ai-kidsmire-features__stats-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: {{ block.settings.closing_spacing }}px;
+  }
+  .ai-kidsmire-features__stat-{{ ai_gen_id }} {
+    background: #2C2C2A;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+  .ai-kidsmire-features__stat-num-{{ ai_gen_id }} {
+    font-size: 20px;
+    font-weight: 500;
+    color: #F1EFE8;
+    display: block;
+  }
+  .ai-kidsmire-features__stat-label-{{ ai_gen_id }} {
+    font-size: 11px;
+    color: #B4B2A9;
+    margin-top: 2px;
+    display: block;
+  }
+  @media screen and (max-width: 589px) {
+    .ai-kidsmire-features__stats-{{ ai_gen_id }} {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
 {% endstyle %}
 
 <kidsmire-features-{{ ai_gen_id }} class="ai-kidsmire-features-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
@@ -129,37 +179,58 @@
       </h2>
     {% endif %}
 
-    <div class="ai-kidsmire-features__grid-{{ ai_gen_id }}">
+   <div class="ai-kidsmire-features__grid-{{ ai_gen_id }}">
       <div class="ai-kidsmire-features__card-{{ ai_gen_id }}">
-        <span class="ai-kidsmire-features__icon-{{ ai_gen_id }}">{{ block.settings.card_1_icon }}</span>
+        <div class="ai-kidsmire-features__icon-wrap-{{ ai_gen_id }}">
+          <span class="ai-kidsmire-features__icon-{{ ai_gen_id }}">{{ block.settings.card_1_icon }}</span>
+        </div>
         <h3 class="ai-kidsmire-features__card-title-{{ ai_gen_id }}">{{ block.settings.card_1_title }}</h3>
+        <span class="ai-kidsmire-features__card-claim-{{ ai_gen_id }}">{{ block.settings.card_1_claim }}</span>
         <p class="ai-kidsmire-features__card-description-{{ ai_gen_id }}">{{ block.settings.card_1_description }}</p>
       </div>
 
       <div class="ai-kidsmire-features__card-{{ ai_gen_id }}">
-        <span class="ai-kidsmire-features__icon-{{ ai_gen_id }}">{{ block.settings.card_2_icon }}</span>
+        <div class="ai-kidsmire-features__icon-wrap-{{ ai_gen_id }}">
+          <span class="ai-kidsmire-features__icon-{{ ai_gen_id }}">{{ block.settings.card_2_icon }}</span>
+        </div>
         <h3 class="ai-kidsmire-features__card-title-{{ ai_gen_id }}">{{ block.settings.card_2_title }}</h3>
+        <span class="ai-kidsmire-features__card-claim-{{ ai_gen_id }}">{{ block.settings.card_2_claim }}</span>
         <p class="ai-kidsmire-features__card-description-{{ ai_gen_id }}">{{ block.settings.card_2_description }}</p>
       </div>
 
       <div class="ai-kidsmire-features__card-{{ ai_gen_id }}">
-        <span class="ai-kidsmire-features__icon-{{ ai_gen_id }}">{{ block.settings.card_3_icon }}</span>
+        <div class="ai-kidsmire-features__icon-wrap-{{ ai_gen_id }}">
+          <span class="ai-kidsmire-features__icon-{{ ai_gen_id }}">{{ block.settings.card_3_icon }}</span>
+        </div>
         <h3 class="ai-kidsmire-features__card-title-{{ ai_gen_id }}">{{ block.settings.card_3_title }}</h3>
+        <span class="ai-kidsmire-features__card-claim-{{ ai_gen_id }}">{{ block.settings.card_3_claim }}</span>
         <p class="ai-kidsmire-features__card-description-{{ ai_gen_id }}">{{ block.settings.card_3_description }}</p>
       </div>
 
       <div class="ai-kidsmire-features__card-{{ ai_gen_id }}">
-        <span class="ai-kidsmire-features__icon-{{ ai_gen_id }}">{{ block.settings.card_4_icon }}</span>
+        <div class="ai-kidsmire-features__icon-wrap-{{ ai_gen_id }}">
+          <span class="ai-kidsmire-features__icon-{{ ai_gen_id }}">{{ block.settings.card_4_icon }}</span>
+        </div>
         <h3 class="ai-kidsmire-features__card-title-{{ ai_gen_id }}">{{ block.settings.card_4_title }}</h3>
+        <span class="ai-kidsmire-features__card-claim-{{ ai_gen_id }}">{{ block.settings.card_4_claim }}</span>
         <p class="ai-kidsmire-features__card-description-{{ ai_gen_id }}">{{ block.settings.card_4_description }}</p>
       </div>
     </div>
 
-    {% if block.settings.closing_text != blank %}
-      <p class="ai-kidsmire-features__closing-{{ ai_gen_id }}">
-        {{ block.settings.closing_text }}
-      </p>
-    {% endif %}
+    <div class="ai-kidsmire-features__stats-{{ ai_gen_id }}">
+      <div class="ai-kidsmire-features__stat-{{ ai_gen_id }}">
+        <span class="ai-kidsmire-features__stat-num-{{ ai_gen_id }}">87+</span>
+        <span class="ai-kidsmire-features__stat-label-{{ ai_gen_id }}">verified reviews</span>
+      </div>
+      <div class="ai-kidsmire-features__stat-{{ ai_gen_id }}">
+        <span class="ai-kidsmire-features__stat-num-{{ ai_gen_id }}">4.9★</span>
+        <span class="ai-kidsmire-features__stat-label-{{ ai_gen_id }}">avg rating</span>
+      </div>
+      <div class="ai-kidsmire-features__stat-{{ ai_gen_id }}">
+        <span class="ai-kidsmire-features__stat-num-{{ ai_gen_id }}">₹330</span>
+        <span class="ai-kidsmire-features__stat-label-{{ ai_gen_id }}">starting price</span>
+      </div>
+    </div>
   </div>
 </kidsmire-features-{{ ai_gen_id }}>
 
@@ -199,7 +270,7 @@
       "type": "inline_richtext",
       "id": "heading",
       "label": "Heading",
-      "default": "Why Parents Love KIDSMIRE 💛"
+      "default": "Made for kids. Built for trust."
     },
     {
       "type": "color",
@@ -231,89 +302,113 @@
       "type": "header",
       "content": "Card 1"
     },
-    {
+{
       "type": "text",
       "id": "card_1_icon",
       "label": "Icon emoji",
-      "default": "🧸"
+      "default": "🌿"
     },
     {
       "type": "inline_richtext",
       "id": "card_1_title",
       "label": "Title",
-      "default": "Super Soft Fabrics"
+      "default": "100% cotton & denim"
+    },
+    {
+      "type": "text",
+      "id": "card_1_claim",
+      "label": "Claim (green text)",
+      "default": "No synthetics. No blends."
     },
     {
       "type": "text",
       "id": "card_1_description",
       "label": "Description",
-      "default": "Gentle on sensitive skin, tough enough for playtime."
+      "default": "Breathable, skin-safe fabric that washes well and stays soft after every use."
     },
     {
       "type": "header",
       "content": "Card 2"
     },
-    {
+  {
       "type": "text",
       "id": "card_2_icon",
       "label": "Icon emoji",
-      "default": "👗"
+      "default": "↩️"
     },
     {
       "type": "inline_richtext",
       "id": "card_2_title",
       "label": "Title",
-      "default": "Styles for Every Moment"
+      "default": "7-day easy returns"
+    },
+    {
+      "type": "text",
+      "id": "card_2_claim",
+      "label": "Claim (green text)",
+      "default": "Wrong size? No questions asked."
     },
     {
       "type": "text",
       "id": "card_2_description",
       "label": "Description",
-      "default": "From birthday parties to lazy Sundays."
+      "default": "Return or exchange within 7 days of delivery — we make it simple."
     },
     {
       "type": "header",
       "content": "Card 3"
     },
-    {
+   {
       "type": "text",
       "id": "card_3_icon",
       "label": "Icon emoji",
-      "default": "💰"
+      "default": "🚚"
     },
     {
       "type": "inline_richtext",
       "id": "card_3_title",
       "label": "Title",
-      "default": "Starting at just ₹330"
+      "default": "Delivers in 3–5 days"
+    },
+    {
+      "type": "text",
+      "id": "card_3_claim",
+      "label": "Claim (green text)",
+      "default": "Pan-India. COD available."
     },
     {
       "type": "text",
       "id": "card_3_description",
       "label": "Description",
-      "default": "Because great style shouldn't cost a fortune."
+      "default": "Free shipping above ₹999. Cash on delivery at your doorstep."
     },
     {
       "type": "header",
       "content": "Card 4"
     },
-    {
+ {
       "type": "text",
       "id": "card_4_icon",
       "label": "Icon emoji",
-      "default": "📏"
+      "default": "📐"
     },
     {
       "type": "inline_richtext",
       "id": "card_4_title",
       "label": "Title",
-      "default": "6 Months to 6 Years"
+      "default": "6 months to 6 years"
+    },
+    {
+      "type": "text",
+      "id": "card_4_claim",
+      "label": "Claim (green text)",
+      "default": "Size guide on every product."
     },
     {
       "type": "text",
       "id": "card_4_description",
       "label": "Description",
-      "default": "Growing with your little one, every step of the way."
+      "default": "Age-based sizing with height + chest measurements so you always order right."
     },
     {
       "type": "header",
@@ -323,7 +418,7 @@
       "type": "textarea",
       "id": "closing_text",
       "label": "Closing text",
-      "default": "Whether it's playtime, parties, or everyday adventures — KIDSMIRE makes dressing up the fun part. 🎉"
+      "default": "No vague promises — just 100% cotton clothes, honest pricing, and a brand that stands behind every order."
     },
     {
       "type": "color",
