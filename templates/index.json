@@ -175,6 +175,12 @@
     "collection_list_zdxykJ": {
       "type": "collection-list",
       "blocks": {
+        "featured_collection_ee9Qtb": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "best-sellers"
+          }
+        },
         "featured_collection_wwrtMf": {
           "type": "featured_collection",
           "settings": {
@@ -195,6 +201,7 @@
         }
       },
       "block_order": [
+        "featured_collection_ee9Qtb",
         "featured_collection_wwrtMf",
         "featured_collection_PCdFPq",
         "featured_collection_KFMiJM"
