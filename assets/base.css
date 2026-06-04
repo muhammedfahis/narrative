@@ -3364,6 +3364,19 @@ details-disclosure > details {
 .list-payment__item img {
   height: 28px !important;
 }
+/* ── KIDSMIRE — fixed product card title height ── */
+.card__heading,
+.card__heading a,
+.card-information__text,
+.card-information .card__heading {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  min-height: 2.6em;
+  line-height: 1.3;
+}
 
 
 
