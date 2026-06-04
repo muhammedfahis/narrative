@@ -36,13 +36,13 @@
             "button_active_text_color": "#ffffff",
             "button_active_border_color": "#121212",
             "boys_banner_image": "shopify://shop_images/ChatGPT_Image_Apr_9_2026_02_27_34_PM.png",
-            "boys_heading": "Shop Boys Collection",
+            "boys_heading": "Dressed to impress. Built to play.",
             "boys_subheading": "Discover our latest styles",
             "girls_banner_image": "shopify://shop_images/ChatGPT_Image_Apr_9_2026_02_18_19_PM.png",
             "girls_heading": "Shop Girls Collection",
             "girls_subheading": "Discover our latest styles",
             "overlay_text_color": "#ffffff",
-            "heading_font_size": 48,
+            "heading_font_size": 44,
             "subheading_font_size": 20
           },
           "blocks": {}
