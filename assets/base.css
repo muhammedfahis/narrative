@@ -3377,6 +3377,12 @@ details-disclosure > details {
   min-height: 2.6em;
   line-height: 1.3;
 }
+/* ── KIDSMIRE — hide sale badges temporarily ── */
+.card__badge,
+.badge--sale,
+.badge--on-sale {
+  display: none !important;
+}
 
 
 
