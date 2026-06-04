@@ -88,7 +88,7 @@
         "custom_liquid_63UXYj": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<button class=\"kidsmire-size-trigger\" onclick=\"document.querySelector('size-chart-' + document.querySelector('[class*=ai-size-chart-]')?.className.match(/ai-size-chart-(\\w+)/)?.[1])?.open()\" type=\"button\" style=\"display:inline-flex;align-items:center;gap:4px;font-size:12px;color:#1D9E75;text-decoration:underline;text-underline-offset:2px;cursor:pointer;background:none;border:none;padding:0 0 8px 0;font-family:inherit;\">\n  <svg width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2 12h20M12 2v20\"/></svg>\n  What size is my child?\n</button>"
+            "custom_liquid": "<button\n  type=\"button\"\n  onclick=\"document.querySelector('[class*=ai-size-chart-][class*=active], [class*=ai-size-chart-]')?.classList.add('active'); document.body.style.overflow='hidden';\"\n  style=\"display:inline-flex;align-items:center;gap:4px;font-size:12px;color:#1D9E75;text-decoration:underline;text-underline-offset:2px;cursor:pointer;background:none;border:none;padding:0 0 8px 0;font-family:inherit;\">\n  <svg width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2 12h20M12 2v20\"/></svg>\n  What size is my child?\n</button>"
           }
         },
         "variant_picker": {
