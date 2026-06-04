@@ -171,7 +171,7 @@
             "type": "text",
             "settings": {
               "heading": "About KIDSMIRE",
-              "subtext": "<p>At KIDSMIRE, we believe every child deserves to look and feel their best. Our premium kids' clothing is thoughtfully designed for comfort, style, and those precious little moments worth remembering. From everyday wear to special occasions, we dress your little ones with love — crafted for kids, chosen by moms.</p>"
+              "subtext": "<p>Premium kids' clothing made from 100% cotton & denim. Designed for comfort, styled for moments worth remembering.<br/><br/>✓ 100% cotton & denim — no synthetics<br/>✓ 7-day returns, no questions asked  <br/>✓ Free shipping above ₹999<br/>✓ 4.9★ from 87+ verified parents</p>"
             }
           }
         },
@@ -185,11 +185,23 @@
           "newsletter_enable": true,
           "newsletter_heading": "Join the KIDSMIRE Community",
           "show_social": true,
+          "enable_whatsapp_button": true,
+          "phone_number": "918848104626",
+          "button_color": "#25d366",
+          "icon_color": "#ffffff",
+          "button_size": 60,
+          "mobile_button_size": 55,
+          "enable_pulse": true,
+          "bottom_position": 20,
+          "right_position": 20,
+          "mobile_bottom_position": 15,
+          "mobile_right_position": 15,
+          "whatsapp_link": "",
           "enable_country_selector": true,
           "enable_language_selector": true,
           "payment_enable": true,
           "margin_top": 48,
-          "padding_top": 36,
+          "padding_top": 4,
           "padding_bottom": 36
         }
       },
