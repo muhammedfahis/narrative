@@ -96,6 +96,7 @@
     width: 100%;
     overflow: hidden;
     border-radius: {{ block.settings.banner_border_radius }}px;
+    max-height: 70vh;
   }
 
   .ai-banner-image-wrapper-{{ ai_gen_id }}:before {
@@ -112,7 +113,6 @@
     z-index: 1;
   }
 
-  /* Girls banner only: soft white wash from the left (reference: readable black copy on busy photo) */
   .ai-banner-girls-{{ ai_gen_id }} .ai-banner-image-wrapper-{{ ai_gen_id }}:before {
     background: linear-gradient(
       90deg,
@@ -140,14 +140,16 @@
 
   .ai-banner-image-{{ ai_gen_id }} {
     width: 100%;
-    height: auto;
+    height: 70vh;
+    object-fit: cover;
+    object-position: top center;
     display: block;
   }
 
   .ai-banner-image-placeholder-{{ ai_gen_id }} {
     background-color: #f4f4f4;
     width: 100%;
-    min-height: 400px;
+    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -169,8 +171,7 @@
     transform: translateY(-50%);
     text-align: left;
     color: #111111;
-    width: min(520px, calc(100% - 76px));
-    max-width: none;
+    width: min(440px, 45%);
     z-index: 3;
     padding: 0;
     border-radius: 0;
@@ -181,18 +182,20 @@
   }
 
   .ai-banner-heading-{{ ai_gen_id }} {
-    font-size: 40px;
+    font-size: 36px;
     font-weight: 800;
     margin: 0;
     letter-spacing: -0.02em;
-    line-height: 1.05;
+    line-height: 1.1;
+    max-width: 420px;
   }
 
   .ai-banner-subheading-{{ ai_gen_id }} {
-    font-size: 18px;
-    margin: 12px 0 0;
-    line-height: 1.35;
-    opacity: 0.9;
+    font-size: 15px;
+    margin: 10px 0 0;
+    line-height: 1.45;
+    opacity: 0.85;
+    max-width: 380px;
   }
 
   .ai-empty-state-{{ ai_gen_id }} {
@@ -209,35 +212,46 @@
 
   @media screen and (max-width: 749px) {
     .ai-banner-image-wrapper-{{ ai_gen_id }} {
-      min-height: 72vh;
+      min-height: 56vh;
+      max-height: 56vh;
     }
 
     .ai-banner-image-{{ ai_gen_id }} {
       width: 100%;
-      height: 72vh;
+      height: 56vh;
       object-fit: cover;
-      object-position: center;
+      object-position: top center;
     }
 
     .ai-banner-image-placeholder-{{ ai_gen_id }} {
-      min-height: 72vh;
+      min-height: 56vh;
     }
 
     .ai-gender-toggle-{{ ai_gen_id }} {
       gap: 8px;
+      margin-top: 14px;
     }
 
     .ai-gender-button-{{ ai_gen_id }} {
-      padding: 10px 16px;
+      flex: 1 1 calc(50% - 10px);
+      text-align: center;
+      box-shadow: none;
+      padding: 10px 14px;
       font-size: 12px;
+      letter-spacing: 0.03em;
     }
 
     .ai-banner-heading-{{ ai_gen_id }} {
-      font-size: 30px;
+      font-size: 26px;
+      color: #ffffff;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
     }
 
     .ai-banner-subheading-{{ ai_gen_id }} {
-      font-size: 16px;
+      font-size: 13px;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.92);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
     }
 
     .ai-banner-text-overlay-{{ ai_gen_id }} {
@@ -259,46 +273,6 @@
       backdrop-filter: blur(8px);
     }
 
-    .ai-banner-heading-{{ ai_gen_id }} {
-      font-size: 28px;
-      color: #ffffff;
-      display: block;
-      padding: 0;
-      border-radius: 0;
-      background: transparent;
-      -webkit-backdrop-filter: none;
-      backdrop-filter: none;
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
-    }
-
-    .ai-banner-subheading-{{ ai_gen_id }} {
-      font-size: 15px;
-      margin-top: 10px;
-      color: rgba(255, 255, 255, 0.92);
-      display: block;
-      padding: 0;
-      border-radius: 0;
-      background: transparent;
-      -webkit-backdrop-filter: none;
-      backdrop-filter: none;
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
-    }
-
-    .ai-gender-toggle-{{ ai_gen_id }} {
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .ai-gender-button-{{ ai_gen_id }} {
-      flex: 1 1 calc(50% - 10px);
-      text-align: center;
-      box-shadow: none;
-      padding: 10px 14px;
-      font-size: 12px;
-      letter-spacing: 0.03em;
-    }
-
-    /* Girls banner mobile: light legibility zone + black type (boys overlay unchanged) */
     .ai-banner-girls-{{ ai_gen_id }} .ai-banner-image-wrapper-{{ ai_gen_id }}:before {
       background: linear-gradient(
         90deg,
@@ -340,13 +314,14 @@
 >
   <div class="ai-gender-filter-container-{{ ai_gen_id }}">
     <div class="ai-banner-content-{{ ai_gen_id }}">
+
       <div class="ai-banner-item-{{ ai_gen_id }} ai-banner-boys-{{ ai_gen_id }} active" data-banner="boys">
         <div class="ai-banner-image-wrapper-{{ ai_gen_id }}">
           {% if block.settings.boys_banner_image %}
             <img
               src="{{ block.settings.boys_banner_image | image_url: width: 2000 }}"
               alt="{{ block.settings.boys_banner_image.alt | escape }}"
-              loading="lazy"
+              loading="eager"
               width="{{ block.settings.boys_banner_image.width }}"
               height="{{ block.settings.boys_banner_image.height }}"
               class="ai-banner-image-{{ ai_gen_id }}"
@@ -354,37 +329,21 @@
           {% else %}
             <div class="ai-banner-image-placeholder-{{ ai_gen_id }}">
               {{ 'hero-apparel-1' | placeholder_svg_tag }}
-              <div class="ai-empty-state-{{ ai_gen_id }}">
-                Add a boys banner image
-              </div>
+              <div class="ai-empty-state-{{ ai_gen_id }}">Add a boys banner image</div>
             </div>
           {% endif %}
-          {% if block.settings.boys_heading != blank or block.settings.boys_subheading != blank %}
-            <div class="ai-banner-text-overlay-{{ ai_gen_id }}">
-              {% if block.settings.boys_heading != blank %}
-                <h2 class="ai-banner-heading-{{ ai_gen_id }}">{{ block.settings.boys_heading }}</h2>
-              {% endif %}
-              {% if block.settings.boys_subheading != blank %}
-                <p class="ai-banner-subheading-{{ ai_gen_id }}">{{ block.settings.boys_subheading }}</p>
-              {% endif %}
-              <div class="ai-gender-toggle-{{ ai_gen_id }}">
-                <button
-                  class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-boys-{{ ai_gen_id }} active"
-                  data-gender="boys"
-                  aria-pressed="true"
-                >
-                  Shop Boys
-                </button>
-                <button
-                  class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-girls-{{ ai_gen_id }}"
-                  data-gender="girls"
-                  aria-pressed="false"
-                >
-                  Shop Girls
-                </button>
-              </div>
+          <div class="ai-banner-text-overlay-{{ ai_gen_id }}">
+            <h2 class="ai-banner-heading-{{ ai_gen_id }}">
+              {% if block.settings.boys_heading != blank %}{{ block.settings.boys_heading }}{% else %}Dressed to impress. Built to play.{% endif %}
+            </h2>
+            <p class="ai-banner-subheading-{{ ai_gen_id }}">
+              {% if block.settings.boys_subheading != blank %}{{ block.settings.boys_subheading }}{% else %}100% cotton styles for boys 6 months to 6 years — tough enough for adventure, sharp enough for every occasion.{% endif %}
+            </p>
+            <div class="ai-gender-toggle-{{ ai_gen_id }}">
+              <button class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-boys-{{ ai_gen_id }} active" data-gender="boys" aria-pressed="true">Shop Boys</button>
+              <button class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-girls-{{ ai_gen_id }}" data-gender="girls" aria-pressed="false">Shop Girls</button>
             </div>
-          {% endif %}
+          </div>
         </div>
       </div>
 
@@ -402,39 +361,24 @@
           {% else %}
             <div class="ai-banner-image-placeholder-{{ ai_gen_id }}">
               {{ 'hero-apparel-1' | placeholder_svg_tag }}
-              <div class="ai-empty-state-{{ ai_gen_id }}">
-                Add a girls banner image
-              </div>
+              <div class="ai-empty-state-{{ ai_gen_id }}">Add a girls banner image</div>
             </div>
           {% endif %}
-          {% if block.settings.girls_heading != blank or block.settings.girls_subheading != blank %}
-            <div class="ai-banner-text-overlay-{{ ai_gen_id }}">
-              {% if block.settings.girls_heading != blank %}
-                <h2 class="ai-banner-heading-{{ ai_gen_id }}">{{ block.settings.girls_heading }}</h2>
-              {% endif %}
-              {% if block.settings.girls_subheading != blank %}
-                <p class="ai-banner-subheading-{{ ai_gen_id }}">{{ block.settings.girls_subheading }}</p>
-              {% endif %}
-              <div class="ai-gender-toggle-{{ ai_gen_id }}">
-                <button
-                  class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-boys-{{ ai_gen_id }}"
-                  data-gender="boys"
-                  aria-pressed="false"
-                >
-                  Shop Boys
-                </button>
-                <button
-                  class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-girls-{{ ai_gen_id }} active"
-                  data-gender="girls"
-                  aria-pressed="true"
-                >
-                  Shop Girls
-                </button>
-              </div>
+          <div class="ai-banner-text-overlay-{{ ai_gen_id }}">
+            <h2 class="ai-banner-heading-{{ ai_gen_id }}">
+              {% if block.settings.girls_heading != blank %}{{ block.settings.girls_heading }}{% else %}Pretty, playful, perfectly her.{% endif %}
+            </h2>
+            <p class="ai-banner-subheading-{{ ai_gen_id }}">
+              {% if block.settings.girls_subheading != blank %}{{ block.settings.girls_subheading }}{% else %}Handpicked styles for girls 6 months to 6 years — from everyday casuals to birthday-ready looks.{% endif %}
+            </p>
+            <div class="ai-gender-toggle-{{ ai_gen_id }}">
+              <button class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-boys-{{ ai_gen_id }}" data-gender="boys" aria-pressed="false">Shop Boys</button>
+              <button class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-girls-{{ ai_gen_id }} active" data-gender="girls" aria-pressed="true">Shop Girls</button>
             </div>
-          {% endif %}
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </gender-filter-banner-{{ ai_gen_id }}>
@@ -472,28 +416,21 @@
           btn.classList.toggle('active', isActive);
           btn.setAttribute('aria-pressed', isActive);
         });
-
         this.bannerItems.forEach((item) => {
           const isActive = item.getAttribute('data-banner') === gender;
           item.classList.toggle('active', isActive);
         });
-
         if (!suppressApply) this.applyFilters({ replaceState: true });
       }
 
       restoreFromUrl() {
         const url = new URL(window.location.href);
         const path = url.pathname || '';
-
-        const boysHandle = '{{ block.settings.boys_collection_handle }}';
         const girlsHandle = '{{ block.settings.girls_collection_handle }}';
-        const isOnBoys = boysHandle && path.indexOf(`/collections/${boysHandle}`) !== -1;
         const isOnGirls = girlsHandle && path.indexOf(`/collections/${girlsHandle}`) !== -1;
-
         if (isOnGirls) {
           this.switchGender('girls', { suppressApply: true });
         } else {
-          // Default visual state
           this.switchGender('boys', { suppressApply: true });
         }
       }
@@ -524,12 +461,10 @@
         const girlsHandle = '{{ block.settings.girls_collection_handle }}';
         const fallbackBoys = 'https://kidsmire.co.in/collections/boys-clothing';
         const fallbackGirls = 'https://kidsmire.co.in/collections/girls-clothing';
-
         const base =
           this.selectedGender === 'boys'
             ? (boysUrl && boysUrl.length ? boysUrl : (boysHandle && boysHandle.length ? `/collections/${boysHandle}` : fallbackBoys))
             : (girlsUrl && girlsUrl.length ? girlsUrl : (girlsHandle && girlsHandle.length ? `/collections/${girlsHandle}` : fallbackGirls));
-
         const url = new URL(base, window.location.origin);
         return url;
       }
@@ -537,43 +472,35 @@
       async applyFilters({ replaceState }) {
         const targetUrl = this.buildTargetUrl();
         if (!targetUrl) return;
-
         const nextUrl = targetUrl.pathname + (targetUrl.search || '');
         const currentUrl = window.location.pathname + window.location.search;
         if (replaceState && nextUrl === currentUrl) return;
-
         if (replaceState) {
           window.history.replaceState({}, '', nextUrl);
         } else {
           window.history.pushState({}, '', nextUrl);
         }
-
         const productGrid = this.getProductGridContainer();
         if (!productGrid) {
           window.location.assign(nextUrl);
           return;
         }
-
         productGrid.setAttribute('aria-busy', 'true');
         try {
           const res = await fetch(nextUrl, { credentials: 'same-origin' });
           if (!res.ok) throw new Error('Failed to fetch filtered results');
-
           const html = await res.text();
           const doc = new DOMParser().parseFromString(html, 'text/html');
-
           const newGrid =
             doc.querySelector('#ProductGridContainer') ||
             doc.querySelector('#product-grid') ||
             doc.querySelector('[data-product-grid]') ||
             doc.querySelector('.collection .product-grid');
-
           if (newGrid) {
             productGrid.innerHTML = newGrid.innerHTML;
           } else {
             window.location.assign(nextUrl);
           }
-
           const facetContainer = this.getFacetContainer();
           if (facetContainer) {
             const newFacet =
@@ -736,10 +663,6 @@
     },
     {
       "type": "header",
-      "content": "Banners"
-    },
-    {
-      "type": "header",
       "content": "Boys banner"
     },
     {
@@ -751,13 +674,13 @@
       "type": "text",
       "id": "boys_heading",
       "label": "Heading",
-      "default": "Shop Boys Collection"
+      "default": "Dressed to impress. Built to play."
     },
     {
       "type": "text",
       "id": "boys_subheading",
       "label": "Subheading",
-      "default": "Discover our latest styles"
+      "default": "100% cotton styles for boys 6 months to 6 years — tough enough for adventure, sharp enough for every occasion."
     },
     {
       "type": "header",
@@ -772,13 +695,13 @@
       "type": "text",
       "id": "girls_heading",
       "label": "Heading",
-      "default": "Shop Girls Collection"
+      "default": "Pretty, playful, perfectly her."
     },
     {
       "type": "text",
       "id": "girls_subheading",
       "label": "Subheading",
-      "default": "Discover our latest styles"
+      "default": "Handpicked styles for girls 6 months to 6 years — from everyday casuals to birthday-ready looks."
     },
     {
       "type": "header",
