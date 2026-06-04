@@ -1,369 +1,393 @@
 {% doc %}
-  @prompt
-    Redesign the Hero USP banner for a premium kids' fashion brand called KIDSMIRE. It must match the existing website theme exactly:
-    
-    THEME SPECS:
-    - Font: "Assistant" for both headings and body
-    - Colors: Background #ffffff (white), Text #121212 (near-black), Accent/Button #334fb4 (blue), Button text #ffffff
-    - Buttons: border-radius 8px, subtle shadow (15% opacity, 4px vertical offset, 5px blur)
-    - Max page width: 1200px
-    - Clean, minimal, boutique aesthetic
-    
-    BANNER CONTENT:
-    - Full-width hero section with the background image: https://cdn.shopify.com/s/files/1/0757/6528/5029/files/Gemini_Generated_Image_n9e6k8n9e6k8n9e6_1.png
-    - Dark overlay (40% opacity) over the image for text readability
-    - Main headline (large, bold, Assistant font): "Curated Essentials for Conscious Parents"
-    - Subheadline (lighter weight, Assistant font): "Premium Quality Kids' Wear – Loved by Moms Across India"
-    - Trust badges row: "✓ Handpicked Styles   ✓ Safe & Tested   ✓ Fast Delivery"
-    - Two CTA buttons: "Shop Boys" and "Shop Girls" with separate default and hover colors, border-radius 8px, each with its own link
-    - Text centered, vertically centered on the banner
-    - Banner height: large (at least 80vh on desktop)
-    - Fully responsive on mobile
-    
-    Make it feel premium, editorial, and consistent with the existing Kidsmire theme.
+  Redesigned KIDSMIRE Hero Section
+  - Split layout: image left, text right
+  - Dark right panel for full text readability
+  - Image anchored to top so face is never cropped
+  - Clean minimal aesthetic matching KIDSMIRE theme
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
-  .ai-hero-usp-{{ ai_gen_id }} {
-    display: block;
+
+  /* ── ROOT ─────────────────────────────────────────── */
+  .km-hero-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
-    min-height: {{ block.settings.min_height_desktop }}vh;
+    min-height: 90vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     overflow: hidden;
+    background: #0e0e0e;
+    font-family: 'Assistant', sans-serif;
   }
 
-  .hero {
-  position: relative;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35); /* adjust 0.25–0.45 */
-}
-
-.hero-text {
-  color: #FFFFFF;
-  position: relative;
-}
-
-  .ai-hero-usp-background-{{ ai_gen_id }} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
+  /* ── LEFT — IMAGE PANEL ───────────────────────────── */
+  .km-hero-img-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    min-height: 90vh;
   }
 
-  .ai-hero-usp-background-{{ ai_gen_id }} img {
+  .km-hero-img-{{ ai_gen_id }} img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
+    display: block;
   }
 
-  .ai-hero-usp-overlay-{{ ai_gen_id }} {
+  /* subtle gradient fade into right panel */
+  .km-hero-img-{{ ai_gen_id }}::after {
+    content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, {{ block.settings.overlay_opacity | divided_by: 100.0 }});
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      transparent 60%,
+      #0e0e0e 100%
+    );
+    pointer-events: none;
+  }
+
+  /* ── RIGHT — TEXT PANEL ───────────────────────────── */
+  .km-hero-text-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px 60px 40px;
+    background: #0e0e0e;
+    position: relative;
     z-index: 2;
   }
 
-  .ai-hero-usp-content-{{ ai_gen_id }} {
-    position: relative;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: {{ block.settings.min_height_desktop }}vh;
-    padding: 60px 20px;
-    text-align: center;
-    max-width: {{ block.settings.content_max_width }}px;
-    margin: 0 auto;
-  }
-
-  .ai-hero-usp-headline-{{ ai_gen_id }} {
-    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
-    font-weight: {{ block.settings.heading_font.weight }};
-    font-style: {{ block.settings.heading_font.style }};
-    font-size: {{ block.settings.headline_size_desktop }}px;
-    line-height: 1.2;
-    color: {{ block.settings.text_color }};
-    margin: 0 0 20px;
-    letter-spacing: -0.02em;
-  }
-
-  .ai-hero-usp-subheadline-{{ ai_gen_id }} {
-    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
-    font-weight: {{ block.settings.body_font.weight }};
-    font-style: {{ block.settings.body_font.style }};
-    font-size: {{ block.settings.subheadline_size_desktop }}px;
-    line-height: 1.5;
-    color: {{ block.settings.text_color }};
-    margin: 0 0 40px;
-    opacity: 0.9;
-  }
-
-  .ai-hero-usp-badges-{{ ai_gen_id }} {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 40px;
-  }
-
-  .ai-hero-usp-badge-{{ ai_gen_id }} {
-    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
-    font-weight: {{ block.settings.body_font.weight }};
-    font-size: {{ block.settings.badge_size_desktop }}px;
-    color: {{ block.settings.text_color }};
-    display: flex;
+  /* brand tag */
+  .km-hero-tag-{{ ai_gen_id }} {
+    display: inline-flex;
     align-items: center;
     gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c2a96e;
+    margin-bottom: 28px;
   }
 
-  .ai-hero-usp-badge-icon-{{ ai_gen_id }} {
-    width: 20px;
-    height: 20px;
+  .km-hero-tag-{{ ai_gen_id }}::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1.5px;
+    background: #c2a96e;
+  }
+
+  /* headline */
+  .km-hero-h1-{{ ai_gen_id }} {
+    font-family: 'Assistant', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    margin: 0 0 20px;
+  }
+
+  .km-hero-h1-{{ ai_gen_id }} em {
+    font-style: normal;
+    color: #c2a96e;
+  }
+
+  /* subheadline */
+  .km-hero-sub-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.6);
+    margin: 0 0 36px;
+    max-width: 380px;
+  }
+
+  /* trust badges */
+  .km-hero-badges-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 44px;
+  }
+
+  .km-hero-badge-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .km-hero-badge-dot-{{ ai_gen_id }} {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(194,169,110,0.15);
+    border: 1.5px solid rgba(194,169,110,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
   }
 
-  .ai-hero-usp-cta-{{ ai_gen_id }} {
-    display: inline-block;
-    padding: 16px 40px;
-    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
-    font-weight: 600;
-    font-size: {{ block.settings.button_size_desktop }}px;
+  .km-hero-badge-dot-{{ ai_gen_id }} svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  /* divider */
+  .km-hero-divider-{{ ai_gen_id }} {
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.12);
+    margin-bottom: 44px;
+  }
+
+  /* CTA buttons */
+  .km-hero-cta-row-{{ ai_gen_id }} {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .km-hero-btn-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 32px;
+    font-family: 'Assistant', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     text-decoration: none;
-    border-radius: {{ block.settings.button_border_radius }}px;
-    box-shadow: 0 {{ block.settings.button_shadow_vertical }}px {{ block.settings.button_shadow_blur }}px rgba(0, 0, 0, {{ block.settings.button_shadow_opacity | divided_by: 100.0 }});
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
-    border: none;
+    border-radius: 6px;
+    transition: all 0.22s ease;
     cursor: pointer;
   }
 
-  .ai-hero-usp-cta-boys-{{ ai_gen_id }} {
-    background-color: {{ block.settings.boys_button_bg }};
-    color: {{ block.settings.boys_button_text }};
+  .km-hero-btn-boys-{{ ai_gen_id }} {
+    background: #ffffff;
+    color: #0e0e0e;
   }
 
-  .ai-hero-usp-cta-boys-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.boys_button_bg_hover }};
-    color: {{ block.settings.boys_button_text_hover }};
+  .km-hero-btn-boys-{{ ai_gen_id }}:hover {
+    background: #c2a96e;
+    color: #0e0e0e;
     transform: translateY(-2px);
-    box-shadow: 0 {{ block.settings.button_shadow_vertical | plus: 2 }}px {{ block.settings.button_shadow_blur | plus: 2 }}px rgba(0, 0, 0, {{ block.settings.button_shadow_opacity | divided_by: 100.0 | plus: 0.05 }});
   }
 
-  .ai-hero-usp-cta-girls-{{ ai_gen_id }} {
-    background-color: {{ block.settings.girls_button_bg }};
-    color: {{ block.settings.girls_button_text }};
+  .km-hero-btn-girls-{{ ai_gen_id }} {
+    background: transparent;
+    color: #ffffff;
+    border: 1.5px solid rgba(255,255,255,0.3);
   }
 
-  .ai-hero-usp-cta-girls-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.girls_button_bg_hover }};
-    color: {{ block.settings.girls_button_text_hover }};
+  .km-hero-btn-girls-{{ ai_gen_id }}:hover {
+    border-color: #c2a96e;
+    color: #c2a96e;
     transform: translateY(-2px);
-    box-shadow: 0 {{ block.settings.button_shadow_vertical | plus: 2 }}px {{ block.settings.button_shadow_blur | plus: 2 }}px rgba(0, 0, 0, {{ block.settings.button_shadow_opacity | divided_by: 100.0 | plus: 0.05 }});
   }
 
-  .ai-hero-usp-cta-row-{{ ai_gen_id }} {
+  /* arrow icon */
+  .km-hero-btn-arrow-{{ ai_gen_id }} {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.2s ease;
+  }
+
+  .km-hero-btn-{{ ai_gen_id }}:hover .km-hero-btn-arrow-{{ ai_gen_id }} {
+    transform: translateX(3px);
+  }
+
+  /* bottom counter strip */
+  .km-hero-strip-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 50%;
     display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center;
-    align-items: center;
+    align-items: stretch;
+    border-top: 1px solid rgba(255,255,255,0.06);
   }
 
+  .km-hero-stat-{{ ai_gen_id }} {
+    flex: 1;
+    padding: 20px 24px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .km-hero-stat-{{ ai_gen_id }}:last-child {
+    border-right: none;
+  }
+
+  .km-hero-stat-num-{{ ai_gen_id }} {
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .km-hero-stat-label-{{ ai_gen_id }} {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ── MOBILE ───────────────────────────────────────── */
   @media screen and (max-width: 749px) {
-    .ai-hero-usp-{{ ai_gen_id }} {
-      min-height: {{ block.settings.min_height_mobile }}vh;
+    .km-hero-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      min-height: auto;
     }
 
-    .ai-hero-usp-content-{{ ai_gen_id }} {
-      min-height: {{ block.settings.min_height_mobile }}vh;
-      padding: 40px 20px;
+    .km-hero-img-{{ ai_gen_id }} {
+      min-height: 55vw;
+      max-height: 70vw;
     }
 
-    .ai-hero-usp-headline-{{ ai_gen_id }} {
-      font-size: {{ block.settings.headline_size_mobile }}px;
-      margin-bottom: 16px;
+    .km-hero-img-{{ ai_gen_id }}::after {
+      background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        #0e0e0e 100%
+      );
     }
 
-    .ai-hero-usp-subheadline-{{ ai_gen_id }} {
-      font-size: {{ block.settings.subheadline_size_mobile }}px;
-      margin-bottom: 30px;
+    .km-hero-text-{{ ai_gen_id }} {
+      padding: 36px 24px 100px;
     }
 
-    .ai-hero-usp-badges-{{ ai_gen_id }} {
-      gap: 20px;
-      margin-bottom: 30px;
-      flex-direction: column;
+    .km-hero-h1-{{ ai_gen_id }} {
+      font-size: 32px;
     }
 
-    .ai-hero-usp-badge-{{ ai_gen_id }} {
-      font-size: {{ block.settings.badge_size_mobile }}px;
+    .km-hero-sub-{{ ai_gen_id }} {
+      font-size: 14px;
     }
 
-    .ai-hero-usp-cta-{{ ai_gen_id }} {
-      font-size: {{ block.settings.button_size_mobile }}px;
-      padding: 14px 32px;
+    .km-hero-strip-{{ ai_gen_id }} {
+      left: 0;
+    }
+
+    .km-hero-stat-{{ ai_gen_id }} {
+      padding: 14px 16px;
+    }
+
+    .km-hero-stat-num-{{ ai_gen_id }} {
+      font-size: 18px;
     }
   }
+
 {% endstyle %}
 
-<hero-usp-{{ ai_gen_id }} class="ai-hero-usp-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
-  <div class="ai-hero-usp-background-{{ ai_gen_id }}">
+<div class="km-hero-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+
+  <!-- LEFT: Image -->
+  <div class="km-hero-img-{{ ai_gen_id }}">
     {% if block.settings.background_image %}
       <img
-        src="{{ block.settings.background_image | image_url: width: 2400 }}"
-        srcset="{{ block.settings.background_image | image_url: width: 750 }} 750w,
-                {{ block.settings.background_image | image_url: width: 1500 }} 1500w,
-                {{ block.settings.background_image | image_url: width: 2400 }} 2400w"
-        sizes="100vw"
-        alt="{{ block.settings.background_image.alt | escape }}"
+        src="{{ block.settings.background_image | image_url: width: 1200 }}"
+        srcset="{{ block.settings.background_image | image_url: width: 600 }} 600w,
+                {{ block.settings.background_image | image_url: width: 1200 }} 1200w"
+        sizes="50vw"
+        alt="KIDSMIRE — Premium Kids Fashion"
         loading="eager"
         width="{{ block.settings.background_image.width }}"
         height="{{ block.settings.background_image.height }}"
       >
     {% else %}
-      <div class="ai-hero-usp-placeholder-{{ ai_gen_id }}">
-        {{ 'hero-apparel-1' | placeholder_svg_tag }}
-      </div>
+      {{ 'hero-apparel-1' | placeholder_svg_tag }}
     {% endif %}
   </div>
 
-  <div class="ai-hero-usp-overlay-{{ ai_gen_id }}"></div>
+  <!-- RIGHT: Text -->
+  <div class="km-hero-text-{{ ai_gen_id }}">
 
-  <div class="ai-hero-usp-content-{{ ai_gen_id }}">
-    {% if block.settings.headline != blank %}
-      <h1 class="ai-hero-usp-headline-{{ ai_gen_id }}">{{ block.settings.headline }}</h1>
-    {% endif %}
+    <span class="km-hero-tag-{{ ai_gen_id }}">KIDSMIRE — Imported Kids Wear</span>
 
-    {% if block.settings.subheadline != blank %}
-      <p class="ai-hero-usp-subheadline-{{ ai_gen_id }}">{{ block.settings.subheadline }}</p>
-    {% endif %}
+    <h1 class="km-hero-h1-{{ ai_gen_id }}">
+      {% if block.settings.headline != blank %}{{ block.settings.headline }}{% else %}Curated Essentials for Conscious Parents{% endif %}
+    </h1>
 
-    <div class="ai-hero-usp-badges-{{ ai_gen_id }}">
-      {% if block.settings.badge_1_text != blank %}
-        <div class="ai-hero-usp-badge-{{ ai_gen_id }}">
-          <svg class="ai-hero-usp-badge-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="{{ block.settings.text_color }}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span>{{ block.settings.badge_1_text }}</span>
+    <p class="km-hero-sub-{{ ai_gen_id }}">
+      {% if block.settings.subheadline != blank %}{{ block.settings.subheadline }}{% else %}Premium Quality Kids Wear - Loved by Moms Across India{% endif %}
+    </p>
+
+    <div class="km-hero-badges-{{ ai_gen_id }}">
+      {% assign badge_texts = block.settings.badge_1_text | append: '||' | append: block.settings.badge_2_text | append: '||' | append: block.settings.badge_3_text | split: '||' %}
+      {% for badge in badge_texts %}
+        {% if badge != blank %}
+        <div class="km-hero-badge-{{ ai_gen_id }}">
+          <div class="km-hero-badge-dot-{{ ai_gen_id }}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c2a96e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          {{ badge }}
         </div>
-      {% endif %}
-
-      {% if block.settings.badge_2_text != blank %}
-        <div class="ai-hero-usp-badge-{{ ai_gen_id }}">
-          <svg class="ai-hero-usp-badge-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="{{ block.settings.text_color }}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span>{{ block.settings.badge_2_text }}</span>
-        </div>
-      {% endif %}
-
-      {% if block.settings.badge_3_text != blank %}
-        <div class="ai-hero-usp-badge-{{ ai_gen_id }}">
-          <svg class="ai-hero-usp-badge-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="{{ block.settings.text_color }}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span>{{ block.settings.badge_3_text }}</span>
-        </div>
-      {% endif %}
+        {% endif %}
+      {% endfor %}
     </div>
 
-    {% if block.settings.cta_boys_text != blank or block.settings.cta_girls_text != blank %}
-      <div class="ai-hero-usp-cta-row-{{ ai_gen_id }}">
-        {% if block.settings.cta_boys_text != blank %}
-          <a href="{{ block.settings.cta_boys_link }}" class="ai-hero-usp-cta-{{ ai_gen_id }} ai-hero-usp-cta-boys-{{ ai_gen_id }}">
-            {{ block.settings.cta_boys_text }}
-          </a>
-        {% endif %}
-        {% if block.settings.cta_girls_text != blank %}
-          <a href="{{ block.settings.cta_girls_link }}" class="ai-hero-usp-cta-{{ ai_gen_id }} ai-hero-usp-cta-girls-{{ ai_gen_id }}">
-            {{ block.settings.cta_girls_text }}
-          </a>
-        {% endif %}
-      </div>
-    {% endif %}
+    <div class="km-hero-divider-{{ ai_gen_id }}"></div>
+
+    <div class="km-hero-cta-row-{{ ai_gen_id }}">
+      <a href="{{ block.settings.cta_boys_link | default: '/collections/boys' }}"
+         class="km-hero-btn-{{ ai_gen_id }} km-hero-btn-boys-{{ ai_gen_id }}">
+        {{ block.settings.cta_boys_text | default: 'Shop Boys' }}
+        <svg class="km-hero-btn-arrow-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+      <a href="{{ block.settings.cta_girls_link | default: '/collections/girls' }}"
+         class="km-hero-btn-{{ ai_gen_id }} km-hero-btn-girls-{{ ai_gen_id }}">
+        {{ block.settings.cta_girls_text | default: 'Shop Girls' }}
+        <svg class="km-hero-btn-arrow-{{ ai_gen_id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+
   </div>
-</hero-usp-{{ ai_gen_id }}>
 
-<script>
-  (function() {
-    class HeroUSP{{ ai_gen_id }} extends HTMLElement {
-      constructor() {
-        super();
-      }
+  <!-- BOTTOM STATS STRIP -->
+  <div class="km-hero-strip-{{ ai_gen_id }}">
+    <div class="km-hero-stat-{{ ai_gen_id }}">
+      <div class="km-hero-stat-num-{{ ai_gen_id }}">36+</div>
+      <div class="km-hero-stat-label-{{ ai_gen_id }}">Styles</div>
+    </div>
+    <div class="km-hero-stat-{{ ai_gen_id }}">
+      <div class="km-hero-stat-num-{{ ai_gen_id }}">100%</div>
+      <div class="km-hero-stat-label-{{ ai_gen_id }}">Imported</div>
+    </div>
+    <div class="km-hero-stat-{{ ai_gen_id }}">
+      <div class="km-hero-stat-num-{{ ai_gen_id }}">COD</div>
+      <div class="km-hero-stat-label-{{ ai_gen_id }}">Available</div>
+    </div>
+  </div>
 
-      connectedCallback() {
-        this.setupAccessibility();
-      }
-
-      setupAccessibility() {
-        this.querySelectorAll('.ai-hero-usp-cta-{{ ai_gen_id }}').forEach((ctaButton) => {
-          ctaButton.setAttribute('role', 'button');
-        });
-      }
-    }
-
-    customElements.define('hero-usp-{{ ai_gen_id }}', HeroUSP{{ ai_gen_id }});
-  })();
-</script>
+</div>
 
 {% schema %}
 {
-  "name": "Hero USP banner",
+  "name": "KIDSMIRE Hero",
   "settings": [
-    {
-      "type": "header",
-      "content": "Background"
-    },
     {
       "type": "image_picker",
       "id": "background_image",
-      "label": "Background image"
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "label": "Overlay opacity",
-      "min": 0,
-      "max": 80,
-      "step": 5,
-      "unit": "%",
-      "default": 40
-    },
-    {
-      "type": "range",
-      "id": "min_height_desktop",
-      "label": "Desktop height",
-      "min": 50,
-      "max": 100,
-      "step": 5,
-      "unit": "vh",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "min_height_mobile",
-      "label": "Mobile height",
-      "min": 50,
-      "max": 100,
-      "step": 5,
-      "unit": "vh",
-      "default": 70
-    },
-    {
-      "type": "header",
-      "content": "Content"
+      "label": "Child photo (left panel)"
     },
     {
       "type": "inline_richtext",
@@ -378,273 +402,49 @@
       "default": "Premium Quality Kids' Wear – Loved by Moms Across India"
     },
     {
-      "type": "range",
-      "id": "content_max_width",
-      "label": "Content max width",
-      "min": 600,
-      "max": 1200,
-      "step": 50,
-      "unit": "px",
-      "default": 900
-    },
-    {
-      "type": "header",
-      "content": "Trust badges"
-    },
-    {
       "type": "text",
       "id": "badge_1_text",
-      "label": "Badge 1 text",
+      "label": "Badge 1",
       "default": "Handpicked Styles"
     },
     {
       "type": "text",
       "id": "badge_2_text",
-      "label": "Badge 2 text",
+      "label": "Badge 2",
       "default": "Safe & Tested"
     },
     {
       "type": "text",
       "id": "badge_3_text",
-      "label": "Badge 3 text",
-      "default": "Fast Delivery"
-    },
-    {
-      "type": "header",
-      "content": "Call to action"
+      "label": "Badge 3",
+      "default": "Fast Delivery across India"
     },
     {
       "type": "text",
       "id": "cta_boys_text",
-      "label": "Shop Boys — button text",
+      "label": "Boys button text",
       "default": "Shop Boys"
     },
     {
       "type": "url",
       "id": "cta_boys_link",
-      "label": "Shop Boys — link"
+      "label": "Boys button link"
     },
     {
       "type": "text",
       "id": "cta_girls_text",
-      "label": "Shop Girls — button text",
+      "label": "Girls button text",
       "default": "Shop Girls"
     },
     {
       "type": "url",
       "id": "cta_girls_link",
-      "label": "Shop Girls — link"
-    },
-    {
-      "type": "header",
-      "content": "Colors"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "header",
-      "content": "Shop Boys button"
-    },
-    {
-      "type": "color",
-      "id": "boys_button_bg",
-      "label": "Background",
-      "default": "#334fb4"
-    },
-    {
-      "type": "color",
-      "id": "boys_button_text",
-      "label": "Text",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "boys_button_bg_hover",
-      "label": "Hover — background",
-      "default": "#283d8f"
-    },
-    {
-      "type": "color",
-      "id": "boys_button_text_hover",
-      "label": "Hover — text",
-      "default": "#ffffff"
-    },
-    {
-      "type": "header",
-      "content": "Shop Girls button"
-    },
-    {
-      "type": "color",
-      "id": "girls_button_bg",
-      "label": "Background",
-      "default": "#c2185b"
-    },
-    {
-      "type": "color",
-      "id": "girls_button_text",
-      "label": "Text",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "girls_button_bg_hover",
-      "label": "Hover — background",
-      "default": "#9d1450"
-    },
-    {
-      "type": "color",
-      "id": "girls_button_text_hover",
-      "label": "Hover — text",
-      "default": "#ffffff"
-    },
-    {
-      "type": "header",
-      "content": "Typography"
-    },
-    {
-      "type": "font_picker",
-      "id": "heading_font",
-      "label": "Heading font",
-      "default": "assistant_n4"
-    },
-    {
-      "type": "font_picker",
-      "id": "body_font",
-      "label": "Body font",
-      "default": "assistant_n4"
-    },
-    {
-      "type": "range",
-      "id": "headline_size_desktop",
-      "label": "Headline size (desktop)",
-      "min": 32,
-      "max": 80,
-      "step": 2,
-      "unit": "px",
-      "default": 56
-    },
-    {
-      "type": "range",
-      "id": "headline_size_mobile",
-      "label": "Headline size (mobile)",
-      "min": 24,
-      "max": 48,
-      "step": 2,
-      "unit": "px",
-      "default": 32
-    },
-    {
-      "type": "range",
-      "id": "subheadline_size_desktop",
-      "label": "Subheadline size (desktop)",
-      "min": 14,
-      "max": 32,
-      "step": 2,
-      "unit": "px",
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "subheadline_size_mobile",
-      "label": "Subheadline size (mobile)",
-      "min": 14,
-      "max": 24,
-      "step": 2,
-      "unit": "px",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "badge_size_desktop",
-      "label": "Badge size (desktop)",
-      "min": 12,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "badge_size_mobile",
-      "label": "Badge size (mobile)",
-      "min": 12,
-      "max": 18,
-      "step": 1,
-      "unit": "px",
-      "default": 14
-    },
-    {
-      "type": "range",
-      "id": "button_size_desktop",
-      "label": "Button size (desktop)",
-      "min": 14,
-      "max": 24,
-      "step": 1,
-      "unit": "px",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "button_size_mobile",
-      "label": "Button size (mobile)",
-      "min": 14,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "default": 15
-    },
-    {
-      "type": "header",
-      "content": "Button style"
-    },
-    {
-      "type": "range",
-      "id": "button_border_radius",
-      "label": "Border radius",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 8
-    },
-    {
-      "type": "range",
-      "id": "button_shadow_opacity",
-      "label": "Shadow opacity",
-      "min": 0,
-      "max": 50,
-      "step": 5,
-      "unit": "%",
-      "default": 15
-    },
-    {
-      "type": "range",
-      "id": "button_shadow_vertical",
-      "label": "Shadow vertical offset",
-      "min": 0,
-      "max": 10,
-      "step": 1,
-      "unit": "px",
-      "default": 4
-    },
-    {
-      "type": "range",
-      "id": "button_shadow_blur",
-      "label": "Shadow blur",
-      "min": 0,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "default": 5
+      "label": "Girls button link"
     }
   ],
   "presets": [
     {
-      "name": "Hero USP banner"
+      "name": "KIDSMIRE Hero"
     }
   ]
 }
