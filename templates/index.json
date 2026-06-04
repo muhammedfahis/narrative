@@ -251,7 +251,7 @@
             "profile_spacing": 30,
             "columns_desktop": 5,
             "columns_mobile": "2",
-            "grid_gap": 8,
+            "grid_gap": 14,
             "grid_spacing": 30,
             "photo_1": "shopify://shop_images/645902488_18032453582610685_833225720255526247_n.jpg",
             "username_1": "",
