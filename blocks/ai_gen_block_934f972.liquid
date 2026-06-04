@@ -36,7 +36,6 @@
     display: block;
   }
 
-  /* subtle gradient fade into right panel */
   .km-hero-img-{{ ai_gen_id }}::after {
     content: '';
     position: absolute;
@@ -60,7 +59,6 @@
     z-index: 2;
   }
 
-  /* brand tag */
   .km-hero-tag-{{ ai_gen_id }} {
     display: inline-flex;
     align-items: center;
@@ -81,7 +79,6 @@
     background: #c2a96e;
   }
 
-  /* headline */
   .km-hero-h1-{{ ai_gen_id }} {
     font-family: 'Assistant', sans-serif;
     font-size: 52px;
@@ -97,7 +94,6 @@
     color: #c2a96e;
   }
 
-  /* subheadline */
   .km-hero-sub-{{ ai_gen_id }} {
     font-size: 16px;
     font-weight: 400;
@@ -107,7 +103,6 @@
     max-width: 380px;
   }
 
-  /* trust badges */
   .km-hero-badges-{{ ai_gen_id }} {
     display: flex;
     flex-direction: column;
@@ -141,7 +136,6 @@
     height: 11px;
   }
 
-  /* divider */
   .km-hero-divider-{{ ai_gen_id }} {
     width: 40px;
     height: 1px;
@@ -149,7 +143,6 @@
     margin-bottom: 44px;
   }
 
-  /* CTA buttons */
   .km-hero-cta-row-{{ ai_gen_id }} {
     display: flex;
     gap: 14px;
@@ -195,7 +188,6 @@
     transform: translateY(-2px);
   }
 
-  /* arrow icon */
   .km-hero-btn-arrow-{{ ai_gen_id }} {
     width: 14px;
     height: 14px;
@@ -206,7 +198,6 @@
     transform: translateX(3px);
   }
 
-  /* bottom counter strip */
   .km-hero-strip-{{ ai_gen_id }} {
     position: absolute;
     bottom: 0;
@@ -292,7 +283,6 @@
 
 <div class="km-hero-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
 
-  <!-- LEFT: Image -->
   <div class="km-hero-img-{{ ai_gen_id }}">
     {% if block.settings.background_image %}
       <img
@@ -310,7 +300,6 @@
     {% endif %}
   </div>
 
-  <!-- RIGHT: Text -->
   <div class="km-hero-text-{{ ai_gen_id }}">
 
     <span class="km-hero-tag-{{ ai_gen_id }}">KIDSMIRE — PREMIUM KIDS WEAR</span>
@@ -362,19 +351,18 @@
 
   </div>
 
-  <!-- BOTTOM STATS STRIP -->
   <div class="km-hero-strip-{{ ai_gen_id }}">
     <div class="km-hero-stat-{{ ai_gen_id }}">
-      <div class="km-hero-stat-num-{{ ai_gen_id }}">36+</div>
-      <div class="km-hero-stat-label-{{ ai_gen_id }}">Styles</div>
+      <div class="km-hero-stat-num-{{ ai_gen_id }}">87+</div>
+      <div class="km-hero-stat-label-{{ ai_gen_id }}">Verified reviews</div>
     </div>
     <div class="km-hero-stat-{{ ai_gen_id }}">
-      <div class="km-hero-stat-num-{{ ai_gen_id }}">100%</div>
-      <div class="km-hero-stat-label-{{ ai_gen_id }}">Imported</div>
+      <div class="km-hero-stat-num-{{ ai_gen_id }}">4.9★</div>
+      <div class="km-hero-stat-label-{{ ai_gen_id }}">Avg rating</div>
     </div>
     <div class="km-hero-stat-{{ ai_gen_id }}">
-      <div class="km-hero-stat-num-{{ ai_gen_id }}">COD</div>
-      <div class="km-hero-stat-label-{{ ai_gen_id }}">Available</div>
+      <div class="km-hero-stat-num-{{ ai_gen_id }}">₹330</div>
+      <div class="km-hero-stat-label-{{ ai_gen_id }}">Starting price</div>
     </div>
   </div>
 
@@ -393,31 +381,31 @@
       "type": "inline_richtext",
       "id": "headline",
       "label": "Headline",
-      "default": "Curated Essentials for Conscious Parents"
+      "default": "Dress them well. Feel good about it."
     },
     {
       "type": "inline_richtext",
       "id": "subheadline",
       "label": "Subheadline",
-      "default": "Premium Quality Kids' Wear – Loved by Moms Across India"
+      "default": "100% cotton kids' wear — handpicked for comfort, priced for real life. Loved by moms across India."
     },
     {
       "type": "text",
       "id": "badge_1_text",
       "label": "Badge 1",
-      "default": "Handpicked Styles"
+      "default": "100% cotton & denim — no synthetics"
     },
     {
       "type": "text",
       "id": "badge_2_text",
       "label": "Badge 2",
-      "default": "Safe & Tested"
+      "default": "7-day easy returns · COD available"
     },
     {
       "type": "text",
       "id": "badge_3_text",
       "label": "Badge 3",
-      "default": "Fast Delivery across India"
+      "default": "Delivers in 3–5 days across India"
     },
     {
       "type": "text",
