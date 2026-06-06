@@ -1,7 +1,6 @@
 {% comment %}
-  KIDSMIRE — Hero Section v2
-  File: sections/km-hero.liquid
-  Fixes: image rendering, schema tag conflict, filter compatibility
+  KIDSMIRE — Hero Section v3
+  sections/km-hero.liquid
 {% endcomment %}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,60 +8,43 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-  #km-hero-{{ section.id }} *,
-  #km-hero-{{ section.id }} *::before,
-  #km-hero-{{ section.id }} *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  #km-hero-{{ section.id }} {
-    font-family: 'Inter', sans-serif;
-  }
-
-  .km-hero-wrap {
+  .km{{ section.id }} {
     display: grid;
     grid-template-columns: 1fr 1fr;
     min-height: 600px;
     background: #1a1a1a;
+    font-family: 'Inter', sans-serif;
   }
 
-  /* LEFT: IMAGE */
-  .km-hero__image-wrap {
+  .km{{ section.id }}-img-col {
     position: relative;
     overflow: hidden;
     min-height: 600px;
     background: #2a2a2a;
   }
 
-  .km-hero__image-wrap img {
+  .km{{ section.id }}-img-col img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center top;
     display: block;
-    position: absolute;
-    inset: 0;
-    transition: transform 0.8s ease;
   }
 
-  .km-hero__image-wrap:hover img {
-    transform: scale(1.03);
-  }
-
-  .km-hero__image-overlay {
+  .km{{ section.id }}-img-col .overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, transparent 55%, rgba(26,26,26,0.6) 100%);
-    pointer-events: none;
+    background: linear-gradient(to right, transparent 55%, rgba(26,26,26,0.5) 100%);
     z-index: 1;
   }
 
-  .km-hero__image-tag {
+  .km{{ section.id }}-img-col .badge {
     position: absolute;
     top: 28px;
     left: 28px;
+    z-index: 2;
     font-size: 10px;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -70,11 +52,25 @@
     background: rgba(0,0,0,0.4);
     padding: 8px 14px;
     border: 0.5px solid rgba(255,255,255,0.15);
-    z-index: 2;
+    font-family: 'Inter', sans-serif;
   }
 
-  /* RIGHT: CONTENT */
-  .km-hero__content {
+  .km{{ section.id }}-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+    background: #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.15);
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .km{{ section.id }}-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -82,16 +78,16 @@
     background: #1a1a1a;
   }
 
-  .km-hero__eyebrow {
+  .km{{ section.id }}-eyebrow {
     font-size: 10px;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: rgba(255,255,255,0.4);
     margin-bottom: 28px;
-    animation: km-fade-up 0.7s ease 0.1s both;
+    font-family: 'Inter', sans-serif;
   }
 
-  .km-hero__headline {
+  .km{{ section.id }}-headline {
     font-family: 'Cormorant Garamond', serif;
     font-size: 54px;
     font-weight: 300;
@@ -99,32 +95,32 @@
     color: #f5f2ee;
     margin-bottom: 24px;
     letter-spacing: -0.5px;
-    animation: km-fade-up 0.8s ease 0.25s both;
   }
 
-  .km-hero__headline em {
+  .km{{ section.id }}-headline em {
     font-style: italic;
     color: #c8b89a;
   }
 
-  .km-hero__subtext {
+  .km{{ section.id }}-subtext {
     font-size: 13px;
     color: rgba(255,255,255,0.42);
     line-height: 1.85;
     margin-bottom: 48px;
     font-weight: 300;
     max-width: 320px;
-    animation: km-fade-up 0.8s ease 0.4s both;
+    font-family: 'Inter', sans-serif;
   }
 
-  .km-hero__ctas {
+  .km{{ section.id }}-ctas {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-    animation: km-fade-up 0.8s ease 0.55s both;
+    margin-bottom: 0;
   }
 
-  .km-hero__btn {
+  .km{{ section.id }}-btn-p,
+  .km{{ section.id }}-btn-s {
     font-family: 'Inter', sans-serif;
     font-size: 10px;
     letter-spacing: 3px;
@@ -133,241 +129,172 @@
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    border: none;
   }
 
-  .km-hero__btn:hover {
-    opacity: 0.85;
-    transform: translateY(-1px);
-  }
-
-  .km-hero__btn--primary {
+  .km{{ section.id }}-btn-p {
     background: #f5f2ee;
     color: #1a1a1a;
   }
 
-  .km-hero__btn--secondary {
+  .km{{ section.id }}-btn-s {
     background: transparent;
     color: rgba(255,255,255,0.55);
     border: 0.5px solid rgba(255,255,255,0.2);
   }
 
-  .km-hero__btn--secondary:hover {
-    border-color: rgba(255,255,255,0.4);
-    color: rgba(255,255,255,0.8);
-  }
-
-  .km-hero__stats {
+  .km{{ section.id }}-stats {
     display: flex;
     gap: 40px;
     margin-top: 52px;
     padding-top: 36px;
     border-top: 0.5px solid rgba(255,255,255,0.1);
-    animation: km-fade-up 0.8s ease 0.7s both;
   }
 
-  .km-hero__stat-num {
+  .km{{ section.id }}-stat-num {
     font-family: 'Cormorant Garamond', serif;
     font-size: 26px;
     font-weight: 300;
     color: #c8b89a;
     line-height: 1;
+    display: block;
   }
 
-  .km-hero__stat-label {
+  .km{{ section.id }}-stat-label {
     font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: rgba(255,255,255,0.28);
     margin-top: 6px;
+    display: block;
+    font-family: 'Inter', sans-serif;
   }
 
-  /* MARQUEE */
-  .km-marquee {
+  .km{{ section.id }}-marquee {
     background: #c8b89a;
     padding: 13px 0;
     overflow: hidden;
     white-space: nowrap;
   }
 
-  .km-marquee__inner {
+  .km{{ section.id }}-marquee-inner {
     display: inline-block;
-    animation: km-scroll 22s linear infinite;
+    animation: kmscroll{{ section.id }} 22s linear infinite;
   }
 
-  .km-marquee__text {
+  .km{{ section.id }}-marquee span.t {
     font-family: 'Inter', sans-serif;
     font-size: 10px;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: #1a1a1a;
-    display: inline;
     margin: 0 48px;
   }
 
-  .km-marquee__dot {
-    display: inline;
+  .km{{ section.id }}-marquee span.d {
     color: rgba(0,0,0,0.28);
-    margin: 0 4px;
   }
 
-  @keyframes km-fade-up {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
+  @keyframes kmscroll{{ section.id }} {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
   }
 
-  @keyframes km-scroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  /* MOBILE */
   @media (max-width: 768px) {
-    .km-hero-wrap {
-      grid-template-columns: 1fr;
-    }
-    .km-hero__image-wrap {
-      min-height: 420px;
-    }
-    .km-hero__image-overlay {
-      background: linear-gradient(to bottom, transparent 50%, rgba(26,26,26,0.85) 100%);
-    }
-    .km-hero__content {
-      padding: 40px 24px 48px;
-    }
-    .km-hero__headline {
-      font-size: 38px;
-    }
-    .km-hero__stats {
-      gap: 28px;
-    }
-    .km-hero__ctas {
-      flex-direction: column;
-    }
-    .km-hero__btn {
-      text-align: center;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .km-hero__headline { font-size: 32px; }
+    .km{{ section.id }} { grid-template-columns: 1fr; }
+    .km{{ section.id }}-img-col { min-height: 420px; }
+    .km{{ section.id }}-content { padding: 40px 24px 48px; }
+    .km{{ section.id }}-headline { font-size: 36px; }
+    .km{{ section.id }}-ctas { flex-direction: column; }
+    .km{{ section.id }}-btn-p,
+    .km{{ section.id }}-btn-s { text-align: center; }
+    .km{{ section.id }}-stats { gap: 24px; }
   }
 </style>
 
-<div id="km-hero-{{ section.id }}">
+<div class="km{{ section.id }}">
 
-  {%- comment -%} HERO GRID {%- endcomment -%}
-  <div class="km-hero-wrap">
+  <div class="km{{ section.id }}-img-col">
+    {%- if section.settings.image != blank -%}
+      {%- assign img_w = section.settings.image.width | at_most: 1400 -%}
+      {%- assign img_h = section.settings.image.height | times: img_w | divided_by: section.settings.image.width -%}
+      <img
+        src="{{ section.settings.image | image_url: width: 1400 }}"
+        srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1200 }} 1200w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
+        sizes="50vw"
+        alt="{{ section.settings.image.alt | default: 'KIDSMIRE hero' | escape }}"
+        loading="eager"
+        fetchpriority="high"
+        width="{{ img_w }}"
+        height="{{ img_h }}"
+      >
+    {%- else -%}
+      <div class="km{{ section.id }}-placeholder">Add hero image</div>
+    {%- endif -%}
+    <div class="overlay"></div>
+    {%- if section.settings.image_tag != blank -%}
+      <span class="badge">{{ section.settings.image_tag }}</span>
+    {%- endif -%}
+  </div>
 
-    {%- comment -%} LEFT: Image {%- endcomment -%}
-    <div class="km-hero__image-wrap">
-{%- if section.settings.image != blank -%}
-  {%- assign img_width = section.settings.image.width | at_most: 1400 -%}
-  {%- assign img_height = section.settings.image.height | times: img_width | divided_by: section.settings.image.width -%}
-  <img
-    src="{{ section.settings.image | image_url: width: 1400 }}"
-    srcset="
-      {{ section.settings.image | image_url: width: 600 }} 600w,
-      {{ section.settings.image | image_url: width: 900 }} 900w,
-      {{ section.settings.image | image_url: width: 1200 }} 1200w,
-      {{ section.settings.image | image_url: width: 1400 }} 1400w
-    "
-    sizes="50vw"
-    alt="{{ section.settings.image.alt | default: 'KIDSMIRE hero image' | escape }}"
-    loading="eager"
-    fetchpriority="high"
-    width="{{ img_width }}"
-    height="{{ img_height }}"
-  >
-{%- else -%}
-  <img
-    src="{{ 'lifestyle-1' | placeholder_svg_tag }}"
-    alt="Add a hero image in the theme customizer"
-    width="800"
-    height="1000"
-    style="width:100%;height:100%;object-fit:cover;opacity:0.15;"
-  >
-{%- endif -%}
+  <div class="km{{ section.id }}-content">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="km{{ section.id }}-eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
 
-      <div class="km-hero__image-overlay"></div>
+    {%- if section.settings.headline != blank -%}
+      <h2 class="km{{ section.id }}-headline">{{ section.settings.headline }}</h2>
+    {%- endif -%}
 
-      {%- if section.settings.image_tag != blank -%}
-        <span class="km-hero__image-tag">{{ section.settings.image_tag }}</span>
+    {%- if section.settings.subtext != blank -%}
+      <p class="km{{ section.id }}-subtext">{{ section.settings.subtext }}</p>
+    {%- endif -%}
+
+    <div class="km{{ section.id }}-ctas">
+      {%- if section.settings.cta_primary_label != blank -%}
+        <a href="{{ section.settings.cta_primary_url | default: '/collections/girls' }}" class="km{{ section.id }}-btn-p">
+          {{ section.settings.cta_primary_label }}
+        </a>
       {%- endif -%}
-
+      {%- if section.settings.cta_secondary_label != blank -%}
+        <a href="{{ section.settings.cta_secondary_url | default: '/collections/boys' }}" class="km{{ section.id }}-btn-s">
+          {{ section.settings.cta_secondary_label }}
+        </a>
+      {%- endif -%}
     </div>
 
-    {%- comment -%} RIGHT: Content {%- endcomment -%}
-    <div class="km-hero__content">
-
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="km-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+    <div class="km{{ section.id }}-stats">
+      {%- if section.settings.stat_1_num != blank -%}
+        <div>
+          <span class="km{{ section.id }}-stat-num">{{ section.settings.stat_1_num }}</span>
+          <span class="km{{ section.id }}-stat-label">{{ section.settings.stat_1_label }}</span>
+        </div>
       {%- endif -%}
-
-      {%- if section.settings.headline != blank -%}
-        <h2 class="km-hero__headline">{{ section.settings.headline }}</h2>
+      {%- if section.settings.stat_2_num != blank -%}
+        <div>
+          <span class="km{{ section.id }}-stat-num">{{ section.settings.stat_2_num }}</span>
+          <span class="km{{ section.id }}-stat-label">{{ section.settings.stat_2_label }}</span>
+        </div>
       {%- endif -%}
-
-      {%- if section.settings.subtext != blank -%}
-        <p class="km-hero__subtext">{{ section.settings.subtext }}</p>
+      {%- if section.settings.stat_3_num != blank -%}
+        <div>
+          <span class="km{{ section.id }}-stat-num">{{ section.settings.stat_3_num }}</span>
+          <span class="km{{ section.id }}-stat-label">{{ section.settings.stat_3_label }}</span>
+        </div>
       {%- endif -%}
-
-      <div class="km-hero__ctas">
-        {%- if section.settings.cta_primary_label != blank -%}
-          <a href="{{ section.settings.cta_primary_url | default: '/collections/girls' }}" class="km-hero__btn km-hero__btn--primary">
-            {{ section.settings.cta_primary_label }}
-          </a>
-        {%- endif -%}
-        {%- if section.settings.cta_secondary_label != blank -%}
-          <a href="{{ section.settings.cta_secondary_url | default: '/collections/boys' }}" class="km-hero__btn km-hero__btn--secondary">
-            {{ section.settings.cta_secondary_label }}
-          </a>
-        {%- endif -%}
-      </div>
-
-      <div class="km-hero__stats">
-        {%- if section.settings.stat_1_num != blank -%}
-          <div>
-            <div class="km-hero__stat-num">{{ section.settings.stat_1_num }}</div>
-            <div class="km-hero__stat-label">{{ section.settings.stat_1_label }}</div>
-          </div>
-        {%- endif -%}
-        {%- if section.settings.stat_2_num != blank -%}
-          <div>
-            <div class="km-hero__stat-num">{{ section.settings.stat_2_num }}</div>
-            <div class="km-hero__stat-label">{{ section.settings.stat_2_label }}</div>
-          </div>
-        {%- endif -%}
-        {%- if section.settings.stat_3_num != blank -%}
-          <div>
-            <div class="km-hero__stat-num">{{ section.settings.stat_3_num }}</div>
-            <div class="km-hero__stat-label">{{ section.settings.stat_3_label }}</div>
-          </div>
-        {%- endif -%}
-      </div>
-
     </div>
   </div>
 
-  {%- comment -%} MARQUEE STRIP {%- endcomment -%}
-  {%- if section.settings.show_marquee -%}
-    <div class="km-marquee" aria-hidden="true">
-      <div class="km-marquee__inner">
-        {%- assign marquee_items = section.settings.marquee_text | split: '|' -%}
-        {%- for item in marquee_items -%}
-          <span class="km-marquee__text">{{ item | strip }}</span>
-          <span class="km-marquee__dot">·</span>
-        {%- endfor -%}
-        {%- for item in marquee_items -%}
-          <span class="km-marquee__text">{{ item | strip }}</span>
-          <span class="km-marquee__dot">·</span>
-        {%- endfor -%}
-      </div>
-    </div>
-  {%- endif -%}
-
 </div>
+
+{%- if section.settings.show_marquee -%}
+  <div class="km{{ section.id }}-marquee">
+    <div class="km{{ section.id }}-marquee-inner">
+      {%- assign items = section.settings.marquee_text | split: '|' -%}
+      {%- for item in items -%}<span class="t">{{ item | strip }}</span><span class="d"> · </span>{%- endfor -%}
+      {%- for item in items -%}<span class="t">{{ item | strip }}</span><span class="d"> · </span>{%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
 
 {% schema %}
 {
@@ -381,7 +308,7 @@
       "type": "image_picker",
       "id": "image",
       "label": "Hero image",
-      "info": "Portrait orientation works best. Min 800x1000px."
+      "info": "Portrait orientation, min 800x1000px recommended."
     },
     {
       "type": "text",
@@ -404,7 +331,7 @@
       "id": "headline",
       "label": "Headline",
       "default": "<p>Dressed to move.<br><em>Built to last.</em></p>",
-      "info": "Wrap italic gold text in <em> tags. Keep short — 5 to 6 words max."
+      "info": "Use <em> tags for italic gold text."
     },
     {
       "type": "textarea",
@@ -440,42 +367,42 @@
     },
     {
       "type": "header",
-      "content": "Stats bar"
+      "content": "Stats"
     },
     {
       "type": "text",
       "id": "stat_1_num",
-      "label": "Stat 1 — number",
+      "label": "Stat 1 number",
       "default": "4.9★"
     },
     {
       "type": "text",
       "id": "stat_1_label",
-      "label": "Stat 1 — label",
+      "label": "Stat 1 label",
       "default": "87+ reviews"
     },
     {
       "type": "text",
       "id": "stat_2_num",
-      "label": "Stat 2 — number",
+      "label": "Stat 2 number",
       "default": "₹330"
     },
     {
       "type": "text",
       "id": "stat_2_label",
-      "label": "Stat 2 — label",
+      "label": "Stat 2 label",
       "default": "Starts from"
     },
     {
       "type": "text",
       "id": "stat_3_num",
-      "label": "Stat 3 — number",
+      "label": "Stat 3 number",
       "default": "100%"
     },
     {
       "type": "text",
       "id": "stat_3_label",
-      "label": "Stat 3 — label",
+      "label": "Stat 3 label",
       "default": "Cotton & denim"
     },
     {
