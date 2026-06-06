@@ -1,179 +1,89 @@
 {% doc %}
-  @prompt
-    Scrolling announcement bar at the top of the page: messages move continuously
-    from right to left (marquee). Full-width, compact, theme colors.
+  Scrolling announcement bar — continuously scrolling marquee, full-width, theme colors.
 {% enddoc %}
-{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
-{% capture marquee_segment_inner %}
-  {% assign marquee_first = true %}
-  {% if block.settings.message_1 != blank %}
-    <span class="ai-marquee-text-{{ ai_gen_id }}">{{ block.settings.message_1 }}</span>
-    {% assign marquee_first = false %}
-  {% endif %}
-  {% if block.settings.message_2 != blank %}
-    {% unless marquee_first %}
-      <span class="ai-marquee-sep-{{ ai_gen_id }}" aria-hidden="true">·</span>
-    {% endunless %}
-    <span class="ai-marquee-text-{{ ai_gen_id }}">{{ block.settings.message_2 }}</span>
-    {% assign marquee_first = false %}
-  {% endif %}
-  {% if block.settings.message_3 != blank %}
-    {% unless marquee_first %}
-      <span class="ai-marquee-sep-{{ ai_gen_id }}" aria-hidden="true">·</span>
-    {% endunless %}
-    <span class="ai-marquee-msg3-{{ ai_gen_id }}">
-      {% unless block.settings.message_3_show_icon == false %}
-        <svg
-          class="ai-marquee-icon-{{ ai_gen_id }}"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813a3.75 3.75 0 002.576-2.576l.813-2.846A.75.75 0 019 4.5zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 012.455 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 011.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 011.423 1.423l1.183.394-1.183.394a2.25 2.25 0 01-1.423 1.423z"
-            clip-rule="evenodd"
-          />
-        </svg>
-      {% endunless %}
-      <span class="ai-marquee-text-{{ ai_gen_id }}">{{ block.settings.message_3 }}</span>
-    </span>
-  {% endif %}
-{% endcapture %}
+{% assign bar_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
-  .ai-announcement-bar-{{ ai_gen_id }} {
+  .ann-bar-{{ bar_id }} {
     display: block;
     width: 100%;
-    background-color: {{ block.settings.background_color }};
+    background-color: {{ block.settings.bg_color }};
     color: {{ block.settings.text_color }};
     overflow: hidden;
-    position: relative;
   }
 
-  .ai-announcement-bar-wrapper-{{ ai_gen_id }} {
-    padding: {{ block.settings.vertical_padding }}px 0;
-    position: relative;
-    width: 100%;
-  }
-
-  .ai-marquee-viewport-{{ ai_gen_id }} {
+  .ann-bar-inner-{{ bar_id }} {
+    padding: {{ block.settings.v_pad }}px 0;
     overflow: hidden;
     width: 100%;
-    display: flex;
-    align-items: center;
-    min-height: {{ block.settings.font_size | times: 1.5 }}px;
   }
 
-  .ai-marquee-track-{{ ai_gen_id }} {
+  .ann-track-{{ bar_id }} {
     display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
     width: max-content;
-    animation: ai-marquee-scroll-{{ ai_gen_id }} {{ block.settings.marquee_duration }}s linear infinite;
+    align-items: center;
+    animation: ann-scroll-{{ bar_id }} {{ block.settings.speed }}s linear infinite;
     will-change: transform;
   }
 
-  .ai-marquee-sep-{{ ai_gen_id }} {
-    display: inline-block;
-    flex-shrink: 0;
-    padding: 0 {{ block.settings.message_spacing | default: 36 }}px;
-    opacity: 0.65;
-    font-weight: 400;
-  }
-
-  .ai-marquee-segment-{{ ai_gen_id }} {
+  .ann-segment-{{ bar_id }} {
     display: inline-flex;
-    flex-shrink: 0;
     align-items: center;
-    justify-content: center;
     gap: 0;
-    padding-left: {{ block.settings.segment_gap }}px;
-    padding-right: {{ block.settings.segment_gap }}px;
+    white-space: nowrap;
     font-size: {{ block.settings.font_size }}px;
     font-weight: {{ block.settings.font_weight }};
-    line-height: {{ block.settings.font_size | times: 1.5 }}px;
-    white-space: nowrap;
+    line-height: 1.5;
+    padding: 0 {{ block.settings.repeat_gap }}px;
   }
 
-  .ai-marquee-text-{{ ai_gen_id }} a {
-    color: inherit;
-    text-decoration: underline;
+  .ann-dot-{{ bar_id }} {
+    display: inline-block;
+    margin: 0 {{ block.settings.msg_gap }}px;
+    opacity: 0.5;
   }
 
-  .ai-marquee-msg3-{{ ai_gen_id }} {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4em;
+  @keyframes ann-scroll-{{ bar_id }} {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
   }
 
-  .ai-marquee-icon-{{ ai_gen_id }} {
-    width: 1.1em;
-    height: 1.1em;
-    flex-shrink: 0;
-    opacity: 0.92;
-    position: relative;
-    top: 0.03em;
-  }
-
-  @keyframes ai-marquee-scroll-{{ ai_gen_id }} {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  @media screen and (max-width: 749px) {
-    .ai-marquee-segment-{{ ai_gen_id }} {
-      font-size: {{ block.settings.font_size | times: 0.9 }}px;
-      line-height: {{ block.settings.font_size | times: 1.35 }}px;
-    }
-
-    .ai-marquee-viewport-{{ ai_gen_id }} {
-      min-height: {{ block.settings.font_size | times: 2.35 }}px;
+  @media (max-width: 749px) {
+    .ann-segment-{{ bar_id }} {
+      font-size: {{ block.settings.font_size | times: 0.9 | floor }}px;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ai-marquee-track-{{ ai_gen_id }} {
+    .ann-track-{{ bar_id }} {
       animation: none;
       justify-content: center;
       width: 100%;
       flex-wrap: wrap;
       white-space: normal;
     }
-
-    .ai-marquee-segment-{{ ai_gen_id }} {
-      white-space: normal;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .ai-marquee-segment-{{ ai_gen_id }}[aria-hidden="true"] {
+    .ann-segment-{{ bar_id }}[aria-hidden="true"] {
       display: none;
     }
   }
 {% endstyle %}
 
-<div
-  class="ai-announcement-bar-{{ ai_gen_id }}"
-  {{ block.shopify_attributes }}
->
-  <div class="ai-announcement-bar-wrapper-{{ ai_gen_id }}">
-    <div class="ai-marquee-viewport-{{ ai_gen_id }}">
-      <div class="ai-marquee-track-{{ ai_gen_id }}">
-        <div class="ai-marquee-segment-{{ ai_gen_id }}">
-          {{ marquee_segment_inner }}
-        </div>
-        <div class="ai-marquee-segment-{{ ai_gen_id }}" aria-hidden="true">
-          {{ marquee_segment_inner }}
-        </div>
-      </div>
+{% capture seg_content %}
+  <span class="ann-segment-{{ bar_id }}">
+    <span>{{ block.settings.message_1 }}</span>
+    <span class="ann-dot-{{ bar_id }}" aria-hidden="true">·</span>
+    <span>{{ block.settings.message_2 }}</span>
+    <span class="ann-dot-{{ bar_id }}" aria-hidden="true">·</span>
+    <span>{{ block.settings.message_3 }}</span>
+  </span>
+{% endcapture %}
+
+<div class="ann-bar-{{ bar_id }}" {{ block.shopify_attributes }}>
+  <div class="ann-bar-inner-{{ bar_id }}">
+    <div class="ann-track-{{ bar_id }}">
+      {{ seg_content }}
+      <span aria-hidden="true">{{ seg_content }}</span>
     </div>
   </div>
 </div>
@@ -190,35 +100,29 @@
       "type": "inline_richtext",
       "id": "message_1",
       "label": "Message 1",
-      "default": "Free Shipping on orders above ₹399"
+      "default": "Free Shipping on orders above ₹999"
     },
     {
       "type": "inline_richtext",
       "id": "message_2",
       "label": "Message 2",
-      "default": "💵 Cash on Delivery Available across India | Order now, pay at your doorstep"
+      "default": "Pan India Shipping"
     },
     {
       "type": "inline_richtext",
       "id": "message_3",
       "label": "Message 3",
-      "default": "New Arrivals"
-    },
-    {
-      "type": "checkbox",
-      "id": "message_3_show_icon",
-      "label": "Sparkle icon on message 3",
-      "default": true
+      "default": "COD Available"
     },
     {
       "type": "range",
-      "id": "message_spacing",
-      "min": 12,
-      "max": 80,
+      "id": "msg_gap",
+      "min": 8,
+      "max": 60,
       "step": 4,
       "unit": "px",
       "label": "Space between messages",
-      "default": 36
+      "default": 28
     },
     {
       "type": "header",
@@ -226,24 +130,23 @@
     },
     {
       "type": "range",
-      "id": "marquee_duration",
+      "id": "speed",
       "min": 10,
       "max": 60,
       "step": 5,
       "unit": "s",
-      "label": "Full scroll cycle time",
-      "info": "Higher value = slower movement",
-      "default": 30
+      "label": "Scroll speed (higher = slower)",
+      "default": 25
     },
     {
       "type": "range",
-      "id": "segment_gap",
-      "min": 12,
-      "max": 108,
+      "id": "repeat_gap",
+      "min": 0,
+      "max": 120,
       "step": 8,
       "unit": "px",
-      "label": "Space between message repeats",
-      "default": 44
+      "label": "Gap between repeated sets",
+      "default": 40
     },
     {
       "type": "header",
@@ -251,9 +154,9 @@
     },
     {
       "type": "color",
-      "id": "background_color",
+      "id": "bg_color",
       "label": "Background color",
-      "default": "#121212"
+      "default": "#111111"
     },
     {
       "type": "color",
@@ -269,36 +172,24 @@
       "step": 1,
       "unit": "px",
       "label": "Font size",
-      "default": 14
+      "default": 13
     },
     {
       "type": "select",
       "id": "font_weight",
       "label": "Font weight",
       "options": [
-        {
-          "value": "400",
-          "label": "Normal"
-        },
-        {
-          "value": "500",
-          "label": "Medium"
-        },
-        {
-          "value": "600",
-          "label": "Semi-bold"
-        },
-        {
-          "value": "700",
-          "label": "Bold"
-        }
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
       ],
       "default": "400"
     },
     {
       "type": "range",
-      "id": "vertical_padding",
-      "min": 8,
+      "id": "v_pad",
+      "min": 6,
       "max": 20,
       "step": 2,
       "unit": "px",
