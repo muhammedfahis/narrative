@@ -1,8 +1,7 @@
 {% comment %}
-  KIDSMIRE — Hero Section
-  Section file: sections/km-hero.liquid
-  Place in: /sections/km-hero.liquid
-  Add to template via: Customize > Add section > KM Hero
+  KIDSMIRE — Hero Section v2
+  File: sections/km-hero.liquid
+  Fixes: image rendering, schema tag conflict, filter compatibility
 {% endcomment %}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,50 +9,56 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-  .km-hero-section *,
-  .km-hero-section *::before,
-  .km-hero-section *::after {
+  #km-hero-{{ section.id }} *,
+  #km-hero-{{ section.id }} *::before,
+  #km-hero-{{ section.id }} *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
 
-  .km-hero-section {
+  #km-hero-{{ section.id }} {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .km-hero-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
     min-height: 600px;
     background: #1a1a1a;
-    font-family: 'Inter', sans-serif;
   }
 
-  /* ── LEFT: IMAGE SIDE ── */
+  /* LEFT: IMAGE */
   .km-hero__image-wrap {
     position: relative;
     overflow: hidden;
     min-height: 600px;
+    background: #2a2a2a;
   }
 
-  .km-hero__image {
+  .km-hero__image-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center top;
     display: block;
+    position: absolute;
+    inset: 0;
     transition: transform 0.8s ease;
   }
 
-  .km-hero__image-wrap:hover .km-hero__image {
+  .km-hero__image-wrap:hover img {
     transform: scale(1.03);
   }
 
   .km-hero__image-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, transparent 60%, #1a1a1a 100%);
+    background: linear-gradient(to right, transparent 55%, rgba(26,26,26,0.6) 100%);
     pointer-events: none;
+    z-index: 1;
   }
 
-  /* Collection tag on image */
   .km-hero__image-tag {
     position: absolute;
     top: 28px;
@@ -61,15 +66,14 @@
     font-size: 10px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    color: rgba(255,255,255,0.75);
+    background: rgba(0,0,0,0.4);
     padding: 8px 14px;
-    border: 0.5px solid rgba(255, 255, 255, 0.15);
+    border: 0.5px solid rgba(255,255,255,0.15);
+    z-index: 2;
   }
 
-  /* ── RIGHT: CONTENT SIDE ── */
+  /* RIGHT: CONTENT */
   .km-hero__content {
     display: flex;
     flex-direction: column;
@@ -82,11 +86,9 @@
     font-size: 10px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255,255,255,0.4);
     margin-bottom: 28px;
-    opacity: 0;
-    transform: translateY(12px);
-    animation: km-fade-up 0.7s ease 0.1s forwards;
+    animation: km-fade-up 0.7s ease 0.1s both;
   }
 
   .km-hero__headline {
@@ -97,9 +99,7 @@
     color: #f5f2ee;
     margin-bottom: 24px;
     letter-spacing: -0.5px;
-    opacity: 0;
-    transform: translateY(16px);
-    animation: km-fade-up 0.8s ease 0.25s forwards;
+    animation: km-fade-up 0.8s ease 0.25s both;
   }
 
   .km-hero__headline em {
@@ -109,24 +109,19 @@
 
   .km-hero__subtext {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.42);
+    color: rgba(255,255,255,0.42);
     line-height: 1.85;
     margin-bottom: 48px;
     font-weight: 300;
     max-width: 320px;
-    opacity: 0;
-    transform: translateY(12px);
-    animation: km-fade-up 0.8s ease 0.4s forwards;
+    animation: km-fade-up 0.8s ease 0.4s both;
   }
 
-  /* ── CTAs ── */
   .km-hero__ctas {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
-    opacity: 0;
-    transform: translateY(12px);
-    animation: km-fade-up 0.8s ease 0.55s forwards;
+    animation: km-fade-up 0.8s ease 0.55s both;
   }
 
   .km-hero__btn {
@@ -135,11 +130,11 @@
     letter-spacing: 3px;
     text-transform: uppercase;
     padding: 15px 36px;
-    border: none;
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
     transition: opacity 0.2s ease, transform 0.2s ease;
+    border: none;
   }
 
   .km-hero__btn:hover {
@@ -154,25 +149,22 @@
 
   .km-hero__btn--secondary {
     background: transparent;
-    color: rgba(255, 255, 255, 0.55);
-    border: 0.5px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255,255,255,0.55);
+    border: 0.5px solid rgba(255,255,255,0.2);
   }
 
   .km-hero__btn--secondary:hover {
-    border-color: rgba(255, 255, 255, 0.4);
-    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.8);
   }
 
-  /* ── STATS ── */
   .km-hero__stats {
     display: flex;
     gap: 40px;
     margin-top: 52px;
     padding-top: 36px;
-    border-top: 0.5px solid rgba(255, 255, 255, 0.1);
-    opacity: 0;
-    transform: translateY(12px);
-    animation: km-fade-up 0.8s ease 0.7s forwards;
+    border-top: 0.5px solid rgba(255,255,255,0.1);
+    animation: km-fade-up 0.8s ease 0.7s both;
   }
 
   .km-hero__stat-num {
@@ -187,11 +179,11 @@
     font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.28);
+    color: rgba(255,255,255,0.28);
     margin-top: 6px;
   }
 
-  /* ── MARQUEE STRIP ── */
+  /* MARQUEE */
   .km-marquee {
     background: #c8b89a;
     padding: 13px 0;
@@ -216,16 +208,13 @@
 
   .km-marquee__dot {
     display: inline;
-    color: rgba(0, 0, 0, 0.28);
+    color: rgba(0,0,0,0.28);
     margin: 0 4px;
   }
 
-  /* ── ANIMATIONS ── */
   @keyframes km-fade-up {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes km-scroll {
@@ -233,150 +222,153 @@
     100% { transform: translateX(-50%); }
   }
 
-  /* ── MOBILE ── */
+  /* MOBILE */
   @media (max-width: 768px) {
-    .km-hero-section {
+    .km-hero-wrap {
       grid-template-columns: 1fr;
     }
-
     .km-hero__image-wrap {
       min-height: 420px;
     }
-
     .km-hero__image-overlay {
-      background: linear-gradient(to bottom, transparent 50%, #1a1a1a 100%);
+      background: linear-gradient(to bottom, transparent 50%, rgba(26,26,26,0.85) 100%);
     }
-
     .km-hero__content {
       padding: 40px 24px 48px;
     }
-
     .km-hero__headline {
       font-size: 38px;
     }
-
     .km-hero__stats {
       gap: 28px;
     }
-
     .km-hero__ctas {
       flex-direction: column;
     }
-
     .km-hero__btn {
       text-align: center;
     }
   }
 
   @media (max-width: 480px) {
-    .km-hero__headline {
-      font-size: 32px;
-    }
+    .km-hero__headline { font-size: 32px; }
   }
 </style>
 
-{%- comment -%} ── HERO ── {%- endcomment -%}
-<section class="km-hero-section" aria-label="{{ section.settings.headline | escape }}">
+<div id="km-hero-{{ section.id }}">
 
-  {%- comment -%} LEFT: Image {%- endcomment -%}
-  <div class="km-hero__image-wrap">
-    {% if section.settings.image != blank %}
-      {{
-        section.settings.image
-        | image_url: width: 1200
-        | image_tag:
-          class: 'km-hero__image',
-          loading: 'eager',
-          fetchpriority: 'high',
-          alt: section.settings.image.alt | escape
-      }}
-    {% else %}
-      {{ 'lifestyle-1' | placeholder_svg_tag: 'km-hero__image' }}
-    {% endif %}
+  {%- comment -%} HERO GRID {%- endcomment -%}
+  <div class="km-hero-wrap">
 
-    <div class="km-hero__image-overlay" aria-hidden="true"></div>
+    {%- comment -%} LEFT: Image {%- endcomment -%}
+    <div class="km-hero__image-wrap">
 
-    {% if section.settings.image_tag != blank %}
-      <span class="km-hero__image-tag">{{ section.settings.image_tag }}</span>
-    {% endif %}
-  </div>
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 1400 }}"
+          srcset="
+            {{ section.settings.image | image_url: width: 600 }} 600w,
+            {{ section.settings.image | image_url: width: 900 }} 900w,
+            {{ section.settings.image | image_url: width: 1200 }} 1200w,
+            {{ section.settings.image | image_url: width: 1400 }} 1400w
+          "
+          sizes="50vw"
+          alt="{{ section.settings.image.alt | default: 'KIDSMIRE hero image' | escape }}"
+          loading="eager"
+          fetchpriority="high"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+        >
+      {%- else -%}
+        <img
+          src="{{ 'lifestyle-1' | placeholder_svg_tag }}"
+          alt="Add a hero image in the theme customizer"
+          style="width:100%;height:100%;object-fit:cover;opacity:0.15;"
+        >
+      {%- endif -%}
 
-  {%- comment -%} RIGHT: Content {%- endcomment -%}
-  <div class="km-hero__content">
+      <div class="km-hero__image-overlay"></div>
 
-    {% if section.settings.eyebrow != blank %}
-      <p class="km-hero__eyebrow">{{ section.settings.eyebrow }}</p>
-    {% endif %}
+      {%- if section.settings.image_tag != blank -%}
+        <span class="km-hero__image-tag">{{ section.settings.image_tag }}</span>
+      {%- endif -%}
 
-    {% if section.settings.headline != blank %}
-      <h1 class="km-hero__headline">{{ section.settings.headline }}</h1>
-    {% endif %}
-
-    {% if section.settings.subtext != blank %}
-      <p class="km-hero__subtext">{{ section.settings.subtext }}</p>
-    {% endif %}
-
-    <div class="km-hero__ctas">
-      {% if section.settings.cta_primary_label != blank and section.settings.cta_primary_url != blank %}
-        <a href="{{ section.settings.cta_primary_url }}" class="km-hero__btn km-hero__btn--primary">
-          {{ section.settings.cta_primary_label }}
-        </a>
-      {% endif %}
-      {% if section.settings.cta_secondary_label != blank and section.settings.cta_secondary_url != blank %}
-        <a href="{{ section.settings.cta_secondary_url }}" class="km-hero__btn km-hero__btn--secondary">
-          {{ section.settings.cta_secondary_label }}
-        </a>
-      {% endif %}
     </div>
 
-    <div class="km-hero__stats">
-      {% if section.settings.stat_1_num != blank %}
-        <div>
-          <div class="km-hero__stat-num">{{ section.settings.stat_1_num }}</div>
-          <div class="km-hero__stat-label">{{ section.settings.stat_1_label }}</div>
-        </div>
-      {% endif %}
-      {% if section.settings.stat_2_num != blank %}
-        <div>
-          <div class="km-hero__stat-num">{{ section.settings.stat_2_num }}</div>
-          <div class="km-hero__stat-label">{{ section.settings.stat_2_label }}</div>
-        </div>
-      {% endif %}
-      {% if section.settings.stat_3_num != blank %}
-        <div>
-          <div class="km-hero__stat-num">{{ section.settings.stat_3_num }}</div>
-          <div class="km-hero__stat-label">{{ section.settings.stat_3_label }}</div>
-        </div>
-      {% endif %}
+    {%- comment -%} RIGHT: Content {%- endcomment -%}
+    <div class="km-hero__content">
+
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="km-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.headline != blank -%}
+        <h2 class="km-hero__headline">{{ section.settings.headline }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.subtext != blank -%}
+        <p class="km-hero__subtext">{{ section.settings.subtext }}</p>
+      {%- endif -%}
+
+      <div class="km-hero__ctas">
+        {%- if section.settings.cta_primary_label != blank -%}
+          <a href="{{ section.settings.cta_primary_url | default: '/collections/girls' }}" class="km-hero__btn km-hero__btn--primary">
+            {{ section.settings.cta_primary_label }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.cta_secondary_label != blank -%}
+          <a href="{{ section.settings.cta_secondary_url | default: '/collections/boys' }}" class="km-hero__btn km-hero__btn--secondary">
+            {{ section.settings.cta_secondary_label }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <div class="km-hero__stats">
+        {%- if section.settings.stat_1_num != blank -%}
+          <div>
+            <div class="km-hero__stat-num">{{ section.settings.stat_1_num }}</div>
+            <div class="km-hero__stat-label">{{ section.settings.stat_1_label }}</div>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.stat_2_num != blank -%}
+          <div>
+            <div class="km-hero__stat-num">{{ section.settings.stat_2_num }}</div>
+            <div class="km-hero__stat-label">{{ section.settings.stat_2_label }}</div>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.stat_3_num != blank -%}
+          <div>
+            <div class="km-hero__stat-num">{{ section.settings.stat_3_num }}</div>
+            <div class="km-hero__stat-label">{{ section.settings.stat_3_label }}</div>
+          </div>
+        {%- endif -%}
+      </div>
+
     </div>
-
   </div>
-</section>
 
-{%- comment -%} ── MARQUEE STRIP ── {%- endcomment -%}
-{% if section.settings.show_marquee %}
-<div class="km-marquee" aria-hidden="true">
-  <div class="km-marquee__inner">
-    {%- assign marquee_items = section.settings.marquee_text | split: '|' -%}
-    {%- for item in marquee_items -%}
-      <span class="km-marquee__text">{{ item | strip }}</span>
-      <span class="km-marquee__dot">·</span>
-    {%- endfor -%}
-    {%- comment -%} Duplicate for seamless loop {%- endcomment -%}
-    {%- for item in marquee_items -%}
-      <span class="km-marquee__text">{{ item | strip }}</span>
-      <span class="km-marquee__dot">·</span>
-    {%- endfor -%}
-  </div>
+  {%- comment -%} MARQUEE STRIP {%- endcomment -%}
+  {%- if section.settings.show_marquee -%}
+    <div class="km-marquee" aria-hidden="true">
+      <div class="km-marquee__inner">
+        {%- assign marquee_items = section.settings.marquee_text | split: '|' -%}
+        {%- for item in marquee_items -%}
+          <span class="km-marquee__text">{{ item | strip }}</span>
+          <span class="km-marquee__dot">·</span>
+        {%- endfor -%}
+        {%- for item in marquee_items -%}
+          <span class="km-marquee__text">{{ item | strip }}</span>
+          <span class="km-marquee__dot">·</span>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
 </div>
-{% endif %}
-
 
 {% schema %}
 {
   "name": "KM Hero",
-  "tag": "div",
-  "class": "km-hero-wrapper",
   "settings": [
     {
       "type": "header",
@@ -386,14 +378,13 @@
       "type": "image_picker",
       "id": "image",
       "label": "Hero image",
-      "info": "Recommended: portrait orientation, min 800×1000px. Use a single child on a dark or neutral background."
+      "info": "Portrait orientation works best. Min 800x1000px."
     },
     {
       "type": "text",
       "id": "image_tag",
       "label": "Image badge text",
-      "default": "New arrivals — Summer 2026",
-      "info": "Small label shown in top-left of image (e.g. collection name)"
+      "default": "New arrivals — Summer 2026"
     },
     {
       "type": "header",
@@ -410,7 +401,7 @@
       "id": "headline",
       "label": "Headline",
       "default": "<p>Dressed to move.<br><em>Built to last.</em></p>",
-      "info": "Use <em> tags for italic gold text. Keep under 6 words per line."
+      "info": "Wrap italic gold text in <em> tags. Keep short — 5 to 6 words max."
     },
     {
       "type": "textarea",
@@ -446,7 +437,7 @@
     },
     {
       "type": "header",
-      "content": "Stats"
+      "content": "Stats bar"
     },
     {
       "type": "text",
@@ -497,9 +488,8 @@
     {
       "type": "textarea",
       "id": "marquee_text",
-      "label": "Marquee items",
-      "default": "Free shipping above ₹999 | COD available pan-India | 7-day easy returns | 100% cotton & denim | Delivers in 3–5 days",
-      "info": "Separate items with a pipe character  |"
+      "label": "Marquee items (separate with |)",
+      "default": "Free shipping above ₹999 | COD available pan-India | 7-day easy returns | 100% cotton & denim | Delivers in 3–5 days"
     }
   ],
   "presets": [
