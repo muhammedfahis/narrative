@@ -1,31 +1,28 @@
-{% comment %}
-  KIDSMIRE — Hero Section v3
-  sections/km-hero.liquid
-{% endcomment %}
+{% comment %} sections/km-hero.liquid {% endcomment %}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-  .km{{ section.id }} {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 600px;
-    background: #1a1a1a;
-    font-family: 'Inter', sans-serif;
-  }
-
-  .km{{ section.id }}-img-col {
+  .kmh-{{ section.id }} {
     position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: #111;
+    display: flex;
+    align-items: stretch;
     overflow: hidden;
-    min-height: 600px;
-    background: #2a2a2a;
   }
 
-  .km{{ section.id }}-img-col img {
+  /* Full-bleed background image */
+  .kmh-{{ section.id }} .kmh-bg {
     position: absolute;
     inset: 0;
+    z-index: 0;
+  }
+
+  .kmh-{{ section.id }} .kmh-bg img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -33,265 +30,299 @@
     display: block;
   }
 
-  .km{{ section.id }}-img-col .overlay {
+  /* Dark gradient overlay — left side lighter, right side very dark */
+  .kmh-{{ section.id }} .kmh-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, transparent 55%, rgba(26,26,26,0.5) 100%);
     z-index: 1;
+    background: linear-gradient(
+      to right,
+      rgba(10,10,10,0.15) 0%,
+      rgba(10,10,10,0.55) 45%,
+      rgba(10,10,10,0.92) 65%,
+      rgba(10,10,10,0.98) 100%
+    );
   }
 
-  .km{{ section.id }}-img-col .badge {
-    position: absolute;
-    top: 28px;
-    left: 28px;
+  /* Content sits on the right half */
+  .kmh-{{ section.id }} .kmh-content {
+    position: relative;
     z-index: 2;
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.75);
-    background: rgba(0,0,0,0.4);
-    padding: 8px 14px;
-    border: 0.5px solid rgba(255,255,255,0.15);
-    font-family: 'Inter', sans-serif;
-  }
-
-  .km{{ section.id }}-placeholder {
-    width: 100%;
-    height: 100%;
-    min-height: 600px;
-    background: #2a2a2a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255,255,255,0.15);
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-family: 'Inter', sans-serif;
-  }
-
-  .km{{ section.id }}-content {
+    margin-left: auto;
+    width: 48%;
+    padding: 80px 64px 80px 48px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 64px 56px;
-    background: #1a1a1a;
+    min-height: 100vh;
   }
 
-  .km{{ section.id }}-eyebrow {
+  .kmh-{{ section.id }} .kmh-line {
+    width: 32px;
+    height: 1px;
+    background: #c8b89a;
+    margin-bottom: 32px;
+  }
+
+  .kmh-{{ section.id }} .kmh-eyebrow {
+    font-family: 'Inter', sans-serif;
     font-size: 10px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 28px;
-    font-family: 'Inter', sans-serif;
-  }
-
-  .km{{ section.id }}-headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 54px;
-    font-weight: 300;
-    line-height: 1.08;
-    color: #f5f2ee;
+    color: rgba(255,255,255,0.38);
     margin-bottom: 24px;
-    letter-spacing: -0.5px;
   }
 
-  .km{{ section.id }}-headline em {
+  .kmh-{{ section.id }} .kmh-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 62px;
+    font-weight: 300;
+    line-height: 1.05;
+    color: #f0ece4;
+    margin-bottom: 28px;
+    letter-spacing: -1px;
+  }
+
+  .kmh-{{ section.id }} .kmh-headline em {
     font-style: italic;
     color: #c8b89a;
-  }
-
-  .km{{ section.id }}-subtext {
-    font-size: 13px;
-    color: rgba(255,255,255,0.42);
-    line-height: 1.85;
-    margin-bottom: 48px;
     font-weight: 300;
-    max-width: 320px;
+  }
+
+  .kmh-{{ section.id }} .kmh-sub {
     font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.38);
+    line-height: 1.9;
+    max-width: 300px;
+    margin-bottom: 52px;
   }
 
-  .km{{ section.id }}-ctas {
+  .kmh-{{ section.id }} .kmh-ctas {
     display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 0;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 56px;
   }
 
-  .km{{ section.id }}-btn-p,
-  .km{{ section.id }}-btn-s {
+  .kmh-{{ section.id }} .kmh-btn-p {
     font-family: 'Inter', sans-serif;
     font-size: 10px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    padding: 15px 36px;
-    cursor: pointer;
+    padding: 16px 40px;
+    background: #f0ece4;
+    color: #111;
     text-decoration: none;
     display: inline-block;
+    transition: opacity 0.2s;
   }
 
-  .km{{ section.id }}-btn-p {
-    background: #f5f2ee;
-    color: #1a1a1a;
+  .kmh-{{ section.id }} .kmh-btn-p:hover { opacity: 0.88; }
+
+  .kmh-{{ section.id }} .kmh-btn-s {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 0.5px solid rgba(255,255,255,0.2);
+    padding-bottom: 2px;
+    transition: color 0.2s;
   }
 
-  .km{{ section.id }}-btn-s {
-    background: transparent;
-    color: rgba(255,255,255,0.55);
-    border: 0.5px solid rgba(255,255,255,0.2);
-  }
+  .kmh-{{ section.id }} .kmh-btn-s:hover { color: rgba(255,255,255,0.75); }
 
-  .km{{ section.id }}-stats {
+  .kmh-{{ section.id }} .kmh-stats {
     display: flex;
-    gap: 40px;
-    margin-top: 52px;
-    padding-top: 36px;
-    border-top: 0.5px solid rgba(255,255,255,0.1);
+    gap: 0;
+    border-top: 0.5px solid rgba(255,255,255,0.08);
+    padding-top: 40px;
   }
 
-  .km{{ section.id }}-stat-num {
+  .kmh-{{ section.id }} .kmh-stat {
+    flex: 1;
+    padding-right: 24px;
+    border-right: 0.5px solid rgba(255,255,255,0.08);
+    margin-right: 24px;
+  }
+
+  .kmh-{{ section.id }} .kmh-stat:last-child {
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  .kmh-{{ section.id }} .kmh-stat-n {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 26px;
+    font-size: 30px;
     font-weight: 300;
     color: #c8b89a;
     line-height: 1;
     display: block;
+    margin-bottom: 6px;
   }
 
-  .km{{ section.id }}-stat-label {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.28);
-    margin-top: 6px;
-    display: block;
+  .kmh-{{ section.id }} .kmh-stat-l {
     font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.22);
+    display: block;
   }
 
-  .km{{ section.id }}-marquee {
+  /* Marquee */
+  .kmh-marquee-{{ section.id }} {
+    width: 100%;
     background: #c8b89a;
-    padding: 13px 0;
+    padding: 12px 0;
     overflow: hidden;
     white-space: nowrap;
   }
 
-  .km{{ section.id }}-marquee-inner {
+  .kmh-marquee-{{ section.id }} .kmh-mi {
     display: inline-block;
-    animation: kmscroll{{ section.id }} 22s linear infinite;
+    animation: kmscroll-{{ section.id }} 24s linear infinite;
   }
 
-  .km{{ section.id }}-marquee span.t {
+  .kmh-marquee-{{ section.id }} .kmh-mt {
     font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    letter-spacing: 3px;
+    font-size: 9px;
+    letter-spacing: 3.5px;
     text-transform: uppercase;
-    color: #1a1a1a;
-    margin: 0 48px;
+    color: rgba(0,0,0,0.65);
+    margin: 0 44px;
   }
 
-  .km{{ section.id }}-marquee span.d {
-    color: rgba(0,0,0,0.28);
+  .kmh-marquee-{{ section.id }} .kmh-md {
+    color: rgba(0,0,0,0.25);
+    font-size: 9px;
   }
 
-  @keyframes kmscroll{{ section.id }} {
+  @keyframes kmscroll-{{ section.id }} {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
   }
 
-  @media (max-width: 768px) {
-    .km{{ section.id }} { grid-template-columns: 1fr; }
-    .km{{ section.id }}-img-col { min-height: 420px; }
-    .km{{ section.id }}-content { padding: 40px 24px 48px; }
-    .km{{ section.id }}-headline { font-size: 36px; }
-    .km{{ section.id }}-ctas { flex-direction: column; }
-    .km{{ section.id }}-btn-p,
-    .km{{ section.id }}-btn-s { text-align: center; }
-    .km{{ section.id }}-stats { gap: 24px; }
+  /* Mobile */
+  @media (max-width: 767px) {
+    .kmh-{{ section.id }} {
+      min-height: auto;
+      flex-direction: column;
+    }
+    .kmh-{{ section.id }} .kmh-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(10,10,10,0.1) 0%,
+        rgba(10,10,10,0.75) 50%,
+        rgba(10,10,10,0.97) 100%
+      );
+    }
+    .kmh-{{ section.id }} .kmh-content {
+      width: 100%;
+      margin-left: 0;
+      padding: 220px 28px 60px;
+      min-height: 90vh;
+    }
+    .kmh-{{ section.id }} .kmh-headline { font-size: 42px; }
+    .kmh-{{ section.id }} .kmh-ctas { flex-direction: column; align-items: flex-start; }
+    .kmh-{{ section.id }} .kmh-stat-n { font-size: 24px; }
   }
 </style>
 
-<div class="km{{ section.id }}">
+<div class="kmh-{{ section.id }}">
 
-  <div class="km{{ section.id }}-img-col">
+  {%- comment -%} BACKGROUND IMAGE {%- endcomment -%}
+  <div class="kmh-bg">
     {%- if section.settings.image != blank -%}
-      {%- assign img_w = section.settings.image.width | at_most: 1400 -%}
-      {%- assign img_h = section.settings.image.height | times: img_w | divided_by: section.settings.image.width -%}
+      {%- liquid
+        assign img_src_w = section.settings.image.width | at_most: 1800
+        assign img_src_h = section.settings.image.height | times: img_src_w | divided_by: section.settings.image.width
+      -%}
       <img
-        src="{{ section.settings.image | image_url: width: 1400 }}"
-        srcset="{{ section.settings.image | image_url: width: 600 }} 600w, {{ section.settings.image | image_url: width: 900 }} 900w, {{ section.settings.image | image_url: width: 1200 }} 1200w, {{ section.settings.image | image_url: width: 1400 }} 1400w"
-        sizes="50vw"
-        alt="{{ section.settings.image.alt | default: 'KIDSMIRE hero' | escape }}"
+        src="{{ section.settings.image | image_url: width: 1800 }}"
+        srcset="{{ section.settings.image | image_url: width: 750 }} 750w, {{ section.settings.image | image_url: width: 1100 }} 1100w, {{ section.settings.image | image_url: width: 1500 }} 1500w, {{ section.settings.image | image_url: width: 1800 }} 1800w"
+        sizes="100vw"
+        alt="{{ section.settings.image.alt | default: 'KIDSMIRE' | escape }}"
         loading="eager"
         fetchpriority="high"
-        width="{{ img_w }}"
-        height="{{ img_h }}"
+        width="{{ img_src_w }}"
+        height="{{ img_src_h }}"
       >
     {%- else -%}
-      <div class="km{{ section.id }}-placeholder">Add hero image</div>
-    {%- endif -%}
-    <div class="overlay"></div>
-    {%- if section.settings.image_tag != blank -%}
-      <span class="badge">{{ section.settings.image_tag }}</span>
+      <div style="width:100%;height:100%;background:#1a1a1a;"></div>
     {%- endif -%}
   </div>
 
-  <div class="km{{ section.id }}-content">
+  {%- comment -%} OVERLAY {%- endcomment -%}
+  <div class="kmh-overlay"></div>
+
+  {%- comment -%} CONTENT {%- endcomment -%}
+  <div class="kmh-content">
+
+    <div class="kmh-line"></div>
+
     {%- if section.settings.eyebrow != blank -%}
-      <p class="km{{ section.id }}-eyebrow">{{ section.settings.eyebrow }}</p>
+      <p class="kmh-eyebrow">{{ section.settings.eyebrow }}</p>
     {%- endif -%}
 
     {%- if section.settings.headline != blank -%}
-      <h2 class="km{{ section.id }}-headline">{{ section.settings.headline }}</h2>
+      <h2 class="kmh-headline">{{ section.settings.headline }}</h2>
     {%- endif -%}
 
     {%- if section.settings.subtext != blank -%}
-      <p class="km{{ section.id }}-subtext">{{ section.settings.subtext }}</p>
+      <p class="kmh-sub">{{ section.settings.subtext }}</p>
     {%- endif -%}
 
-    <div class="km{{ section.id }}-ctas">
+    <div class="kmh-ctas">
       {%- if section.settings.cta_primary_label != blank -%}
-        <a href="{{ section.settings.cta_primary_url | default: '/collections/girls' }}" class="km{{ section.id }}-btn-p">
+        <a href="{{ section.settings.cta_primary_url | default: '/collections/girls' }}" class="kmh-btn-p">
           {{ section.settings.cta_primary_label }}
         </a>
       {%- endif -%}
       {%- if section.settings.cta_secondary_label != blank -%}
-        <a href="{{ section.settings.cta_secondary_url | default: '/collections/boys' }}" class="km{{ section.id }}-btn-s">
-          {{ section.settings.cta_secondary_label }}
+        <a href="{{ section.settings.cta_secondary_url | default: '/collections/boys' }}" class="kmh-btn-s">
+          {{ section.settings.cta_secondary_label }} &rarr;
         </a>
       {%- endif -%}
     </div>
 
-    <div class="km{{ section.id }}-stats">
+    <div class="kmh-stats">
       {%- if section.settings.stat_1_num != blank -%}
-        <div>
-          <span class="km{{ section.id }}-stat-num">{{ section.settings.stat_1_num }}</span>
-          <span class="km{{ section.id }}-stat-label">{{ section.settings.stat_1_label }}</span>
+        <div class="kmh-stat">
+          <span class="kmh-stat-n">{{ section.settings.stat_1_num }}</span>
+          <span class="kmh-stat-l">{{ section.settings.stat_1_label }}</span>
         </div>
       {%- endif -%}
       {%- if section.settings.stat_2_num != blank -%}
-        <div>
-          <span class="km{{ section.id }}-stat-num">{{ section.settings.stat_2_num }}</span>
-          <span class="km{{ section.id }}-stat-label">{{ section.settings.stat_2_label }}</span>
+        <div class="kmh-stat">
+          <span class="kmh-stat-n">{{ section.settings.stat_2_num }}</span>
+          <span class="kmh-stat-l">{{ section.settings.stat_2_label }}</span>
         </div>
       {%- endif -%}
       {%- if section.settings.stat_3_num != blank -%}
-        <div>
-          <span class="km{{ section.id }}-stat-num">{{ section.settings.stat_3_num }}</span>
-          <span class="km{{ section.id }}-stat-label">{{ section.settings.stat_3_label }}</span>
+        <div class="kmh-stat">
+          <span class="kmh-stat-n">{{ section.settings.stat_3_num }}</span>
+          <span class="kmh-stat-l">{{ section.settings.stat_3_label }}</span>
         </div>
       {%- endif -%}
     </div>
-  </div>
 
+  </div>
 </div>
 
 {%- if section.settings.show_marquee -%}
-  <div class="km{{ section.id }}-marquee">
-    <div class="km{{ section.id }}-marquee-inner">
+  <div class="kmh-marquee-{{ section.id }}">
+    <div class="kmh-mi">
       {%- assign items = section.settings.marquee_text | split: '|' -%}
-      {%- for item in items -%}<span class="t">{{ item | strip }}</span><span class="d"> · </span>{%- endfor -%}
-      {%- for item in items -%}<span class="t">{{ item | strip }}</span><span class="d"> · </span>{%- endfor -%}
+      {%- for item in items -%}<span class="kmh-mt">{{ item | strip }}</span><span class="kmh-md"> · </span>{%- endfor -%}
+      {%- for item in items -%}<span class="kmh-mt">{{ item | strip }}</span><span class="kmh-md"> · </span>{%- endfor -%}
     </div>
   </div>
 {%- endif -%}
@@ -308,13 +339,7 @@
       "type": "image_picker",
       "id": "image",
       "label": "Hero image",
-      "info": "Portrait orientation, min 800x1000px recommended."
-    },
-    {
-      "type": "text",
-      "id": "image_tag",
-      "label": "Image badge text",
-      "default": "New arrivals — Summer 2026"
+      "info": "Full-bleed background. Portrait or landscape both work. Min 1200px wide."
     },
     {
       "type": "header",
@@ -323,7 +348,7 @@
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow text",
+      "label": "Eyebrow",
       "default": "New arrivals — Summer 2026"
     },
     {
@@ -331,7 +356,7 @@
       "id": "headline",
       "label": "Headline",
       "default": "<p>Dressed to move.<br><em>Built to last.</em></p>",
-      "info": "Use <em> tags for italic gold text."
+      "info": "Wrap italic gold text in <em> tags."
     },
     {
       "type": "textarea",
@@ -346,7 +371,7 @@
     {
       "type": "text",
       "id": "cta_primary_label",
-      "label": "Primary button label",
+      "label": "Primary button",
       "default": "Shop girls"
     },
     {
@@ -357,7 +382,7 @@
     {
       "type": "text",
       "id": "cta_secondary_label",
-      "label": "Secondary button label",
+      "label": "Secondary button",
       "default": "Shop boys"
     },
     {
