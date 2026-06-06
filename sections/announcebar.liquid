@@ -1,0 +1,206 @@
+{% doc %}
+  Scrolling announcement bar — continuously scrolling marquee, full-width, theme colors.
+{% enddoc %}
+
+{% assign bar_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ann-bar-{{ bar_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.bg_color }};
+    color: {{ block.settings.text_color }};
+    overflow: hidden;
+  }
+
+  .ann-bar-inner-{{ bar_id }} {
+    padding: {{ block.settings.v_pad }}px 0;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .ann-track-{{ bar_id }} {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    animation: ann-scroll-{{ bar_id }} {{ block.settings.speed }}s linear infinite;
+    will-change: transform;
+  }
+
+  .ann-segment-{{ bar_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    white-space: nowrap;
+    font-size: {{ block.settings.font_size }}px;
+    font-weight: {{ block.settings.font_weight }};
+    line-height: 1.5;
+    padding: 0 {{ block.settings.repeat_gap }}px;
+  }
+
+  .ann-dot-{{ bar_id }} {
+    display: inline-block;
+    margin: 0 {{ block.settings.msg_gap }}px;
+    opacity: 0.5;
+  }
+
+  @keyframes ann-scroll-{{ bar_id }} {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 749px) {
+    .ann-segment-{{ bar_id }} {
+      font-size: {{ block.settings.font_size | times: 0.9 | floor }}px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ann-track-{{ bar_id }} {
+      animation: none;
+      justify-content: center;
+      width: 100%;
+      flex-wrap: wrap;
+      white-space: normal;
+    }
+    .ann-segment-{{ bar_id }}[aria-hidden="true"] {
+      display: none;
+    }
+  }
+{% endstyle %}
+
+{% capture seg_content %}
+  <span class="ann-segment-{{ bar_id }}">
+    <span>{{ block.settings.message_1 }}</span>
+    <span class="ann-dot-{{ bar_id }}" aria-hidden="true">·</span>
+    <span>{{ block.settings.message_2 }}</span>
+    <span class="ann-dot-{{ bar_id }}" aria-hidden="true">·</span>
+    <span>{{ block.settings.message_3 }}</span>
+  </span>
+{% endcapture %}
+
+<div class="ann-bar-{{ bar_id }}" {{ block.shopify_attributes }}>
+  <div class="ann-bar-inner-{{ bar_id }}">
+    <div class="ann-track-{{ bar_id }}">
+      {{ seg_content }}
+      <span aria-hidden="true">{{ seg_content }}</span>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Scrolling announcement",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Messages"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "message_1",
+      "label": "Message 1",
+      "default": "Free Shipping on orders above ₹999"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "message_2",
+      "label": "Message 2",
+      "default": "Pan India Shipping"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "message_3",
+      "label": "Message 3",
+      "default": "COD Available"
+    },
+    {
+      "type": "range",
+      "id": "msg_gap",
+      "min": 8,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Space between messages",
+      "default": 28
+    },
+    {
+      "type": "header",
+      "content": "Motion"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Scroll speed (higher = slower)",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "repeat_gap",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Gap between repeated sets",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi-bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "range",
+      "id": "v_pad",
+      "min": 6,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 10
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling announcement"
+    }
+  ]
+}
+{% endschema %}
