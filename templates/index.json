@@ -76,22 +76,16 @@
         "ai_gen_block_934f972_AcgwUW": {
           "type": "ai_gen_block_934f972",
           "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_Jun_4_2026_12_44_36_PM.png",
-            "eyebrow": "New arrivals — Summer 2026",
-            "headline": "<p>Curated Essentials for Conscious Parents</p>",
-            "subtext": "Premium cotton & denim, sized 6 months to 6 years. Designed for the children who never slow down.",
-            "cta_primary_label": "Shop girls",
-            "cta_primary_url": "",
-            "cta_secondary_label": "Shop boys",
-            "cta_secondary_url": "",
-            "stat_1_num": "4.9★",
-            "stat_1_label": "87+ reviews",
-            "stat_2_num": "₹330",
-            "stat_2_label": "Starts from",
-            "stat_3_num": "100%",
-            "stat_3_label": "Cotton & denim",
-            "show_marquee": true,
-            "marquee_text": "Free shipping above ₹999 | COD available pan-India | 7-day easy returns | 100% cotton & denim | Delivers in 3–5 days"
+            "background_image": "shopify://shop_images/ChatGPT_Image_Jun_4_2026_12_44_36_PM.png",
+            "headline": "Curated Essentials for Conscious Parents",
+            "subheadline": "100% cotton kids' wear — handpicked for comfort, priced for real life. Loved by moms across India.",
+            "badge_1_text": "100% cotton & denim — no synthetics",
+            "badge_2_text": "7-day easy returns · COD available",
+            "badge_3_text": "Delivers in 3–5 days across India",
+            "cta_boys_text": "Shop Boys",
+            "cta_boys_link": "",
+            "cta_girls_text": "Shop Girls",
+            "cta_girls_link": ""
           },
           "blocks": {}
         }
