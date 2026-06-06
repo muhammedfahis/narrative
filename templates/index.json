@@ -71,6 +71,7 @@
     },
     "1775191592d3cd1b61": {
       "type": "_blocks",
+      "disabled": true,
       "settings": {}
     },
     "1775192259c9690415": {
@@ -97,6 +98,7 @@
       "block_order": [
         "ai_gen_block_934f972_AcgwUW"
       ],
+      "disabled": true,
       "settings": {}
     },
     "image_banner": {
@@ -205,14 +207,6 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
-    },
-    "17751918666fdf4b4f": {
-      "type": "_blocks",
-      "settings": {}
-    },
-    "1775191175d02d95cb": {
-      "type": "_blocks",
-      "settings": {}
     },
     "1775834680150f3a04": {
       "type": "_blocks",
@@ -331,12 +325,6 @@
         "include_margins": true
       }
     },
-    "1773646079df475f87": {
-      "type": "apps",
-      "settings": {
-        "include_margins": true
-      }
-    },
     "1775398557991d0497": {
       "type": "_blocks",
       "blocks": {
@@ -403,30 +391,6 @@
       "settings": {
         "include_margins": true
       }
-    },
-    "1775723078513a292f": {
-      "type": "_blocks",
-      "settings": {}
-    },
-    "17757259630b79b784": {
-      "type": "_blocks",
-      "settings": {}
-    },
-    "1775726021356bb2df": {
-      "type": "_blocks",
-      "settings": {}
-    },
-    "1775726649ce29ab81": {
-      "type": "_blocks",
-      "settings": {}
-    },
-    "17758382771cf65052": {
-      "type": "_blocks",
-      "settings": {}
-    },
-    "1775996377b821d5a8": {
-      "type": "_blocks",
-      "settings": {}
     },
     "1776678561b81228a1": {
       "type": "_blocks",
@@ -500,20 +464,11 @@
     "image_banner",
     "custom_liquid_3FT3Ag",
     "collection_list_zdxykJ",
-    "17751918666fdf4b4f",
-    "1775191175d02d95cb",
     "1775834680150f3a04",
     "1775837563e7d2b710",
     "17735128981acce6d0",
-    "1773646079df475f87",
     "1775398557991d0497",
     "177565993200a8e6b1",
-    "1775723078513a292f",
-    "17757259630b79b784",
-    "1775726021356bb2df",
-    "1775726649ce29ab81",
-    "17758382771cf65052",
-    "1775996377b821d5a8",
     "1776678561b81228a1"
   ]
 }
