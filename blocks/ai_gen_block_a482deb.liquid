@@ -1,742 +1,336 @@
 {% doc %}
-  @prompt
-    Update the existing AI-generated gender filter banner block (section ID: template--20673556971685__blocks_MM8Chy, block ID: template--20673556971685__blocks_MM8Chy__ai_gen_block_6984537_ixeagT) with these two improvements: 1) "Boys" gender button should be active/selected by default when the page first loads, with the boys banner image and text shown immediately. 2) Add an age filter below the gender toggle that dynamically changes based on the selected gender. When "Boys" is selected, show boys-specific age groups (e.g. 0-2Y, 2-4Y, 4-6Y, 6-8Y, 8-10Y). When "Girls" is selected, show girls-specific age groups (e.g. 0-2Y, 2-4Y, 4-6Y, 6-8Y, 8-10Y) — these should be configurable separately in the theme editor for boys and girls. Clicking an age filter should filter the product grid below to show only products matching that gender and age group using collection URL parameters or tags. The active age filter should be visually highlighted.
+  Minimal gender filter banner — KIDSMIRE
+  Cream background, editorial typography, no hero image
 {% enddoc %}
+
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
-  .ai-gender-filter-banner-{{ ai_gen_id }} {
-    display: block;
-    width: 100%;
-    position: relative;
-  }
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
 
-  .ai-gender-filter-container-{{ ai_gen_id }} {
-    width: {{ block.settings.desktop_width_percent }}%;
-    max-width: 100%;
-    margin: 0 auto;
-  }
-
-  .ai-gender-toggle-{{ ai_gen_id }} {
-    display: flex;
-    justify-content: flex-start;
-    gap: 12px;
-    margin-top: 18px;
-    flex-wrap: wrap;
-  }
-
-  .ai-gender-button-{{ ai_gen_id }} {
-    padding: 10px 18px;
-    background-color: #ffffff;
-    color: #111111;
-    border: 2px solid #111111;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    line-height: 1.1;
-    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.20);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .ai-gender-button-{{ ai_gen_id }}:hover {
-    background-color: #f5f5f5;
-    transform: translateY(-1px);
-    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
-  }
-
-  .ai-gender-button-{{ ai_gen_id }}.active {
-    background-color: #111111;
-    color: #ffffff;
-    border-color: #111111;
-  }
-
-  gender-filter-banner-{{ ai_gen_id }}[data-selected-gender='boys'] .ai-gender-button-boys-{{ ai_gen_id }} {
-    background-color: #111111;
-    color: #ffffff;
-    border-color: #111111;
-  }
-
-  gender-filter-banner-{{ ai_gen_id }}[data-selected-gender='boys'] .ai-gender-button-girls-{{ ai_gen_id }} {
-    background-color: #ffffff;
-    color: #111111;
-    border-color: #111111;
-  }
-
-  gender-filter-banner-{{ ai_gen_id }}[data-selected-gender='girls'] .ai-gender-button-girls-{{ ai_gen_id }} {
-    background-color: #111111;
-    color: #ffffff;
-    border-color: #111111;
-  }
-
-  gender-filter-banner-{{ ai_gen_id }}[data-selected-gender='girls'] .ai-gender-button-boys-{{ ai_gen_id }} {
-    background-color: #ffffff;
-    color: #111111;
-    border-color: #111111;
-  }
-
-  .ai-banner-content-{{ ai_gen_id }} {
-    position: relative;
+  .kmgb-{{ ai_gen_id }} {
+    background: #f5f2ee;
+    padding: 72px 48px 56px;
+    border-bottom: 0.5px solid rgba(0,0,0,0.08);
     width: 100%;
   }
 
-  .ai-banner-item-{{ ai_gen_id }} {
-    display: none;
-    width: 100%;
+  .kmgb-inner-{{ ai_gen_id }} {
+    max-width: 860px;
   }
 
-  .ai-banner-item-{{ ai_gen_id }}.active {
-    display: block;
-  }
-
-  .ai-banner-image-wrapper-{{ ai_gen_id }} {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    border-radius: {{ block.settings.banner_border_radius }}px;
-    max-height: 70vh;
-  }
-
-  .ai-banner-image-wrapper-{{ ai_gen_id }}:before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.08) 0%,
-      rgba(0, 0, 0, 0.00) 55%,
-      rgba(0, 0, 0, 0.10) 100%
-    );
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .ai-banner-girls-{{ ai_gen_id }} .ai-banner-image-wrapper-{{ ai_gen_id }}:before {
-    background: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.94) 0%,
-      rgba(255, 255, 255, 0.78) 18%,
-      rgba(255, 255, 255, 0.48) 38%,
-      rgba(255, 255, 255, 0.18) 56%,
-      rgba(255, 255, 255, 0.05) 68%,
-      rgba(255, 255, 255, 0) 100%
-    );
-  }
-
-  .ai-banner-girls-{{ ai_gen_id }} .ai-banner-heading-{{ ai_gen_id }} {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-weight: 700;
-    color: #000000;
-    letter-spacing: -0.01em;
-  }
-
-  .ai-banner-girls-{{ ai_gen_id }} .ai-banner-subheading-{{ ai_gen_id }} {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    color: #000000;
-    opacity: 1;
-  }
-
-  .ai-banner-image-{{ ai_gen_id }} {
-    width: 100%;
-    height: 70vh;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
-  }
-
-  .ai-banner-image-placeholder-{{ ai_gen_id }} {
-    background-color: #f4f4f4;
-    width: 100%;
-    min-height: 70vh;
+  /* Eyebrow */
+  .kmgb-eyebrow-{{ ai_gen_id }} {
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    border-radius: {{ block.settings.banner_border_radius }}px;
+    gap: 16px;
+    margin-bottom: 24px;
   }
 
-  .ai-banner-image-placeholder-{{ ai_gen_id }} svg {
-    width: 100%;
-    height: 100%;
-    max-width: 500px;
-    max-height: 500px;
+  .kmgb-eyebrow-line-{{ ai_gen_id }} {
+    width: 28px;
+    height: 1px;
+    background: #c8b89a;
+    flex-shrink: 0;
   }
 
-  .ai-banner-text-overlay-{{ ai_gen_id }} {
-    position: absolute;
-    left: 38px;
-    top: 50%;
-    transform: translateY(-50%);
-    text-align: left;
-    color: #111111;
-    width: min(440px, 45%);
-    z-index: 3;
-    padding: 0;
-    border-radius: 0;
+  .kmgb-eyebrow-text-{{ ai_gen_id }} {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.35);
+  }
+
+  /* Headline */
+  .kmgb-headline-{{ ai_gen_id }} {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 1.05;
+    color: #1a1a1a;
+    letter-spacing: -0.5px;
+    margin: 0 0 16px;
+    transition: opacity 0.3s ease;
+  }
+
+  .kmgb-headline-{{ ai_gen_id }} em {
+    font-style: italic;
+    color: #c8b89a;
+  }
+
+  /* Subtext */
+  .kmgb-sub-{{ ai_gen_id }} {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(0,0,0,0.45);
+    line-height: 1.85;
+    max-width: 400px;
+    margin: 0 0 40px;
+    display: block;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Toggle buttons */
+  .kmgb-toggle-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 0;
+    border: 0.5px solid rgba(0,0,0,0.15);
+    width: fit-content;
+  }
+
+  .kmgb-btn-{{ ai_gen_id }} {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 13px 36px;
     background: transparent;
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    pointer-events: auto;
+    color: rgba(0,0,0,0.35);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+    position: relative;
   }
 
-  .ai-banner-heading-{{ ai_gen_id }} {
-    font-size: 36px;
-    font-weight: 800;
-    margin: 0;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    max-width: 420px;
+  .kmgb-btn-{{ ai_gen_id }}:first-child {
+    border-right: 0.5px solid rgba(0,0,0,0.15);
   }
 
-  .ai-banner-subheading-{{ ai_gen_id }} {
-    font-size: 15px;
-    margin: 10px 0 0;
-    line-height: 1.45;
-    opacity: 0.85;
-    max-width: 380px;
+  .kmgb-btn-{{ ai_gen_id }}.active {
+    background: #1a1a1a;
+    color: #f5f2ee;
   }
 
-  .ai-empty-state-{{ ai_gen_id }} {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 20px;
-    font-size: 14px;
-    color: #666;
-    text-align: center;
-    pointer-events: none;
+  .kmgb-btn-{{ ai_gen_id }}:not(.active):hover {
+    background: rgba(0,0,0,0.04);
+    color: rgba(0,0,0,0.7);
   }
 
-  @media screen and (max-width: 749px) {
-    .ai-banner-image-wrapper-{{ ai_gen_id }} {
-      min-height: 56vh;
-      max-height: 56vh;
-    }
+  /* Fade animation for content swap */
+  .kmgb-headline-{{ ai_gen_id }}.fade,
+  .kmgb-sub-{{ ai_gen_id }}.fade {
+    opacity: 0;
+    transform: translateY(6px);
+  }
 
-    .ai-banner-image-{{ ai_gen_id }} {
-      width: 100%;
-      height: 56vh;
-      object-fit: cover;
-      object-position: top center;
-    }
+  .kmgb-headline-{{ ai_gen_id }},
+  .kmgb-sub-{{ ai_gen_id }} {
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
 
-    .ai-banner-image-placeholder-{{ ai_gen_id }} {
-      min-height: 56vh;
+  @media (max-width: 768px) {
+    .kmgb-{{ ai_gen_id }} {
+      padding: 52px 24px 44px;
     }
+    .kmgb-headline-{{ ai_gen_id }} {
+      font-size: 38px;
+    }
+    .kmgb-btn-{{ ai_gen_id }} {
+      padding: 12px 24px;
+      font-size: 9px;
+      letter-spacing: 2px;
+    }
+  }
 
-    .ai-gender-toggle-{{ ai_gen_id }} {
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .ai-gender-button-{{ ai_gen_id }} {
-      flex: 1 1 calc(50% - 10px);
-      text-align: center;
-      box-shadow: none;
-      padding: 10px 14px;
-      font-size: 12px;
-      letter-spacing: 0.03em;
-    }
-
-    .ai-banner-heading-{{ ai_gen_id }} {
-      font-size: 26px;
-      color: #ffffff;
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
-    }
-
-    .ai-banner-subheading-{{ ai_gen_id }} {
-      font-size: 13px;
-      margin-top: 8px;
-      color: rgba(255, 255, 255, 0.92);
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
-    }
-
-    .ai-banner-text-overlay-{{ ai_gen_id }} {
-      left: 18px;
-      right: 18px;
-      width: auto;
-      top: auto;
-      bottom: 18px;
-      transform: none;
-      padding: 14px 14px 12px;
-      border-radius: 18px;
-      background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.58) 0%,
-        rgba(0, 0, 0, 0.38) 40%,
-        rgba(0, 0, 0, 0.00) 100%
-      );
-      -webkit-backdrop-filter: blur(8px);
-      backdrop-filter: blur(8px);
-    }
-
-    .ai-banner-girls-{{ ai_gen_id }} .ai-banner-image-wrapper-{{ ai_gen_id }}:before {
-      background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.96) 0%,
-        rgba(255, 255, 255, 0.72) 45%,
-        rgba(255, 255, 255, 0.28) 72%,
-        rgba(255, 255, 255, 0) 100%
-      );
-    }
-
-    .ai-banner-girls-{{ ai_gen_id }} .ai-banner-text-overlay-{{ ai_gen_id }} {
-      background: linear-gradient(
-        to top,
-        rgba(255, 255, 255, 0.97) 0%,
-        rgba(255, 255, 255, 0.88) 35%,
-        rgba(255, 255, 255, 0.55) 65%,
-        rgba(255, 255, 255, 0) 100%
-      );
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-    }
-
-    .ai-banner-girls-{{ ai_gen_id }} .ai-banner-heading-{{ ai_gen_id }} {
-      color: #000000;
-      text-shadow: none;
-    }
-
-    .ai-banner-girls-{{ ai_gen_id }} .ai-banner-subheading-{{ ai_gen_id }} {
-      color: #000000;
-      text-shadow: none;
-    }
+  @media (max-width: 480px) {
+    .kmgb-headline-{{ ai_gen_id }} { font-size: 32px; }
+    .kmgb-toggle-{{ ai_gen_id }} { width: 100%; }
+    .kmgb-btn-{{ ai_gen_id }} { flex: 1; text-align: center; }
   }
 {% endstyle %}
 
-<gender-filter-banner-{{ ai_gen_id }}
-  class="ai-gender-filter-banner-{{ ai_gen_id }}"
-  data-selected-gender="boys"
-  {{ block.shopify_attributes }}
->
-  <div class="ai-gender-filter-container-{{ ai_gen_id }}">
-    <div class="ai-banner-content-{{ ai_gen_id }}">
+<div class="kmgb-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="kmgb-inner-{{ ai_gen_id }}">
 
-      <div class="ai-banner-item-{{ ai_gen_id }} ai-banner-boys-{{ ai_gen_id }} active" data-banner="boys">
-        <div class="ai-banner-image-wrapper-{{ ai_gen_id }}">
-          {% if block.settings.boys_banner_image %}
-            <img
-              src="{{ block.settings.boys_banner_image | image_url: width: 2000 }}"
-              alt="{{ block.settings.boys_banner_image.alt | escape }}"
-              loading="eager"
-              width="{{ block.settings.boys_banner_image.width }}"
-              height="{{ block.settings.boys_banner_image.height }}"
-              class="ai-banner-image-{{ ai_gen_id }}"
-            >
-          {% else %}
-            <div class="ai-banner-image-placeholder-{{ ai_gen_id }}">
-              {{ 'hero-apparel-1' | placeholder_svg_tag }}
-              <div class="ai-empty-state-{{ ai_gen_id }}">Add a boys banner image</div>
-            </div>
-          {% endif %}
-          <div class="ai-banner-text-overlay-{{ ai_gen_id }}">
-            <h2 class="ai-banner-heading-{{ ai_gen_id }}">
-              {% if block.settings.boys_heading != blank %}{{ block.settings.boys_heading }}{% else %}Dressed to impress. Built to play.{% endif %}
-            </h2>
-            <p class="ai-banner-subheading-{{ ai_gen_id }}">
-              {% if block.settings.boys_subheading != blank %}{{ block.settings.boys_subheading }}{% else %}100% cotton styles for boys 6 months to 6 years — tough enough for adventure, sharp enough for every occasion.{% endif %}
-            </p>
-            <div class="ai-gender-toggle-{{ ai_gen_id }}">
-              <button class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-boys-{{ ai_gen_id }} active" data-gender="boys" aria-pressed="true">Shop Boys</button>
-              <button class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-girls-{{ ai_gen_id }}" data-gender="girls" aria-pressed="false">Shop Girls</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="ai-banner-item-{{ ai_gen_id }} ai-banner-girls-{{ ai_gen_id }}" data-banner="girls">
-        <div class="ai-banner-image-wrapper-{{ ai_gen_id }}">
-          {% if block.settings.girls_banner_image %}
-            <img
-              src="{{ block.settings.girls_banner_image | image_url: width: 2000 }}"
-              alt="{{ block.settings.girls_banner_image.alt | escape }}"
-              loading="lazy"
-              width="{{ block.settings.girls_banner_image.width }}"
-              height="{{ block.settings.girls_banner_image.height }}"
-              class="ai-banner-image-{{ ai_gen_id }}"
-            >
-          {% else %}
-            <div class="ai-banner-image-placeholder-{{ ai_gen_id }}">
-              {{ 'hero-apparel-1' | placeholder_svg_tag }}
-              <div class="ai-empty-state-{{ ai_gen_id }}">Add a girls banner image</div>
-            </div>
-          {% endif %}
-          <div class="ai-banner-text-overlay-{{ ai_gen_id }}">
-            <h2 class="ai-banner-heading-{{ ai_gen_id }}">
-              {% if block.settings.girls_heading != blank %}{{ block.settings.girls_heading }}{% else %}Pretty, playful, perfectly her.{% endif %}
-            </h2>
-            <p class="ai-banner-subheading-{{ ai_gen_id }}">
-              {% if block.settings.girls_subheading != blank %}{{ block.settings.girls_subheading }}{% else %}Handpicked styles for girls 6 months to 6 years — from everyday casuals to birthday-ready looks.{% endif %}
-            </p>
-            <div class="ai-gender-toggle-{{ ai_gen_id }}">
-              <button class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-boys-{{ ai_gen_id }}" data-gender="boys" aria-pressed="false">Shop Boys</button>
-              <button class="ai-gender-button-{{ ai_gen_id }} ai-gender-button-girls-{{ ai_gen_id }} active" data-gender="girls" aria-pressed="true">Shop Girls</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div class="kmgb-eyebrow-{{ ai_gen_id }}">
+      <div class="kmgb-eyebrow-line-{{ ai_gen_id }}"></div>
+      <span class="kmgb-eyebrow-text-{{ ai_gen_id }}" id="kmgb-label-{{ ai_gen_id }}">Boys collection</span>
     </div>
+
+    <h1 class="kmgb-headline-{{ ai_gen_id }}" id="kmgb-headline-{{ ai_gen_id }}">
+      Dressed to move.<br><em>Built to last.</em>
+    </h1>
+
+    <span class="kmgb-sub-{{ ai_gen_id }}" id="kmgb-sub-{{ ai_gen_id }}">
+      {{ block.settings.boys_subheading }}
+    </span>
+
+    <div class="kmgb-toggle-{{ ai_gen_id }}">
+      <button
+        class="kmgb-btn-{{ ai_gen_id }} active"
+        id="kmgb-boys-btn-{{ ai_gen_id }}"
+        data-gender="boys"
+        aria-pressed="true"
+      >{{ block.settings.boys_button_text | default: 'Boys' }}</button>
+      <button
+        class="kmgb-btn-{{ ai_gen_id }}"
+        id="kmgb-girls-btn-{{ ai_gen_id }}"
+        data-gender="girls"
+        aria-pressed="false"
+      >{{ block.settings.girls_button_text | default: 'Girls' }}</button>
+    </div>
+
   </div>
-</gender-filter-banner-{{ ai_gen_id }}>
+</div>
 
 <script>
-  (function() {
-    class GenderFilterBanner{{ ai_gen_id }} extends HTMLElement {
-      constructor() {
-        super();
-        this.genderButtons = this.querySelectorAll('.ai-gender-button-{{ ai_gen_id }}');
-        this.bannerItems = this.querySelectorAll('.ai-banner-item-{{ ai_gen_id }}');
-        this.selectedGender = null;
-      }
+(function() {
+  var id = '{{ ai_gen_id }}';
 
-      connectedCallback() {
-        this.setupGenderToggle();
-        this.restoreFromUrl();
-      }
+  var content = {
+    boys: {
+      label: '{{ block.settings.boys_button_text | default: "Boys" }} collection',
+      headline: '{{ block.settings.boys_heading | default: "Dressed to move.<br><em>Built to last.</em>" }}',
+      sub: '{{ block.settings.boys_subheading | default: "100% cotton styles for boys 6 months to 6 years — tough enough for adventure, sharp enough for every occasion." }}'
+    },
+    girls: {
+      label: '{{ block.settings.girls_button_text | default: "Girls" }} collection',
+      headline: '{{ block.settings.girls_heading | default: "Pretty, playful,<br><em>perfectly her.</em>" }}',
+      sub: '{{ block.settings.girls_subheading | default: "Handpicked styles for girls 6 months to 6 years — from everyday casuals to birthday-ready looks." }}'
+    }
+  };
 
-      setupGenderToggle() {
-        this.genderButtons.forEach((button) => {
-          button.addEventListener('click', () => {
-            const gender = button.getAttribute('data-gender');
-            this.switchGender(gender);
-          });
-        });
-      }
+  var boysUrl = '{{ block.settings.boys_collection_url | default: "/collections/boys-clothing" }}';
+  var girlsUrl = '{{ block.settings.girls_collection_url | default: "/collections/girls-clothing" }}';
 
-      switchGender(gender, options = {}) {
-        const { suppressApply = false } = options;
-        this.selectedGender = gender;
-        this.setAttribute('data-selected-gender', gender);
-        this.genderButtons.forEach((btn) => {
-          const isActive = btn.getAttribute('data-gender') === gender;
-          btn.classList.toggle('active', isActive);
-          btn.setAttribute('aria-pressed', isActive);
-        });
-        this.bannerItems.forEach((item) => {
-          const isActive = item.getAttribute('data-banner') === gender;
-          item.classList.toggle('active', isActive);
-        });
-        if (!suppressApply) this.applyFilters({ replaceState: true });
-      }
+  var headline = document.getElementById('kmgb-headline-' + id);
+  var sub = document.getElementById('kmgb-sub-' + id);
+  var label = document.getElementById('kmgb-label-' + id);
+  var boysBtn = document.getElementById('kmgb-boys-btn-' + id);
+  var girlsBtn = document.getElementById('kmgb-girls-btn-' + id);
 
-      restoreFromUrl() {
-        const url = new URL(window.location.href);
-        const path = url.pathname || '';
-        const girlsHandle = '{{ block.settings.girls_collection_handle }}';
-        const isOnGirls = girlsHandle && path.indexOf(`/collections/${girlsHandle}`) !== -1;
-        if (isOnGirls) {
-          this.switchGender('girls', { suppressApply: true });
-        } else {
-          this.switchGender('boys', { suppressApply: true });
-        }
-      }
+  function setGender(gender, navigate) {
+    var c = content[gender];
+    var url = gender === 'boys' ? boysUrl : girlsUrl;
 
-      getProductGridContainer() {
-        return (
-          document.querySelector('#ProductGridContainer') ||
-          document.querySelector('#product-grid') ||
-          document.querySelector('[data-product-grid]') ||
-          document.querySelector('.collection .product-grid') ||
-          null
-        );
-      }
+    // Fade out
+    headline.style.opacity = '0';
+    headline.style.transform = 'translateY(6px)';
+    sub.style.opacity = '0';
+    sub.style.transform = 'translateY(6px)';
 
-      getFacetContainer() {
-        return (
-          document.querySelector('#FacetFiltersForm') ||
-          document.querySelector('[data-facet-filters]') ||
-          null
-        );
-      }
+    setTimeout(function() {
+      label.textContent = c.label;
+      headline.innerHTML = c.headline;
+      sub.textContent = c.sub;
 
-      buildTargetUrl() {
-        if (!this.selectedGender) return null;
-        const boysUrl = '{{ block.settings.boys_collection_url }}';
-        const girlsUrl = '{{ block.settings.girls_collection_url }}';
-        const boysHandle = '{{ block.settings.boys_collection_handle }}';
-        const girlsHandle = '{{ block.settings.girls_collection_handle }}';
-        const fallbackBoys = 'https://kidsmire.co.in/collections/boys-clothing';
-        const fallbackGirls = 'https://kidsmire.co.in/collections/girls-clothing';
-        const base =
-          this.selectedGender === 'boys'
-            ? (boysUrl && boysUrl.length ? boysUrl : (boysHandle && boysHandle.length ? `/collections/${boysHandle}` : fallbackBoys))
-            : (girlsUrl && girlsUrl.length ? girlsUrl : (girlsHandle && girlsHandle.length ? `/collections/${girlsHandle}` : fallbackGirls));
-        const url = new URL(base, window.location.origin);
-        return url;
-      }
+      // Fade in
+      headline.style.opacity = '1';
+      headline.style.transform = 'translateY(0)';
+      sub.style.opacity = '1';
+      sub.style.transform = 'translateY(0)';
+    }, 220);
 
-      async applyFilters({ replaceState }) {
-        const targetUrl = this.buildTargetUrl();
-        if (!targetUrl) return;
-        const nextUrl = targetUrl.pathname + (targetUrl.search || '');
-        const currentUrl = window.location.pathname + window.location.search;
-        if (replaceState && nextUrl === currentUrl) return;
-        if (replaceState) {
-          window.history.replaceState({}, '', nextUrl);
-        } else {
-          window.history.pushState({}, '', nextUrl);
-        }
-        const productGrid = this.getProductGridContainer();
-        if (!productGrid) {
-          window.location.assign(nextUrl);
-          return;
-        }
-        productGrid.setAttribute('aria-busy', 'true');
-        try {
-          const res = await fetch(nextUrl, { credentials: 'same-origin' });
-          if (!res.ok) throw new Error('Failed to fetch filtered results');
-          const html = await res.text();
-          const doc = new DOMParser().parseFromString(html, 'text/html');
-          const newGrid =
-            doc.querySelector('#ProductGridContainer') ||
-            doc.querySelector('#product-grid') ||
-            doc.querySelector('[data-product-grid]') ||
-            doc.querySelector('.collection .product-grid');
-          if (newGrid) {
-            productGrid.innerHTML = newGrid.innerHTML;
-          } else {
-            window.location.assign(nextUrl);
-          }
-          const facetContainer = this.getFacetContainer();
-          if (facetContainer) {
-            const newFacet =
-              doc.querySelector('#FacetFiltersForm') ||
-              doc.querySelector('[data-facet-filters]');
-            if (newFacet) facetContainer.innerHTML = newFacet.innerHTML;
-          }
-        } catch (err) {
-          window.location.assign(nextUrl);
-        } finally {
-          productGrid.removeAttribute('aria-busy');
-        }
+    // Toggle buttons
+    boysBtn.classList.toggle('active', gender === 'boys');
+    girlsBtn.classList.toggle('active', gender === 'girls');
+    boysBtn.setAttribute('aria-pressed', gender === 'boys');
+    girlsBtn.setAttribute('aria-pressed', gender === 'girls');
+
+    // Navigate
+    if (navigate && url) {
+      var currentPath = window.location.pathname;
+      var targetPath = new URL(url, window.location.origin).pathname;
+      if (currentPath !== targetPath) {
+        window.location.assign(url);
       }
     }
+  }
 
-    customElements.define('gender-filter-banner-{{ ai_gen_id }}', GenderFilterBanner{{ ai_gen_id }});
-  })();
+  // Detect current collection from URL on load
+  var path = window.location.pathname.toLowerCase();
+  var girlsHandle = '{{ block.settings.girls_collection_handle | default: "girls-clothing" }}';
+  var isGirls = girlsHandle && path.indexOf(girlsHandle.toLowerCase()) !== -1;
+  setGender(isGirls ? 'girls' : 'boys', false);
+
+  boysBtn.addEventListener('click', function() { setGender('boys', true); });
+  girlsBtn.addEventListener('click', function() { setGender('girls', true); });
+
+  // Remove section gap
+  var wrap = document.querySelector('.kmgb-' + id);
+  if (wrap) wrap.closest('.shopify-section').style.cssText = 'margin:0!important;padding:0!important;';
+})();
 </script>
 
 {% schema %}
 {
-  "name": "Gender filter banner",
+  "name": "KM Gender Banner",
   "tag": null,
   "settings": [
     {
       "type": "header",
-      "content": "Layout"
-    },
-    {
-      "type": "range",
-      "id": "desktop_width_percent",
-      "label": "Desktop width",
-      "min": 50,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "default": 100
-    },
-    {
-      "type": "range",
-      "id": "banner_border_radius",
-      "label": "Banner border radius",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "header",
-      "content": "Gender buttons"
+      "content": "Boys"
     },
     {
       "type": "text",
       "id": "boys_button_text",
-      "label": "Boys button text",
+      "label": "Button label",
       "default": "Boys"
-    },
-    {
-      "type": "text",
-      "id": "girls_button_text",
-      "label": "Girls button text",
-      "default": "Girls"
-    },
-    {
-      "type": "text",
-      "id": "boys_collection_handle",
-      "label": "Boys collection handle",
-      "default": "boys-clothing"
-    },
-    {
-      "type": "text",
-      "id": "girls_collection_handle",
-      "label": "Girls collection handle",
-      "default": "girls-clothing"
-    },
-    {
-      "type": "url",
-      "id": "boys_collection_url",
-      "label": "Boys collection URL"
-    },
-    {
-      "type": "url",
-      "id": "girls_collection_url",
-      "label": "Girls collection URL"
-    },
-    {
-      "type": "range",
-      "id": "button_font_size",
-      "label": "Font size",
-      "min": 12,
-      "max": 24,
-      "step": 1,
-      "unit": "px",
-      "default": 16
-    },
-    {
-      "type": "range",
-      "id": "button_border_radius",
-      "label": "Border radius",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "unit": "px",
-      "default": 8
-    },
-    {
-      "type": "color",
-      "id": "button_bg_color",
-      "label": "Background",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "button_text_color",
-      "label": "Text",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "id": "button_border_color",
-      "label": "Border",
-      "default": "#cccccc"
-    },
-    {
-      "type": "color",
-      "id": "button_hover_bg_color",
-      "label": "Hover background",
-      "default": "#f3f3f3"
-    },
-    {
-      "type": "color",
-      "id": "button_hover_text_color",
-      "label": "Hover text",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "id": "button_hover_border_color",
-      "label": "Hover border",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "id": "button_active_bg_color",
-      "label": "Active background",
-      "default": "#121212"
-    },
-    {
-      "type": "color",
-      "id": "button_active_text_color",
-      "label": "Active text",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "button_active_border_color",
-      "label": "Active border",
-      "default": "#121212"
-    },
-    {
-      "type": "header",
-      "content": "Boys banner"
-    },
-    {
-      "type": "image_picker",
-      "id": "boys_banner_image",
-      "label": "Image"
     },
     {
       "type": "text",
       "id": "boys_heading",
       "label": "Heading",
-      "default": "Dressed to impress. Built to play."
+      "default": "Dressed to move.<br><em>Built to last.</em>"
     },
     {
-      "type": "text",
+      "type": "textarea",
       "id": "boys_subheading",
       "label": "Subheading",
       "default": "100% cotton styles for boys 6 months to 6 years — tough enough for adventure, sharp enough for every occasion."
     },
     {
-      "type": "header",
-      "content": "Girls banner"
+      "type": "text",
+      "id": "boys_collection_handle",
+      "label": "Collection handle",
+      "default": "boys-clothing"
     },
     {
-      "type": "image_picker",
-      "id": "girls_banner_image",
-      "label": "Image"
+      "type": "url",
+      "id": "boys_collection_url",
+      "label": "Collection URL"
+    },
+    {
+      "type": "header",
+      "content": "Girls"
+    },
+    {
+      "type": "text",
+      "id": "girls_button_text",
+      "label": "Button label",
+      "default": "Girls"
     },
     {
       "type": "text",
       "id": "girls_heading",
       "label": "Heading",
-      "default": "Pretty, playful, perfectly her."
+      "default": "Pretty, playful,<br><em>perfectly her.</em>"
     },
     {
-      "type": "text",
+      "type": "textarea",
       "id": "girls_subheading",
       "label": "Subheading",
       "default": "Handpicked styles for girls 6 months to 6 years — from everyday casuals to birthday-ready looks."
     },
     {
-      "type": "header",
-      "content": "Banner text overlay"
+      "type": "text",
+      "id": "girls_collection_handle",
+      "label": "Collection handle",
+      "default": "girls-clothing"
     },
     {
-      "type": "color",
-      "id": "overlay_text_color",
-      "label": "Text color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "range",
-      "id": "heading_font_size",
-      "label": "Heading size",
-      "min": 24,
-      "max": 72,
-      "step": 2,
-      "unit": "px",
-      "default": 48
-    },
-    {
-      "type": "range",
-      "id": "subheading_font_size",
-      "label": "Subheading size",
-      "min": 14,
-      "max": 32,
-      "step": 2,
-      "unit": "px",
-      "default": 20
+      "type": "url",
+      "id": "girls_collection_url",
+      "label": "Collection URL"
     }
   ],
   "presets": [
     {
-      "name": "Gender filter banner"
+      "name": "KM Gender Banner"
     }
   ]
 }
