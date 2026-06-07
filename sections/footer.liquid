@@ -1,41 +1,15 @@
-{% comment %}theme-check-disable UndefinedObject{% endcomment %}
+{% comment %} sections/footer.liquid — KIDSMIRE redesign {% endcomment %}
+
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 <link rel="stylesheet" href="{{ 'component-newsletter.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-list-payment.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-list-social.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'disclosure.css' | asset_url }}" media="print" onload="this.media='all'">
-
-<noscript>{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-list-social.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'disclosure.css' | asset_url | stylesheet_tag }}</noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 {%- style -%}
-  .footer {
-    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
-  }
-
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
-
-  @media screen and (min-width: 750px) {
-    .footer {
-      margin-top: {{ section.settings.margin_top }}px;
-    }
-
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-
-  .ai-whatsapp-button-{{ section.id }} {
+  /* ── WhatsApp floating button ── */
+  .kmft-wa {
     display: block;
     position: fixed;
     bottom: {{ section.settings.bottom_position }}px;
@@ -45,7 +19,7 @@
     height: {{ section.settings.button_size }}px;
   }
 
-  .ai-whatsapp-button__link-{{ section.id }} {
+  .kmft-wa__link {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,610 +27,500 @@
     height: 100%;
     background-color: {{ section.settings.button_color }};
     border-radius: 50%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-decoration: none;
   }
 
-  .ai-whatsapp-button__link-{{ section.id }}:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  .kmft-wa__link:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.22);
   }
 
-  .ai-whatsapp-button__icon-{{ section.id }} {
-    width: calc({{ section.settings.button_size }}px * 0.6);
-    height: calc({{ section.settings.button_size }}px * 0.6);
+  .kmft-wa__icon {
+    width: calc({{ section.settings.button_size }}px * 0.58);
+    height: calc({{ section.settings.button_size }}px * 0.58);
     fill: {{ section.settings.icon_color }};
   }
 
   {% if section.settings.enable_pulse %}
-    @keyframes ai-whatsapp-pulse-{{ section.id }} {
-      0% {
-        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-      }
+    @keyframes kmft-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); }
+      70%  { box-shadow: 0 0 0 14px rgba(37,211,102,0); }
+      100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
     }
-
-    .ai-whatsapp-button__link-{{ section.id }} {
-      animation: ai-whatsapp-pulse-{{ section.id }} 2s infinite;
-    }
-
-    .ai-whatsapp-button__link-{{ section.id }}:hover {
-      animation: none;
-    }
+    .kmft-wa__link { animation: kmft-pulse 2s infinite; }
+    .kmft-wa__link:hover { animation: none; }
   {% endif %}
 
-  @media screen and (max-width: 749px) {
-    .ai-whatsapp-button-{{ section.id }} {
+  @media (max-width: 749px) {
+    .kmft-wa {
       bottom: {{ section.settings.mobile_bottom_position }}px;
       right: {{ section.settings.mobile_right_position }}px;
       width: {{ section.settings.mobile_button_size }}px;
       height: {{ section.settings.mobile_button_size }}px;
     }
-
-    .ai-whatsapp-button__icon-{{ section.id }} {
-      width: calc({{ section.settings.mobile_button_size }}px * 0.6);
-      height: calc({{ section.settings.mobile_button_size }}px * 0.6);
+    .kmft-wa__icon {
+      width: calc({{ section.settings.mobile_button_size }}px * 0.58);
+      height: calc({{ section.settings.mobile_button_size }}px * 0.58);
     }
+  }
+
+  /* ── Footer ── */
+  .kmft {
+    background: #0e0e0e;
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Email strip */
+  .kmft-email {
+    background: #c8b89a;
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .kmft-email-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: #1a1a1a;
+    margin: 0 0 4px;
+    letter-spacing: -0.2px;
+  }
+
+  .kmft-email-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.45);
+    margin: 0;
+  }
+
+  .kmft-email .newsletter-form__field-wrapper {
+    display: flex;
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  .kmft-email .field {
+    display: flex;
+    gap: 0;
+    border: 0.5px solid rgba(0,0,0,0.18);
+  }
+
+  .kmft-email .field__input {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+    padding: 14px 20px !important;
+    background: rgba(255,255,255,0.55) !important;
+    border: none !important;
+    outline: none !important;
+    width: 220px !important;
+    color: #1a1a1a !important;
+    border-radius: 0 !important;
+    height: auto !important;
+  }
+
+  .kmft-email .field__label {
+    display: none !important;
+  }
+
+  .kmft-email .newsletter-form__button {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 10px !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    padding: 14px 20px !important;
+    background: #1a1a1a !important;
+    color: #f5f2ee !important;
+    border: none !important;
+    cursor: pointer !important;
+    border-radius: 0 !important;
+    height: auto !important;
+  }
+
+  .kmft-email .newsletter-form__button svg {
+    stroke: #f5f2ee;
+    fill: none;
+  }
+
+  /* Main grid */
+  .kmft-body {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding: 64px 48px 56px;
+    border-bottom: 0.5px solid rgba(255,255,255,0.07);
+  }
+
+  /* Brand col */
+  .kmft-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #f0ece4;
+    margin: 0 0 16px;
+    display: block;
+    text-decoration: none;
+  }
+
+  .kmft-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.28);
+    line-height: 1.8;
+    max-width: 220px;
+    margin: 0 0 28px;
+  }
+
+  .kmft-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .kmft-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .kmft-badge svg {
+    width: 13px;
+    height: 13px;
+    stroke: #c8b89a;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  .kmft-badge span {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.26);
+    letter-spacing: 0.3px;
+  }
+
+  /* Link cols */
+  .kmft-col-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.22);
+    margin: 0 0 20px;
+    display: block;
+  }
+
+  .kmft-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .kmft-col ul li a,
+  .kmft-col ul li span {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.38);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+    display: block;
+  }
+
+  .kmft-col ul li a:hover {
+    color: rgba(255,255,255,0.72);
+  }
+
+  .kmft-contact-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.16);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* Bottom bar */
+  .kmft-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 48px 28px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .kmft-copy {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.14);
+  }
+
+  .kmft-copy a {
+    color: rgba(255,255,255,0.14);
+    text-decoration: none;
+  }
+
+  .kmft-policy-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .kmft-policy-links a {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.14);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .kmft-policy-links a:hover { color: rgba(255,255,255,0.4); }
+
+  .kmft-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+  }
+
+  .kmft-social a {
+    opacity: 0.28;
+    transition: opacity 0.2s;
+    display: flex;
+  }
+
+  .kmft-social a:hover { opacity: 0.65; }
+
+  .kmft-social svg {
+    width: 18px;
+    height: 18px;
+    stroke: #f0ece4;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Payment icons */
+  .kmft-payment {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    opacity: 0.35;
+  }
+
+  @media (max-width: 900px) {
+    .kmft-email { padding: 36px 24px; flex-direction: column; align-items: flex-start; gap: 20px; }
+    .kmft-email .field__input { width: 180px !important; }
+    .kmft-body { grid-template-columns: 1fr 1fr; gap: 36px; padding: 48px 24px 44px; }
+    .kmft-bottom { padding: 20px 24px 24px; }
+  }
+
+  @media (max-width: 540px) {
+    .kmft-body { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .kmft-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .kmft-email .field__input { width: 150px !important; }
   }
 {%- endstyle -%}
 
-<footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
-  <div style="background:rgba(29,158,117,0.12); border-bottom:0.5px solid rgba(29,158,117,0.25); padding:10px 20px; display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; text-align:center;">
-  <span style="font-size:12px; color:#5DCAA5;">
-    <strong style="color:#9FE1CB;">7-day easy returns</strong> &nbsp;·&nbsp;
-    <strong style="color:#9FE1CB;">COD available pan-India</strong> &nbsp;·&nbsp;
-    <strong style="color:#9FE1CB;">Delivers in 3–5 days</strong> &nbsp;·&nbsp;
-    Free shipping above ₹999
-  </span>
-</div>
-  {%- if section.blocks.size > 0 or section.settings.newsletter_enable or section.settings.show_social -%}
-    <div class="footer__content-top page-width">
-      {%- if section.blocks.size > 0 -%}
-        {%- liquid
-          if section.blocks.size == 9
-            assign footer_grid_class = 'grid--3-col-tablet'
-          elsif section.blocks.size > 6
-            assign footer_grid_class = 'grid--4-col-desktop'
-          elsif section.blocks.size > 4
-            assign footer_grid_class = 'grid--3-col-tablet'
-          endif
-        -%}
-        <div class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}">
-          {%- for block in section.blocks -%}
-            <div class="footer-block grid__item{% if block.type == 'link_list' %} footer-block--menu{% endif %}" {{ block.shopify_attributes }}>
-              {%- if block.settings.heading != blank -%}
-                <h2 class="footer-block__heading">{{- block.settings.heading | escape -}}</h2>
-              {%- endif -%}
+<div class="kmft">
 
-              {%- case block.type -%}
-                {%- when 'text' -%}
-                  <div class="footer-block__details-content rte">
-                    {{ block.settings.subtext }}
-                  </div>
-                {%- when 'link_list' -%}
-                  {%- if block.settings.menu != blank -%}
-                    <ul class="footer-block__details-content list-unstyled">
-                      {%- for link in block.settings.menu.links -%}
-                        <li>
-                          <a href="{{ link.url }}" class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
-                            {{ link.title }}
-                          </a>
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-                  {%- endif -%}
-                {%- when 'image' -%}
-                  <div class="footer-block__details-content footer-block-image {{ block.settings.alignment }}">
-                    {%- if block.settings.image != blank -%}
-                      {%- assign image_size_2x = block.settings.image_width | times: 2 | at_most: 5760 -%}
-                      <img
-                        srcset= "{{ block.settings.image | image_url: width: block.settings.image_width }}, {{ block.settings.image | image_url: width: image_size_2x }} 2x"
-                        src="{{ block.settings.image | image_url: width: 400 }}"
-                        alt="{{ block.settings.image.alt | escape }}"
-                        loading="lazy"
-                        width="{{ block.settings.image.width }}"
-                        height="{{ block.settings.image.height }}"
-                        style="max-width: min(100%, {{ block.settings.image_width }}px);"
-                      >
-                    {%- else -%}
-                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
-                    {%- endif -%}
-                  </div>
-                {%- endcase -%}
-            </div>
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
-
-      <div class="footer-block--newsletter">
-        {%- if section.settings.newsletter_enable -%}
-          <div class="footer-block__newsletter">
- {%- if section.settings.newsletter_heading != blank -%}
-  <h2 class="footer-block__heading">{{ section.settings.newsletter_heading | escape }}</h2>
-  <p style="font-size:13px; color:currentColor; opacity:0.65; margin-top:-8px; margin-bottom:12px;">First order discount + new arrivals straight to your inbox.</p>
-{%- endif -%}
-            {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
-              <input type="hidden" name="contact[tags]" value="newsletter">
-              <div class="newsletter-form__field-wrapper">
-                <div class="field">
-                  <input
-                    id="NewsletterForm--{{ section.id }}"
-                    type="email"
-                    name="contact[email]"
-                    class="field__input"
-                    value="{{ form.email }}"
-                    aria-required="true"
-                    autocorrect="off"
-                    autocapitalize="off"
-                    autocomplete="email"
-                    {% if form.errors %}
-                      autofocus
-                      aria-invalid="true"
-                      aria-describedby="ContactFooter-error"
-                    {% elsif form.posted_successfully? %}
-                      aria-describedby="ContactFooter-success"
-                    {% endif %}
-                    placeholder="{{ 'newsletter.label' | t }}"
-                    required
-                  >
-                  <label class="field__label" for="NewsletterForm--{{ section.id }}">
-                    {{ 'newsletter.label' | t }}
-                  </label>
-                  <button type="submit" class="newsletter-form__button field__button" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">
-                    {% render 'icon-arrow' %}
-                  </button>
-                </div>
-                {%- if form.errors -%}
-                  <small class="newsletter-form__message form__message" id="ContactFooter-error">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
-                {%- endif -%}
-              </div>
-              {%- if form.posted_successfully? -%}
-                <h3 class="newsletter-form__message newsletter-form__message--success form__message" id="ContactFooter-success" tabindex="-1" autofocus>{% render 'icon-success' %}{{ 'newsletter.success' | t }}</h3>
-              {%- endif -%}
-            {%- endform -%}
-          </div>
-        {%- endif -%}
-
-        {%- if section.settings.show_social -%}
-          <ul class="footer__list-social list-unstyled list-social" role="list">
-            {%- if settings.social_twitter_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_twitter_link }}" class="link list-social__link" >
-                  {%- render 'icon-twitter' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_facebook_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_facebook_link }}" class="link list-social__link" >
-                  {%- render 'icon-facebook' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_pinterest_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_pinterest_link }}" class="link list-social__link" >
-                  {%- render 'icon-pinterest' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_instagram_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_instagram_link }}" class="link list-social__link" >
-                  {%- render 'icon-instagram' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_tiktok_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_tiktok_link }}" class="link list-social__link" >
-                  {%- render 'icon-tiktok' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_tumblr_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_tumblr_link }}" class="link list-social__link" >
-                  {%- render 'icon-tumblr' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_snapchat_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_snapchat_link }}" class="link list-social__link" >
-                  {%- render 'icon-snapchat' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_youtube_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_youtube_link }}" class="link list-social__link" >
-                  {%- render 'icon-youtube' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if settings.social_vimeo_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ settings.social_vimeo_link }}" class="link list-social__link" >
-                  {%- render 'icon-vimeo' -%}
-                  <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
-                </a>
-              </li>
-            {%- endif -%}
-            {%- if section.settings.whatsapp_link != blank -%}
-              <li class="list-social__item">
-                <a href="{{ section.settings.whatsapp_link }}" class="link list-social__link" target="_blank" rel="noopener noreferrer">
-                  <svg aria-hidden="true" focusable="false" class="icon icon-whatsapp" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M20.52 3.48A11.9 11.9 0 0 0 12.04 0C5.48 0 .14 5.34.14 11.9c0 2.09.54 4.14 1.56 5.95L0 24l6.33-1.66a11.86 11.86 0 0 0 5.71 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.16-3.43-8.42Zm-8.48 18.3h-.01a9.86 9.86 0 0 1-5.03-1.38l-.36-.22-3.75.99 1-3.66-.24-.38a9.86 9.86 0 0 1-1.51-5.24c0-5.44 4.42-9.86 9.87-9.86 2.64 0 5.12 1.03 6.98 2.89a9.8 9.8 0 0 1 2.89 6.98c0 5.44-4.43 9.86-9.84 9.88Zm5.4-7.38c-.3-.15-1.75-.86-2.02-.95-.27-.1-.47-.15-.67.14-.2.3-.77.95-.95 1.15-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.49-.9-.8-1.5-1.79-1.68-2.09-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.06 2.88 1.2 3.08.15.2 2.09 3.19 5.06 4.47.7.3 1.25.48 1.67.61.7.23 1.34.2 1.84.12.56-.08 1.75-.71 2-1.4.25-.69.25-1.28.17-1.4-.07-.12-.27-.2-.57-.35Z"/>
-                  </svg>
-                  <span class="visually-hidden">WhatsApp</span>
-                </a>
-              </li>
-            {%- endif -%}
-          </ul>
-        {%- endif -%}
-      </div>
+  {%- comment -%} Email strip using Shopify's native newsletter form {%- endcomment -%}
+  <div class="kmft-email">
+    <div>
+      <p class="kmft-email-headline">Join the KIDSMIRE community</p>
+      <p class="kmft-email-sub">First order discount + new arrivals in your inbox</p>
     </div>
-  {%- endif -%}
-
-  <div class="footer__content-bottom">
-    <div class="footer__content-bottom-wrapper page-width">
-      <div class="footer__column footer__localization isolate">
-        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-          <noscript>
-            {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
-              <div class="localization-form__select">
-                <h2 class="visually-hidden" id="FooterCountryLabelNoScript">{{ 'localization.country_label' | t }}</h2>
-                <select class="localization-selector link" name="country_code" aria-labelledby="FooterCountryLabelNoScript">
-                  {%- for country in localization.available_countries -%}
-                    <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
-                      {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
-                    </option>
-                  {%- endfor -%}
-                </select>
-                {% render 'icon-caret' %}
-              </div>
-              <button class="button button--tertiary">{{ 'localization.update_country' | t }}</button>
-            {%- endform -%}
-          </noscript>
-          <localization-form>
-            {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
-              <div class="no-js-hidden">
-                <h2 class="caption-large text-body" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
-                <div class="disclosure">
-                  <button type="button" class="disclosure__button localization-form__select localization-selector link link--text caption-large" aria-expanded="false" aria-controls="FooterCountryList" aria-describedby="FooterCountryLabel">
-                    {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
-                    {% render 'icon-caret' %}
-                  </button>
-                  <div class="disclosure__list-wrapper" hidden>
-                    <ul id="FooterCountryList" role="list" class="disclosure__list list-unstyled">
-                      {%- for country in localization.available_countries -%}
-                        <li class="disclosure__item" tabindex="-1">
-                          <a class="link link--text disclosure__link caption-large{% if country.iso_code == localization.country.iso_code %} disclosure__link--active{% endif %} focus-inset" href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">
-                            {{ country.name }} <span class="localization-form__currency">({{ country.currency.iso_code }} {{ country.currency.symbol }})</span>
-                          </a>
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-                  </div>
-                </div>
-                <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
-
-        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-          <noscript>
-            {%- form 'localization', id: 'FooterLanguageFormNoScript', class: 'localization-form' -%}
-              <div class="localization-form__select">
-                <h2 class="visually-hidden" id="FooterLanguageLabelNoScript">{{ 'localization.language_label' | t }}</h2>
-                <select class="localization-selector link" name="locale_code" aria-labelledby="FooterLanguageLabelNoScript">
-                  {%- for language in localization.available_languages -%}
-                    <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
-                      {{ language.endonym_name | capitalize }}
-                    </option>
-                  {%- endfor -%}
-                </select>
-                {% render 'icon-caret' %}
-              </div>
-              <button class="button button--tertiary">{{ 'localization.update_language' | t }}</button>
-            {%- endform -%}
-          </noscript>
-
-          <localization-form>
-            {%- form 'localization', id: 'FooterLanguageForm', class: 'localization-form' -%}
-              <div class="no-js-hidden">
-                <h2 class="caption-large text-body" id="FooterLanguageLabel">{{ 'localization.language_label' | t }}</h2>
-                <div class="disclosure">
-                  <button type="button" class="disclosure__button localization-form__select localization-selector link link--text caption-large" aria-expanded="false" aria-controls="FooterLanguageList" aria-describedby="FooterLanguageLabel">
-                    {{ localization.language.endonym_name | capitalize }}
-                    {% render 'icon-caret' %}
-                  </button>
-                  <div class="disclosure__list-wrapper" hidden>
-                    <ul id="FooterLanguageList" role="list" class="disclosure__list list-unstyled">
-                      {%- for language in localization.available_languages -%}
-                        <li class="disclosure__item" tabindex="-1">
-                          <a class="link link--text disclosure__link caption-large{% if language.iso_code == localization.language.iso_code %} disclosure__link--active{% endif %} focus-inset" href="#" hreflang="{{ language.iso_code }}" lang="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} aria-current="true"{% endif %} data-value="{{ language.iso_code }}">
-                            {{ language.endonym_name | capitalize }}
-                          </a>
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-                  </div>
-                </div>
-                <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
-      </div>
-      <div class="footer__column footer__column--info">
-        {%- if section.settings.payment_enable -%}
-          <div class="footer__payment">
-            <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
-            <ul class="list list-payment" role="list">
-              {%- for type in shop.enabled_payment_types -%}
-                <li class="list-payment__item">
-                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
-                </li>
-              {%- endfor -%}
-            </ul>
+    <div>
+      {%- form 'customer', id: 'ContactFooterKM', class: 'footer__newsletter newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter-form__field-wrapper">
+          <div class="field">
+            <input
+              id="NewsletterFormKM"
+              type="email"
+              name="contact[email]"
+              class="field__input"
+              value="{{ form.email }}"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              placeholder="Your email address"
+              required
+            >
+            <label class="field__label" for="NewsletterFormKM">Email</label>
+            <button type="submit" class="newsletter-form__button field__button" name="commit" aria-label="Subscribe">
+              {% render 'icon-arrow' %}
+            </button>
           </div>
-        {%- endif -%}
-        <div class="footer__copyright caption">
-          <small class="copyright__content">&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: routes.root_url }}</small>
-          <small class="copyright__content"></small>
+          {%- if form.errors -%}
+            <small class="newsletter-form__message form__message">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+          {%- endif -%}
         </div>
-      </div>
+        {%- if form.posted_successfully? -%}
+          <h3 class="newsletter-form__message newsletter-form__message--success form__message" tabindex="-1" autofocus>{% render 'icon-success' %}{{ 'newsletter.success' | t }}</h3>
+        {%- endif -%}
+      {%- endform -%}
     </div>
   </div>
-</footer>
 
+  {%- comment -%} 4-column grid {%- endcomment -%}
+  <div class="kmft-body">
+
+    {%- comment -%} Col 1: Brand {%- endcomment -%}
+    <div class="kmft-col">
+      <a href="{{ routes.root_url }}" class="kmft-logo">Kidsmire</a>
+      <p class="kmft-desc">Premium kids' clothing made from 100% cotton & denim. Designed for comfort, styled for moments worth remembering.</p>
+      <div class="kmft-badges">
+        <div class="kmft-badge">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>100% cotton & denim — no synthetics</span>
+        </div>
+        <div class="kmft-badge">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>7-day returns, no questions asked</span>
+        </div>
+        <div class="kmft-badge">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Free shipping above ₹999</span>
+        </div>
+        <div class="kmft-badge">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>4.9★ from 87+ verified parents</span>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} Col 2: Shop {%- endcomment -%}
+    <div class="kmft-col">
+      <span class="kmft-col-title">Shop</span>
+      <ul>
+        <li><a href="/collections/girls-clothing">Girls clothing</a></li>
+        <li><a href="/collections/boys-clothing">Boys clothing</a></li>
+        <li><a href="/collections/all">All products</a></li>
+        <li><a href="/collections/new-arrivals">New arrivals</a></li>
+        <li><a href="/collections/best-sellers">Best sellers</a></li>
+      </ul>
+    </div>
+
+    {%- comment -%} Col 3: Help {%- endcomment -%}
+    <div class="kmft-col">
+      <span class="kmft-col-title">Help</span>
+      <ul>
+        <li><a href="/pages/size-guide">Size guide</a></li>
+        <li><a href="{{ routes.root_url }}apps/parcelpanel">Track your order</a></li>
+        <li><a href="{{ routes.root_url }}policies/refund-policy">Returns & exchanges</a></li>
+        <li><a href="/pages/contact">Contact us</a></li>
+        <li><a href="{{ routes.search_url }}">Search</a></li>
+      </ul>
+    </div>
+
+    {%- comment -%} Col 4: Contact {%- endcomment -%}
+    <div class="kmft-col">
+      <span class="kmft-col-title">Contact</span>
+      <ul>
+        <li>
+          <span class="kmft-contact-label">WhatsApp</span>
+          <a href="https://wa.me/{{ section.settings.phone_number }}">Message us directly</a>
+        </li>
+        <li>
+          <span class="kmft-contact-label">Email</span>
+          <a href="mailto:kidsmire@gmail.com">kidsmire@gmail.com</a>
+        </li>
+        <li>
+          <span class="kmft-contact-label">Location</span>
+          <span>Kerala, India</span>
+        </li>
+        <li>
+          <span class="kmft-contact-label">Hours</span>
+          <span>Mon–Sat, 9am–7pm IST</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  {%- comment -%} Bottom bar {%- endcomment -%}
+  <div class="kmft-bottom">
+
+    <span class="kmft-copy">&copy; {{ 'now' | date: '%Y' }}, <a href="{{ routes.root_url }}">{{ shop.name }}</a>. All rights reserved.</span>
+
+    <div class="kmft-policy-links">
+      <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a>
+      <a href="{{ routes.root_url }}policies/terms-of-service">Terms</a>
+      <a href="{{ routes.root_url }}policies/shipping-policy">Shipping</a>
+    </div>
+
+    <div class="kmft-social">
+      {%- if settings.social_instagram_link != blank -%}
+        <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="#f0ece4" stroke="none"/></svg>
+        </a>
+      {%- endif -%}
+      {%- if settings.social_facebook_link != blank -%}
+        <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.payment_enable -%}
+      <div class="kmft-payment">
+        {%- for type in shop.enabled_payment_types -%}
+          {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+
+</div>
+
+{%- comment -%} WhatsApp floating button {%- endcomment -%}
 {%- if section.settings.enable_whatsapp_button -%}
-  <whatsapp-button-{{ section.id }} class="ai-whatsapp-button-{{ section.id }}">
-    <a
-      href="https://wa.me/{{ section.settings.phone_number }}"
-      class="ai-whatsapp-button__link-{{ section.id }}"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Chat on WhatsApp"
-    >
-      <svg
-        class="ai-whatsapp-button__icon-{{ section.id }}"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-      >
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-      </svg>
-    </a>
-  </whatsapp-button-{{ section.id }}>
+  <a
+    href="https://wa.me/{{ section.settings.phone_number }}"
+    class="kmft-wa__link"
+    style="display:flex;align-items:center;justify-content:center;position:fixed;bottom:{{ section.settings.mobile_bottom_position }}px;right:{{ section.settings.mobile_right_position }}px;z-index:9999;width:{{ section.settings.button_size }}px;height:{{ section.settings.button_size }}px;background:{{ section.settings.button_color }};border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,0.18);text-decoration:none;"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat on WhatsApp"
+  >
+    <svg style="width:calc({{ section.settings.button_size }}px * 0.58);height:calc({{ section.settings.button_size }}px * 0.58);fill:{{ section.settings.icon_color }};" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
 {%- endif -%}
-
-{% javascript %}
-  class LocalizationForm extends HTMLElement {
-    constructor() {
-      super();
-      this.elements = {
-        input: this.querySelector('input[name="locale_code"], input[name="country_code"]'),
-        button: this.querySelector('button'),
-        panel: this.querySelector('.disclosure__list-wrapper'),
-      };
-      this.elements.button.addEventListener('click', this.openSelector.bind(this));
-      this.elements.button.addEventListener('focusout', this.closeSelector.bind(this));
-      this.addEventListener('keyup', this.onContainerKeyUp.bind(this));
-
-      this.querySelectorAll('a').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)));
-    }
-
-    hidePanel() {
-      this.elements.button.setAttribute('aria-expanded', 'false');
-      this.elements.panel.setAttribute('hidden', true);
-    }
-
-    onContainerKeyUp(event) {
-      if (event.code.toUpperCase() !== 'ESCAPE') return;
-
-      this.hidePanel();
-      this.elements.button.focus();
-    }
-
-    onItemClick(event) {
-      event.preventDefault();
-      const form = this.querySelector('form');
-      this.elements.input.value = event.currentTarget.dataset.value;
-      if (form) form.submit();
-    }
-
-    openSelector() {
-      this.elements.button.focus();
-      this.elements.panel.toggleAttribute('hidden');
-      this.elements.button.setAttribute('aria-expanded', (this.elements.button.getAttribute('aria-expanded') === 'false').toString());
-    }
-
-    closeSelector(event) {
-      const shouldClose = event.relatedTarget && event.relatedTarget.nodeName === 'BUTTON';
-      if (event.relatedTarget === null || shouldClose) {
-        this.hidePanel();
-      }
-    }
-  }
-
-  customElements.define('localization-form', LocalizationForm);
-
-  class WhatsAppButton extends HTMLElement {
-    connectedCallback() {
-      const link = this.querySelector('a');
-      if (!link) return;
-
-      link.addEventListener('click', function () {
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'click', {
-            event_category: 'WhatsApp',
-            event_label: 'Chat Button',
-          });
-        }
-      });
-    }
-  }
-
-  customElements.define('whatsapp-button-{{ section.id }}', WhatsAppButton);
-{% endjavascript %}
 
 {% schema %}
 {
-  "name": "t:sections.footer.name",
-  "blocks": [
-    {
-      "type": "link_list",
-      "name": "t:sections.footer.blocks.link_list.name",
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "default": "Quick links",
-          "label": "t:sections.footer.blocks.link_list.settings.heading.label"
-        },
-        {
-          "type": "link_list",
-          "id": "menu",
-          "default": "footer",
-          "label": "t:sections.footer.blocks.link_list.settings.menu.label",
-          "info": "t:sections.footer.blocks.link_list.settings.menu.info"
-        }
-      ]
-    },
-    {
-      "type": "text",
-      "name": "t:sections.footer.blocks.text.name",
-      "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "default": "Heading",
-          "label": "t:sections.footer.blocks.text.settings.heading.label"
-        },
-        {
-          "type": "richtext",
-          "id": "subtext",
-          "default": "<p>Share contact information, store details, and brand content with your customers.</p>",
-          "label": "t:sections.footer.blocks.text.settings.subtext.label"
-        }
-      ]
-    },
-    {
-      "type": "image",
-      "name": "Image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "range",
-          "id": "image_width",
-          "min": 50,
-          "max": 200,
-          "step": 5,
-          "unit": "px",
-          "label": "Image width",
-          "default": 100
-        },
-        {
-          "type": "select",
-          "id": "alignment",
-          "label": "Image alignment on large screen",
-          "options": [
-            {
-              "value": "",
-              "label": "Left"
-            },
-            {
-              "value": "center",
-              "label": "Center"
-            },
-            {
-              "value": "right",
-              "label": "Right"
-            }
-          ],
-          "default": "center"
-        }
-      ]
-    }
-  ],
+  "name": "Footer",
+  "blocks": [],
   "settings": [
-    {
-      "type": "select",
-      "id": "color_scheme",
-      "options": [
-        {
-          "value": "accent-1",
-          "label": "t:sections.all.colors.accent_1.label"
-        },
-        {
-          "value": "accent-2",
-          "label": "t:sections.all.colors.accent_2.label"
-        },
-        {
-          "value": "background-1",
-          "label": "t:sections.all.colors.background_1.label"
-        },
-        {
-          "value": "background-2",
-          "label": "t:sections.all.colors.background_2.label"
-        },
-        {
-          "value": "inverse",
-          "label": "t:sections.all.colors.inverse.label"
-        }
-      ],
-      "default": "background-1",
-      "label": "t:sections.all.colors.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__1.content",
-      "info": "t:sections.footer.settings.header__1.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "newsletter_enable",
-      "default": true,
-      "label": "t:sections.footer.settings.newsletter_enable.label"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_heading",
-      "default": "Subscribe to our emails",
-      "label": "t:sections.footer.settings.newsletter_heading.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__2.content",
-      "info": "t:sections.footer.settings.header__2.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_social",
-      "default": false,
-      "label": "t:sections.footer.settings.show_social.label"
-    },
     {
       "type": "header",
       "content": "WhatsApp floating button"
@@ -664,15 +528,15 @@
     {
       "type": "checkbox",
       "id": "enable_whatsapp_button",
-      "label": "Enable WhatsApp floating button",
+      "label": "Enable WhatsApp button",
       "default": true
     },
     {
       "type": "text",
       "id": "phone_number",
-      "label": "Phone number",
+      "label": "Phone number (with country code, no +)",
       "default": "918848104626",
-      "info": "Enter phone number with country code (no + or spaces)"
+      "info": "e.g. 919876543210"
     },
     {
       "type": "color",
@@ -687,12 +551,18 @@
       "default": "#FFFFFF"
     },
     {
+      "type": "checkbox",
+      "id": "enable_pulse",
+      "label": "Pulse animation",
+      "default": true
+    },
+    {
       "type": "range",
       "id": "button_size",
-      "label": "Button size (desktop)",
-      "min": 40,
+      "label": "Button size",
+      "min": 44,
       "max": 80,
-      "step": 5,
+      "step": 4,
       "unit": "px",
       "default": 60
     },
@@ -707,15 +577,9 @@
       "default": 55
     },
     {
-      "type": "checkbox",
-      "id": "enable_pulse",
-      "label": "Enable pulse animation",
-      "default": true
-    },
-    {
       "type": "range",
       "id": "bottom_position",
-      "label": "Distance from bottom (desktop)",
+      "label": "Distance from bottom",
       "min": 10,
       "max": 100,
       "step": 5,
@@ -725,7 +589,7 @@
     {
       "type": "range",
       "id": "right_position",
-      "label": "Distance from right (desktop)",
+      "label": "Distance from right",
       "min": 10,
       "max": 100,
       "step": 5,
@@ -753,90 +617,16 @@
       "default": 15
     },
     {
-      "type": "url",
-      "id": "whatsapp_link",
-      "label": "WhatsApp link"
-    },
-    {
       "type": "header",
-      "content": "t:sections.footer.settings.header__3.content",
-      "info": "t:sections.footer.settings.header__4.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_country_selector",
-      "default": true,
-      "label": "t:sections.footer.settings.enable_country_selector.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__5.content",
-      "info": "t:sections.footer.settings.header__6.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_language_selector",
-      "default": true,
-      "label": "t:sections.footer.settings.enable_language_selector.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__7.content"
+      "content": "Payment icons"
     },
     {
       "type": "checkbox",
       "id": "payment_enable",
-      "default": true,
-      "label": "t:sections.footer.settings.payment_enable.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.spacing"
-    },
-    {
-      "type": "range",
-      "id": "margin_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.footer.settings.margin_top.label",
-      "default": 0
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
+      "label": "Show payment icons",
+      "default": true
     }
   ],
-  "default": {
-    "blocks": [
-      {
-        "type": "link_list"
-      },
-      {
-        "type": "text"
-      }
-    ]
-  }
+  "default": {}
 }
 {% endschema %}
