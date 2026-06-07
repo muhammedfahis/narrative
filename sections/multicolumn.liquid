@@ -1,195 +1,327 @@
 {{ 'section-multicolumn.css' | asset_url | stylesheet_tag }}
-<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
-<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 {%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  .kmmc-{{ section.id }} {
+    background: #0e0e0e;
+    padding: {{ section.settings.padding_top }}px 48px {{ section.settings.padding_bottom }}px;
+    margin: 0;
   }
 
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
+  @media screen and (max-width: 749px) {
+    .kmmc-{{ section.id }} {
+      padding: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px 24px {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+  }
+
+  /* Header */
+  .kmmc-{{ section.id }} .kmmc-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .kmmc-{{ section.id }} .kmmc-header-line {
+    width: 28px;
+    height: 1px;
+    background: #c8b89a;
+    flex-shrink: 0;
+  }
+
+  .kmmc-{{ section.id }} .kmmc-header-inner {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .kmmc-{{ section.id }} .kmmc-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.28);
+  }
+
+  .kmmc-{{ section.id }} .kmmc-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: #f0ece4;
+    letter-spacing: -0.3px;
+    margin: 0;
+    line-height: 1;
+  }
+
+  .kmmc-{{ section.id }} .kmmc-title em {
+    font-style: italic;
+    color: #c8b89a;
+  }
+
+  /* Grid */
+  .kmmc-{{ section.id }} .kmmc-grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.06);
+  }
+
+  /* Card */
+  .kmmc-{{ section.id }} .kmmc-card {
+    background: #0e0e0e;
+    padding: 40px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transition: background 0.25s ease;
+  }
+
+  .kmmc-{{ section.id }} .kmmc-card:hover {
+    background: #161616;
+  }
+
+  /* Number */
+  .kmmc-{{ section.id }} .kmmc-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: #c8b89a;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  /* Icon box */
+  .kmmc-{{ section.id }} .kmmc-icon {
+    width: 40px;
+    height: 40px;
+    border: 0.5px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    flex-shrink: 0;
+  }
+
+  .kmmc-{{ section.id }} .kmmc-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: rgba(255,255,255,0.4);
+    fill: none;
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Title */
+  .kmmc-{{ section.id }} .kmmc-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: #f0ece4;
+    margin: 0 0 12px;
+    line-height: 1.2;
+    letter-spacing: -0.2px;
+  }
+
+  /* Text */
+  .kmmc-{{ section.id }} .kmmc-card-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  .kmmc-{{ section.id }} .kmmc-card-text p {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.8;
+  }
+
+  /* Link */
+  .kmmc-{{ section.id }} .kmmc-card-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #c8b89a;
+    text-decoration: none;
+    margin-top: 20px;
+    display: inline-block;
+    border-bottom: 0.5px solid rgba(200,184,154,0.3);
+    padding-bottom: 2px;
+  }
+
+  /* Promise strip */
+  .kmmc-{{ section.id }} .kmmc-strip {
+    display: flex;
+    gap: 0;
+    margin-top: 40px;
+    border-top: 0.5px solid rgba(255,255,255,0.06);
+    padding-top: 32px;
+    flex-wrap: wrap;
+  }
+
+  .kmmc-{{ section.id }} .kmmc-promise {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 160px;
+    padding-right: 20px;
+    border-right: 0.5px solid rgba(255,255,255,0.06);
+    margin-right: 20px;
+  }
+
+  .kmmc-{{ section.id }} .kmmc-promise:last-child {
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  .kmmc-{{ section.id }} .kmmc-promise svg {
+    width: 14px;
+    height: 14px;
+    stroke: #c8b89a;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  .kmmc-{{ section.id }} .kmmc-promise span {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+  }
+
+  @media screen and (max-width: 900px) {
+    .kmmc-{{ section.id }} .kmmc-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .kmmc-{{ section.id }} .kmmc-strip {
+      gap: 20px;
+    }
+    .kmmc-{{ section.id }} .kmmc-promise {
+      border-right: none;
+      margin-right: 0;
+      padding-right: 0;
+      min-width: calc(50% - 10px);
+    }
+  }
+
+  @media screen and (max-width: 540px) {
+    .kmmc-{{ section.id }} .kmmc-grid {
+      grid-template-columns: 1fr;
+    }
+    .kmmc-{{ section.id }} .kmmc-promise {
+      min-width: 100%;
+    }
+    .kmmc-{{ section.id }} .kmmc-title {
+      font-size: 28px;
     }
   }
 {%- endstyle -%}
 
 {%- liquid
-  assign columns_mobile_int = section.settings.columns_mobile | plus: 0
-  assign show_mobile_slider = false
-  if section.settings.swipe_on_mobile and section.blocks.size > columns_mobile_int
-    assign show_mobile_slider = true
-  endif
+  assign icons = 'leaf,shirt,currency,users' | split: ','
 -%}
 
-<div class="multicolumn color-{{ section.settings.color_scheme }} gradient{% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %}{% if section.settings.title == blank %} no-heading{% endif %}">
-  <div class="page-width section-{{ section.id }}-padding isolate">
-    {%- unless section.settings.title == blank -%}
-      <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin">
-        <h2 class="title {{ section.settings.heading_size }}">
-          {{ section.settings.title | escape }}
-        </h2>
-        {%- if section.settings.button_label != blank and show_mobile_slider -%}
-          <a href="{{ section.settings.button_link }}" class="link underlined-link large-up-hide">{{ section.settings.button_label | escape }}</a>
-        {%- endif -%}
+<div class="kmmc-{{ section.id }}">
+
+  {%- unless section.settings.title == blank -%}
+    <div class="kmmc-header">
+      <div class="kmmc-header-line"></div>
+      <div class="kmmc-header-inner">
+        <span class="kmmc-label">Why parents choose us</span>
+        <h2 class="kmmc-title">{{ section.settings.title | escape }}</h2>
       </div>
-    {%- endunless -%}
-    <slider-component class="slider-mobile-gutter">
-      <ul class="multicolumn-list contains-content-container grid grid--{{ section.settings.columns_mobile }}-col-tablet-down grid--{{ section.settings.columns_desktop }}-col-desktop{% if show_mobile_slider %} slider slider--mobile grid--peek{% endif %}"
-        id="Slider-{{ section.id }}"
-        role="list"
-      >
-        {%- liquid
-          assign highest_ratio = 0
-          for block in section.blocks
-            if block.settings.image.aspect_ratio > highest_ratio
-              assign highest_ratio = block.settings.image.aspect_ratio
-            endif
-          endfor
-        -%}
-        {%- for block in section.blocks -%}
-          {%- assign empty_column = '' -%}
-          {%- if block.settings.image == blank and block.settings.title == blank and block.settings.text == blank and block.settings.link_label == blank -%}
-            {%- assign empty_column = ' multicolumn-list__item--empty' -%}
-          {%- endif -%}
+    </div>
+  {%- endunless -%}
 
-          <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="multicolumn-list__item grid__item{% if section.settings.swipe_on_mobile %} slider__slide{% endif %}{% if section.settings.column_alignment == 'center' %} center{% endif %}{{ empty_column }}" {{ block.shopify_attributes }}>
-            <div class="multicolumn-card content-container">
-              {%- if block.settings.image != blank -%}
-                {% if section.settings.image_ratio == 'adapt' or section.settings.image_ratio == 'circle' %}
-                  {% assign spaced_image = true %}
-                {% endif %}
-                <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--{{ section.settings.image_width }}-width{% if section.settings.image_width != 'full' or spaced_image %} multicolumn-card-spacing{% endif %}">
-                  <div class="media media--transparent media--{{ section.settings.image_ratio }}"
-                    {% if section.settings.image_ratio == 'adapt' %}
-                      style="padding-bottom: {{ 1 | divided_by: highest_ratio | times: 100 }}%;"
-                    {% endif %}>
-                    {%- capture sizes -%}(min-width: 990px) {% if section.blocks.size <= 2 %}710px{% else %}550px{% endif %}, (min-width: 750px) {% if section.blocks.size == 1 %}710px{% else %}550px{% endif %}, calc(100vw - 30px){%- endcapture -%}
-                    {{ block.settings.image | image_url: width: 1420 | image_tag:
-                      loading: 'lazy',
-                      sizes: sizes,
-                      widths: '275, 550, 710, 1420',
-                      class: 'multicolumn-card__image'
-                    }}
-                  </div>
-                </div>
-              {%- endif -%}
-              <div class="multicolumn-card__info">
-                {%- if block.settings.title != blank -%}
-                  <h3>{{ block.settings.title | escape }}</h3>
-                {%- endif -%}
-                {%- if block.settings.text != blank -%}
-                  <div class="rte">{{ block.settings.text }}</div>
-                {%- endif -%}
-                {%- if block.settings.link_label != blank -%}
-                  <a class="link animate-arrow" {% if block.settings.link == blank %}role="link" aria-disabled="true"{% else %}href="{{ block.settings.link }}"{% endif %}>{{ block.settings.link_label | escape }}<span class="icon-wrap">&nbsp;{% render 'icon-arrow' %}</span></a>
-                {%- endif -%}
-              </div>
-            </div>
-          </li>
-        {%- endfor -%}
-      </ul>
+  <div class="kmmc-grid">
+    {%- for block in section.blocks -%}
+      {%- assign icon_index = forloop.index0 | modulo: 4 -%}
+      <div class="kmmc-card" {{ block.shopify_attributes }}>
 
-      {%- if show_mobile_slider -%}
-        <div class="slider-buttons no-js-hidden medium-hide">
-          <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
-          <div class="slider-counter caption">
-            <span class="slider-counter--current">1</span>
-            <span aria-hidden="true"> / </span>
-            <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
-            <span class="slider-counter--total">{{ section.blocks.size }}</span>
-          </div>
-          <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'general.slider.next_slide' | t }}">{% render 'icon-caret' %}</button>
+        <div class="kmmc-icon">
+          {%- case icon_index -%}
+            {%- when 0 -%}
+              <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 6a6 6 0 1 0 0 12A6 6 0 0 0 12 6z"/></svg>
+            {%- when 1 -%}
+              <svg viewBox="0 0 24 24"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+            {%- when 2 -%}
+              <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            {%- when 3 -%}
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a7.5 7.5 0 0 1 13 0"/></svg>
+          {%- endcase -%}
         </div>
-      {%- endif -%}
-    </slider-component>
-    <div class="center{% if show_mobile_slider %} small-hide medium-hide{% endif %}">
-      {%- if section.settings.button_label != blank -%}
-        <a class="button button--primary"{% if section.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.button_link }}"{% endif %}>
-          {{ section.settings.button_label | escape }}
-        </a>
-      {%- endif -%}
+
+        <span class="kmmc-num">0{{ forloop.index }}</span>
+
+        {%- if block.settings.title != blank -%}
+          <h3 class="kmmc-card-title">{{ block.settings.title | escape }}</h3>
+        {%- endif -%}
+
+        {%- if block.settings.text != blank -%}
+          <div class="kmmc-card-text">{{ block.settings.text }}</div>
+        {%- endif -%}
+
+        {%- if block.settings.link_label != blank -%}
+          <a class="kmmc-card-link" {% if block.settings.link == blank %}role="link" aria-disabled="true"{% else %}href="{{ block.settings.link }}"{% endif %}>
+            {{ block.settings.link_label | escape }} &rarr;
+          </a>
+        {%- endif -%}
+
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <!-- Promise strip -->
+  <div class="kmmc-strip">
+    <div class="kmmc-promise">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>7-day easy returns</span>
+    </div>
+    <div class="kmmc-promise">
+      <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      <span>Free shipping above ₹999</span>
+    </div>
+    <div class="kmmc-promise">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Quality guaranteed</span>
+    </div>
+    <div class="kmmc-promise">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span>COD available pan-India</span>
     </div>
   </div>
+
 </div>
 
 {% schema %}
 {
-  "name": "t:sections.multicolumn.name",
+  "name": "Key Benefits",
   "class": "section",
   "tag": "section",
   "settings": [
     {
       "type": "text",
       "id": "title",
-      "default": "Multicolumn",
-      "label": "t:sections.multicolumn.settings.title.label"
-    },
-    {
-      "type": "select",
-      "id": "heading_size",
-      "options": [
-        {
-          "value": "h2",
-          "label": "t:sections.all.heading_size.options__1.label"
-        },
-        {
-          "value": "h1",
-          "label": "t:sections.all.heading_size.options__2.label"
-        },
-        {
-          "value": "h0",
-          "label": "t:sections.all.heading_size.options__3.label"
-        }
-      ],
-      "default": "h1",
-      "label": "t:sections.all.heading_size.label"
-    },
-    {
-      "type": "select",
-      "id": "image_width",
-      "options": [
-        {
-          "value": "third",
-          "label": "t:sections.multicolumn.settings.image_width.options__1.label"
-        },
-        {
-          "value": "half",
-          "label": "t:sections.multicolumn.settings.image_width.options__2.label"
-        },
-        {
-          "value": "full",
-          "label": "t:sections.multicolumn.settings.image_width.options__3.label"
-        }
-      ],
-      "default": "full",
-      "label": "t:sections.multicolumn.settings.image_width.label"
-    },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:sections.multicolumn.settings.image_ratio.options__1.label"
-        },
-        {
-          "value": "portrait",
-          "label": "t:sections.multicolumn.settings.image_ratio.options__2.label"
-        },
-        {
-          "value": "square",
-          "label": "t:sections.multicolumn.settings.image_ratio.options__3.label"
-        },
-        {
-          "value": "circle",
-          "label": "t:sections.multicolumn.settings.image_ratio.options__4.label"
-        }
-      ],
-      "default": "adapt",
-      "label": "t:sections.multicolumn.settings.image_ratio.label"
+      "default": "Built for <em>real life.</em>",
+      "label": "Heading"
     },
     {
       "type": "range",
@@ -197,109 +329,12 @@
       "min": 1,
       "max": 6,
       "step": 1,
-      "default": 3,
-      "label": "t:sections.multicolumn.settings.columns_desktop.label"
-    },
-    {
-      "type": "select",
-      "id": "column_alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "t:sections.multicolumn.settings.column_alignment.options__1.label"
-        },
-        {
-          "value": "center",
-          "label": "t:sections.multicolumn.settings.column_alignment.options__2.label"
-        }
-      ],
-      "default": "left",
-      "label": "t:sections.multicolumn.settings.column_alignment.label"
-    },
-    {
-      "type": "select",
-      "id": "background_style",
-      "options": [
-        {
-          "value": "none",
-          "label": "t:sections.multicolumn.settings.background_style.options__1.label"
-        },
-        {
-          "value": "primary",
-          "label": "t:sections.multicolumn.settings.background_style.options__2.label"
-        }
-      ],
-      "default": "primary",
-      "label": "t:sections.multicolumn.settings.background_style.label"
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "default": "Button label",
-      "label": "t:sections.multicolumn.settings.button_label.label"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "t:sections.multicolumn.settings.button_link.label"
-    },
-    {
-      "type": "select",
-      "id": "color_scheme",
-      "options": [
-        {
-          "value": "accent-1",
-          "label": "t:sections.all.colors.accent_1.label"
-        },
-        {
-          "value": "accent-2",
-          "label": "t:sections.all.colors.accent_2.label"
-        },
-        {
-          "value": "background-1",
-          "label": "t:sections.all.colors.background_1.label"
-        },
-        {
-          "value": "background-2",
-          "label": "t:sections.all.colors.background_2.label"
-        },
-        {
-          "value": "inverse",
-          "label": "t:sections.all.colors.inverse.label"
-        }
-      ],
-      "default": "background-1",
-      "label": "t:sections.all.colors.label"
+      "default": 4,
+      "label": "Columns (desktop)"
     },
     {
       "type": "header",
-      "content": "t:sections.multicolumn.settings.header_mobile.content"
-    },
-    {
-      "type": "select",
-      "id": "columns_mobile",
-      "options": [
-        {
-          "value": "1",
-          "label": "t:sections.multicolumn.settings.columns_mobile.options__1.label"
-        },
-        {
-          "value": "2",
-          "label": "t:sections.multicolumn.settings.columns_mobile.options__2.label"
-        }
-      ],
-      "default": "1",
-      "label": "t:sections.multicolumn.settings.columns_mobile.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "swipe_on_mobile",
-      "default": false,
-      "label": "t:sections.multicolumn.settings.swipe_on_mobile.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
+      "content": "Spacing"
     },
     {
       "type": "range",
@@ -308,8 +343,8 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
+      "label": "Padding top",
+      "default": 64
     },
     {
       "type": "range",
@@ -318,57 +353,71 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
+      "label": "Padding bottom",
+      "default": 64
     }
   ],
   "blocks": [
     {
       "type": "column",
-      "name": "t:sections.multicolumn.blocks.column.name",
+      "name": "Benefit",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "t:sections.multicolumn.blocks.column.settings.image.label"
-        },
         {
           "type": "text",
           "id": "title",
-          "default": "Column",
-          "label": "t:sections.multicolumn.blocks.column.settings.title.label"
+          "default": "Super soft fabrics",
+          "label": "Title"
         },
         {
           "type": "richtext",
           "id": "text",
-          "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-          "label": "t:sections.multicolumn.blocks.column.settings.text.label"
+          "default": "<p>100% cotton & denim — no synthetics. Gentle on sensitive skin, tough enough for every adventure.</p>",
+          "label": "Description"
         },
         {
           "type": "text",
           "id": "link_label",
-          "label": "t:sections.multicolumn.blocks.column.settings.link_label.label"
+          "label": "Link label"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "t:sections.multicolumn.blocks.column.settings.link.label"
+          "label": "Link URL"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "t:sections.multicolumn.presets.name",
+      "name": "Key Benefits",
       "blocks": [
         {
-          "type": "column"
+          "type": "column",
+          "settings": {
+            "title": "Super soft fabrics",
+            "text": "<p>100% cotton & denim — no synthetics, ever. Gentle on sensitive skin, tough enough for every adventure.</p>"
+          }
         },
         {
-          "type": "column"
+          "type": "column",
+          "settings": {
+            "title": "Styles for every moment",
+            "text": "<p>From birthday parties to lazy Sundays — one wardrobe that works for every occasion, no compromise.</p>"
+          }
         },
         {
-          "type": "column"
+          "type": "column",
+          "settings": {
+            "title": "Starting at ₹330",
+            "text": "<p>Premium quality shouldn't cost a fortune. Great style is for every family — not just a few.</p>"
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "title": "6 months to 6 years",
+            "text": "<p>Every size, every stage. Growing with your little one, every step of the way from newborn to school-ready.</p>"
+          }
         }
       ]
     }
