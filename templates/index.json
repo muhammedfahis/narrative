@@ -430,6 +430,7 @@
       "blocks": {
         "ai_gen_block_dc68bcf_GYKF6m": {
           "type": "ai_gen_block_dc68bcf",
+          "disabled": true,
           "settings": {
             "popup_delay": 1500,
             "show_badge": true,
@@ -486,6 +487,7 @@
       "block_order": [
         "ai_gen_block_dc68bcf_GYKF6m"
       ],
+      "disabled": true,
       "settings": {}
     }
   },
