@@ -73,6 +73,12 @@
 details[data-index*="availability"] {
     display: none !important;
 }
+/* Hide availability filter */
+.js-filter[data-index="filter.p.availability"],
+details.disclosure-has-popup[data-index="filter.p.availability"],
+div[data-index="filter.p.availability"] {
+  display: none !important;
+}
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding">
