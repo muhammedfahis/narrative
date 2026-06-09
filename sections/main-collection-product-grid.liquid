@@ -192,7 +192,11 @@ div[data-index="filter.p.availability"] {
     </div>
   </div>
 </div>
-
+<script>
+  document.querySelectorAll('[data-index]').forEach(el => {
+    console.log(el.dataset.index, el.className);
+  });
+</script>
 <script>
   (function () {
     function normalizeBtnText(el) {
