@@ -193,9 +193,9 @@ div[data-index="filter.p.availability"] {
   </div>
 </div>
 <script>
-  document.querySelectorAll('[data-index]').forEach(el => {
-    console.log(el.dataset.index, el.className);
-  });
+document.querySelectorAll('[data-index]').forEach(el => {
+  console.log(el.dataset.index, el.querySelector('.facets__heading, summary, legend')?.textContent?.trim());
+});
 </script>
 <script>
   (function () {
