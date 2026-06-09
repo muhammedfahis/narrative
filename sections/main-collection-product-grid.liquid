@@ -68,15 +68,13 @@
     display: none !important;
   }
 
-  /* Hide only the availability facet group */
-.js-filter[data-index*="availability"],
-details[data-index*="availability"] {
-    display: none !important;
+/* Hide availability filter - desktop */
+details[data-index="1"].js-filter {
+  display: none !important;
 }
-/* Hide availability filter */
-.js-filter[data-index="filter.p.availability"],
-details.disclosure-has-popup[data-index="filter.p.availability"],
-div[data-index="filter.p.availability"] {
+
+/* Hide availability filter - mobile */
+details[data-index="mobile-1"].js-filter {
   display: none !important;
 }
 {%- endstyle -%}
@@ -192,11 +190,6 @@ div[data-index="filter.p.availability"] {
     </div>
   </div>
 </div>
-<script>
-document.querySelectorAll('[data-index]').forEach(el => {
-  console.log(el.dataset.index, el.querySelector('.facets__heading, summary, legend')?.textContent?.trim());
-});
-</script>
 <script>
   (function () {
     function normalizeBtnText(el) {
