@@ -152,57 +152,19 @@
       },
       "footer": {
         "type": "footer",
-        "blocks": {
-          "footer-0": {
-            "type": "link_list",
-            "settings": {
-              "heading": "Quick Links",
-              "menu": "footer"
-            }
-          },
-          "footer-1": {
-            "type": "link_list",
-            "settings": {
-              "heading": "Customer Care",
-              "menu": "footer"
-            }
-          },
-          "footer-2": {
-            "type": "text",
-            "settings": {
-              "heading": "About KIDSMIRE",
-              "subtext": "<p>Premium kids' clothing made from 100% cotton & denim. Designed for comfort, styled for moments worth remembering.<br/><br/>✓ 100% cotton & denim — no synthetics<br/>✓ 7-day returns, no questions asked  <br/>✓ Free shipping above ₹999<br/>✓ 4.9★ from 87+ verified parents</p>"
-            }
-          }
-        },
-        "block_order": [
-          "footer-0",
-          "footer-1",
-          "footer-2"
-        ],
         "settings": {
-          "color_scheme": "inverse",
-          "newsletter_enable": true,
-          "newsletter_heading": "Join the KIDSMIRE community",
-          "show_social": true,
-          "enable_whatsapp_button": true,
+          "enable_whatsapp_button": false,
           "phone_number": "918848104626",
           "button_color": "#25d366",
           "icon_color": "#ffffff",
+          "enable_pulse": true,
           "button_size": 60,
           "mobile_button_size": 55,
-          "enable_pulse": true,
           "bottom_position": 20,
           "right_position": 20,
           "mobile_bottom_position": 15,
           "mobile_right_position": 15,
-          "whatsapp_link": "",
-          "enable_country_selector": true,
-          "enable_language_selector": true,
-          "payment_enable": true,
-          "margin_top": 48,
-          "padding_top": 4,
-          "padding_bottom": 36
+          "payment_enable": true
         }
       },
       "main-password-header": {
