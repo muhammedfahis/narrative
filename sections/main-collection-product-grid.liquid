@@ -60,6 +60,19 @@
     opacity: 0.55;
     cursor: not-allowed;
   }
+    /* Hide product count */
+  .product-count-vertical,
+  .product-count__text,
+  #ProductCountDesktop,
+  .product-count {
+    display: none !important;
+  }
+
+  /* Hide only the availability facet group */
+.js-filter[data-index*="availability"],
+details[data-index*="availability"] {
+    display: none !important;
+}
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding">
