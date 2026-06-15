@@ -132,11 +132,11 @@
       {{- 'products.product.on_sale' | t -}}
     </span>
   {%- endif -%}
-  {%- if card_product.tags contains 'imported' -%}
+  {% comment %} {%- if card_product.tags contains 'imported' -%} {% endcomment %}
     <span class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}">
       Imported
     </span>
-  {%- endif -%}
+  {% comment %} {%- endif -%} {% endcomment %}
 </div>
         </div>
       </div>
